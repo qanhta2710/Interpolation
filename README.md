@@ -13,5 +13,9 @@
 ## **Lưu ý khi sử dụng**
 - Khi sử dụng chức năng *Nội suy Lagrange* lưu ý xếp các mốc nội suy theo thứ tự **tăng dần**
 
+## Tải
+
+- Tải ở Releases hoặc ấn vào [đây](https://github.com/qanhta2710/Interpolation/releases) 
+
 ## Contributors
 - Cảm ơn bác [TontonYuta](https://github.com/TontonYuta) đã giúp em tạo ý tưởng thực hiện tạo App này.
