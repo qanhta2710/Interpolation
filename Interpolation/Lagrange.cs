@@ -1,5 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using System;
+﻿using System;
 
 namespace Interpolation
 {
@@ -66,22 +65,6 @@ namespace Interpolation
                 }
             }
             return divideTable;
-        }
-        public static double[] FindPolynomial(double[] coeffsD, double[,] divideTable, int precision)
-        {
-            double[] coeffsPolynomial = new double[coeffsD.Length];
-
-            var coeffsDVector = DenseVector.OfArray(coeffsD);
-            var divideMatrix = DenseMatrix.OfArray(divideTable);
-            var coeffsDMatrix = coeffsDVector.ToRowMatrix();
-            var result = coeffsDMatrix.Multiply(divideMatrix);
-
-            coeffsPolynomial = result.Row(0).ToArray();
-            for (int i = 0; i < coeffsPolynomial.Length; i++)
-            {
-                coeffsPolynomial[i] = Math.Round(coeffsPolynomial[i], precision);
-            }
-            return coeffsPolynomial;
         }
     }
 }

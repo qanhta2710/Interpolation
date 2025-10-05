@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -9,6 +10,10 @@ namespace Interpolation
         public Form1()
         {
             InitializeComponent();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
         }
         // Tìm mốc nội suy Chebyshev
         private void btnSolveChebyshev_Click(object sender, EventArgs e)
@@ -37,6 +42,9 @@ namespace Interpolation
             {
                 dataGridViewLagrange.Rows.Clear();
                 dataGridViewLagrange.Columns.Clear();
+
+                // Sắp xếp dữ liệu theo thứ tự tăng dần
+                dataXYLagrange.Sort(dataXYLagrange.Columns["colsXLagrange"], System.ComponentModel.ListSortDirection.Ascending);
 
                 double[] x = GetXValues(dataXYLagrange);
                 double[] y = GetYValues(dataXYLagrange);
@@ -115,7 +123,7 @@ namespace Interpolation
                 dataGridViewLagrange.Rows.Add();
 
                 // Tính hệ số đa thức nội suy
-                double[] lagrangePolynomial = Lagrange.FindPolynomial(coeffsD, divideTable, precision);
+                double[] lagrangePolynomial = Function.FindPolynomial(coeffsD, divideTable, precision);
                 object[] lagrangePolynomialRow = new object[cols + 1];
                 for (int j = 0; j < lagrangePolynomial.Length; j++)
                 {
@@ -126,17 +134,125 @@ namespace Interpolation
                 dataGridViewLagrange.Rows.Add(lagrangePolynomialRow);
 
                 // Chỉnh label để in ra màn hình đa thức hoàn chỉnh
-                lblResult.Text = PolynomialToString(lagrangePolynomial);
+                lblResult.Text = Function.PolynomialToString(lagrangePolynomial);
                 lblResult.Visible = true;
-
-
             }
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
-                throw;
             }
         }
+        // Tìm đa thức nội suy bằng Newton
+        private void btnSolveNewton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridViewNewton.Rows.Clear();
+                dataGridViewNewton.Columns.Clear();
+
+                if (comboBoxNewton.SelectedIndex == 0)
+                {
+                    // Mốc nội suy bất kì
+                    MessageBox.Show("Giữ nguyên thứ tự mốc nội suy");
+                }
+                else if (comboBoxNewton.SelectedIndex == 1)
+                {
+                    // Mốc nội suy tăng dần
+                    dataXYNewton.Sort(dataXYNewton.Columns["colsXNewton"], System.ComponentModel.ListSortDirection.Ascending);
+                    MessageBox.Show("Sắp xếp mốc nội suy tăng dần");
+                }
+                else if (comboBoxNewton.SelectedIndex == 2)
+                {
+                    // Mốc nội suy giảm dần
+                    dataXYNewton.Sort(dataXYNewton.Columns["colsXNewton"], System.ComponentModel.ListSortDirection.Descending);
+                    MessageBox.Show("Sắp xếp mốc nội suy giảm dần");
+                }
+
+                double[] x = GetXValues(dataXYNewton);
+                double[] y = GetYValues(dataXYNewton);
+                int precision = Convert.ToInt32(txtBoxPrecisionNewton.Text);
+
+                // Tạo bảng
+                dataGridViewNewton.Columns.Add("X", "X");
+                dataGridViewNewton.Columns.Add("Y", "Y");
+                for (int j = 1; j < x.Length; j++)
+                {
+                    dataGridViewNewton.Columns.Add($"TSP{j}", $"TSP {j}");
+                }
+                dataGridViewNewton.Columns.Add("note", "Ghi chú");
+                dataGridViewNewton.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+                double?[,] dividedDifferenceTable = Newton.BuildDividedDifferenceTable(x, y, precision);
+
+                // Thêm bảng tỷ sai phân
+                int rows = dividedDifferenceTable.GetLength(0);
+                int cols = dividedDifferenceTable.GetLength(1);
+                for (int i = 0; i < rows; i++)
+                {
+                    object[] row = new object[cols + 2];
+                    for (int j = 0; j < cols; j++)
+                    {
+                        row[j] = dividedDifferenceTable[i, j]?.ToString() ?? "";
+                    }
+                    if (i == rows - 1)
+                    {
+                        row[cols] = "Bảng tỷ sai phân";
+                    }
+                    dataGridViewNewton.Rows.Add(row);
+                }
+
+                dataGridViewNewton.Rows.Add();
+
+                // Bảng tích
+                double[] x_newton = x.Take(x.Length - 1).ToArray();
+                double[,] productTable = Horner.ProductTable(x_newton, precision);
+                int tableProductRows = productTable.GetLength(0);
+                int tableProductCols = productTable.GetLength(1);
+                for (int i = 0; i < tableProductRows; i++)
+                {
+                    object[] row = new object[tableProductCols + 2];
+                    for (int j = 0; j < tableProductCols; j++)
+                    {
+                        row[j] = productTable[i, j];
+                    }
+                    if (i == 0)
+                    {
+                        row[tableProductCols] = "";
+                        row[tableProductCols + 1] = "Bảng tích";
+                    }
+                    dataGridViewNewton.Rows.Add(row);
+                }
+
+                dataGridViewNewton.Rows.Add();
+
+                // Hệ số đa thức nội suy
+                double[] dividedDiffDiagonal = new double[x.Length];
+                for (int i = 0; i < x.Length; i++)
+                {
+                    dividedDiffDiagonal[i] = dividedDifferenceTable[i, i + 1] ?? 0.0;
+                }
+
+                double[] newtonPolynomial = Function.FindPolynomial(dividedDiffDiagonal, productTable, precision);
+                object[] newtonPolynomialRow = new object[cols + 1];
+                for (int j = 0; j < newtonPolynomial.Length; j++)
+                {
+                    newtonPolynomialRow[j] = newtonPolynomial[j];
+                }
+                newtonPolynomialRow[cols - 1] = "";
+                newtonPolynomialRow[cols] = "Hệ số đa thức nội suy";
+                dataGridViewNewton.Rows.Add(newtonPolynomialRow);
+
+                // In đa thức nội suy
+                lblResultNewton.Text = Function.PolynomialToString(newtonPolynomial);
+                lblResultNewton.Visible = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi định dạng");
+            }
+        }
+
+        // Các phương thức hỗ trợ 
         private double[] GetXValues(DataGridView dataGridView)
         {
             int rows = dataGridView.Rows.Count - 1;
@@ -156,40 +272,6 @@ namespace Interpolation
                 y[i] = Convert.ToDouble(dataGridView.Rows[i].Cells[1].Value);
             }
             return y;
-        }
-        private string PolynomialToString(double[] coeffs)
-        {
-            var sb = new StringBuilder();
-            int n = coeffs.Length;
-
-            for (int i = 0; i < n; i++)
-            {
-                double c = coeffs[i];
-                int power = n - i - 1;
-
-                if (Math.Abs(c) < 1e-9) continue;
-
-                if (sb.Length > 0)
-                {
-                    sb.Append(c >= 0 ? " + " : " - ");
-                }
-                else if (c < 0)
-                {
-                    sb.Append("-");
-                }
-
-                double absC = Math.Abs(c);
-                if (!(Math.Abs(absC - 1.0) < 1e-9 && power > 0))
-                {
-                    sb.Append(absC);
-                }
-                if (power > 0)
-                {
-                    sb.Append("x");
-                    if (power > 1) sb.Append("^" + power);
-                }
-            }
-            return sb.ToString();
         }
     }
 }
