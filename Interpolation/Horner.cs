@@ -34,6 +34,47 @@ namespace Interpolation
             }
             return productTable;
         }
+        public static double HornerEvaluate(double[] coeffsP, double c, int precision)
+        {
+            double res = coeffsP[coeffsP.Length - 1];
+            for (int i = coeffsP.Length - 2; i >= 0; i--)
+            {
+                res = Math.Round(coeffsP[i] + c * res, precision);
+            }
+            return res;
+        }
+        public static (double[] quotinent, double remainder) HornerDivide(double[] coeffsP, double c, int precision)
+        {
+            int n = coeffsP.Length - 1;
+            double[] quotient = new double[n];
+            quotient[n - 1] = Math.Round(coeffsP[n], precision);
+            for (int i = n - 2; i >= 0; i--)
+            {
+                quotient[i] = Math.Round(coeffsP[i + 1] + c * quotient[i + 1], precision);
+            }
+            double remainder = Math.Round(coeffsP[0] + c * quotient[0], precision);
+            return (quotient, remainder);
+        }
+        public static double[] HornerDerivatives(double[] coeffsP, double c, int m, int precision)
+        {
+            double[] R = coeffsP;
+            double[] result = new double[m + 1];
+            for (int k = 0; k <= m; k++)
+            {
+                double Rc = HornerEvaluate(R, c, precision);
+                result[k] = Math.Round(Function.Factorial(k) * Rc, precision);
+
+                if (R.Length <= 1)
+                {
+                    break;
+                }
+
+                (double[] quotient, _) = HornerDivide(R, c, precision);
+                R = quotient;
+            }
+            return result;
+        }
+
     }
     public class Function
     {
@@ -86,6 +127,12 @@ namespace Interpolation
                 }
             }
             return sb.ToString();
+        }
+        public static double Factorial(int n)
+        {
+            double res = 1;
+            for (int i = 2; i <= n; i++) res *= i;
+            return res;
         }
     }
 }

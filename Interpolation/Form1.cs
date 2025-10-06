@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -42,7 +43,6 @@ namespace Interpolation
             {
                 dataGridViewLagrange.Rows.Clear();
                 dataGridViewLagrange.Columns.Clear();
-
                 // Sắp xếp dữ liệu theo thứ tự tăng dần
                 dataXYLagrange.Sort(dataXYLagrange.Columns["colsXLagrange"], System.ComponentModel.ListSortDirection.Ascending);
 
@@ -58,6 +58,8 @@ namespace Interpolation
                 }
                 dataGridViewLagrange.Columns.Add("note", "Ghi chú");
                 dataGridViewLagrange.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                foreach (DataGridViewColumn col in dataGridViewLagrange.Columns)
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 // Tính hệ số D
                 double[] coeffsD = Lagrange.CoeffsD(x, y, precision);
@@ -182,6 +184,9 @@ namespace Interpolation
                 dataGridViewNewton.Columns.Add("note", "Ghi chú");
                 dataGridViewNewton.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
+                foreach (DataGridViewColumn col in dataGridViewNewton.Columns)
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+
                 double?[,] dividedDifferenceTable = Newton.BuildDividedDifferenceTable(x, y, precision);
 
                 // Thêm bảng tỷ sai phân
@@ -225,13 +230,24 @@ namespace Interpolation
 
                 dataGridViewNewton.Rows.Add();
 
-                // Hệ số đa thức nội suy
+                // Hệ số
                 double[] dividedDiffDiagonal = new double[x.Length];
                 for (int i = 0; i < x.Length; i++)
                 {
                     dividedDiffDiagonal[i] = dividedDifferenceTable[i, i + 1] ?? 0.0;
                 }
+                object[] colsDividedDiffDiagonal = new object[x.Length + 2];
+                for (int j = 0; j < x.Length; j++)
+                {
+                    colsDividedDiffDiagonal[j] = dividedDiffDiagonal[j];
+                }
+                colsDividedDiffDiagonal[x.Length] = "";
+                colsDividedDiffDiagonal[x.Length + 1] = "Hệ số";
+                dataGridViewNewton.Rows.Add(colsDividedDiffDiagonal);
 
+                dataGridViewNewton.Rows.Add();
+
+                // Hệ số đa thức nội suy
                 double[] newtonPolynomial = Function.FindPolynomial(dividedDiffDiagonal, productTable, precision);
                 object[] newtonPolynomialRow = new object[cols + 1];
                 for (int j = 0; j < newtonPolynomial.Length; j++)
@@ -249,6 +265,36 @@ namespace Interpolation
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
+            }
+        }
+
+        // Tính giá trị đa thức và các đạo hàm tại điểm c bằng phương pháp Horner
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxResult.Clear();
+                richTextBoxResult.SelectionFont = new Font("Consolas", 15, FontStyle.Regular);
+                double[] coeffsP = GetCoeffsP(dataGridViewCoeffsP);
+                int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
+                double c = Convert.ToDouble(txtBoxC.Text);
+                int n = coeffsP.Length - 1;
+                // Tính giá trị đa thức P(x) tại c
+                double hornerEval = Horner.HornerEvaluate(coeffsP, c, precision);
+
+                richTextBoxResult.AppendText($"P({c}) = {hornerEval}\n");
+                // Tính giá trị đạo hàm các cấp của đa thức P(x) tại c
+                double[] hornerDerivatives = Horner.HornerDerivatives(coeffsP, c, n, precision);
+                for (int m = 1; m < hornerDerivatives.Length; m++)
+                {
+                    richTextBoxResult.SelectionFont = new Font("Consolas", 15, FontStyle.Regular);
+                    richTextBoxResult.AppendText($"P^({m})(x = {c}) = {hornerDerivatives[m]}\n");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi định dạng");
+                throw;
             }
         }
 
@@ -273,5 +319,15 @@ namespace Interpolation
             }
             return y;
         }
+        private double[] GetCoeffsP(DataGridView dataGridView)
+        {
+            int rows = dataGridView.Rows.Count - 1;
+            double[] coeffsP = new double[rows];
+            for (int i = 0; i < rows; i++)
+            {
+                coeffsP[i] = Convert.ToDouble(dataGridView.Rows[rows - 1 - i].Cells[0].Value);
+            }
+            return coeffsP;
+        }   
     }
 }

@@ -74,6 +74,16 @@
             this.txtBoxPrecisionNewton = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxNewton = new System.Windows.Forms.ComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
+            this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtBoxC = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.richTextBoxResult = new System.Windows.Forms.RichTextBox();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).BeginInit();
@@ -92,6 +102,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataXYNewton)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage2
@@ -124,10 +137,15 @@
             // 
             // dataGridViewLagrange
             // 
+            this.dataGridViewLagrange.AllowUserToAddRows = false;
+            this.dataGridViewLagrange.AllowUserToDeleteRows = false;
+            this.dataGridViewLagrange.AllowUserToResizeColumns = false;
+            this.dataGridViewLagrange.AllowUserToResizeRows = false;
             this.dataGridViewLagrange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLagrange.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewLagrange.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewLagrange.Name = "dataGridViewLagrange";
+            this.dataGridViewLagrange.ReadOnly = true;
             this.dataGridViewLagrange.RowHeadersWidth = 51;
             this.dataGridViewLagrange.RowTemplate.Height = 24;
             this.dataGridViewLagrange.Size = new System.Drawing.Size(816, 493);
@@ -137,10 +155,10 @@
             // 
             this.lblResult.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(376, 509);
+            this.lblResult.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(373, 511);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(70, 28);
+            this.lblResult.Size = new System.Drawing.Size(76, 23);
             this.lblResult.TabIndex = 7;
             this.lblResult.Text = "label2";
             this.lblResult.Visible = false;
@@ -428,6 +446,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -450,10 +469,15 @@
             // 
             // dataGridViewNewton
             // 
+            this.dataGridViewNewton.AllowUserToAddRows = false;
+            this.dataGridViewNewton.AllowUserToDeleteRows = false;
+            this.dataGridViewNewton.AllowUserToResizeColumns = false;
+            this.dataGridViewNewton.AllowUserToResizeRows = false;
             this.dataGridViewNewton.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewNewton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewNewton.Location = new System.Drawing.Point(251, 3);
             this.dataGridViewNewton.Name = "dataGridViewNewton";
+            this.dataGridViewNewton.ReadOnly = true;
             this.dataGridViewNewton.RowHeadersWidth = 51;
             this.dataGridViewNewton.RowTemplate.Height = 24;
             this.dataGridViewNewton.Size = new System.Drawing.Size(832, 506);
@@ -518,10 +542,10 @@
             // 
             this.lblResultNewton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultNewton.AutoSize = true;
-            this.lblResultNewton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultNewton.Location = new System.Drawing.Point(657, 12);
+            this.lblResultNewton.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultNewton.Location = new System.Drawing.Point(653, 14);
             this.lblResultNewton.Name = "lblResultNewton";
-            this.lblResultNewton.Size = new System.Drawing.Size(63, 25);
+            this.lblResultNewton.Size = new System.Drawing.Size(70, 22);
             this.lblResultNewton.TabIndex = 0;
             this.lblResultNewton.Text = "label2";
             this.lblResultNewton.Visible = false;
@@ -580,6 +604,108 @@
             this.comboBoxNewton.Size = new System.Drawing.Size(164, 24);
             this.comboBoxNewton.TabIndex = 3;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.richTextBoxResult);
+            this.tabPage4.Controls.Add(this.panel2);
+            this.tabPage4.Controls.Add(this.dataGridViewCoeffsP);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1086, 612);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Tính giá trị";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewCoeffsP
+            // 
+            this.dataGridViewCoeffsP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCoeffsP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.coeffsP});
+            this.dataGridViewCoeffsP.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataGridViewCoeffsP.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewCoeffsP.Name = "dataGridViewCoeffsP";
+            this.dataGridViewCoeffsP.RowHeadersWidth = 51;
+            this.dataGridViewCoeffsP.RowTemplate.Height = 24;
+            this.dataGridViewCoeffsP.Size = new System.Drawing.Size(166, 606);
+            this.dataGridViewCoeffsP.TabIndex = 0;
+            // 
+            // coeffsP
+            // 
+            this.coeffsP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.coeffsP.HeaderText = "Hệ số";
+            this.coeffsP.MinimumWidth = 6;
+            this.coeffsP.Name = "coeffsP";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.txtBoxC);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.txtBoxPrecisionEval);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(169, 489);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(914, 120);
+            this.panel2.TabIndex = 1;
+            // 
+            // txtBoxPrecisionEval
+            // 
+            this.txtBoxPrecisionEval.Location = new System.Drawing.Point(6, 73);
+            this.txtBoxPrecisionEval.Name = "txtBoxPrecisionEval";
+            this.txtBoxPrecisionEval.Size = new System.Drawing.Size(182, 22);
+            this.txtBoxPrecisionEval.TabIndex = 0;
+            this.txtBoxPrecisionEval.Text = "15";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(180, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Số chữ số phần thập phân";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(801, 42);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 30);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Tính giá trị";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtBoxC
+            // 
+            this.txtBoxC.Location = new System.Drawing.Point(281, 73);
+            this.txtBoxC.Name = "txtBoxC";
+            this.txtBoxC.Size = new System.Drawing.Size(102, 22);
+            this.txtBoxC.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(281, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(102, 18);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Giá trị cần tính";
+            // 
+            // richTextBoxResult
+            // 
+            this.richTextBoxResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxResult.Location = new System.Drawing.Point(169, 3);
+            this.richTextBoxResult.Name = "richTextBoxResult";
+            this.richTextBoxResult.ReadOnly = true;
+            this.richTextBoxResult.Size = new System.Drawing.Size(914, 486);
+            this.richTextBoxResult.TabIndex = 2;
+            this.richTextBoxResult.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -614,6 +740,10 @@
             this.tableLayoutPanel5.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -665,6 +795,16 @@
         private System.Windows.Forms.TextBox txtBoxPrecisionNewton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxNewton;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView dataGridViewCoeffsP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn coeffsP;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtBoxPrecisionEval;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtBoxC;
+        private System.Windows.Forms.RichTextBox richTextBoxResult;
     }
 }
 
