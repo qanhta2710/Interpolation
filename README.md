@@ -5,12 +5,11 @@
 - Nếu có góp ý sửa lỗi hãy tạo Issues mới hoặc nếu có ý tưởng cải tiến hãy tạo Pull requests
 
 ## WIP
-- Tính giá trị đa thức tại 1 điểm bằng lược đồ Horner
 - Tìm đa thức nội suy mốc cách đều bằng nội suy Newton
 - ...
 
 ## **Lưu ý khi sử dụng**
-- ~~Khi sử dụng chức năng *Nội suy Lagrange* lưu ý xếp các mốc nội suy theo thứ tự **tăng dần**~~ Đã thêm tính năng tự động sắp xếp
+- ~~Khi sử dụng chức năng *Nội suy Lagrange* lưu ý xếp các mốc nội suy theo thứ tự **tăng dần**~~ **Đã thêm tính năng tự động sắp xếp**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 
 ## Tải
