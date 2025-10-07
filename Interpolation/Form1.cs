@@ -274,22 +274,25 @@ namespace Interpolation
             try
             {
                 richTextBoxResult.Clear();
-                richTextBoxResult.SelectionFont = new Font("Consolas", 15, FontStyle.Regular);
                 double[] coeffsP = GetCoeffsP(dataGridViewCoeffsP);
                 int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
                 double c = Convert.ToDouble(txtBoxC.Text);
                 int n = coeffsP.Length - 1;
+
                 // Tính giá trị đa thức P(x) tại c
                 double hornerEval = Horner.HornerEvaluate(coeffsP, c, precision);
-
                 richTextBoxResult.AppendText($"P({c}) = {hornerEval}\n");
+
                 // Tính giá trị đạo hàm các cấp của đa thức P(x) tại c
                 double[] hornerDerivatives = Horner.HornerDerivatives(coeffsP, c, n, precision);
                 for (int m = 1; m < hornerDerivatives.Length; m++)
                 {
-                    richTextBoxResult.SelectionFont = new Font("Consolas", 15, FontStyle.Regular);
                     richTextBoxResult.AppendText($"P^({m})(x = {c}) = {hornerDerivatives[m]}\n");
                 }
+
+                // Tính tích đa thức P(x) với (x-c)
+                double[] multiplyPolynomial = Function.MultiplyPolynomial(coeffsP, c, precision);
+                richTextBoxResult.AppendText($"({Function.PolynomialToString(coeffsP.Reverse().ToArray())})(x - {c}) = {Function.PolynomialToString(multiplyPolynomial)}");
             }
             catch (Exception)
             {

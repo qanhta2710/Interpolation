@@ -1,5 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace Interpolation
@@ -74,7 +75,6 @@ namespace Interpolation
             }
             return result;
         }
-
     }
     public class Function
     {
@@ -93,6 +93,18 @@ namespace Interpolation
                 coeffsPolynomial[i] = Math.Round(coeffsPolynomial[i], precision);
             }
             return coeffsPolynomial;
+        }
+        public static double[] MultiplyPolynomial(double[] P, double c, int precision)
+        {
+            int degP = P.Length - 1;
+            double[] result = new double[degP + 2];
+            result[degP + 1] = Math.Round(P[degP], precision);
+            for (int i = degP; i > 0; i--)
+            {
+                result[i] = Math.Round(-c * P[i] + P[i - 1], precision);
+            }
+            result[0] = Math.Round(-c * P[0], precision);
+            return result.Reverse().ToArray();
         }
         public static string PolynomialToString(double[] coeffs)
         {
