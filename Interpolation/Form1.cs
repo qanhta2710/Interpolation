@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Interpolation
@@ -43,8 +43,7 @@ namespace Interpolation
             {
                 dataGridViewLagrange.Rows.Clear();
                 dataGridViewLagrange.Columns.Clear();
-                // Sắp xếp dữ liệu theo thứ tự tăng dần
-                dataXYLagrange.Sort(dataXYLagrange.Columns["colsXLagrange"], System.ComponentModel.ListSortDirection.Ascending);
+                RemoveDuplicate(dataXYLagrange);
 
                 double[] x = GetXValues(dataXYLagrange);
                 double[] y = GetYValues(dataXYLagrange);
@@ -170,6 +169,8 @@ namespace Interpolation
                     MessageBox.Show("Sắp xếp mốc nội suy giảm dần");
                 }
 
+                RemoveDuplicate(dataXYNewton);
+
                 double[] x = GetXValues(dataXYNewton);
                 double[] y = GetYValues(dataXYNewton);
                 int precision = Convert.ToInt32(txtBoxPrecisionNewton.Text);
@@ -277,22 +278,72 @@ namespace Interpolation
                 double[] coeffsP = GetCoeffsP(dataGridViewCoeffsP);
                 int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
                 double c = Convert.ToDouble(txtBoxC.Text);
+                int k = Convert.ToInt32(txtBoxk.Text);
                 int n = coeffsP.Length - 1;
 
                 // Tính giá trị đa thức P(x) tại c
+                richTextBoxResult.AppendText($"Giá trị đa thức P(x) tại c:\n");
                 double hornerEval = Horner.HornerEvaluate(coeffsP, c, precision);
                 richTextBoxResult.AppendText($"P({c}) = {hornerEval}\n");
 
                 // Tính giá trị đạo hàm các cấp của đa thức P(x) tại c
+                richTextBoxResult.AppendText($"Giá trị đạo hàm các cấp của đa thức P(x) tại c:\n");
                 double[] hornerDerivatives = Horner.HornerDerivatives(coeffsP, c, n, precision);
                 for (int m = 1; m < hornerDerivatives.Length; m++)
                 {
                     richTextBoxResult.AppendText($"P^({m})(x = {c}) = {hornerDerivatives[m]}\n");
                 }
 
+                // Tính thương và phần dư của phép chia P(x) với (x-c)
+                richTextBoxResult.AppendText($"Thương và dư của phép chia P(x) với (x-c):\n");
+                (double[] quotinent, double remainder) = Horner.HornerDivide(coeffsP, c, precision);
+                richTextBoxResult.AppendText($"Q(x) = {Function.PolynomialToString(quotinent.Reverse().ToArray())}, R = {remainder}\n");
+
                 // Tính tích đa thức P(x) với (x-c)
+                richTextBoxResult.AppendText($"Tích đa thức P(x) với (x-c):\n");
                 double[] multiplyPolynomial = Function.MultiplyPolynomial(coeffsP, c, precision);
-                richTextBoxResult.AppendText($"({Function.PolynomialToString(coeffsP.Reverse().ToArray())})(x - {c}) = {Function.PolynomialToString(multiplyPolynomial)}");
+                richTextBoxResult.AppendText($"({Function.PolynomialToString(coeffsP.Reverse().ToArray())})(x - {c}) = {Function.PolynomialToString(multiplyPolynomial)}\n");
+
+                dataGridViewHornerEval.DataSource = null;
+                DataTable evalTable = Horner.HornerEvaluationTable(coeffsP, c, precision);
+                dataGridViewHornerEval.DataSource = evalTable;
+
+                dataGridViewHornerEval.ColumnHeadersVisible = false;
+                dataGridViewHornerEval.RowHeadersVisible = false;
+                dataGridViewHornerEval.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridViewHornerEval.AllowUserToAddRows = false;
+                dataGridViewHornerEval.ClearSelection();
+
+                DataTable derivativeTable = Horner.GetHornerDerivativesTable(coeffsP, c, k, precision);
+                dataGridViewHornerDerivative.DataSource = derivativeTable;
+
+                dataGridViewHornerDerivative.ColumnHeadersVisible = false;
+                dataGridViewHornerDerivative.RowHeadersVisible = false;
+                dataGridViewHornerDerivative.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridViewHornerDerivative.AllowUserToAddRows = false;
+                dataGridViewHornerDerivative.ClearSelection();
+
+                if (dataGridViewHornerEval.Rows.Count > 1 && dataGridViewHornerEval.Columns.Count > 0)
+                {
+                    int lastColIndex = dataGridViewHornerEval.ColumnCount - 1;
+                    dataGridViewHornerEval.Rows[1].Cells[lastColIndex].Style.BackColor = Color.LightGreen;
+                    dataGridViewHornerEval.Rows[1].Cells[lastColIndex].Style.Font = new Font(dataGridViewHornerEval.Font, FontStyle.Bold);
+                }
+                foreach (DataGridViewRow row in dataGridViewHornerDerivative.Rows)
+                {
+                    if (row.Index == 0) continue;
+
+                    for (int i = row.Cells.Count - 1; i >= 0; i--)
+                    {
+                        var cell = row.Cells[i];
+                        if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                        {
+                            cell.Style.BackColor = Color.LightSkyBlue;
+                            cell.Style.Font = new Font(dataGridViewHornerEval.Font, FontStyle.Bold);
+                            break;
+                        }
+                    }
+                }
             }
             catch (Exception)
             {
@@ -331,6 +382,25 @@ namespace Interpolation
                 coeffsP[i] = Convert.ToDouble(dataGridView.Rows[rows - 1 - i].Cells[0].Value);
             }
             return coeffsP;
-        }   
+        }
+        private void RemoveDuplicate(DataGridView dataGridView)
+        {
+            var seenXValues = new System.Collections.Generic.HashSet<double>();
+            int rowIndex = 0;
+            while (rowIndex < dataGridView.Rows.Count - 1)
+            {
+                var cellValue = dataGridView.Rows[rowIndex].Cells[0].Value;
+                double xValue = Convert.ToDouble(cellValue);
+                if (seenXValues.Contains(xValue))
+                {
+                    dataGridView.Rows.RemoveAt(rowIndex);
+                }
+                else
+                {
+                    seenXValues.Add(xValue);
+                    rowIndex++;
+                }
+            }
+        }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Interpolation
 {
@@ -30,7 +25,7 @@ namespace Interpolation
                 for (int i = j - 1; i < n; i++)
                 {
                     table[i, j] = (table[i, j - 1] - table[i - 1, j - 1]) / (table[i, 0] - table[i - (j - 1), 0]);
-                    table[i, j] = table[i, j] != null ? Math.Round(table[i, j].Value, precision) : (double?) null;
+                    table[i, j] = table[i, j] != null ? Math.Round(table[i, j].Value, precision) : (double?)null;
                 }
             }
             return table;

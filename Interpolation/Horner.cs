@@ -1,5 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -74,6 +75,66 @@ namespace Interpolation
                 R = quotient;
             }
             return result;
+        }
+        public static DataTable HornerEvaluationTable(double[] coeffsP, double c, int precision)
+        {
+            var dt = new DataTable();   
+            var displayCoeffs = coeffsP.Reverse().ToArray();
+            int n = displayCoeffs.Length;
+            for (int i = 0; i < n; i++)
+            {
+                dt.Columns.Add($"Col{i}");
+            }
+            dt.Rows.Add(displayCoeffs.Cast<object>().ToArray());
+            var steps = new double[n];
+            steps[0] = displayCoeffs[0];
+            for (int i = 1; i < n; i++)
+            {
+                steps[i] = Math.Round(displayCoeffs[i] + c * steps[i - 1], precision);
+            }
+            dt.Rows.Add(steps.Cast<object>().ToArray());
+
+            return dt;
+        }
+        public static DataTable GetHornerDerivativesTable(double[] coeffsP, double c, int m, int precision)
+        {
+            var dt = new DataTable();
+            var displayCoeffs = coeffsP.Reverse().ToArray();
+            int n = displayCoeffs.Length;
+
+            for (int i = 0; i < n; i++)
+            {
+                dt.Columns.Add($"Col{i}");
+            }
+            dt.Rows.Add(displayCoeffs.Cast<object>().ToArray());
+            var currentCoeffs = displayCoeffs;
+            for (int k = 0; k <= m; k++)
+            {
+                if (currentCoeffs.Length < 1) break;
+
+                var stepsRowValues = new double[currentCoeffs.Length];
+                var nextQuotient = new double[currentCoeffs.Length - 1];
+
+                stepsRowValues[0] = currentCoeffs[0];
+                if (nextQuotient.Length > 0)
+                {
+                    nextQuotient[0] = currentCoeffs[0];
+                }
+
+                for (int i = 1; i < currentCoeffs.Length; i++)
+                {
+                    stepsRowValues[i] = Math.Round(currentCoeffs[i] + c * stepsRowValues[i - 1], precision);
+                    if (i < currentCoeffs.Length - 1)
+                    {
+                        nextQuotient[i] = stepsRowValues[i];
+                    }
+                }
+                object[] fullRowData = new object[n];
+                Array.Copy(stepsRowValues.Cast<object>().ToArray(), fullRowData, stepsRowValues.Length);
+                dt.Rows.Add(fullRowData);
+                currentCoeffs = nextQuotient;
+            }
+            return dt;
         }
     }
     public class Function
