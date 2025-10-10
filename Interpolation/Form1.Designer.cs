@@ -626,7 +626,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1086, 612);
+            this.tabPage4.Size = new System.Drawing.Size(1138, 646);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Tính giá trị";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -643,7 +643,7 @@
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.91358F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.08642F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(914, 486);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(966, 520);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // richTextBoxResult
@@ -653,7 +653,7 @@
             this.richTextBoxResult.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxResult.Name = "richTextBoxResult";
             this.richTextBoxResult.ReadOnly = true;
-            this.richTextBoxResult.Size = new System.Drawing.Size(908, 222);
+            this.richTextBoxResult.Size = new System.Drawing.Size(960, 237);
             this.richTextBoxResult.TabIndex = 2;
             this.richTextBoxResult.Text = "";
             // 
@@ -669,9 +669,9 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.txtBoxPrecisionEval);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(169, 489);
+            this.panel2.Location = new System.Drawing.Point(169, 523);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(914, 120);
+            this.panel2.Size = new System.Drawing.Size(966, 120);
             this.panel2.TabIndex = 1;
             // 
             // label8
@@ -730,7 +730,7 @@
             this.dataGridViewCoeffsP.Name = "dataGridViewCoeffsP";
             this.dataGridViewCoeffsP.RowHeadersWidth = 51;
             this.dataGridViewCoeffsP.RowTemplate.Height = 24;
-            this.dataGridViewCoeffsP.Size = new System.Drawing.Size(166, 606);
+            this.dataGridViewCoeffsP.Size = new System.Drawing.Size(166, 640);
             this.dataGridViewCoeffsP.TabIndex = 0;
             // 
             // coeffsP
@@ -748,11 +748,11 @@
             this.tableLayoutPanel7.Controls.Add(this.dataGridViewHornerEval, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.dataGridViewHornerDerivative, 1, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 231);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 246);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(908, 252);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(960, 271);
             this.tableLayoutPanel7.TabIndex = 3;
             // 
             // txtBoxk
@@ -783,7 +783,7 @@
             this.dataGridViewHornerEval.ReadOnly = true;
             this.dataGridViewHornerEval.RowHeadersWidth = 51;
             this.dataGridViewHornerEval.RowTemplate.Height = 24;
-            this.dataGridViewHornerEval.Size = new System.Drawing.Size(448, 246);
+            this.dataGridViewHornerEval.Size = new System.Drawing.Size(474, 265);
             this.dataGridViewHornerEval.TabIndex = 0;
             // 
             // dataGridViewHornerDerivative
@@ -792,12 +792,12 @@
             this.dataGridViewHornerDerivative.AllowUserToDeleteRows = false;
             this.dataGridViewHornerDerivative.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewHornerDerivative.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewHornerDerivative.Location = new System.Drawing.Point(457, 3);
+            this.dataGridViewHornerDerivative.Location = new System.Drawing.Point(483, 3);
             this.dataGridViewHornerDerivative.Name = "dataGridViewHornerDerivative";
             this.dataGridViewHornerDerivative.ReadOnly = true;
             this.dataGridViewHornerDerivative.RowHeadersWidth = 51;
             this.dataGridViewHornerDerivative.RowTemplate.Height = 24;
-            this.dataGridViewHornerDerivative.Size = new System.Drawing.Size(448, 246);
+            this.dataGridViewHornerDerivative.Size = new System.Drawing.Size(474, 265);
             this.dataGridViewHornerDerivative.TabIndex = 1;
             // 
             // label10
@@ -815,8 +815,9 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Right;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(610, 3);
+            this.label11.Location = new System.Drawing.Point(796, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(170, 17);
             this.label11.TabIndex = 7;
