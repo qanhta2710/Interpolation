@@ -10,7 +10,6 @@
 - Nếu có góp ý sửa lỗi hãy tạo Issues mới hoặc nếu có ý tưởng cải tiến hãy tạo Pull requests
 
 ## WIP
-- Tìm đa thức nội suy mốc cách đều bằng nội suy Newton
 - Nội suy trung tâm
 - ...
 
@@ -25,13 +24,14 @@
 
 ![Ảnh minh hoạ chức năng Horner](./images/Horner.png)
 - Khi nhập vào mảng hệ số **LUÔN LUÔN** để thừa ra **1 DÒNG** như trong hình
-- Giá trị in đậm trong bảng thương **CHƯA PHẢI** là giá trị cuối cùng của đạo hàm cấp k của P(x = c) người dùng cần phải lấy kết quả in đậm đó nhân với k! (k là đạo hàm cấp cần tính) để ra kết quả cuối cùng *(Văn lủng củng quá nếu ai có cách nào giải thích tốt hơn thì nhắn tôi nhé)*
-- Giá trị ở bảng trên cùng là giá trị cuối cùng cần tìm
+- Giá trị in đậm trong bảng thương **CHƯA PHẢI** là giá trị cuối cùng của đạo hàm cấp k của P(x = c) người dùng cần phải lấy kết quả in đậm đó nhân với k! (k là đạo hàm cấp cần tính) để ra kết quả cuối cùng
+- Giá trị ở màn hình thông báo là giá trị cuối cùng cần tìm
 
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 - Khi nhập lưu ý dùng dấu **.** để biểu diễn phần thập phân
-- Luôn luôn để cách 1 dòng khi nhập vào 
+- **LUÔN LUÔN** để cách 1 dòng khi nhập giá trị
+
 ## Tải
 - Tải ở Releases hoặc ấn vào [đây](https://github.com/qanhta2710/Interpolation/releases) 
 
