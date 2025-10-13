@@ -78,7 +78,7 @@ namespace Interpolation
         }
         public static DataTable HornerEvaluationTable(double[] coeffsP, double c, int precision)
         {
-            var dt = new DataTable();   
+            var dt = new DataTable();
             var displayCoeffs = coeffsP.Reverse().ToArray();
             int n = displayCoeffs.Length;
             for (int i = 0; i < n; i++)

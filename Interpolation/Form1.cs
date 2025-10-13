@@ -15,6 +15,12 @@ namespace Interpolation
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
+            comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
+            dataGridViewHornerEval.ClearSelection();
+            dataGridViewHornerDerivative.ClearSelection();
+            dataGridViewLagrange.ClearSelection();
+            dataGridViewNewton.ClearSelection();
+            dataGridViewNewtonFinite.ClearSelection();
         }
         // Tìm mốc nội suy Chebyshev
         private void btnSolveChebyshev_Click(object sender, EventArgs e)
@@ -289,7 +295,7 @@ namespace Interpolation
                 // Tính giá trị đạo hàm các cấp của đa thức P(x) tại c
                 richTextBoxResult.AppendText($"Giá trị đạo hàm các cấp của đa thức P(x) tại c:\n");
                 double[] hornerDerivatives = Horner.HornerDerivatives(coeffsP, c, n, precision);
-                for (int m = 1; m < hornerDerivatives.Length; m++)
+                for (int m = 1; m <= k; m++)
                 {
                     richTextBoxResult.AppendText($"P^({m})(x = {c}) = {hornerDerivatives[m]}\n");
                 }
@@ -308,20 +314,8 @@ namespace Interpolation
                 DataTable evalTable = Horner.HornerEvaluationTable(coeffsP, c, precision);
                 dataGridViewHornerEval.DataSource = evalTable;
 
-                dataGridViewHornerEval.ColumnHeadersVisible = false;
-                dataGridViewHornerEval.RowHeadersVisible = false;
-                dataGridViewHornerEval.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridViewHornerEval.AllowUserToAddRows = false;
-                dataGridViewHornerEval.ClearSelection();
-
                 DataTable derivativeTable = Horner.GetHornerDerivativesTable(coeffsP, c, k, precision);
                 dataGridViewHornerDerivative.DataSource = derivativeTable;
-
-                dataGridViewHornerDerivative.ColumnHeadersVisible = false;
-                dataGridViewHornerDerivative.RowHeadersVisible = false;
-                dataGridViewHornerDerivative.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridViewHornerDerivative.AllowUserToAddRows = false;
-                dataGridViewHornerDerivative.ClearSelection();
 
                 if (dataGridViewHornerEval.Rows.Count > 1 && dataGridViewHornerEval.Columns.Count > 0)
                 {
@@ -348,7 +342,129 @@ namespace Interpolation
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
-                throw;
+            }
+        }
+        private void btnSolveNewtonFinite_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridViewNewtonFinite.Rows.Clear();
+                dataGridViewNewtonFinite.Columns.Clear();
+
+                if (comboBoxNewtonFinite.SelectedIndex == 0)
+                {
+                    dataGridViewXYNewtonFinite.Sort(dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"], System.ComponentModel.ListSortDirection.Ascending);
+                    MessageBox.Show("Sắp xếp mốc nội suy tăng dần");
+                }
+                else if (comboBoxNewtonFinite.SelectedIndex == 1)
+                {
+                    dataGridViewXYNewtonFinite.Sort(dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"], System.ComponentModel.ListSortDirection.Descending);
+                    MessageBox.Show("Sắp xếp mốc nội suy giảm dần");
+                }
+                RemoveDuplicate(dataGridViewXYNewtonFinite);
+
+                double[] x = GetXValues(dataGridViewXYNewtonFinite);
+                double[] y = GetYValues(dataGridViewXYNewtonFinite);
+                int precision = Convert.ToInt32(txtBoxPrecisionNewtonFinite.Text);
+
+                dataGridViewNewtonFinite.Columns.Add("X", "X");
+                dataGridViewNewtonFinite.Columns.Add("Y", "Y");
+                for (int j = 1; j < x.Length; j++)
+                {
+                    dataGridViewNewtonFinite.Columns.Add($"TSP{j}", $"TSP {j}");
+                }
+                dataGridViewNewtonFinite.Columns.Add("note", "Ghi chú");
+                dataGridViewNewtonFinite.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+                foreach (DataGridViewColumn col in dataGridViewNewtonFinite.Columns)
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                double?[,] finiteDifferenceTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
+                int rows = finiteDifferenceTable.GetLength(0);
+                int cols = finiteDifferenceTable.GetLength(1);
+                for (int i = 0; i < rows; i++)
+                {
+                    object[] row = new object[cols + 2];
+                    for (int j = 0; j < cols; j++)
+                    {
+                        row[j] = finiteDifferenceTable[i, j]?.ToString() ?? "";
+                    }
+                    if (i == rows - 1)
+                    {
+                        row[cols] = "Bảng tỷ sai phân";
+                    }
+                    dataGridViewNewtonFinite.Rows.Add(row);
+                }
+
+                dataGridViewNewtonFinite.Rows.Add();
+
+                double[] x_newton_finite = new double[x.Length - 1];
+                if (comboBoxNewtonFinite.SelectedIndex == 0)
+                {
+                    for (int i = 0; i < x.Length - 1; i++)
+                    {
+                        x_newton_finite[i] = i;
+                    }
+                }
+                else if (comboBoxNewtonFinite.SelectedIndex == 1)
+                {
+                    for (int i = 0; i < x.Length - 1; i++)
+                    {
+                        x_newton_finite[i] = -i;
+                    }
+                }
+                double[,] productTable = Horner.ProductTable(x_newton_finite, precision);
+                int tableProductRows = productTable.GetLength(0);
+                int tableProductCols = productTable.GetLength(1);
+                for (int i = 0; i < tableProductRows; i++)
+                {
+                    object[] row = new object[tableProductCols + 2];
+                    for (int j = 0; j < tableProductCols; j++)
+                    {
+                        row[j] = productTable[i, j];
+                    }
+                    if (i == 0)
+                    {
+                        row[tableProductCols] = "";
+                        row[tableProductCols + 1] = "Bảng tích";
+                    }
+                    dataGridViewNewtonFinite.Rows.Add(row);
+                }
+
+                dataGridViewNewtonFinite.Rows.Add();
+
+                double[] finiteDifferenceDiagonal = new double[x.Length];
+                for (int i = 0; i < x.Length; i++)
+                {
+                    finiteDifferenceDiagonal[i] = finiteDifferenceTable[i, i + 1] / Function.Factorial(i) ?? 0.0;
+                }
+                object[] colsFiniteDifferenceDiagonal = new object[x.Length + 2];
+                for (int j = 0; j < x.Length; j++)
+                {
+                    colsFiniteDifferenceDiagonal[j] = finiteDifferenceDiagonal[j];
+                }
+                colsFiniteDifferenceDiagonal[x.Length] = "";
+                colsFiniteDifferenceDiagonal[x.Length + 1] = "Hệ số";
+                dataGridViewNewtonFinite.Rows.Add(colsFiniteDifferenceDiagonal);
+
+                dataGridViewNewtonFinite.Rows.Add();
+
+                double[] newtonPolynomial = Function.FindPolynomial(finiteDifferenceDiagonal, productTable, precision);
+                object[] newtonPolynomialRow = new object[cols + 1];
+                for (int j = 0; j < newtonPolynomial.Length; j++)
+                {
+                    newtonPolynomialRow[j] = newtonPolynomial[j];
+                }
+                newtonPolynomialRow[cols - 1] = "";
+                newtonPolynomialRow[cols] = "Hệ số đa thức nội suy";
+                dataGridViewNewtonFinite.Rows.Add(newtonPolynomialRow);
+
+                lblNewtonFinite.Text = Function.PolynomialToString(newtonPolynomial);
+                lblNewtonFinite.Visible = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi định dạng");
             }
         }
 
