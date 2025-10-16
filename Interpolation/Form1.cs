@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -16,13 +17,9 @@ namespace Interpolation
         {
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
             comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
-
-            dataGridViewHornerEval.ClearSelection();
-            dataGridViewHornerDerivative.ClearSelection();
-            dataGridViewLagrange.ClearSelection();
-            dataGridViewNewton.ClearSelection();
-            dataGridViewNewtonFinite.ClearSelection();
         }
+
+        #region Event Handlers
         // Tìm mốc nội suy Chebyshev
         private void btnSolveChebyshev_Click(object sender, EventArgs e)
         {
@@ -57,91 +54,9 @@ namespace Interpolation
                 double[] y = GetYValues(dataXYLagrange);
                 int precision = Convert.ToInt32(txtBoxPrecisionLagrange.Text);
 
-                // Tạo bảng
-                int cols = x.Length + 1;
-                for (int j = 0; j < cols; j++)
-                {
-                    dataGridViewLagrange.Columns.Add($"col{j}", $"Cột {j}");
-                }
-                dataGridViewLagrange.Columns.Add("note", "Ghi chú");
-                dataGridViewLagrange.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                foreach (DataGridViewColumn col in dataGridViewLagrange.Columns)
-                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                // Tính hệ số D
-                double[] coeffsD = Lagrange.CoeffsD(x, y, precision);
-                object[] coeffsDRow = new object[cols + 1];
-                for (int j = 0; j < coeffsD.Length; j++)
-                {
-                    coeffsDRow[j] = coeffsD[j];
-                }
-                coeffsDRow[cols - 1] = "";
-                coeffsDRow[cols] = "Hệ số D";
-                dataGridViewLagrange.Rows.Add(coeffsDRow);
-
-                dataGridViewLagrange.Rows.Add();
-
-                // Tính bảng tích
-                double[,] productTable = Horner.ProductTable(x, precision);
-                int tableProductRows = productTable.GetLength(0);
-                int tableProductCols = productTable.GetLength(1);
-                for (int i = 0; i < tableProductRows; i++)
-                {
-                    object[] row = new object[tableProductCols + 1];
-                    for (int j = 0; j < tableProductCols; j++)
-                    {
-                        row[j] = productTable[i, j];
-                    }
-                    if (i == 0)
-                    {
-                        row[tableProductCols] = "Bảng tích";
-                    }
-                    if (i == tableProductRows - 1)
-                    {
-                        row[tableProductCols] = "w_{n+1}";
-                    }
-                    dataGridViewLagrange.Rows.Add(row);
-                }
-
-                dataGridViewLagrange.Rows.Add();
-
-                // Trích xuất hệ số W từ bảng tích
-                double[] coeffsW = new double[cols];
-                for (int i = 0; i < cols; i++)
-                {
-                    coeffsW[i] = productTable[productTable.GetLength(0) - 1, i];
-                }
-
-                // Tính bảng thương
-                double[,] divideTable = Lagrange.DivideTable(x, y, coeffsW, precision);
-                int tableDivideRows = divideTable.GetLength(0);
-                int tableDivideCols = divideTable.GetLength(1);
-                for (int i = 0; i < tableDivideRows; i++)
-                {
-                    object[] row = new object[tableDivideCols + 2];
-                    for (int j = 0; j < tableDivideCols; j++)
-                    {
-                        row[j] = divideTable[i, j];
-                    }
-                    if (i == 0)
-                    {
-                        row[tableDivideCols] = "";
-                        row[tableDivideCols + 1] = "Bảng thương";
-                    }
-                    dataGridViewLagrange.Rows.Add(row);
-                }
-                dataGridViewLagrange.Rows.Add();
-
-                // Tính hệ số đa thức nội suy
-                double[] lagrangePolynomial = Function.FindPolynomial(coeffsD, divideTable, precision);
-                object[] lagrangePolynomialRow = new object[cols + 1];
-                for (int j = 0; j < lagrangePolynomial.Length; j++)
-                {
-                    lagrangePolynomialRow[j] = lagrangePolynomial[j];
-                }
-                lagrangePolynomialRow[cols - 1] = "";
-                lagrangePolynomialRow[cols] = "Hệ số đa thức nội suy";
-                dataGridViewLagrange.Rows.Add(lagrangePolynomialRow);
+                // Tìm và in đa thức nội suy
+                var lagrangePolynomial = SolveLagrange(x, y, precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable);
+                DisplayLagrangeResults(dataGridViewLagrange, x.Length, coeffsD, productTable, divideTable, lagrangePolynomial);
 
                 // In ra đa thức nội suy dạng chính tắc
                 lblResult.Text = Function.PolynomialToString(lagrangePolynomial);
@@ -185,89 +100,9 @@ namespace Interpolation
                 double[] y = GetYValues(dataXYNewton);
                 int precision = Convert.ToInt32(txtBoxPrecisionNewton.Text);
 
-                // Tạo bảng
-                dataGridViewNewton.Columns.Add("X", "X");
-                dataGridViewNewton.Columns.Add("Y", "Y");
-                for (int j = 1; j < x.Length; j++)
-                {
-                    dataGridViewNewton.Columns.Add($"TSP{j}", $"TSP {j}");
-                }
-                dataGridViewNewton.Columns.Add("note", "Ghi chú");
-                dataGridViewNewton.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-                foreach (DataGridViewColumn col in dataGridViewNewton.Columns)
-                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                double?[,] dividedDifferenceTable = Newton.BuildDividedDifferenceTable(x, y, precision);
-
-                // Bảng tỷ sai phân
-                int rows = dividedDifferenceTable.GetLength(0);
-                int cols = dividedDifferenceTable.GetLength(1);
-                for (int i = 0; i < rows; i++)
-                {
-                    object[] row = new object[cols + 2];
-                    for (int j = 0; j < cols; j++)
-                    {
-                        row[j] = dividedDifferenceTable[i, j]?.ToString() ?? "";
-                    }
-                    if (i == rows - 1)
-                    {
-                        row[cols] = "Bảng tỷ sai phân";
-                    }
-                    dataGridViewNewton.Rows.Add(row);
-                }
-
-                dataGridViewNewton.Rows.Add();
-
-                // Bảng tích
-                double[] x_newton = x.Take(x.Length - 1).ToArray();
-                double[,] productTable = Horner.ProductTable(x_newton, precision);
-                int tableProductRows = productTable.GetLength(0);
-                int tableProductCols = productTable.GetLength(1);
-                for (int i = 0; i < tableProductRows; i++)
-                {
-                    object[] row = new object[tableProductCols + 2];
-                    for (int j = 0; j < tableProductCols; j++)
-                    {
-                        row[j] = productTable[i, j];
-                    }
-                    if (i == 0)
-                    {
-                        row[tableProductCols] = "";
-                        row[tableProductCols + 1] = "Bảng tích";
-                    }
-                    dataGridViewNewton.Rows.Add(row);
-                }
-
-                dataGridViewNewton.Rows.Add();
-
-                // Trích xuất hệ số tỷ sai phân từ bảng tỷ sai phân
-                double[] dividedDiffDiagonal = new double[x.Length];
-                for (int i = 0; i < x.Length; i++)
-                {
-                    dividedDiffDiagonal[i] = dividedDifferenceTable[i, i + 1] ?? 0.0;
-                }
-                object[] colsDividedDiffDiagonal = new object[x.Length + 2];
-                for (int j = 0; j < x.Length; j++)
-                {
-                    colsDividedDiffDiagonal[j] = dividedDiffDiagonal[j];
-                }
-                colsDividedDiffDiagonal[x.Length] = "";
-                colsDividedDiffDiagonal[x.Length + 1] = "Hệ số";
-                dataGridViewNewton.Rows.Add(colsDividedDiffDiagonal);
-
-                dataGridViewNewton.Rows.Add();
-
-                // Hệ số đa thức nội suy
-                double[] newtonPolynomial = Function.FindPolynomial(dividedDiffDiagonal, productTable, precision);
-                object[] newtonPolynomialRow = new object[cols + 1];
-                for (int j = 0; j < newtonPolynomial.Length; j++)
-                {
-                    newtonPolynomialRow[j] = newtonPolynomial[j];
-                }
-                newtonPolynomialRow[cols - 1] = "";
-                newtonPolynomialRow[cols] = "Hệ số đa thức nội suy";
-                dataGridViewNewton.Rows.Add(newtonPolynomialRow);
+                // Tìm và in đa thức nội suy
+                var newtonPolynomial = SolveNewton(x, y, precision, out double?[,] diffTable, out double[,] productTable, out double[] dividedDiagonalDiff);
+                DisplayNewtonResults(dataGridViewNewton, x.Length, diffTable, dividedDiagonalDiff, productTable, newtonPolynomial);
 
                 // In đa thức nội suy
                 lblResultNewton.Text = Function.PolynomialToString(newtonPolynomial);
@@ -278,84 +113,11 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
-
-        // Tính giá trị đa thức và các đạo hàm tại điểm c bằng phương pháp Horner
-        private void btnEval_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Xử lý Input
-                richTextBoxResult.Clear();
-                double[] coeffsP = GetCoeffsP(dataGridViewCoeffsP);
-                int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
-                double c = Convert.ToDouble(txtBoxC.Text);
-                int k = Convert.ToInt32(txtBoxk.Text);
-                int n = coeffsP.Length - 1;
-
-                // Tính giá trị đa thức P(x) tại c
-                richTextBoxResult.AppendText($"Giá trị đa thức P(x) tại c:\n");
-                double hornerEval = Horner.HornerEvaluate(coeffsP, c, precision);
-                richTextBoxResult.AppendText($"P({c}) = {hornerEval}\n");
-
-                // Tính giá trị đạo hàm các cấp của đa thức P(x) tại c
-                richTextBoxResult.AppendText($"Giá trị đạo hàm các cấp của đa thức P(x) tại c:\n");
-                double[] hornerDerivatives = Horner.HornerDerivatives(coeffsP, c, n, precision);
-                for (int m = 1; m <= k; m++)
-                {
-                    richTextBoxResult.AppendText($"P^({m})(x = {c}) = {hornerDerivatives[m]}\n");
-                }
-
-                // Tính thương và phần dư của phép chia P(x) với (x-c)
-                richTextBoxResult.AppendText($"Thương và dư của phép chia P(x) với (x-c):\n");
-                (double[] quotinent, double remainder) = Horner.HornerDivide(coeffsP, c, precision);
-                richTextBoxResult.AppendText($"Q(x) = {Function.PolynomialToString(quotinent.Reverse().ToArray())}, R = {remainder}\n");
-
-                // Tính tích đa thức P(x) với (x-c)
-                richTextBoxResult.AppendText($"Tích đa thức P(x) với (x-c):\n");
-                double[] multiplyPolynomial = Function.MultiplyPolynomial(coeffsP, c, precision);
-                richTextBoxResult.AppendText($"({Function.PolynomialToString(coeffsP.Reverse().ToArray())})(x - {c}) = {Function.PolynomialToString(multiplyPolynomial)}\n");
-
-                dataGridViewHornerEval.DataSource = null;
-                DataTable evalTable = Horner.HornerEvaluationTable(coeffsP, c, precision);
-                dataGridViewHornerEval.DataSource = evalTable;
-
-                DataTable derivativeTable = Horner.GetHornerDerivativesTable(coeffsP, c, k, precision);
-                dataGridViewHornerDerivative.DataSource = derivativeTable;
-
-                if (dataGridViewHornerEval.Rows.Count > 1 && dataGridViewHornerEval.Columns.Count > 0)
-                {
-                    int lastColIndex = dataGridViewHornerEval.ColumnCount - 1;
-                    dataGridViewHornerEval.Rows[1].Cells[lastColIndex].Style.BackColor = Color.LightGreen;
-                    dataGridViewHornerEval.Rows[1].Cells[lastColIndex].Style.Font = new Font(dataGridViewHornerEval.Font, FontStyle.Bold);
-                }
-                foreach (DataGridViewRow row in dataGridViewHornerDerivative.Rows)
-                {
-                    if (row.Index == 0) continue;
-
-                    for (int i = row.Cells.Count - 1; i >= 0; i--)
-                    {
-                        var cell = row.Cells[i];
-                        if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
-                        {
-                            cell.Style.BackColor = Color.LightSkyBlue;
-                            cell.Style.Font = new Font(dataGridViewHornerEval.Font, FontStyle.Bold);
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Lỗi định dạng");
-            }
-        }
         private void btnSolveNewtonFinite_Click(object sender, EventArgs e)
         {
             try
             {
-                dataGridViewNewtonFinite.Rows.Clear();
-                dataGridViewNewtonFinite.Columns.Clear();
-
+                // Xử lý Input
                 if (comboBoxNewtonFinite.SelectedIndex == 0)
                 {
                     dataGridViewXYNewtonFinite.Sort(dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"], System.ComponentModel.ListSortDirection.Ascending);
@@ -366,104 +128,19 @@ namespace Interpolation
                     dataGridViewXYNewtonFinite.Sort(dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"], System.ComponentModel.ListSortDirection.Descending);
                     MessageBox.Show("Sắp xếp mốc nội suy giảm dần");
                 }
+
                 RemoveDuplicate(dataGridViewXYNewtonFinite);
 
                 double[] x = GetXValues(dataGridViewXYNewtonFinite);
                 double[] y = GetYValues(dataGridViewXYNewtonFinite);
                 int precision = Convert.ToInt32(txtBoxPrecisionNewtonFinite.Text);
+                bool isAscending = comboBoxNewtonFinite.SelectedIndex == 0;
 
-                dataGridViewNewtonFinite.Columns.Add("X", "X");
-                dataGridViewNewtonFinite.Columns.Add("Y", "Y");
-                for (int j = 1; j < x.Length; j++)
-                {
-                    dataGridViewNewtonFinite.Columns.Add($"TSP{j}", $"TSP {j}");
-                }
-                dataGridViewNewtonFinite.Columns.Add("note", "Ghi chú");
-                dataGridViewNewtonFinite.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                // Tìm và in đa thức nội suy
+                var newtonPolynomial = SolveNewtonFinite(x, y, precision, isAscending, out double?[,] finiteDiffTable, out double[,] productTable, out double[] dividedDiagonalDiff);
+                DisplayNewtonResults(dataGridViewNewtonFinite, x.Length, finiteDiffTable, dividedDiagonalDiff, productTable, newtonPolynomial);
 
-                foreach (DataGridViewColumn col in dataGridViewNewtonFinite.Columns)
-                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                double?[,] finiteDifferenceTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
-                int rows = finiteDifferenceTable.GetLength(0);
-                int cols = finiteDifferenceTable.GetLength(1);
-                for (int i = 0; i < rows; i++)
-                {
-                    object[] row = new object[cols + 2];
-                    for (int j = 0; j < cols; j++)
-                    {
-                        row[j] = finiteDifferenceTable[i, j]?.ToString() ?? "";
-                    }
-                    if (i == rows - 1)
-                    {
-                        row[cols] = "Bảng tỷ sai phân";
-                    }
-                    dataGridViewNewtonFinite.Rows.Add(row);
-                }
-
-                dataGridViewNewtonFinite.Rows.Add();
-
-                double[] x_newton_finite = new double[x.Length - 1];
-                if (comboBoxNewtonFinite.SelectedIndex == 0)
-                {
-                    for (int i = 0; i < x.Length - 1; i++)
-                    {
-                        x_newton_finite[i] = i;
-                    }
-                }
-                else if (comboBoxNewtonFinite.SelectedIndex == 1)
-                {
-                    for (int i = 0; i < x.Length - 1; i++)
-                    {
-                        x_newton_finite[i] = -i;
-                    }
-                }
-                double[,] productTable = Horner.ProductTable(x_newton_finite, precision);
-                int tableProductRows = productTable.GetLength(0);
-                int tableProductCols = productTable.GetLength(1);
-                for (int i = 0; i < tableProductRows; i++)
-                {
-                    object[] row = new object[tableProductCols + 2];
-                    for (int j = 0; j < tableProductCols; j++)
-                    {
-                        row[j] = productTable[i, j];
-                    }
-                    if (i == 0)
-                    {
-                        row[tableProductCols] = "";
-                        row[tableProductCols + 1] = "Bảng tích";
-                    }
-                    dataGridViewNewtonFinite.Rows.Add(row);
-                }
-
-                dataGridViewNewtonFinite.Rows.Add();
-
-                double[] finiteDifferenceDiagonal = new double[x.Length];
-                for (int i = 0; i < x.Length; i++)
-                {
-                    finiteDifferenceDiagonal[i] = finiteDifferenceTable[i, i + 1] / Function.Factorial(i) ?? 0.0;
-                }
-                object[] colsFiniteDifferenceDiagonal = new object[x.Length + 2];
-                for (int j = 0; j < x.Length; j++)
-                {
-                    colsFiniteDifferenceDiagonal[j] = finiteDifferenceDiagonal[j];
-                }
-                colsFiniteDifferenceDiagonal[x.Length] = "";
-                colsFiniteDifferenceDiagonal[x.Length + 1] = "Hệ số";
-                dataGridViewNewtonFinite.Rows.Add(colsFiniteDifferenceDiagonal);
-
-                dataGridViewNewtonFinite.Rows.Add();
-
-                double[] newtonPolynomial = Function.FindPolynomial(finiteDifferenceDiagonal, productTable, precision);
-                object[] newtonPolynomialRow = new object[cols + 1];
-                for (int j = 0; j < newtonPolynomial.Length; j++)
-                {
-                    newtonPolynomialRow[j] = newtonPolynomial[j];
-                }
-                newtonPolynomialRow[cols - 1] = "";
-                newtonPolynomialRow[cols] = "Hệ số đa thức nội suy";
-                dataGridViewNewtonFinite.Rows.Add(newtonPolynomialRow);
-
+                // Viết đa thức nội suy dạng chính tắc
                 lblNewtonFinite.Text = Function.PolynomialToString(newtonPolynomial);
                 lblNewtonFinite.Visible = true;
             }
@@ -472,8 +149,169 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        // Tính giá trị đa thức và các đạo hàm tại điểm c bằng phương pháp Horner
+        private void btnEval_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Xử lý Input
+                double[] coeffsP = GetCoeffsP(dataGridViewCoeffsP);
+                int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
+                double c = Convert.ToDouble(txtBoxC.Text);
+                int k = Convert.ToInt32(txtBoxk.Text);
+                int n = coeffsP.Length - 1;
 
-        // Các phương thức hỗ trợ 
+                // Tính và in kết quả
+                HornerResults result = SolveHorner(coeffsP, c, k, precision);
+                DisplayHornerResults(result, c);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi định dạng");
+            }
+        }
+        #endregion
+
+        #region Core
+        private double[] SolveLagrange(double[] x, double[] y, int precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable)
+        {
+            coeffsD = Lagrange.CoeffsD(x, y, precision);
+            productTable = Horner.ProductTable(x, precision);
+            double[] coeffsW = new double[x.Length + 1];
+            for (int i = 0; i <= x.Length; i++)
+            {
+                coeffsW[i] = productTable[productTable.GetLength(0) - 1, i];
+            }
+            divideTable = Lagrange.DivideTable(x, y, coeffsW, precision);
+            return Function.FindPolynomial(coeffsD, divideTable, precision);
+        }
+        private double[] SolveNewton(double[] x, double[] y, int precision, out double?[,] diffTable, out double[,] productTable, out double[] dividedDiagonalDiff)
+        {
+            diffTable = Newton.BuildDividedDifferenceTable(x, y, precision);
+            double[] x_newton = x.Take(x.Length - 1).ToArray();
+            productTable = Horner.ProductTable(x_newton, precision);
+            dividedDiagonalDiff = new double[x.Length];
+            for (int i = 0; i < x.Length; i++)
+            {
+                dividedDiagonalDiff[i] = diffTable[i, i + 1] ?? 0.0;
+            }
+            return Function.FindPolynomial(dividedDiagonalDiff, productTable, precision);
+        }
+        private double[] SolveNewtonFinite(double[] x, double[] y, int precision, bool isAscending, out double?[,] finiteDiffTable, out double[,] productTable, out double[] dividedDiagonalDiff)
+        {
+            finiteDiffTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
+            double[] x_newton = new double[x.Length - 1];
+            if (isAscending)
+            {
+                for (int i = 0; i < x.Length - 1; i++)
+                {
+                    x_newton[i] = i;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < x.Length - 1; i++)
+                {
+                    x_newton[i] = -i;
+                }
+            }
+            productTable = Horner.ProductTable(x_newton, precision);
+            dividedDiagonalDiff = new double[x.Length];
+            for (int i = 0; i < x.Length; i++)
+            {
+                dividedDiagonalDiff[i] = (finiteDiffTable[i, i + 1] / Function.Factorial(i)) ?? 0.0;
+            }
+            return Function.FindPolynomial(dividedDiagonalDiff, productTable, precision);
+        }
+        private HornerResults SolveHorner(double[] coeffsP, double c, int k, int precision)
+        {
+            int n = coeffsP.Length - 1;
+            var results = new HornerResults();
+
+            results.Evaluation = Horner.HornerEvaluate(coeffsP, c, precision);
+            results.Derivatives = Horner.HornerDerivatives(coeffsP, c, n, precision);
+            (results.Quotient, results.Remainder) = Horner.HornerDivide(coeffsP, c, precision);
+            results.MultipliedPolynomial = Function.MultiplyPolynomial(coeffsP, c, precision);
+            results.EvaluationTable = Horner.HornerEvaluationTable(coeffsP, c, precision);
+            results.DerivativeTable = Horner.GetHornerDerivativesTable(coeffsP, c, k, precision);
+
+            return results;
+        }
+        #endregion
+
+        #region UI
+        private void DisplayLagrangeResults(DataGridView dgv, int n, double[] coeffsD, double[,] productTable, double[,] divideTable, double[] lagrangePolynomial) // n là số nút nội suy
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, n + 1, "Ghi chú"); // n + 1 cột do bảng nhân và 1 cột ghi chú
+            AddRow(dgv, coeffsD, "Hệ số D");
+            AddSectionBreak(dgv);
+            AddTable(dgv, productTable, "Bảng tích", "w_{n+1}");
+            AddSectionBreak(dgv);
+            AddTable(dgv, divideTable, "Bảng thương");
+            AddSectionBreak(dgv);
+            AddRow(dgv, lagrangePolynomial, "Hệ số đa thức nội suy");
+        }
+
+        private void DisplayNewtonResults(DataGridView dgv, int n, double?[,] diffTable, double[] dividedDiagonalDiff, double[,] productTable, double[] newtonPolynomial)
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, n + 1, "Ghi chú");
+            AddNullableTable(dgv, diffTable, "Bảng tỷ sai phân");
+            AddSectionBreak(dgv);
+            AddRow(dgv, dividedDiagonalDiff, "Hệ số trích xuất từ bảng TSP");
+            AddSectionBreak(dgv);
+            AddTable(dgv, productTable, "Bảng tích", "w_{n+1}");
+            AddSectionBreak(dgv);
+            AddRow(dgv, newtonPolynomial, "Hệ số đa thức nội suy");
+        }
+        private void DisplayHornerResults(HornerResults results, double c)
+        {
+            richTextBoxResult.Clear();
+            richTextBoxResult.AppendText($"Giá trị đa thức P(x) tại c:\nP({c}) = {results.Evaluation}\n\n");
+            richTextBoxResult.AppendText($"Giá trị đạo hàm các cấp của đa thức P(x) tại c:\n");
+            for (int m = 1; m < results.Derivatives.Length; m++)
+            {
+                richTextBoxResult.AppendText($"P^({m})(x = {c}) = {results.Derivatives[m]}\n");
+            }
+            richTextBoxResult.AppendText($"\nThương và dư của phép chia P(x) với (x-c):\n");
+            richTextBoxResult.AppendText($"Q(x) = {Function.PolynomialToString(results.Quotient.Reverse().ToArray())}, R = {results.Remainder}\n\n");
+            richTextBoxResult.AppendText($"Tích đa thức P(x) với (x-c):\n");
+            richTextBoxResult.AppendText($"{Function.PolynomialToString(results.MultipliedPolynomial)}\n");
+
+            dataGridViewHornerEval.DataSource = results.EvaluationTable;
+            dataGridViewHornerDerivative.DataSource = results.DerivativeTable;
+
+            StyleHornerGrids();
+        }
+        private void StyleHornerGrids()
+        {
+            if (dataGridViewHornerEval.Rows.Count > 1 && dataGridViewHornerEval.Columns.Count > 0)
+            {
+                var cell = dataGridViewHornerEval.Rows[1].Cells[dataGridViewHornerEval.ColumnCount - 1];
+                cell.Style.BackColor = Color.LightGreen;
+                cell.Style.Font = new Font(dataGridViewHornerEval.Font, FontStyle.Bold);
+            }
+            foreach (DataGridViewRow row in dataGridViewHornerDerivative.Rows)
+            {
+                if (row.Index == 0) continue;
+                for (int i = row.Cells.Count - 1; i >= 0; i--)
+                {
+                    var cell = row.Cells[i];
+                    if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                    {
+                        cell.Style.BackColor = Color.LightSkyBlue;
+                        cell.Style.Font = new Font(dataGridViewHornerEval.Font, FontStyle.Bold);
+                        break;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Utilities
         private double[] GetXValues(DataGridView dataGridView)
         {
             int rows = dataGridView.Rows.Count - 1;
@@ -506,7 +344,7 @@ namespace Interpolation
         }
         private void RemoveDuplicate(DataGridView dataGridView)
         {
-            var seenXValues = new System.Collections.Generic.HashSet<double>();
+            var seenXValues = new HashSet<double>();
             int rowIndex = 0;
             while (rowIndex < dataGridView.Rows.Count - 1)
             {
@@ -523,5 +361,67 @@ namespace Interpolation
                 }
             }
         }
+        private void SetupColumns(DataGridView dgv, int dataCols, string noteHeaderText)
+        {
+            for (int j = 0; j < dataCols; j++)
+            {
+                dgv.Columns.Add($"col{j}", $"Cột {j}");
+            }
+            dgv.Columns.Add("note", noteHeaderText);
+            dgv.Columns["note"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+        }
+        private void AddRow(DataGridView dgv, double[] data, string note)
+        {
+            var row = new List<object>();
+            for (int i = 0; i < data.Length; i++)
+            {
+                row.Add(data[i]);
+            }
+            while (row.Count < dgv.Columns.Count - 1) row.Add(""); // Thêm ô trống tới khi đến cột ghi chú
+            row.Add(note);
+            dgv.Rows.Add(row.ToArray());
+        }
+        private void AddTable(DataGridView dgv, double[,] table, string startNote, string endNote = null)
+        {
+            for (int i = 0; i < table.GetLength(0); i++)
+            {
+                double[] rowData = new double[table.GetLength(1)];
+                for (int j = 0; j < table.GetLength(1); j++) rowData[j] = table[i, j];
+
+                string note = (i == 0) ? startNote : (i == table.GetLength(0) - 1) ? endNote : "";
+                AddRow(dgv, rowData, note);
+            }
+        }
+        private void AddNullableTable(DataGridView dgv, double?[,] table, string note)
+        {
+            for (int i = 0; i < table.GetLength(0); i++)
+            {
+                object[] row = new object[dgv.Columns.Count];
+                for (int j = 0; j < table.GetLength(1); j++)
+                {
+                    row[j] = table[i, j]?.ToString() ?? "";
+                }
+                if (i == table.GetLength(0) - 1) row[dgv.Columns.Count - 1] = note;
+                dgv.Rows.Add(row);
+            }
+        }
+        private void AddSectionBreak(DataGridView dgv) => dgv.Rows.Add();
+        private class HornerResults
+        {
+            public double Evaluation { get; set; }
+            public double[] Derivatives { get; set; }
+            public double[] Quotient { get; set; }
+            public double Remainder { get; set; }
+            public double[] MultipliedPolynomial { get; set; }
+            public DataTable EvaluationTable { get; set; }
+            public DataTable DerivativeTable { get; set; }
+        }
+        #endregion
     }
 }
