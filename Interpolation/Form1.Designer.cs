@@ -951,8 +951,9 @@
             // 
             // btnEval
             // 
+            this.btnEval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEval.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEval.Location = new System.Drawing.Point(801, 42);
+            this.btnEval.Location = new System.Drawing.Point(852, 54);
             this.btnEval.Name = "btnEval";
             this.btnEval.Size = new System.Drawing.Size(108, 30);
             this.btnEval.TabIndex = 2;
