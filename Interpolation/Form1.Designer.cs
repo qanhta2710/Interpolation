@@ -100,7 +100,7 @@
             this.txtBoxk = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtBoxC = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEval = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
@@ -884,7 +884,7 @@
             this.panel2.Controls.Add(this.txtBoxk);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.txtBoxC);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btnEval);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.txtBoxPrecisionEval);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -949,16 +949,16 @@
             this.txtBoxC.Size = new System.Drawing.Size(102, 22);
             this.txtBoxC.TabIndex = 3;
             // 
-            // button1
+            // btnEval
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(801, 42);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 30);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Tính giá trị";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnEval.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEval.Location = new System.Drawing.Point(801, 42);
+            this.btnEval.Name = "btnEval";
+            this.btnEval.Size = new System.Drawing.Size(108, 30);
+            this.btnEval.TabIndex = 2;
+            this.btnEval.Text = "Tính giá trị";
+            this.btnEval.UseVisualStyleBackColor = true;
+            this.btnEval.Click += new System.EventHandler(this.btnEval_Click);
             // 
             // label2
             // 
@@ -1105,7 +1105,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn coeffsP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBoxPrecisionEval;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEval;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtBoxC;
         private System.Windows.Forms.RichTextBox richTextBoxResult;

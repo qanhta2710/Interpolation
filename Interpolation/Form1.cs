@@ -16,6 +16,7 @@ namespace Interpolation
         {
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
             comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
+
             dataGridViewHornerEval.ClearSelection();
             dataGridViewHornerDerivative.ClearSelection();
             dataGridViewLagrange.ClearSelection();
@@ -47,6 +48,7 @@ namespace Interpolation
         {
             try
             {
+                // Xử lý Input
                 dataGridViewLagrange.Rows.Clear();
                 dataGridViewLagrange.Columns.Clear();
                 RemoveDuplicate(dataXYLagrange);
@@ -103,6 +105,7 @@ namespace Interpolation
 
                 dataGridViewLagrange.Rows.Add();
 
+                // Trích xuất hệ số W từ bảng tích
                 double[] coeffsW = new double[cols];
                 for (int i = 0; i < cols; i++)
                 {
@@ -140,7 +143,7 @@ namespace Interpolation
                 lagrangePolynomialRow[cols] = "Hệ số đa thức nội suy";
                 dataGridViewLagrange.Rows.Add(lagrangePolynomialRow);
 
-                // Chỉnh label để in ra màn hình đa thức hoàn chỉnh
+                // In ra đa thức nội suy dạng chính tắc
                 lblResult.Text = Function.PolynomialToString(lagrangePolynomial);
                 lblResult.Visible = true;
             }
@@ -154,6 +157,7 @@ namespace Interpolation
         {
             try
             {
+                // Xử lý Input
                 dataGridViewNewton.Rows.Clear();
                 dataGridViewNewton.Columns.Clear();
 
@@ -196,7 +200,7 @@ namespace Interpolation
 
                 double?[,] dividedDifferenceTable = Newton.BuildDividedDifferenceTable(x, y, precision);
 
-                // Thêm bảng tỷ sai phân
+                // Bảng tỷ sai phân
                 int rows = dividedDifferenceTable.GetLength(0);
                 int cols = dividedDifferenceTable.GetLength(1);
                 for (int i = 0; i < rows; i++)
@@ -237,7 +241,7 @@ namespace Interpolation
 
                 dataGridViewNewton.Rows.Add();
 
-                // Hệ số
+                // Trích xuất hệ số tỷ sai phân từ bảng tỷ sai phân
                 double[] dividedDiffDiagonal = new double[x.Length];
                 for (int i = 0; i < x.Length; i++)
                 {
@@ -276,10 +280,11 @@ namespace Interpolation
         }
 
         // Tính giá trị đa thức và các đạo hàm tại điểm c bằng phương pháp Horner
-        private void button1_Click(object sender, EventArgs e)
+        private void btnEval_Click(object sender, EventArgs e)
         {
             try
             {
+                // Xử lý Input
                 richTextBoxResult.Clear();
                 double[] coeffsP = GetCoeffsP(dataGridViewCoeffsP);
                 int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
