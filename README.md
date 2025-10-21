@@ -10,7 +10,9 @@
 - Nếu có góp ý sửa lỗi hãy tạo Issues mới hoặc nếu có ý tưởng cải tiến hãy tạo Pull requests
 
 ## WIP
-- Nội suy trung tâm
+- Thêm giao diện cảnh báo + lưu ý 
+- Có thể sẽ sửa lại cấu trúc của 2 nội suy trung tâm (?) -- **Hiện tại đang có khá nhiều code thừa chưa tối ưu của 2 phương pháp này do làm vội**
+- Thêm chức năng nhập dữ liệu từ file Excel (?)
 - ...
 
 ## Hướng dẫn sử dụng (?)

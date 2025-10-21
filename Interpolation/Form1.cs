@@ -9,6 +9,7 @@ namespace Interpolation
 {
     public partial class Form1 : Form
     {
+        private bool hasShownStirlingWarning = false;
         public Form1()
         {
             InitializeComponent();
@@ -18,7 +19,6 @@ namespace Interpolation
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
             comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
         }
-
         #region Event Handlers
         // Tìm mốc nội suy Chebyshev
         private void btnSolveChebyshev_Click(object sender, EventArgs e)
@@ -170,6 +170,52 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+
+        // Tìm đa thức nội suy trung tâm bằng Stirling
+        private void btnSolveStirling_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Xử lý Input
+                dataXYStirling.Sort(dataXYStirling.Columns["colsXStirling"], System.ComponentModel.ListSortDirection.Ascending);
+                RemoveDuplicate(dataXYStirling);
+
+                double[] x = GetXValues(dataXYStirling);
+                double[] y = GetYValues(dataXYStirling);
+                int precision = Convert.ToInt32(txtboxPrecisionStirling.Text);
+
+                var StirlingPolynomial = SolveStirling(x, y, precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs);
+                DisplayCentralResults(dataResultStirling, x.Length, diffTable, vectorCoeffs, prodTable, StirlingPolynomial);
+
+                lblStirling.Text = Function.PolynomialToString(StirlingPolynomial);
+                lblStirling.Visible = true;            
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi định dạng");
+                throw;
+            }
+        }
+        private void btnSolveBessel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataXYBessel.Sort(dataXYBessel.Columns["colsXBessel"], System.ComponentModel.ListSortDirection.Ascending);
+                RemoveDuplicate(dataXYBessel);
+
+                double[] x = GetXValues(dataXYBessel);
+                double[] y = GetYValues(dataXYBessel);
+                int precision = Convert.ToInt32(txtboxPrecisionBessel.Text);
+
+                var BesselPolynomial = SolveBessel(x, y, precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs);
+                DisplayCentralResults(dataResultBessel, x.Length, diffTable, vectorCoeffs, prodTable, BesselPolynomial);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi định dạng");
+                throw;
+            }
+        }
         #endregion
 
         #region Core
@@ -236,6 +282,126 @@ namespace Interpolation
             results.DerivativeTable = Horner.GetHornerDerivativesTable(coeffsP, c, k, precision);
 
             return results;
+        }
+        private double[] SolveStirling(double[] x, double[] y, int precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs)
+        {
+            diffTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
+            vectorCoeffs = new double[x.Length];
+            int idx = (x.Length - 1) / 2;
+            for (int j = 1; j <= x.Length; j++)
+            {
+                if (j % 2 != 0)
+                {
+                    vectorCoeffs[j - 1] = diffTable[idx, j] / Function.Factorial(j - 1) ?? 0.0;
+                    vectorCoeffs[j - 1] = Math.Round(vectorCoeffs[j - 1], precision);
+                }
+                else
+                {
+                    vectorCoeffs[j - 1] = (1.0 / 2.0) * ((diffTable[idx, j] + diffTable[idx + 1, j]) / Function.Factorial(j - 1)) ?? 0.0;
+                    vectorCoeffs[j - 1] = Math.Round(vectorCoeffs[j - 1], precision);
+                    idx++;
+                }
+            }
+            double[] vectorCoeffsEven = new double[(x.Length + 1) / 2];
+            double[] vectorCoeffsOdd = new double[(x.Length / 2)];
+            int evenIdx = 0;
+            int oddIdx = 0;
+            for (int i = 0; i < x.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    vectorCoeffsEven[evenIdx++] = vectorCoeffs[i];
+                }
+                else
+                {
+                    vectorCoeffsOdd[oddIdx++] = vectorCoeffs[i];
+                }
+            }
+            double[] x_new = new double[(x.Length - 1) / 2];
+            for (int i = 0; i < (x.Length - 1) / 2; i++)
+            {
+                x_new[i] = Math.Pow(i, 2);
+            }
+            prodTable = Horner.ProductTable(x_new, precision);
+            double[,] prodTableEven = prodTable;
+            double[,] prodTableOdd = RemoveFirstRowAndLastColumn(prodTable);
+            double[] finalCoeffsEven = Function.FindPolynomial(vectorCoeffsEven, prodTableEven, precision);
+            double[] finalCoeffsOdd = Function.FindPolynomial(vectorCoeffsOdd, prodTableOdd, precision);
+            
+            double[] finalCoeffs = new double[x.Length];
+            evenIdx = 0; 
+            oddIdx = 0;
+            for (int i = 0; i < x.Length; i++)
+            {
+                if ((i % 2) == 0)
+                {
+                    finalCoeffs[i] = finalCoeffsEven[evenIdx++];
+                }
+                else
+                {
+                    finalCoeffs[i] = finalCoeffsOdd[oddIdx++];
+                }
+            }
+            return finalCoeffs;
+        }
+        private double[] SolveBessel(double[] x, double[] y, int precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs)
+        {
+            diffTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
+            vectorCoeffs = new double[x.Length];
+            int idx = (x.Length / 2) - 1;
+            for (int j = 1; j <= x.Length; j++)
+            {
+                if (j % 2 != 0)
+                {
+                    vectorCoeffs[j - 1] = (1.0 / 2.0) * ((diffTable[idx, j] + diffTable[idx + 1, j]) / Function.Factorial(j - 1)) ?? 0.0;
+                    vectorCoeffs[j - 1] = Math.Round(vectorCoeffs[j - 1], precision);
+                    idx++;
+                }
+                else
+                {
+                    vectorCoeffs[j - 1] = diffTable[idx, j] / Function.Factorial(j - 1) ?? 0.0;
+                    vectorCoeffs[j - 1] = Math.Round(vectorCoeffs[j - 1], precision);
+                }
+            }
+            double[] vectorCoeffsEven = new double[(x.Length / 2)];
+            double[] vectorCoeffsOdd = new double[(x.Length / 2)];
+            int evenIdx = 0;
+            int oddIdx = 0;
+            for (int i = 0; i < x.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    vectorCoeffsEven[evenIdx++] = vectorCoeffs[i];
+                }
+                else
+                {
+                    vectorCoeffsOdd[oddIdx++] = vectorCoeffs[i];
+                }
+            }
+            double[] x_new = new double[((x.Length / 2) - 1)];
+            for (int i = 1; i < (x.Length / 2); i++)
+            {
+                x_new[i - 1] = Math.Pow(i - 0.5, 2);
+            }
+            prodTable = Horner.ProductTable(x_new, precision);
+            double[] finalCoeffsEven = Function.FindPolynomial(vectorCoeffsEven, prodTable, precision);
+            double[] finalCoeffsOdd = Function.FindPolynomial(vectorCoeffsOdd, prodTable, precision);
+
+            double[] finalCoeffs = new double[x.Length];
+            evenIdx = 0;
+            oddIdx = 0;
+            for (int i = 0; i < x.Length; i++)
+            {
+                if ((i % 2) != 0)
+                {
+                    finalCoeffs[i] = finalCoeffsEven[evenIdx++];
+                }
+                else
+                {
+                    finalCoeffs[i] = finalCoeffsOdd[oddIdx++];
+                }
+            }
+            return finalCoeffs;
         }
         #endregion
 
@@ -308,6 +474,19 @@ namespace Interpolation
                     }
                 }
             }
+        }
+        private void DisplayCentralResults(DataGridView dgv, int n, double?[,] diffTable, double[] coeffsVector, double[,] productTable, double[] coeffsPolynomial)
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, n + 1, "Ghi chú");
+            AddNullableTable(dgv, diffTable, "Bảng tỷ sai phân");
+            AddSectionBreak(dgv);
+            AddRow(dgv, coeffsVector, "Hệ số trích xuất từ bảng TSP");
+            AddSectionBreak(dgv);
+            AddTable(dgv, productTable, "Bảng tích", "");
+            AddSectionBreak(dgv);
+            AddRow(dgv, coeffsPolynomial, "Hệ số đa thức nội suy");
         }
         #endregion
 
@@ -422,6 +601,23 @@ namespace Interpolation
             public DataTable EvaluationTable { get; set; }
             public DataTable DerivativeTable { get; set; }
         }
+        private double[,] RemoveFirstRowAndLastColumn(double[,] table)
+        {
+            int rows = table.GetLength(0);
+            int cols = table.GetLength(1);
+
+            double[,] res = new double[rows - 1, cols - 1];
+
+            for (int i = 1; i < rows; i++)
+            {
+                for (int j = 0; j < cols - 1; j++)
+                {
+                    res[i - 1, j] = table[i, j];
+                }
+            }
+            return res;
+        }
         #endregion
+
     }
 }
