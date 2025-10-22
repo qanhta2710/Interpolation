@@ -181,6 +181,11 @@ namespace Interpolation
                 RemoveDuplicate(dataXYStirling);
 
                 double[] x = GetXValues(dataXYStirling);
+                if (x.Length % 2 == 0)
+                {
+                    MessageBox.Show("Số nút nội suy chẵn vui lòng chọn nội suy Bessel");
+                    return;
+                }
                 double[] y = GetYValues(dataXYStirling);
                 int precision = Convert.ToInt32(txtboxPrecisionStirling.Text);
 
@@ -193,7 +198,6 @@ namespace Interpolation
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
-                throw;
             }
         }
         private void btnSolveBessel_Click(object sender, EventArgs e)
@@ -204,6 +208,11 @@ namespace Interpolation
                 RemoveDuplicate(dataXYBessel);
 
                 double[] x = GetXValues(dataXYBessel);
+                if (x.Length % 2 != 0)
+                {
+                    MessageBox.Show("Số nút nội suy lẻ vui lòng chọn nội suy Stirling");
+                    return;
+                }
                 double[] y = GetYValues(dataXYBessel);
                 int precision = Convert.ToInt32(txtboxPrecisionBessel.Text);
 
@@ -213,7 +222,6 @@ namespace Interpolation
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
-                throw;
             }
         }
         #endregion
