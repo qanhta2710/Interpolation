@@ -167,7 +167,7 @@ namespace Interpolation
             result[0] = Math.Round(-c * P[0], precision);
             return result.Reverse().ToArray();
         }
-        public static string PolynomialToString(double[] coeffs)
+        public static string PolynomialToString(double[] coeffs, string variable = "x")
         {
             var sb = new StringBuilder();
             int n = coeffs.Length;
@@ -195,12 +195,14 @@ namespace Interpolation
                 }
                 if (power > 0)
                 {
-                    sb.Append("x");
+                    sb.Append(variable);
                     if (power > 1) sb.Append("^" + power);
                 }
             }
+
             return sb.ToString();
         }
+
         public static double Factorial(int n)
         {
             double res = 1;

@@ -29,18 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridViewLagrange = new System.Windows.Forms.DataGridView();
-            this.lblResult = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSolveLagrange = new System.Windows.Forms.Button();
-            this.txtBoxPrecisionLagrange = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dataXYLagrange = new System.Windows.Forms.DataGridView();
-            this.colsXLagrange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colsYLagrange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -61,6 +49,18 @@
             this.n = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chebyshevPoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridViewLagrange = new System.Windows.Forms.DataGridView();
+            this.dataXYLagrange = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblResult = new System.Windows.Forms.Label();
+            this.btnSolveLagrange = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionLagrange = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnLagrangeToEval = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridViewNewton = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,11 +69,13 @@
             this.colsYNewton = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.lblResultNewton = new System.Windows.Forms.Label();
-            this.btnSolveNewton = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxPrecisionNewton = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxNewton = new System.Windows.Forms.ComboBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnNewtonToEval = new System.Windows.Forms.Button();
+            this.btnSolveNewton = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridViewNewtonFinite = new System.Windows.Forms.DataGridView();
             this.dataGridViewXYNewtonFinite = new System.Windows.Forms.DataGridView();
@@ -81,11 +83,37 @@
             this.colsYNewtonFinite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.lblNewtonFinite = new System.Windows.Forms.Label();
-            this.btnSolveNewtonFinite = new System.Windows.Forms.Button();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxPrecisionNewtonFinite = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.comboBoxNewtonFinite = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnNewtonFiniteToEval = new System.Windows.Forms.Button();
+            this.btnSolveNewtonFinite = new System.Windows.Forms.Button();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.dataResultStirling = new System.Windows.Forms.DataGridView();
+            this.dataXYStirling = new System.Windows.Forms.DataGridView();
+            this.colsXStirling = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYStirling = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnStirlingToEval = new System.Windows.Forms.Button();
+            this.lblStirling = new System.Windows.Forms.Label();
+            this.btnSolveStirling = new System.Windows.Forms.Button();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtboxPrecisionStirling = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.dataResultBessel = new System.Windows.Forms.DataGridView();
+            this.dataXYBessel = new System.Windows.Forms.DataGridView();
+            this.colsXBessel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBesselToEval = new System.Windows.Forms.Button();
+            this.lblResultBessel = new System.Windows.Forms.Label();
+            this.btnSolveBessel = new System.Windows.Forms.Button();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtboxPrecisionBessel = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.richTextBoxResult = new System.Windows.Forms.RichTextBox();
@@ -104,51 +132,40 @@
             this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
             this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.dataResultStirling = new System.Windows.Forms.DataGridView();
-            this.dataXYStirling = new System.Windows.Forms.DataGridView();
-            this.colsXStirling = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colsYStirling = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblStirling = new System.Windows.Forms.Label();
-            this.btnSolveStirling = new System.Windows.Forms.Button();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtboxPrecisionStirling = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblResultBessel = new System.Windows.Forms.Label();
-            this.btnSolveBessel = new System.Windows.Forms.Button();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtboxPrecisionBessel = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.dataXYBessel = new System.Windows.Forms.DataGridView();
-            this.dataResultBessel = new System.Windows.Forms.DataGridView();
-            this.colsXBessel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataChebyshev)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewton)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYNewton)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewtonFinite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewXYNewtonFinite)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultStirling)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYStirling)).BeginInit();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultBessel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).BeginInit();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -156,159 +173,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerDerivative)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).BeginInit();
-            this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultStirling)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYStirling)).BeginInit();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultBessel)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.tableLayoutPanel4);
-            this.tabPage2.Controls.Add(this.flowLayoutPanel2);
-            this.tabPage2.Controls.Add(this.dataXYLagrange);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Nội suy Lagrange";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.dataGridViewLagrange, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.lblResult, 0, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(261, 3);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.22486F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.775137F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(874, 581);
-            this.tableLayoutPanel4.TabIndex = 4;
-            // 
-            // dataGridViewLagrange
-            // 
-            this.dataGridViewLagrange.AllowUserToAddRows = false;
-            this.dataGridViewLagrange.AllowUserToDeleteRows = false;
-            this.dataGridViewLagrange.AllowUserToResizeColumns = false;
-            this.dataGridViewLagrange.AllowUserToResizeRows = false;
-            this.dataGridViewLagrange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLagrange.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewLagrange.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewLagrange.Name = "dataGridViewLagrange";
-            this.dataGridViewLagrange.ReadOnly = true;
-            this.dataGridViewLagrange.RowHeadersWidth = 51;
-            this.dataGridViewLagrange.RowTemplate.Height = 24;
-            this.dataGridViewLagrange.Size = new System.Drawing.Size(868, 524);
-            this.dataGridViewLagrange.TabIndex = 6;
-            // 
-            // lblResult
-            // 
-            this.lblResult.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(399, 544);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(76, 23);
-            this.lblResult.TabIndex = 7;
-            this.lblResult.Text = "label2";
-            this.lblResult.Visible = false;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.tableLayoutPanel2);
-            this.flowLayoutPanel2.Controls.Add(this.label1);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(261, 584);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(874, 59);
-            this.flowLayoutPanel2.TabIndex = 3;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.btnSolveLagrange, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtBoxPrecisionLagrange, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(360, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(511, 49);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // btnSolveLagrange
-            // 
-            this.btnSolveLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveLagrange.AutoSize = true;
-            this.btnSolveLagrange.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveLagrange.Location = new System.Drawing.Point(223, 8);
-            this.btnSolveLagrange.Name = "btnSolveLagrange";
-            this.btnSolveLagrange.Size = new System.Drawing.Size(170, 33);
-            this.btnSolveLagrange.TabIndex = 0;
-            this.btnSolveLagrange.Text = "Tìm đa thức nội suy";
-            this.btnSolveLagrange.UseVisualStyleBackColor = true;
-            this.btnSolveLagrange.Click += new System.EventHandler(this.btnSolveLagrange_Click);
-            // 
-            // txtBoxPrecisionLagrange
-            // 
-            this.txtBoxPrecisionLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBoxPrecisionLagrange.Location = new System.Drawing.Point(3, 13);
-            this.txtBoxPrecisionLagrange.Name = "txtBoxPrecisionLagrange";
-            this.txtBoxPrecisionLagrange.Size = new System.Drawing.Size(100, 22);
-            this.txtBoxPrecisionLagrange.TabIndex = 1;
-            this.txtBoxPrecisionLagrange.Text = "15";
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(146, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(208, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Số chữ số hiển thị phần thập phân";
-            // 
-            // dataXYLagrange
-            // 
-            this.dataXYLagrange.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataXYLagrange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYLagrange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colsXLagrange,
-            this.colsYLagrange});
-            this.dataXYLagrange.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataXYLagrange.Location = new System.Drawing.Point(3, 3);
-            this.dataXYLagrange.Name = "dataXYLagrange";
-            this.dataXYLagrange.RowHeadersWidth = 51;
-            this.dataXYLagrange.RowTemplate.Height = 24;
-            this.dataXYLagrange.Size = new System.Drawing.Size(258, 640);
-            this.dataXYLagrange.TabIndex = 2;
-            // 
-            // colsXLagrange
-            // 
-            this.colsXLagrange.HeaderText = "X";
-            this.colsXLagrange.MinimumWidth = 6;
-            this.colsXLagrange.Name = "colsXLagrange";
-            // 
-            // colsYLagrange
-            // 
-            this.colsYLagrange.HeaderText = "Y";
-            this.colsYLagrange.MinimumWidth = 6;
-            this.colsYLagrange.Name = "colsYLagrange";
             // 
             // tabPage1
             // 
@@ -531,6 +396,149 @@
             this.tabControl1.Size = new System.Drawing.Size(1146, 675);
             this.tabControl1.TabIndex = 0;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dataGridViewLagrange);
+            this.tabPage2.Controls.Add(this.dataXYLagrange);
+            this.tabPage2.Controls.Add(this.tableLayoutPanel2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Nội suy Lagrange";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewLagrange
+            // 
+            this.dataGridViewLagrange.AllowUserToAddRows = false;
+            this.dataGridViewLagrange.AllowUserToDeleteRows = false;
+            this.dataGridViewLagrange.AllowUserToResizeColumns = false;
+            this.dataGridViewLagrange.AllowUserToResizeRows = false;
+            this.dataGridViewLagrange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLagrange.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewLagrange.Location = new System.Drawing.Point(251, 3);
+            this.dataGridViewLagrange.Name = "dataGridViewLagrange";
+            this.dataGridViewLagrange.ReadOnly = true;
+            this.dataGridViewLagrange.RowHeadersWidth = 51;
+            this.dataGridViewLagrange.RowTemplate.Height = 24;
+            this.dataGridViewLagrange.Size = new System.Drawing.Size(884, 540);
+            this.dataGridViewLagrange.TabIndex = 5;
+            // 
+            // dataXYLagrange
+            // 
+            this.dataXYLagrange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYLagrange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn3});
+            this.dataXYLagrange.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYLagrange.Location = new System.Drawing.Point(3, 3);
+            this.dataXYLagrange.Name = "dataXYLagrange";
+            this.dataXYLagrange.RowHeadersWidth = 51;
+            this.dataXYLagrange.RowTemplate.Height = 24;
+            this.dataXYLagrange.Size = new System.Drawing.Size(248, 540);
+            this.dataXYLagrange.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "X";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Y";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel2.Controls.Add(this.lblResult, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnSolveLagrange, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnLagrangeToEval, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // lblResult
+            // 
+            this.lblResult.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResult.AutoSize = true;
+            this.lblResult.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(671, 14);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(100, 22);
+            this.lblResult.TabIndex = 0;
+            this.lblResult.Text = "lblResult";
+            this.lblResult.Visible = false;
+            // 
+            // btnSolveLagrange
+            // 
+            this.btnSolveLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveLagrange.AutoSize = true;
+            this.btnSolveLagrange.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveLagrange.Location = new System.Drawing.Point(632, 57);
+            this.btnSolveLagrange.Name = "btnSolveLagrange";
+            this.btnSolveLagrange.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveLagrange.TabIndex = 1;
+            this.btnSolveLagrange.Text = "Tìm đa thức nội suy";
+            this.btnSolveLagrange.UseVisualStyleBackColor = true;
+            this.btnSolveLagrange.Click += new System.EventHandler(this.btnSolveLagrange_Click_1);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.txtBoxPrecisionLagrange);
+            this.flowLayoutPanel2.Controls.Add(this.label13);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(305, 44);
+            this.flowLayoutPanel2.TabIndex = 2;
+            // 
+            // txtBoxPrecisionLagrange
+            // 
+            this.txtBoxPrecisionLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionLagrange.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionLagrange.Name = "txtBoxPrecisionLagrange";
+            this.txtBoxPrecisionLagrange.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionLagrange.TabIndex = 0;
+            this.txtBoxPrecisionLagrange.Text = "15";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(109, 6);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(161, 16);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Số chữ số phần thập phân";
+            // 
+            // btnLagrangeToEval
+            // 
+            this.btnLagrangeToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLagrangeToEval.AutoSize = true;
+            this.btnLagrangeToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLagrangeToEval.Location = new System.Drawing.Point(39, 8);
+            this.btnLagrangeToEval.Name = "btnLagrangeToEval";
+            this.btnLagrangeToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnLagrangeToEval.TabIndex = 3;
+            this.btnLagrangeToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnLagrangeToEval.UseVisualStyleBackColor = true;
+            this.btnLagrangeToEval.Visible = false;
+            this.btnLagrangeToEval.Click += new System.EventHandler(this.btnLagrangeToEval_Click);
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridViewNewton);
@@ -603,15 +611,16 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
             this.tableLayoutPanel5.Controls.Add(this.lblResultNewton, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnSolveNewton, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel3, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.comboBoxNewton, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.panel3, 1, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 543);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
@@ -623,22 +632,9 @@
             this.lblResultNewton.Location = new System.Drawing.Point(686, 14);
             this.lblResultNewton.Name = "lblResultNewton";
             this.lblResultNewton.Size = new System.Drawing.Size(70, 22);
-            this.lblResultNewton.TabIndex = 0;
-            this.lblResultNewton.Text = "label2";
+            this.lblResultNewton.TabIndex = 5;
+            this.lblResultNewton.Text = "label1";
             this.lblResultNewton.Visible = false;
-            // 
-            // btnSolveNewton
-            // 
-            this.btnSolveNewton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveNewton.AutoSize = true;
-            this.btnSolveNewton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveNewton.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveNewton.Name = "btnSolveNewton";
-            this.btnSolveNewton.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveNewton.TabIndex = 1;
-            this.btnSolveNewton.Text = "Tìm đa thức nội suy";
-            this.btnSolveNewton.UseVisualStyleBackColor = true;
-            this.btnSolveNewton.Click += new System.EventHandler(this.btnSolveNewton_Click);
             // 
             // flowLayoutPanel3
             // 
@@ -680,6 +676,42 @@
             this.comboBoxNewton.Name = "comboBoxNewton";
             this.comboBoxNewton.Size = new System.Drawing.Size(164, 24);
             this.comboBoxNewton.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnNewtonToEval);
+            this.panel3.Controls.Add(this.btnSolveNewton);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(314, 53);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(815, 44);
+            this.panel3.TabIndex = 4;
+            // 
+            // btnNewtonToEval
+            // 
+            this.btnNewtonToEval.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNewtonToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewtonToEval.Location = new System.Drawing.Point(583, 0);
+            this.btnNewtonToEval.Name = "btnNewtonToEval";
+            this.btnNewtonToEval.Size = new System.Drawing.Size(232, 44);
+            this.btnNewtonToEval.TabIndex = 4;
+            this.btnNewtonToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnNewtonToEval.UseVisualStyleBackColor = true;
+            this.btnNewtonToEval.Visible = false;
+            this.btnNewtonToEval.Click += new System.EventHandler(this.btnNewtonToEval_Click);
+            // 
+            // btnSolveNewton
+            // 
+            this.btnSolveNewton.AutoSize = true;
+            this.btnSolveNewton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSolveNewton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveNewton.Location = new System.Drawing.Point(0, 0);
+            this.btnSolveNewton.Name = "btnSolveNewton";
+            this.btnSolveNewton.Size = new System.Drawing.Size(178, 44);
+            this.btnSolveNewton.TabIndex = 1;
+            this.btnSolveNewton.Text = "Tìm đa thức nội suy";
+            this.btnSolveNewton.UseVisualStyleBackColor = true;
+            this.btnSolveNewton.Click += new System.EventHandler(this.btnSolveNewton_Click);
             // 
             // tabPage5
             // 
@@ -744,15 +776,16 @@
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
             this.tableLayoutPanel8.Controls.Add(this.lblNewtonFinite, 1, 0);
-            this.tableLayoutPanel8.Controls.Add(this.btnSolveNewtonFinite, 1, 1);
             this.tableLayoutPanel8.Controls.Add(this.flowLayoutPanel4, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.comboBoxNewtonFinite, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.panel4, 1, 1);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 543);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
@@ -764,22 +797,9 @@
             this.lblNewtonFinite.Location = new System.Drawing.Point(686, 14);
             this.lblNewtonFinite.Name = "lblNewtonFinite";
             this.lblNewtonFinite.Size = new System.Drawing.Size(70, 22);
-            this.lblNewtonFinite.TabIndex = 0;
+            this.lblNewtonFinite.TabIndex = 5;
             this.lblNewtonFinite.Text = "label2";
             this.lblNewtonFinite.Visible = false;
-            // 
-            // btnSolveNewtonFinite
-            // 
-            this.btnSolveNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveNewtonFinite.AutoSize = true;
-            this.btnSolveNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveNewtonFinite.Name = "btnSolveNewtonFinite";
-            this.btnSolveNewtonFinite.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveNewtonFinite.TabIndex = 1;
-            this.btnSolveNewtonFinite.Text = "Tìm đa thức nội suy";
-            this.btnSolveNewtonFinite.UseVisualStyleBackColor = true;
-            this.btnSolveNewtonFinite.Click += new System.EventHandler(this.btnSolveNewtonFinite_Click);
             // 
             // flowLayoutPanel4
             // 
@@ -814,12 +834,333 @@
             // 
             this.comboBoxNewtonFinite.FormattingEnabled = true;
             this.comboBoxNewtonFinite.Items.AddRange(new object[] {
-            "Mốc nội suy tăng dần",
-            "Mốc nội suy giảm dần"});
+            "Nội suy Newton tiến",
+            "Nội suy Newton lùi"});
             this.comboBoxNewtonFinite.Location = new System.Drawing.Point(3, 3);
             this.comboBoxNewtonFinite.Name = "comboBoxNewtonFinite";
             this.comboBoxNewtonFinite.Size = new System.Drawing.Size(164, 24);
             this.comboBoxNewtonFinite.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnNewtonFiniteToEval);
+            this.panel4.Controls.Add(this.btnSolveNewtonFinite);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(314, 53);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(815, 44);
+            this.panel4.TabIndex = 4;
+            // 
+            // btnNewtonFiniteToEval
+            // 
+            this.btnNewtonFiniteToEval.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNewtonFiniteToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(583, 0);
+            this.btnNewtonFiniteToEval.Name = "btnNewtonFiniteToEval";
+            this.btnNewtonFiniteToEval.Size = new System.Drawing.Size(232, 44);
+            this.btnNewtonFiniteToEval.TabIndex = 5;
+            this.btnNewtonFiniteToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnNewtonFiniteToEval.UseVisualStyleBackColor = true;
+            this.btnNewtonFiniteToEval.Visible = false;
+            this.btnNewtonFiniteToEval.Click += new System.EventHandler(this.btnNewtonFiniteToEval_Click);
+            // 
+            // btnSolveNewtonFinite
+            // 
+            this.btnSolveNewtonFinite.AutoSize = true;
+            this.btnSolveNewtonFinite.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSolveNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(0, 0);
+            this.btnSolveNewtonFinite.Name = "btnSolveNewtonFinite";
+            this.btnSolveNewtonFinite.Size = new System.Drawing.Size(178, 44);
+            this.btnSolveNewtonFinite.TabIndex = 1;
+            this.btnSolveNewtonFinite.Text = "Tìm đa thức nội suy";
+            this.btnSolveNewtonFinite.UseVisualStyleBackColor = true;
+            this.btnSolveNewtonFinite.Click += new System.EventHandler(this.btnSolveNewtonFinite_Click);
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.dataResultStirling);
+            this.tabPage6.Controls.Add(this.dataXYStirling);
+            this.tabPage6.Controls.Add(this.tableLayoutPanel9);
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Nội suy Stirling";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // dataResultStirling
+            // 
+            this.dataResultStirling.AllowUserToAddRows = false;
+            this.dataResultStirling.AllowUserToDeleteRows = false;
+            this.dataResultStirling.AllowUserToResizeColumns = false;
+            this.dataResultStirling.AllowUserToResizeRows = false;
+            this.dataResultStirling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultStirling.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataResultStirling.Location = new System.Drawing.Point(251, 3);
+            this.dataResultStirling.Name = "dataResultStirling";
+            this.dataResultStirling.ReadOnly = true;
+            this.dataResultStirling.RowHeadersWidth = 51;
+            this.dataResultStirling.RowTemplate.Height = 24;
+            this.dataResultStirling.Size = new System.Drawing.Size(884, 540);
+            this.dataResultStirling.TabIndex = 5;
+            // 
+            // dataXYStirling
+            // 
+            this.dataXYStirling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYStirling.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXStirling,
+            this.colsYStirling});
+            this.dataXYStirling.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYStirling.Location = new System.Drawing.Point(3, 3);
+            this.dataXYStirling.Name = "dataXYStirling";
+            this.dataXYStirling.RowHeadersWidth = 51;
+            this.dataXYStirling.RowTemplate.Height = 24;
+            this.dataXYStirling.Size = new System.Drawing.Size(248, 540);
+            this.dataXYStirling.TabIndex = 4;
+            // 
+            // colsXStirling
+            // 
+            this.colsXStirling.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXStirling.HeaderText = "X";
+            this.colsXStirling.MinimumWidth = 6;
+            this.colsXStirling.Name = "colsXStirling";
+            // 
+            // colsYStirling
+            // 
+            this.colsYStirling.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYStirling.HeaderText = "Y";
+            this.colsYStirling.MinimumWidth = 6;
+            this.colsYStirling.Name = "colsYStirling";
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel9.Controls.Add(this.btnStirlingToEval, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.lblStirling, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.btnSolveStirling, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.flowLayoutPanel5, 0, 1);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 2;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel9.TabIndex = 3;
+            // 
+            // btnStirlingToEval
+            // 
+            this.btnStirlingToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnStirlingToEval.AutoSize = true;
+            this.btnStirlingToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStirlingToEval.Location = new System.Drawing.Point(39, 8);
+            this.btnStirlingToEval.Name = "btnStirlingToEval";
+            this.btnStirlingToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnStirlingToEval.TabIndex = 4;
+            this.btnStirlingToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnStirlingToEval.UseVisualStyleBackColor = true;
+            this.btnStirlingToEval.Visible = false;
+            this.btnStirlingToEval.Click += new System.EventHandler(this.btnStirlingToEval_Click);
+            // 
+            // lblStirling
+            // 
+            this.lblStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblStirling.AutoSize = true;
+            this.lblStirling.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStirling.Location = new System.Drawing.Point(686, 14);
+            this.lblStirling.Name = "lblStirling";
+            this.lblStirling.Size = new System.Drawing.Size(70, 22);
+            this.lblStirling.TabIndex = 0;
+            this.lblStirling.Text = "label2";
+            this.lblStirling.Visible = false;
+            // 
+            // btnSolveStirling
+            // 
+            this.btnSolveStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveStirling.AutoSize = true;
+            this.btnSolveStirling.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveStirling.Location = new System.Drawing.Point(632, 57);
+            this.btnSolveStirling.Name = "btnSolveStirling";
+            this.btnSolveStirling.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveStirling.TabIndex = 1;
+            this.btnSolveStirling.Text = "Tìm đa thức nội suy";
+            this.btnSolveStirling.UseVisualStyleBackColor = true;
+            this.btnSolveStirling.Click += new System.EventHandler(this.btnSolveStirling_Click);
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Controls.Add(this.txtboxPrecisionStirling);
+            this.flowLayoutPanel5.Controls.Add(this.label15);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(305, 44);
+            this.flowLayoutPanel5.TabIndex = 2;
+            // 
+            // txtboxPrecisionStirling
+            // 
+            this.txtboxPrecisionStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtboxPrecisionStirling.Location = new System.Drawing.Point(3, 3);
+            this.txtboxPrecisionStirling.Name = "txtboxPrecisionStirling";
+            this.txtboxPrecisionStirling.Size = new System.Drawing.Size(100, 22);
+            this.txtboxPrecisionStirling.TabIndex = 0;
+            this.txtboxPrecisionStirling.Text = "15";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(109, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(161, 16);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Số chữ số phần thập phân";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.dataResultBessel);
+            this.tabPage7.Controls.Add(this.dataXYBessel);
+            this.tabPage7.Controls.Add(this.tableLayoutPanel10);
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Nội suy Bessel";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // dataResultBessel
+            // 
+            this.dataResultBessel.AllowUserToAddRows = false;
+            this.dataResultBessel.AllowUserToDeleteRows = false;
+            this.dataResultBessel.AllowUserToResizeColumns = false;
+            this.dataResultBessel.AllowUserToResizeRows = false;
+            this.dataResultBessel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultBessel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataResultBessel.Location = new System.Drawing.Point(248, 0);
+            this.dataResultBessel.Name = "dataResultBessel";
+            this.dataResultBessel.ReadOnly = true;
+            this.dataResultBessel.RowHeadersWidth = 51;
+            this.dataResultBessel.RowTemplate.Height = 24;
+            this.dataResultBessel.Size = new System.Drawing.Size(890, 546);
+            this.dataResultBessel.TabIndex = 6;
+            // 
+            // dataXYBessel
+            // 
+            this.dataXYBessel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYBessel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXBessel,
+            this.dataGridViewTextBoxColumn2});
+            this.dataXYBessel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYBessel.Location = new System.Drawing.Point(0, 0);
+            this.dataXYBessel.Name = "dataXYBessel";
+            this.dataXYBessel.RowHeadersWidth = 51;
+            this.dataXYBessel.RowTemplate.Height = 24;
+            this.dataXYBessel.Size = new System.Drawing.Size(248, 546);
+            this.dataXYBessel.TabIndex = 5;
+            // 
+            // colsXBessel
+            // 
+            this.colsXBessel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXBessel.HeaderText = "X";
+            this.colsXBessel.MinimumWidth = 6;
+            this.colsXBessel.Name = "colsXBessel";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Y";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel10.Controls.Add(this.btnBesselToEval, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.lblResultBessel, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.btnSolveBessel, 1, 1);
+            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel6, 0, 1);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 546);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 2;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1138, 100);
+            this.tableLayoutPanel10.TabIndex = 4;
+            // 
+            // btnBesselToEval
+            // 
+            this.btnBesselToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBesselToEval.AutoSize = true;
+            this.btnBesselToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBesselToEval.Location = new System.Drawing.Point(40, 8);
+            this.btnBesselToEval.Name = "btnBesselToEval";
+            this.btnBesselToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnBesselToEval.TabIndex = 5;
+            this.btnBesselToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnBesselToEval.UseVisualStyleBackColor = true;
+            this.btnBesselToEval.Visible = false;
+            this.btnBesselToEval.Click += new System.EventHandler(this.btnBesselToEval_Click);
+            // 
+            // lblResultBessel
+            // 
+            this.lblResultBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultBessel.AutoSize = true;
+            this.lblResultBessel.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultBessel.Location = new System.Drawing.Point(690, 14);
+            this.lblResultBessel.Name = "lblResultBessel";
+            this.lblResultBessel.Size = new System.Drawing.Size(70, 22);
+            this.lblResultBessel.TabIndex = 0;
+            this.lblResultBessel.Text = "label2";
+            this.lblResultBessel.Visible = false;
+            // 
+            // btnSolveBessel
+            // 
+            this.btnSolveBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveBessel.AutoSize = true;
+            this.btnSolveBessel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveBessel.Location = new System.Drawing.Point(636, 57);
+            this.btnSolveBessel.Name = "btnSolveBessel";
+            this.btnSolveBessel.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveBessel.TabIndex = 1;
+            this.btnSolveBessel.Text = "Tìm đa thức nội suy";
+            this.btnSolveBessel.UseVisualStyleBackColor = true;
+            this.btnSolveBessel.Click += new System.EventHandler(this.btnSolveBessel_Click);
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.txtboxPrecisionBessel);
+            this.flowLayoutPanel6.Controls.Add(this.label16);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(306, 44);
+            this.flowLayoutPanel6.TabIndex = 2;
+            // 
+            // txtboxPrecisionBessel
+            // 
+            this.txtboxPrecisionBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtboxPrecisionBessel.Location = new System.Drawing.Point(3, 3);
+            this.txtboxPrecisionBessel.Name = "txtboxPrecisionBessel";
+            this.txtboxPrecisionBessel.Size = new System.Drawing.Size(100, 22);
+            this.txtboxPrecisionBessel.TabIndex = 0;
+            this.txtboxPrecisionBessel.Text = "15";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(109, 6);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(161, 16);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Số chữ số phần thập phân";
             // 
             // tabPage4
             // 
@@ -964,6 +1305,7 @@
             this.txtBoxk.Name = "txtBoxk";
             this.txtBoxk.Size = new System.Drawing.Size(100, 22);
             this.txtBoxk.TabIndex = 5;
+            this.txtBoxk.Text = "0";
             // 
             // label8
             // 
@@ -1032,261 +1374,6 @@
             this.coeffsP.MinimumWidth = 6;
             this.coeffsP.Name = "coeffsP";
             // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.dataResultStirling);
-            this.tabPage6.Controls.Add(this.dataXYStirling);
-            this.tabPage6.Controls.Add(this.tableLayoutPanel9);
-            this.tabPage6.Location = new System.Drawing.Point(4, 25);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Nội suy Stirling";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // dataResultStirling
-            // 
-            this.dataResultStirling.AllowUserToAddRows = false;
-            this.dataResultStirling.AllowUserToDeleteRows = false;
-            this.dataResultStirling.AllowUserToResizeColumns = false;
-            this.dataResultStirling.AllowUserToResizeRows = false;
-            this.dataResultStirling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataResultStirling.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataResultStirling.Location = new System.Drawing.Point(251, 3);
-            this.dataResultStirling.Name = "dataResultStirling";
-            this.dataResultStirling.ReadOnly = true;
-            this.dataResultStirling.RowHeadersWidth = 51;
-            this.dataResultStirling.RowTemplate.Height = 24;
-            this.dataResultStirling.Size = new System.Drawing.Size(884, 540);
-            this.dataResultStirling.TabIndex = 5;
-            // 
-            // dataXYStirling
-            // 
-            this.dataXYStirling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYStirling.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colsXStirling,
-            this.colsYStirling});
-            this.dataXYStirling.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataXYStirling.Location = new System.Drawing.Point(3, 3);
-            this.dataXYStirling.Name = "dataXYStirling";
-            this.dataXYStirling.RowHeadersWidth = 51;
-            this.dataXYStirling.RowTemplate.Height = 24;
-            this.dataXYStirling.Size = new System.Drawing.Size(248, 540);
-            this.dataXYStirling.TabIndex = 4;
-            // 
-            // colsXStirling
-            // 
-            this.colsXStirling.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsXStirling.HeaderText = "X";
-            this.colsXStirling.MinimumWidth = 6;
-            this.colsXStirling.Name = "colsXStirling";
-            // 
-            // colsYStirling
-            // 
-            this.colsYStirling.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsYStirling.HeaderText = "Y";
-            this.colsYStirling.MinimumWidth = 6;
-            this.colsYStirling.Name = "colsYStirling";
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
-            this.tableLayoutPanel9.Controls.Add(this.lblStirling, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.btnSolveStirling, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.flowLayoutPanel5, 0, 1);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 543);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(1132, 100);
-            this.tableLayoutPanel9.TabIndex = 3;
-            // 
-            // lblStirling
-            // 
-            this.lblStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblStirling.AutoSize = true;
-            this.lblStirling.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStirling.Location = new System.Drawing.Point(686, 14);
-            this.lblStirling.Name = "lblStirling";
-            this.lblStirling.Size = new System.Drawing.Size(70, 22);
-            this.lblStirling.TabIndex = 0;
-            this.lblStirling.Text = "label2";
-            this.lblStirling.Visible = false;
-            // 
-            // btnSolveStirling
-            // 
-            this.btnSolveStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveStirling.AutoSize = true;
-            this.btnSolveStirling.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveStirling.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveStirling.Name = "btnSolveStirling";
-            this.btnSolveStirling.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveStirling.TabIndex = 1;
-            this.btnSolveStirling.Text = "Tìm đa thức nội suy";
-            this.btnSolveStirling.UseVisualStyleBackColor = true;
-            this.btnSolveStirling.Click += new System.EventHandler(this.btnSolveStirling_Click);
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.txtboxPrecisionStirling);
-            this.flowLayoutPanel5.Controls.Add(this.label15);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 53);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(305, 44);
-            this.flowLayoutPanel5.TabIndex = 2;
-            // 
-            // txtboxPrecisionStirling
-            // 
-            this.txtboxPrecisionStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtboxPrecisionStirling.Location = new System.Drawing.Point(3, 3);
-            this.txtboxPrecisionStirling.Name = "txtboxPrecisionStirling";
-            this.txtboxPrecisionStirling.Size = new System.Drawing.Size(100, 22);
-            this.txtboxPrecisionStirling.TabIndex = 0;
-            this.txtboxPrecisionStirling.Text = "15";
-            // 
-            // label15
-            // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(109, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(161, 16);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Số chữ số phần thập phân";
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.dataResultBessel);
-            this.tabPage7.Controls.Add(this.dataXYBessel);
-            this.tabPage7.Controls.Add(this.tableLayoutPanel10);
-            this.tabPage7.Location = new System.Drawing.Point(4, 25);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "Nội suy Bessel";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
-            this.tableLayoutPanel10.Controls.Add(this.lblResultBessel, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.btnSolveBessel, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel6, 0, 1);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 546);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(1138, 100);
-            this.tableLayoutPanel10.TabIndex = 4;
-            // 
-            // lblResultBessel
-            // 
-            this.lblResultBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResultBessel.AutoSize = true;
-            this.lblResultBessel.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultBessel.Location = new System.Drawing.Point(690, 14);
-            this.lblResultBessel.Name = "lblResultBessel";
-            this.lblResultBessel.Size = new System.Drawing.Size(70, 22);
-            this.lblResultBessel.TabIndex = 0;
-            this.lblResultBessel.Text = "label2";
-            this.lblResultBessel.Visible = false;
-            // 
-            // btnSolveBessel
-            // 
-            this.btnSolveBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveBessel.AutoSize = true;
-            this.btnSolveBessel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveBessel.Location = new System.Drawing.Point(636, 57);
-            this.btnSolveBessel.Name = "btnSolveBessel";
-            this.btnSolveBessel.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveBessel.TabIndex = 1;
-            this.btnSolveBessel.Text = "Tìm đa thức nội suy";
-            this.btnSolveBessel.UseVisualStyleBackColor = true;
-            this.btnSolveBessel.Click += new System.EventHandler(this.btnSolveBessel_Click);
-            // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Controls.Add(this.txtboxPrecisionBessel);
-            this.flowLayoutPanel6.Controls.Add(this.label16);
-            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 53);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(306, 44);
-            this.flowLayoutPanel6.TabIndex = 2;
-            // 
-            // txtboxPrecisionBessel
-            // 
-            this.txtboxPrecisionBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtboxPrecisionBessel.Location = new System.Drawing.Point(3, 3);
-            this.txtboxPrecisionBessel.Name = "txtboxPrecisionBessel";
-            this.txtboxPrecisionBessel.Size = new System.Drawing.Size(100, 22);
-            this.txtboxPrecisionBessel.TabIndex = 0;
-            this.txtboxPrecisionBessel.Text = "15";
-            // 
-            // label16
-            // 
-            this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(109, 6);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(161, 16);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "Số chữ số phần thập phân";
-            // 
-            // dataXYBessel
-            // 
-            this.dataXYBessel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYBessel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colsXBessel,
-            this.dataGridViewTextBoxColumn2});
-            this.dataXYBessel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataXYBessel.Location = new System.Drawing.Point(0, 0);
-            this.dataXYBessel.Name = "dataXYBessel";
-            this.dataXYBessel.RowHeadersWidth = 51;
-            this.dataXYBessel.RowTemplate.Height = 24;
-            this.dataXYBessel.Size = new System.Drawing.Size(248, 546);
-            this.dataXYBessel.TabIndex = 5;
-            // 
-            // dataResultBessel
-            // 
-            this.dataResultBessel.AllowUserToAddRows = false;
-            this.dataResultBessel.AllowUserToDeleteRows = false;
-            this.dataResultBessel.AllowUserToResizeColumns = false;
-            this.dataResultBessel.AllowUserToResizeRows = false;
-            this.dataResultBessel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataResultBessel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataResultBessel.Location = new System.Drawing.Point(248, 0);
-            this.dataResultBessel.Name = "dataResultBessel";
-            this.dataResultBessel.ReadOnly = true;
-            this.dataResultBessel.RowHeadersWidth = 51;
-            this.dataResultBessel.RowTemplate.Height = 24;
-            this.dataResultBessel.Size = new System.Drawing.Size(890, 546);
-            this.dataResultBessel.TabIndex = 6;
-            // 
-            // colsXBessel
-            // 
-            this.colsXBessel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsXBessel.HeaderText = "X";
-            this.colsXBessel.MinimumWidth = 6;
-            this.colsXBessel.Name = "colsXBessel";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Y";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1297,15 +1384,6 @@
             this.Name = "Form1";
             this.Text = "Nội suy";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabPage2.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
@@ -1314,6 +1392,13 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataChebyshev)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewton)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -1322,6 +1407,8 @@
             this.tableLayoutPanel5.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewtonFinite)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewXYNewtonFinite)).EndInit();
@@ -1329,14 +1416,8 @@
             this.tableLayoutPanel8.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerEval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerDerivative)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataResultStirling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYStirling)).EndInit();
@@ -1345,28 +1426,25 @@
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
             this.tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultBessel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultBessel)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerEval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerDerivative)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.DataGridView dataGridViewLagrange;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button btnSolveLagrange;
-        private System.Windows.Forms.TextBox txtBoxPrecisionLagrange;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataXYLagrange;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colsXLagrange;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colsYLagrange;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -1386,14 +1464,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn n;
         private System.Windows.Forms.DataGridViewTextBoxColumn chebyshevPoints;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataXYNewton;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsXNewton;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsYNewton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblResultNewton;
         private System.Windows.Forms.Button btnSolveNewton;
         private System.Windows.Forms.DataGridView dataGridViewNewton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
@@ -1423,7 +1499,6 @@
         private System.Windows.Forms.DataGridView dataGridViewNewtonFinite;
         private System.Windows.Forms.DataGridView dataGridViewXYNewtonFinite;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.Label lblNewtonFinite;
         private System.Windows.Forms.Button btnSolveNewtonFinite;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.TextBox txtBoxPrecisionNewtonFinite;
@@ -1453,6 +1528,26 @@
         private System.Windows.Forms.DataGridView dataResultBessel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsXBessel;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dataGridViewLagrange;
+        private System.Windows.Forms.DataGridView dataXYLagrange;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.Button btnSolveLagrange;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.TextBox txtBoxPrecisionLagrange;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnLagrangeToEval;
+        private System.Windows.Forms.Button btnStirlingToEval;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnNewtonToEval;
+        private System.Windows.Forms.Label lblResultNewton;
+        private System.Windows.Forms.Label lblNewtonFinite;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnNewtonFiniteToEval;
+        private System.Windows.Forms.Button btnBesselToEval;
     }
 }
 

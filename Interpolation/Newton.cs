@@ -34,7 +34,6 @@ namespace Interpolation
         {
             int n = x.Length;
             double?[,] table = new double?[n, n + 1];
-
             for (int i = 0; i < x.Length; i++)
             {
                 table[i, 0] = Math.Round(x[i], precision);

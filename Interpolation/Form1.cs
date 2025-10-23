@@ -9,7 +9,7 @@ namespace Interpolation
 {
     public partial class Form1 : Form
     {
-        private bool hasShownStirlingWarning = false;
+        private double[] lastPolynomialCoeffs; 
         public Form1()
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace Interpolation
             }
         }
         // Tìm đa thức nội suy bằng Lagrange
-        private void btnSolveLagrange_Click(object sender, EventArgs e)
+        private void btnSolveLagrange_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -56,17 +56,20 @@ namespace Interpolation
 
                 // Tìm và in đa thức nội suy
                 var lagrangePolynomial = SolveLagrange(x, y, precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable);
+                lastPolynomialCoeffs = lagrangePolynomial;
                 DisplayLagrangeResults(dataGridViewLagrange, x.Length, coeffsD, productTable, divideTable, lagrangePolynomial);
 
                 // In ra đa thức nội suy dạng chính tắc
                 lblResult.Text = Function.PolynomialToString(lagrangePolynomial);
                 lblResult.Visible = true;
+                btnLagrangeToEval.Visible = true;
             }
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+
         // Tìm đa thức nội suy bằng Newton
         private void btnSolveNewton_Click(object sender, EventArgs e)
         {
@@ -102,11 +105,13 @@ namespace Interpolation
 
                 // Tìm và in đa thức nội suy
                 var newtonPolynomial = SolveNewton(x, y, precision, out double?[,] diffTable, out double[,] productTable, out double[] dividedDiagonalDiff);
+                lastPolynomialCoeffs = newtonPolynomial;
                 DisplayNewtonResults(dataGridViewNewton, x.Length, diffTable, dividedDiagonalDiff, productTable, newtonPolynomial);
 
                 // In đa thức nội suy
                 lblResultNewton.Text = Function.PolynomialToString(newtonPolynomial);
                 lblResultNewton.Visible = true;
+                btnNewtonToEval.Visible = true;
             }
             catch (Exception)
             {
@@ -121,28 +126,37 @@ namespace Interpolation
                 if (comboBoxNewtonFinite.SelectedIndex == 0)
                 {
                     dataGridViewXYNewtonFinite.Sort(dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"], System.ComponentModel.ListSortDirection.Ascending);
-                    MessageBox.Show("Sắp xếp mốc nội suy tăng dần");
+                    MessageBox.Show("Nội suy Newton tiến");
                 }
                 else if (comboBoxNewtonFinite.SelectedIndex == 1)
                 {
-                    dataGridViewXYNewtonFinite.Sort(dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"], System.ComponentModel.ListSortDirection.Descending);
-                    MessageBox.Show("Sắp xếp mốc nội suy giảm dần");
+                    MessageBox.Show("Nội suy Newton lùi");
                 }
-
+                MessageBox.Show(
+                "Chương trình sẽ sử dụng phép đổi biến:\n\n" +
+                "    t = (x - x_0) / h\n\n" +
+                "Đa thức nội suy là: f(t)\n\n" +
+                "Kết quả hiển thị theo biến t",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
                 RemoveDuplicate(dataGridViewXYNewtonFinite);
 
                 double[] x = GetXValues(dataGridViewXYNewtonFinite);
                 double[] y = GetYValues(dataGridViewXYNewtonFinite);
                 int precision = Convert.ToInt32(txtBoxPrecisionNewtonFinite.Text);
-                bool isAscending = comboBoxNewtonFinite.SelectedIndex == 0;
+                bool isForward = comboBoxNewtonFinite.SelectedIndex == 0;
 
                 // Tìm và in đa thức nội suy
-                var newtonPolynomial = SolveNewtonFinite(x, y, precision, isAscending, out double?[,] finiteDiffTable, out double[,] productTable, out double[] dividedDiagonalDiff);
+                var newtonPolynomial = SolveNewtonFinite(x, y, precision, isForward, out double?[,] finiteDiffTable, out double[,] productTable, out double[] dividedDiagonalDiff);
+                lastPolynomialCoeffs = newtonPolynomial;
                 DisplayNewtonResults(dataGridViewNewtonFinite, x.Length, finiteDiffTable, dividedDiagonalDiff, productTable, newtonPolynomial);
 
                 // Viết đa thức nội suy dạng chính tắc
-                lblNewtonFinite.Text = Function.PolynomialToString(newtonPolynomial);
+                lblNewtonFinite.Text = Function.PolynomialToString(newtonPolynomial, "t");
                 lblNewtonFinite.Visible = true;
+                btnNewtonFiniteToEval.Visible = true;
             }
             catch (Exception)
             {
@@ -186,14 +200,25 @@ namespace Interpolation
                     MessageBox.Show("Số nút nội suy chẵn vui lòng chọn nội suy Bessel");
                     return;
                 }
+                MessageBox.Show(
+                "Chương trình sẽ sử dụng phép đổi biến:\n\n" +
+                "    t = (x - x_0) / h\n\n" +
+                "Đa thức nội suy là: f(t)\n\n" +
+                "Kết quả hiển thị theo biến t",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
                 double[] y = GetYValues(dataXYStirling);
                 int precision = Convert.ToInt32(txtboxPrecisionStirling.Text);
 
                 var StirlingPolynomial = SolveStirling(x, y, precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs);
+                lastPolynomialCoeffs = StirlingPolynomial;
                 DisplayCentralResults(dataResultStirling, x.Length, diffTable, vectorCoeffs, prodTable, StirlingPolynomial);
 
-                lblStirling.Text = Function.PolynomialToString(StirlingPolynomial);
-                lblStirling.Visible = true;            
+                lblStirling.Text = Function.PolynomialToString(StirlingPolynomial, "t");
+                lblStirling.Visible = true;
+                btnStirlingToEval.Visible = true;
             }
             catch (Exception)
             {
@@ -213,19 +238,57 @@ namespace Interpolation
                     MessageBox.Show("Số nút nội suy lẻ vui lòng chọn nội suy Stirling");
                     return;
                 }
+                MessageBox.Show(
+                "Chương trình sẽ sử dụng phép đổi biến:\n\n" +
+                "    t = ( (x - x_0) / h ) - 0.5\n\n" +
+                "Đa thức nội suy là: f(t)\n\n" +
+                "Kết quả hiển thị theo biến t",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
                 double[] y = GetYValues(dataXYBessel);
                 int precision = Convert.ToInt32(txtboxPrecisionBessel.Text);
 
                 var BesselPolynomial = SolveBessel(x, y, precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs);
+                lastPolynomialCoeffs = BesselPolynomial;
                 DisplayCentralResults(dataResultBessel, x.Length, diffTable, vectorCoeffs, prodTable, BesselPolynomial);
+
+                lblResultBessel.Text = Function.PolynomialToString(BesselPolynomial, "t");
+                lblResultBessel.Visible = true;
+                btnBesselToEval.Visible = true;
             }
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        private void btnLagrangeToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnNewtonToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnNewtonFiniteToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnStirlingToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnBesselToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
         #endregion
-
         #region Core
         private double[] SolveLagrange(double[] x, double[] y, int precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable)
         {
@@ -251,11 +314,11 @@ namespace Interpolation
             }
             return Function.FindPolynomial(dividedDiagonalDiff, productTable, precision);
         }
-        private double[] SolveNewtonFinite(double[] x, double[] y, int precision, bool isAscending, out double?[,] finiteDiffTable, out double[,] productTable, out double[] dividedDiagonalDiff)
+        private double[] SolveNewtonFinite(double[] x, double[] y, int precision, bool isForward, out double?[,] finiteDiffTable, out double[,] productTable, out double[] dividedDiagonalDiff)
         {
             finiteDiffTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
             double[] x_newton = new double[x.Length - 1];
-            if (isAscending)
+            if (isForward)
             {
                 for (int i = 0; i < x.Length - 1; i++)
                 {
@@ -271,9 +334,20 @@ namespace Interpolation
             }
             productTable = Horner.ProductTable(x_newton, precision);
             dividedDiagonalDiff = new double[x.Length];
-            for (int i = 0; i < x.Length; i++)
+            if (isForward)
             {
-                dividedDiagonalDiff[i] = (finiteDiffTable[i, i + 1] / Function.Factorial(i)) ?? 0.0;
+                for (int i = 0; i < x.Length; i++)
+                {
+                    dividedDiagonalDiff[i] = (finiteDiffTable[i, i + 1] / Function.Factorial(i)) ?? 0.0;
+                }
+            }
+            else
+            {
+                int lastRow = x.Length - 1;
+                for (int i = 0; i < x.Length; i++)
+                {
+                    dividedDiagonalDiff[i] = (finiteDiffTable[lastRow, i + 1] / Function.Factorial(i)) ?? 0.0;
+                }
             }
             return Function.FindPolynomial(dividedDiagonalDiff, productTable, precision);
         }
@@ -625,7 +699,14 @@ namespace Interpolation
             }
             return res;
         }
+        private void TransferCoeffsToEval(DataGridView dgv, double[] polynomialCoeffs)
+        {
+            dgv.Rows.Clear();
+            for (int i = 0; i < polynomialCoeffs.Length; i++)
+            {
+                dgv.Rows.Add(polynomialCoeffs[i]);
+            }
+        }
         #endregion
-
     }
 }
