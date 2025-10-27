@@ -132,6 +132,17 @@
             this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
             this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.richTextBoxInterPoints = new System.Windows.Forms.RichTextBox();
+            this.btnOpenExcel = new System.Windows.Forms.Button();
+            this.btnFindPoints = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtBoxX = new System.Windows.Forms.TextBox();
+            this.textBoxK = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.richTextBoxFindPoints = new System.Windows.Forms.RichTextBox();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -173,6 +184,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerDerivative)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).BeginInit();
+            this.tabPage8.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -389,6 +403,7 @@
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1374,6 +1389,131 @@
             this.coeffsP.MinimumWidth = 6;
             this.coeffsP.Name = "coeffsP";
             // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.richTextBoxFindPoints);
+            this.tabPage8.Controls.Add(this.panel5);
+            this.tabPage8.Controls.Add(this.richTextBoxInterPoints);
+            this.tabPage8.Location = new System.Drawing.Point(4, 25);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Tìm mốc nội suy cách đều";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxInterPoints
+            // 
+            this.richTextBoxInterPoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxInterPoints.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxInterPoints.Name = "richTextBoxInterPoints";
+            this.richTextBoxInterPoints.Size = new System.Drawing.Size(1132, 640);
+            this.richTextBoxInterPoints.TabIndex = 3;
+            this.richTextBoxInterPoints.Text = "";
+            // 
+            // btnOpenExcel
+            // 
+            this.btnOpenExcel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcel.AutoSize = true;
+            this.btnOpenExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcel.Location = new System.Drawing.Point(132, 27);
+            this.btnOpenExcel.Name = "btnOpenExcel";
+            this.btnOpenExcel.Size = new System.Drawing.Size(120, 30);
+            this.btnOpenExcel.TabIndex = 2;
+            this.btnOpenExcel.Text = "Nhập File Excel";
+            this.btnOpenExcel.UseVisualStyleBackColor = true;
+            this.btnOpenExcel.Click += new System.EventHandler(this.btnOpenExcel_Click);
+            // 
+            // btnFindPoints
+            // 
+            this.btnFindPoints.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnFindPoints.AutoSize = true;
+            this.btnFindPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindPoints.Location = new System.Drawing.Point(114, 112);
+            this.btnFindPoints.Name = "btnFindPoints";
+            this.btnFindPoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnFindPoints.Size = new System.Drawing.Size(156, 28);
+            this.btnFindPoints.TabIndex = 3;
+            this.btnFindPoints.Text = "Tìm các mốc nội suy";
+            this.btnFindPoints.UseVisualStyleBackColor = true;
+            this.btnFindPoints.Click += new System.EventHandler(this.btnFindPoints_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.tableLayoutPanel4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(3, 474);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1132, 169);
+            this.panel5.TabIndex = 5;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 362F));
+            this.tableLayoutPanel4.Controls.Add(this.btnOpenExcel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnFindPoints, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.textBoxK, 2, 1);
+            this.tableLayoutPanel4.Controls.Add(this.txtBoxX, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label17, 2, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1132, 169);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // txtBoxX
+            // 
+            this.txtBoxX.Location = new System.Drawing.Point(388, 87);
+            this.txtBoxX.Name = "txtBoxX";
+            this.txtBoxX.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxX.TabIndex = 4;
+            // 
+            // textBoxK
+            // 
+            this.textBoxK.Location = new System.Drawing.Point(773, 87);
+            this.textBoxK.Name = "textBoxK";
+            this.textBoxK.Size = new System.Drawing.Size(100, 22);
+            this.textBoxK.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(388, 66);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 18);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Nhập giá trị X";
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(773, 66);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(149, 18);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Nhập số mốc nội suy";
+            // 
+            // richTextBoxFindPoints
+            // 
+            this.richTextBoxFindPoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxFindPoints.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxFindPoints.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxFindPoints.Name = "richTextBoxFindPoints";
+            this.richTextBoxFindPoints.Size = new System.Drawing.Size(1132, 471);
+            this.richTextBoxFindPoints.TabIndex = 6;
+            this.richTextBoxFindPoints.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1440,6 +1580,10 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).EndInit();
+            this.tabPage8.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1548,6 +1692,17 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnNewtonFiniteToEval;
         private System.Windows.Forms.Button btnBesselToEval;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.Button btnOpenExcel;
+        private System.Windows.Forms.Button btnFindPoints;
+        private System.Windows.Forms.RichTextBox richTextBoxInterPoints;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TextBox textBoxK;
+        private System.Windows.Forms.TextBox txtBoxX;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.RichTextBox richTextBoxFindPoints;
     }
 }
 

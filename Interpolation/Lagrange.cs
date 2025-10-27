@@ -4,7 +4,7 @@ namespace Interpolation
 {
     public class Lagrange
     {
-        public static double[] CoeffsD(double[] x, double[] y, int precision)
+        public static double[] CoeffsD(double[] x, double[] y, int precision, out double[,] arrMatrix)
         {
             int n = x.Length;
             double[,] arr = new double[n, n];
@@ -22,6 +22,7 @@ namespace Interpolation
                     }
                 }
             }
+            arrMatrix = arr;
             double[] productNotation = new double[arr.GetLength(0)];
             for (int j = 0; j < arr.GetLength(1); j++)
             {

@@ -1,15 +1,23 @@
-﻿using System;
+﻿using MathNet.Numerics.Integration;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.Xml;
+using System.Text;
 using System.Windows.Forms;
+using System.Xml.Xsl;
 
 namespace Interpolation
 {
     public partial class Form1 : Form
     {
-        private double[] lastPolynomialCoeffs; 
+        private double[] lastPolynomialCoeffs;
+        private double[] xValues;
+        private double[] yValues;
         public Form1()
         {
             InitializeComponent();
@@ -55,9 +63,9 @@ namespace Interpolation
                 int precision = Convert.ToInt32(txtBoxPrecisionLagrange.Text);
 
                 // Tìm và in đa thức nội suy
-                var lagrangePolynomial = SolveLagrange(x, y, precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable);
+                var lagrangePolynomial = SolveLagrange(x, y, precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable, out double[,] arrMatrix);
                 lastPolynomialCoeffs = lagrangePolynomial;
-                DisplayLagrangeResults(dataGridViewLagrange, x.Length, coeffsD, productTable, divideTable, lagrangePolynomial);
+                DisplayLagrangeResults(dataGridViewLagrange, x.Length, coeffsD, productTable, divideTable, lagrangePolynomial, arrMatrix);
 
                 // In ra đa thức nội suy dạng chính tắc
                 lblResult.Text = Function.PolynomialToString(lagrangePolynomial);
@@ -214,7 +222,7 @@ namespace Interpolation
 
                 var StirlingPolynomial = SolveStirling(x, y, precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs);
                 lastPolynomialCoeffs = StirlingPolynomial;
-                DisplayCentralResults(dataResultStirling, x.Length, diffTable, vectorCoeffs, prodTable, StirlingPolynomial);
+                DisplayCentralResultsStirling(dataResultStirling, x.Length, diffTable, vectorCoeffs, prodTable, StirlingPolynomial);
 
                 lblStirling.Text = Function.PolynomialToString(StirlingPolynomial, "t");
                 lblStirling.Visible = true;
@@ -252,7 +260,7 @@ namespace Interpolation
 
                 var BesselPolynomial = SolveBessel(x, y, precision, out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs);
                 lastPolynomialCoeffs = BesselPolynomial;
-                DisplayCentralResults(dataResultBessel, x.Length, diffTable, vectorCoeffs, prodTable, BesselPolynomial);
+                DisplayCentralResultsBessel(dataResultBessel, x.Length, diffTable, vectorCoeffs, prodTable, BesselPolynomial);
 
                 lblResultBessel.Text = Function.PolynomialToString(BesselPolynomial, "t");
                 lblResultBessel.Visible = true;
@@ -288,11 +296,67 @@ namespace Interpolation
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
+        private void btnOpenExcel_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out xValues, out yValues);
+
+                        MessageBox.Show(
+                            $"Đã đọc thành công {xValues.Length} điểm dữ liệu từ file Excel!\n\n",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        private void btnFindPoints_Click(object sender, EventArgs e)
+        {
+            if (xValues == null || yValues == null || xValues.Length == 0)
+            {
+                MessageBox.Show("Vui lòng mở file Excel trước");
+                return;
+            }
+            
+            double xAvg = Convert.ToDouble(txtBoxX.Text);
+            int k = Convert.ToInt32(textBoxK.Text);
+             
+            if (k > xValues.Length)
+            {
+                MessageBox.Show($"Số mốc nội suy k = {k} lớn hơn số điểm dữ liệu {xValues.Length}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var result = FindInterpolationPoints(xAvg, k, xValues, yValues);
+            if (result.xs == -1)
+            {
+                MessageBox.Show($"Giá trị x = {xAvg} nằm ngoài phạm vi dữ liệu [{xValues.Min()}, {xValues.Max()}]",
+                              "Không tìm thấy", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DisplayInterpolationPointsResult(xAvg, result);
+        }
         #endregion
         #region Core
-        private double[] SolveLagrange(double[] x, double[] y, int precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable)
+        private double[] SolveLagrange(double[] x, double[] y, int precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable, out double[,] arrMatrix)
         {
-            coeffsD = Lagrange.CoeffsD(x, y, precision);
+            coeffsD = Lagrange.CoeffsD(x, y, precision, out arrMatrix);
             productTable = Horner.ProductTable(x, precision);
             double[] coeffsW = new double[x.Length + 1];
             for (int i = 0; i <= x.Length; i++)
@@ -485,14 +549,98 @@ namespace Interpolation
             }
             return finalCoeffs;
         }
+        private (int xs, double[] selectedX, double[] selectedY) FindInterpolationPoints(double x, int k, double[] dataX, double[] dataY)
+        {
+            int n = dataX.Length;
+            int xs = -1;
+            bool isRightPoint = false; 
+            for (int i = 0; i < n - 1; i++)
+            {
+                if (x >= dataX[i] && x <= dataX[i + 1])
+                {
+                    double distToLeft = Math.Abs(x - dataX[i]);
+                    double distToRight = Math.Abs(x - dataX[i + 1]);
+
+                    if (distToLeft <= distToRight)
+                    {
+                        xs = i;
+                        isRightPoint = false;
+                    }
+                    else
+                    {
+                        xs = i + 1;
+                        isRightPoint = true;
+                    }
+                    break;
+                }
+            }
+
+            if (xs == -1)
+            {
+                if (x < dataX[0] || x > dataX[n - 1])
+                {
+                    return (-1, null, null);
+                }
+            }
+
+            var selectedIndices = new List<int>();
+            selectedIndices.Add(xs);
+            int left = xs - 1;
+            int right = xs + 1;
+            if (isRightPoint)
+            {
+                while (selectedIndices.Count < k)
+                {
+                    if (left >= 0 && selectedIndices.Count < k)
+                    {
+                        selectedIndices.Add(left);
+                        left--;
+                    }
+                    if (right < n && selectedIndices.Count < k)
+                    {
+                        selectedIndices.Add(right);
+                        right++;
+                    }
+                    if (left < 0 && right >= n)
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                while (selectedIndices.Count < k)
+                {
+                    if (right < n && selectedIndices.Count < k)
+                    {
+                        selectedIndices.Add(right);
+                        right++;
+                    }
+                    if (left >= 0 && selectedIndices.Count < k)
+                    {
+                        selectedIndices.Add(left);
+                        left--;
+                    }
+                    if (left < 0 && right >= n)
+                    {
+                        break;
+                    }
+                }
+            }
+            double[] selectedX = selectedIndices.Select(i => dataX[i]).ToArray();
+            double[] selectedY = selectedIndices.Select(i => dataY[i]).ToArray();
+
+            return (xs, selectedX, selectedY);
+        }
         #endregion
 
         #region UI
-        private void DisplayLagrangeResults(DataGridView dgv, int n, double[] coeffsD, double[,] productTable, double[,] divideTable, double[] lagrangePolynomial) // n là số nút nội suy
+        private void DisplayLagrangeResults(DataGridView dgv, int n, double[] coeffsD, double[,] productTable, double[,] divideTable, double[] lagrangePolynomial, double[,] arrMatrix) // n là số nút nội suy
         {
             dgv.Rows.Clear();
             dgv.Columns.Clear();
             SetupColumns(dgv, n + 1, "Ghi chú"); // n + 1 cột do bảng nhân và 1 cột ghi chú
+            AddTable(dgv, arrMatrix, "Ma trận {x_j - x_i}");
             AddRow(dgv, coeffsD, "Hệ số D");
             AddSectionBreak(dgv);
             AddTable(dgv, productTable, "Bảng tích", "w_{n+1}");
@@ -557,7 +705,7 @@ namespace Interpolation
                 }
             }
         }
-        private void DisplayCentralResults(DataGridView dgv, int n, double?[,] diffTable, double[] coeffsVector, double[,] productTable, double[] coeffsPolynomial)
+        private void DisplayCentralResultsStirling(DataGridView dgv, int n, double?[,] diffTable, double[] coeffsVector, double[,] productTable, double[] coeffsPolynomial)
         {
             dgv.Rows.Clear();
             dgv.Columns.Clear();
@@ -566,9 +714,50 @@ namespace Interpolation
             AddSectionBreak(dgv);
             AddRow(dgv, coeffsVector, "Hệ số trích xuất từ bảng TSP");
             AddSectionBreak(dgv);
-            AddTable(dgv, productTable, "Bảng tích", "");
+            AddTable(dgv, productTable, "Bảng tích", "t = 0, 1, 4, 9, 16...");
             AddSectionBreak(dgv);
             AddRow(dgv, coeffsPolynomial, "Hệ số đa thức nội suy");
+        }
+        private void DisplayCentralResultsBessel(DataGridView dgv, int n, double?[,] diffTable, double[] coeffsVector, double[,] productTable, double[] coeffsPolynomial)
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, n + 1, "Ghi chú");
+            AddNullableTable(dgv, diffTable, "Bảng tỷ sai phân");
+            AddSectionBreak(dgv);
+            AddRow(dgv, coeffsVector, "Hệ số trích xuất từ bảng TSP");
+            AddSectionBreak(dgv);
+            AddTable(dgv, productTable, "Bảng tích", "t = 0.25, 2.25, 6.25, 12.25...");
+            AddSectionBreak(dgv);
+            AddRow(dgv, coeffsPolynomial, "Hệ số đa thức nội suy");
+        }
+        private void DisplayInterpolationPointsResult(double x, (int xs, double[] selectedX, double[] selectedY) result)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("═══════════════════════════════════════════════");
+            sb.AppendLine($"KẾT QUẢ TÌM MỐC NỘI SUY CHO x = {x}");
+            sb.AppendLine("═══════════════════════════════════════════════\n");
+
+            sb.AppendLine($"Số mốc nội suy tìm được: {result.selectedX.Length}\n");
+
+            sb.AppendLine("Bộ điểm (x, y) được chọn:");
+            sb.AppendLine("───────────────────────────────────────────────");
+            sb.AppendLine(String.Format("{0,-5} {1,15} {2,15}", "STT", "x", "y"));
+            sb.AppendLine("───────────────────────────────────────────────");
+
+            for (int i = 0; i < result.selectedX.Length; i++)
+            {
+                sb.AppendLine(String.Format("{0,-5} {1,15} {2,15}",
+                    i + 1, result.selectedX[i], result.selectedY[i]));
+            }
+
+            sb.AppendLine("───────────────────────────────────────────────");
+            sb.AppendLine($"\nĐiểm trung tâm xs = {xValues[result.xs]:F6}");
+            sb.AppendLine("═══════════════════════════════════════════════");
+
+            richTextBoxFindPoints.Clear();
+            richTextBoxFindPoints.AppendText(sb.ToString());
         }
         #endregion
 
@@ -705,6 +894,59 @@ namespace Interpolation
             for (int i = 0; i < polynomialCoeffs.Length; i++)
             {
                 dgv.Rows.Add(polynomialCoeffs[i]);
+            }
+        }
+        private void ReadExcelData(string filePath, out double[] xValues, out double[] yValues)
+        {
+            var xList = new List<double>();
+            var yList = new List<double>();
+            var seenXValues = new HashSet<double>(); 
+            int duplicateCount = 0; 
+
+            FileInfo fileInfo = new FileInfo(filePath);
+
+            using (ExcelPackage package = new ExcelPackage(fileInfo))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                int rowCount = worksheet.Dimension?.Rows ?? 0;
+                int startRow = 1;
+                for (int row = startRow; row <= rowCount; row++)
+                {
+                    var xCell = worksheet.Cells[row, 1].Value;
+                    var yCell = worksheet.Cells[row, 2].Value;
+                    if (xCell != null && yCell != null)
+                    {
+                        if (double.TryParse(xCell.ToString(), out double xValue) &&
+                            double.TryParse(yCell.ToString(), out double yValue))
+                        {
+                            if (!seenXValues.Contains(xValue))
+                            {
+                                xList.Add(xValue);
+                                yList.Add(yValue);
+                                seenXValues.Add(xValue);
+                            }
+                            else
+                            {
+                                duplicateCount++;
+                            }
+                        }
+                    }
+                }
+            }
+            xValues = xList.ToArray();
+            yValues = yList.ToArray();
+            if (xValues.Length == 0)
+            {
+                throw new Exception("Không tìm thấy dữ liệu hợp lệ");
+            }
+            if (duplicateCount > 0)
+            {
+                MessageBox.Show(
+                    $"Đã loại bỏ {duplicateCount} điểm có giá trị x trùng lặp.\n" +
+                    $"Số điểm còn lại: {xValues.Length}",
+                    "Cảnh báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
         #endregion
