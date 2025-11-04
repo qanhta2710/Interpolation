@@ -133,16 +133,40 @@
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
             this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.richTextBoxInterPoints = new System.Windows.Forms.RichTextBox();
-            this.btnOpenExcel = new System.Windows.Forms.Button();
-            this.btnFindPoints = new System.Windows.Forms.Button();
+            this.richTextBoxFindPoints = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtBoxX = new System.Windows.Forms.TextBox();
+            this.btnOpenExcel = new System.Windows.Forms.Button();
+            this.btnFindPoints = new System.Windows.Forms.Button();
             this.textBoxK = new System.Windows.Forms.TextBox();
+            this.txtBoxX = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.richTextBoxFindPoints = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxInterPoints = new System.Windows.Forms.RichTextBox();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.dataResultGaussI = new System.Windows.Forms.DataGridView();
+            this.dataXYGaussI = new System.Windows.Forms.DataGridView();
+            this.colsXGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnGaussIToEval = new System.Windows.Forms.Button();
+            this.lblResultGaussI = new System.Windows.Forms.Label();
+            this.btnSolveGaussI = new System.Windows.Forms.Button();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionGaussI = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnGaussIIToEval = new System.Windows.Forms.Button();
+            this.lblResultGaussII = new System.Windows.Forms.Label();
+            this.btnSolveGaussII = new System.Windows.Forms.Button();
+            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionGaussII = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.dataXYGaussII = new System.Windows.Forms.DataGridView();
+            this.dataResultGaussII = new System.Windows.Forms.DataGridView();
+            this.colsXGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -187,6 +211,16 @@
             this.tabPage8.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).BeginInit();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.flowLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -402,6 +436,8 @@
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1402,41 +1438,15 @@
             this.tabPage8.Text = "Tìm mốc nội suy cách đều";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // richTextBoxInterPoints
+            // richTextBoxFindPoints
             // 
-            this.richTextBoxInterPoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxInterPoints.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxInterPoints.Name = "richTextBoxInterPoints";
-            this.richTextBoxInterPoints.Size = new System.Drawing.Size(1132, 640);
-            this.richTextBoxInterPoints.TabIndex = 3;
-            this.richTextBoxInterPoints.Text = "";
-            // 
-            // btnOpenExcel
-            // 
-            this.btnOpenExcel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnOpenExcel.AutoSize = true;
-            this.btnOpenExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcel.Location = new System.Drawing.Point(132, 27);
-            this.btnOpenExcel.Name = "btnOpenExcel";
-            this.btnOpenExcel.Size = new System.Drawing.Size(120, 30);
-            this.btnOpenExcel.TabIndex = 2;
-            this.btnOpenExcel.Text = "Nhập File Excel";
-            this.btnOpenExcel.UseVisualStyleBackColor = true;
-            this.btnOpenExcel.Click += new System.EventHandler(this.btnOpenExcel_Click);
-            // 
-            // btnFindPoints
-            // 
-            this.btnFindPoints.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnFindPoints.AutoSize = true;
-            this.btnFindPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFindPoints.Location = new System.Drawing.Point(114, 112);
-            this.btnFindPoints.Name = "btnFindPoints";
-            this.btnFindPoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnFindPoints.Size = new System.Drawing.Size(156, 28);
-            this.btnFindPoints.TabIndex = 3;
-            this.btnFindPoints.Text = "Tìm các mốc nội suy";
-            this.btnFindPoints.UseVisualStyleBackColor = true;
-            this.btnFindPoints.Click += new System.EventHandler(this.btnFindPoints_Click);
+            this.richTextBoxFindPoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxFindPoints.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxFindPoints.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxFindPoints.Name = "richTextBoxFindPoints";
+            this.richTextBoxFindPoints.Size = new System.Drawing.Size(1132, 471);
+            this.richTextBoxFindPoints.TabIndex = 6;
+            this.richTextBoxFindPoints.Text = "";
             // 
             // panel5
             // 
@@ -1468,12 +1478,32 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1132, 169);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
-            // txtBoxX
+            // btnOpenExcel
             // 
-            this.txtBoxX.Location = new System.Drawing.Point(388, 87);
-            this.txtBoxX.Name = "txtBoxX";
-            this.txtBoxX.Size = new System.Drawing.Size(100, 22);
-            this.txtBoxX.TabIndex = 4;
+            this.btnOpenExcel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcel.AutoSize = true;
+            this.btnOpenExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcel.Location = new System.Drawing.Point(132, 27);
+            this.btnOpenExcel.Name = "btnOpenExcel";
+            this.btnOpenExcel.Size = new System.Drawing.Size(120, 30);
+            this.btnOpenExcel.TabIndex = 2;
+            this.btnOpenExcel.Text = "Nhập File Excel";
+            this.btnOpenExcel.UseVisualStyleBackColor = true;
+            this.btnOpenExcel.Click += new System.EventHandler(this.btnOpenExcel_Click);
+            // 
+            // btnFindPoints
+            // 
+            this.btnFindPoints.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnFindPoints.AutoSize = true;
+            this.btnFindPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindPoints.Location = new System.Drawing.Point(114, 112);
+            this.btnFindPoints.Name = "btnFindPoints";
+            this.btnFindPoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnFindPoints.Size = new System.Drawing.Size(156, 28);
+            this.btnFindPoints.TabIndex = 3;
+            this.btnFindPoints.Text = "Tìm các mốc nội suy";
+            this.btnFindPoints.UseVisualStyleBackColor = true;
+            this.btnFindPoints.Click += new System.EventHandler(this.btnFindPoints_Click);
             // 
             // textBoxK
             // 
@@ -1481,6 +1511,13 @@
             this.textBoxK.Name = "textBoxK";
             this.textBoxK.Size = new System.Drawing.Size(100, 22);
             this.textBoxK.TabIndex = 5;
+            // 
+            // txtBoxX
+            // 
+            this.txtBoxX.Location = new System.Drawing.Point(388, 87);
+            this.txtBoxX.Name = "txtBoxX";
+            this.txtBoxX.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxX.TabIndex = 4;
             // 
             // label1
             // 
@@ -1504,15 +1541,300 @@
             this.label17.TabIndex = 7;
             this.label17.Text = "Nhập số mốc nội suy";
             // 
-            // richTextBoxFindPoints
+            // richTextBoxInterPoints
             // 
-            this.richTextBoxFindPoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxFindPoints.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxFindPoints.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxFindPoints.Name = "richTextBoxFindPoints";
-            this.richTextBoxFindPoints.Size = new System.Drawing.Size(1132, 471);
-            this.richTextBoxFindPoints.TabIndex = 6;
-            this.richTextBoxFindPoints.Text = "";
+            this.richTextBoxInterPoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxInterPoints.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxInterPoints.Name = "richTextBoxInterPoints";
+            this.richTextBoxInterPoints.Size = new System.Drawing.Size(1132, 640);
+            this.richTextBoxInterPoints.TabIndex = 3;
+            this.richTextBoxInterPoints.Text = "";
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.dataResultGaussI);
+            this.tabPage9.Controls.Add(this.dataXYGaussI);
+            this.tabPage9.Controls.Add(this.tableLayoutPanel11);
+            this.tabPage9.Location = new System.Drawing.Point(4, 25);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "Gauss I";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // dataResultGaussI
+            // 
+            this.dataResultGaussI.AllowUserToAddRows = false;
+            this.dataResultGaussI.AllowUserToDeleteRows = false;
+            this.dataResultGaussI.AllowUserToResizeColumns = false;
+            this.dataResultGaussI.AllowUserToResizeRows = false;
+            this.dataResultGaussI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultGaussI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataResultGaussI.Location = new System.Drawing.Point(251, 3);
+            this.dataResultGaussI.Name = "dataResultGaussI";
+            this.dataResultGaussI.ReadOnly = true;
+            this.dataResultGaussI.RowHeadersWidth = 51;
+            this.dataResultGaussI.RowTemplate.Height = 24;
+            this.dataResultGaussI.Size = new System.Drawing.Size(884, 540);
+            this.dataResultGaussI.TabIndex = 7;
+            // 
+            // dataXYGaussI
+            // 
+            this.dataXYGaussI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYGaussI.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXGaussI,
+            this.colsYGaussI});
+            this.dataXYGaussI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYGaussI.Location = new System.Drawing.Point(3, 3);
+            this.dataXYGaussI.Name = "dataXYGaussI";
+            this.dataXYGaussI.RowHeadersWidth = 51;
+            this.dataXYGaussI.RowTemplate.Height = 24;
+            this.dataXYGaussI.Size = new System.Drawing.Size(248, 540);
+            this.dataXYGaussI.TabIndex = 6;
+            // 
+            // colsXGaussI
+            // 
+            this.colsXGaussI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXGaussI.HeaderText = "X";
+            this.colsXGaussI.MinimumWidth = 6;
+            this.colsXGaussI.Name = "colsXGaussI";
+            // 
+            // colsYGaussI
+            // 
+            this.colsYGaussI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYGaussI.HeaderText = "Y";
+            this.colsYGaussI.MinimumWidth = 6;
+            this.colsYGaussI.Name = "colsYGaussI";
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel11.Controls.Add(this.btnGaussIToEval, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.lblResultGaussI, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.btnSolveGaussI, 1, 1);
+            this.tableLayoutPanel11.Controls.Add(this.flowLayoutPanel7, 0, 1);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel11.TabIndex = 5;
+            // 
+            // btnGaussIToEval
+            // 
+            this.btnGaussIToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGaussIToEval.AutoSize = true;
+            this.btnGaussIToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGaussIToEval.Location = new System.Drawing.Point(39, 8);
+            this.btnGaussIToEval.Name = "btnGaussIToEval";
+            this.btnGaussIToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnGaussIToEval.TabIndex = 5;
+            this.btnGaussIToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnGaussIToEval.UseVisualStyleBackColor = true;
+            this.btnGaussIToEval.Visible = false;
+            this.btnGaussIToEval.Click += new System.EventHandler(this.btnGaussIToEval_Click);
+            // 
+            // lblResultGaussI
+            // 
+            this.lblResultGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultGaussI.AutoSize = true;
+            this.lblResultGaussI.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultGaussI.Location = new System.Drawing.Point(686, 14);
+            this.lblResultGaussI.Name = "lblResultGaussI";
+            this.lblResultGaussI.Size = new System.Drawing.Size(70, 22);
+            this.lblResultGaussI.TabIndex = 0;
+            this.lblResultGaussI.Text = "label2";
+            this.lblResultGaussI.Visible = false;
+            // 
+            // btnSolveGaussI
+            // 
+            this.btnSolveGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveGaussI.AutoSize = true;
+            this.btnSolveGaussI.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveGaussI.Location = new System.Drawing.Point(632, 57);
+            this.btnSolveGaussI.Name = "btnSolveGaussI";
+            this.btnSolveGaussI.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveGaussI.TabIndex = 1;
+            this.btnSolveGaussI.Text = "Tìm đa thức nội suy";
+            this.btnSolveGaussI.UseVisualStyleBackColor = true;
+            this.btnSolveGaussI.Click += new System.EventHandler(this.btnSolveGaussI_Click);
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.txtBoxPrecisionGaussI);
+            this.flowLayoutPanel7.Controls.Add(this.label19);
+            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(305, 44);
+            this.flowLayoutPanel7.TabIndex = 2;
+            // 
+            // txtBoxPrecisionGaussI
+            // 
+            this.txtBoxPrecisionGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionGaussI.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionGaussI.Name = "txtBoxPrecisionGaussI";
+            this.txtBoxPrecisionGaussI.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionGaussI.TabIndex = 0;
+            this.txtBoxPrecisionGaussI.Text = "15";
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(109, 6);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(161, 16);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Số chữ số phần thập phân";
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.dataResultGaussII);
+            this.tabPage10.Controls.Add(this.dataXYGaussII);
+            this.tabPage10.Controls.Add(this.tableLayoutPanel12);
+            this.tabPage10.Location = new System.Drawing.Point(4, 25);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage10.TabIndex = 9;
+            this.tabPage10.Text = "Gauss II";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 2;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel12.Controls.Add(this.btnGaussIIToEval, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.lblResultGaussII, 1, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnSolveGaussII, 1, 1);
+            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel8, 0, 1);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 2;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel12.TabIndex = 6;
+            // 
+            // btnGaussIIToEval
+            // 
+            this.btnGaussIIToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGaussIIToEval.AutoSize = true;
+            this.btnGaussIIToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGaussIIToEval.Location = new System.Drawing.Point(39, 8);
+            this.btnGaussIIToEval.Name = "btnGaussIIToEval";
+            this.btnGaussIIToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnGaussIIToEval.TabIndex = 5;
+            this.btnGaussIIToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnGaussIIToEval.UseVisualStyleBackColor = true;
+            this.btnGaussIIToEval.Visible = false;
+            this.btnGaussIIToEval.Click += new System.EventHandler(this.btnGaussIIToEval_Click);
+            // 
+            // lblResultGaussII
+            // 
+            this.lblResultGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultGaussII.AutoSize = true;
+            this.lblResultGaussII.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultGaussII.Location = new System.Drawing.Point(686, 14);
+            this.lblResultGaussII.Name = "lblResultGaussII";
+            this.lblResultGaussII.Size = new System.Drawing.Size(70, 22);
+            this.lblResultGaussII.TabIndex = 0;
+            this.lblResultGaussII.Text = "label2";
+            this.lblResultGaussII.Visible = false;
+            // 
+            // btnSolveGaussII
+            // 
+            this.btnSolveGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveGaussII.AutoSize = true;
+            this.btnSolveGaussII.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveGaussII.Location = new System.Drawing.Point(632, 57);
+            this.btnSolveGaussII.Name = "btnSolveGaussII";
+            this.btnSolveGaussII.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveGaussII.TabIndex = 1;
+            this.btnSolveGaussII.Text = "Tìm đa thức nội suy";
+            this.btnSolveGaussII.UseVisualStyleBackColor = true;
+            this.btnSolveGaussII.Click += new System.EventHandler(this.btnSolveGaussII_Click);
+            // 
+            // flowLayoutPanel8
+            // 
+            this.flowLayoutPanel8.Controls.Add(this.txtBoxPrecisionGaussII);
+            this.flowLayoutPanel8.Controls.Add(this.label20);
+            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(305, 44);
+            this.flowLayoutPanel8.TabIndex = 2;
+            // 
+            // txtBoxPrecisionGaussII
+            // 
+            this.txtBoxPrecisionGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionGaussII.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionGaussII.Name = "txtBoxPrecisionGaussII";
+            this.txtBoxPrecisionGaussII.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionGaussII.TabIndex = 0;
+            this.txtBoxPrecisionGaussII.Text = "15";
+            // 
+            // label20
+            // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(109, 6);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(161, 16);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "Số chữ số phần thập phân";
+            // 
+            // dataXYGaussII
+            // 
+            this.dataXYGaussII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYGaussII.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXGaussII,
+            this.colsYGaussII});
+            this.dataXYGaussII.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYGaussII.Location = new System.Drawing.Point(3, 3);
+            this.dataXYGaussII.Name = "dataXYGaussII";
+            this.dataXYGaussII.RowHeadersWidth = 51;
+            this.dataXYGaussII.RowTemplate.Height = 24;
+            this.dataXYGaussII.Size = new System.Drawing.Size(248, 540);
+            this.dataXYGaussII.TabIndex = 7;
+            // 
+            // dataResultGaussII
+            // 
+            this.dataResultGaussII.AllowUserToAddRows = false;
+            this.dataResultGaussII.AllowUserToDeleteRows = false;
+            this.dataResultGaussII.AllowUserToResizeColumns = false;
+            this.dataResultGaussII.AllowUserToResizeRows = false;
+            this.dataResultGaussII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultGaussII.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataResultGaussII.Location = new System.Drawing.Point(251, 3);
+            this.dataResultGaussII.Name = "dataResultGaussII";
+            this.dataResultGaussII.ReadOnly = true;
+            this.dataResultGaussII.RowHeadersWidth = 51;
+            this.dataResultGaussII.RowTemplate.Height = 24;
+            this.dataResultGaussII.Size = new System.Drawing.Size(884, 540);
+            this.dataResultGaussII.TabIndex = 8;
+            // 
+            // colsXGaussII
+            // 
+            this.colsXGaussII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXGaussII.HeaderText = "X";
+            this.colsXGaussII.MinimumWidth = 6;
+            this.colsXGaussII.Name = "colsXGaussII";
+            // 
+            // colsYGaussII
+            // 
+            this.colsYGaussII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYGaussII.HeaderText = "Y";
+            this.colsYGaussII.MinimumWidth = 6;
+            this.colsYGaussII.Name = "colsYGaussII";
             // 
             // Form1
             // 
@@ -1584,6 +1906,20 @@
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).EndInit();
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
+            this.tabPage10.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
+            this.flowLayoutPanel8.ResumeLayout(false);
+            this.flowLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1703,6 +2039,30 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.RichTextBox richTextBoxFindPoints;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.Button btnGaussIToEval;
+        private System.Windows.Forms.Label lblResultGaussI;
+        private System.Windows.Forms.Button btnSolveGaussI;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.TextBox txtBoxPrecisionGaussI;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridView dataXYGaussI;
+        private System.Windows.Forms.DataGridView dataResultGaussI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colsXGaussI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colsYGaussI;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.DataGridView dataResultGaussII;
+        private System.Windows.Forms.DataGridView dataXYGaussII;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.Button btnGaussIIToEval;
+        private System.Windows.Forms.Label lblResultGaussII;
+        private System.Windows.Forms.Button btnSolveGaussII;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
+        private System.Windows.Forms.TextBox txtBoxPrecisionGaussII;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colsXGaussII;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colsYGaussII;
     }
 }
 

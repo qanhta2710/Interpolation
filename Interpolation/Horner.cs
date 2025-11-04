@@ -177,8 +177,6 @@ namespace Interpolation
                 double c = coeffs[i];
                 int power = n - i - 1;
 
-                if (Math.Abs(c) < 1e-9) continue;
-
                 if (sb.Length > 0)
                 {
                     sb.Append(c >= 0 ? " + " : " - ");

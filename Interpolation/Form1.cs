@@ -1,15 +1,12 @@
-﻿using MathNet.Numerics.Integration;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml.Xsl;
 
 namespace Interpolation
 {
@@ -26,6 +23,7 @@ namespace Interpolation
         {
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
             comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
+            SetupDataGridViewColumnTypes();
         }
         #region Event Handlers
         // Tìm mốc nội suy Chebyshev
@@ -271,6 +269,85 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        private void btnSolveGaussI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Xử lý Input
+                dataXYGaussI.Sort(dataXYGaussI.Columns["colsXGaussI"], System.ComponentModel.ListSortDirection.Ascending);
+                RemoveDuplicate(dataXYGaussI);
+
+                double[] x = GetXValues(dataXYGaussI);
+                double[] y = GetYValues(dataXYGaussI);
+                int precision = Convert.ToInt32(txtBoxPrecisionGaussI.Text);
+
+                MessageBox.Show(
+                    "Công thức Gauss I (Forward):\n\n" +
+                    "- Phép đổi biến: t = (x - x_0) / h\n" +
+                    "- Đa thức: f(t)\n\n" +
+                    "Kết quả hiển thị theo biến t",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                var gaussIPolynomial = SolveGaussI(x, y, precision,
+                    out double?[,] diffTable,
+                    out double[,] prodTable,
+                    out double[] vectorCoeffs);
+
+                lastPolynomialCoeffs = gaussIPolynomial;
+                DisplayGaussIResults(dataResultGaussI, x.Length, diffTable, vectorCoeffs, prodTable, gaussIPolynomial);
+
+                lblResultGaussI.Text = Function.PolynomialToString(gaussIPolynomial, "t");
+                lblResultGaussI.Visible = true;
+                btnGaussIToEval.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+            }
+        }
+        private void btnSolveGaussII_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Xử lý Input
+                dataXYGaussII.Sort(dataXYGaussII.Columns["colsXGaussII"], System.ComponentModel.ListSortDirection.Ascending);
+                RemoveDuplicate(dataXYGaussII);
+
+                double[] x = GetXValues(dataXYGaussII);
+                double[] y = GetYValues(dataXYGaussII);
+                int precision = Convert.ToInt32(txtBoxPrecisionGaussII.Text);
+
+                MessageBox.Show(
+                    "Công thức Gauss II:\n\n" +
+                    "- Phép đổi biến: t = (x - x_0) / h\n" +
+                    "- Đa thức: f(t)\n\n" +
+                    "Kết quả hiển thị theo biến t",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                var gaussIIPolynomial = SolveGaussII(x, y, precision,
+                    out double?[,] diffTable,
+                    out double[,] prodTable,
+                    out double[] vectorCoeffs);
+
+                lastPolynomialCoeffs = gaussIIPolynomial;
+                DisplayGaussIResults(dataResultGaussII, x.Length, diffTable, vectorCoeffs, prodTable, gaussIIPolynomial);
+
+                lblResultGaussII.Text = Function.PolynomialToString(gaussIIPolynomial, "t");
+                lblResultGaussII.Visible = true;
+                btnGaussIIToEval.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+                throw;
+            }
+        }
         private void btnLagrangeToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
@@ -292,6 +369,16 @@ namespace Interpolation
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnBesselToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnGaussIToEval_Click(object sender, EventArgs e)
+        {
+            TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnGaussIIToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
@@ -334,10 +421,10 @@ namespace Interpolation
                 MessageBox.Show("Vui lòng mở file Excel trước");
                 return;
             }
-            
+
             double xAvg = Convert.ToDouble(txtBoxX.Text);
             int k = Convert.ToInt32(textBoxK.Text);
-             
+
             if (k > xValues.Length)
             {
                 MessageBox.Show($"Số mốc nội suy k = {k} lớn hơn số điểm dữ liệu {xValues.Length}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -352,6 +439,7 @@ namespace Interpolation
             }
             DisplayInterpolationPointsResult(xAvg, result);
         }
+
         #endregion
         #region Core
         private double[] SolveLagrange(double[] x, double[] y, int precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable, out double[,] arrMatrix)
@@ -473,9 +561,9 @@ namespace Interpolation
             double[,] prodTableOdd = RemoveFirstRowAndLastColumn(prodTable);
             double[] finalCoeffsEven = Function.FindPolynomial(vectorCoeffsEven, prodTableEven, precision);
             double[] finalCoeffsOdd = Function.FindPolynomial(vectorCoeffsOdd, prodTableOdd, precision);
-            
+
             double[] finalCoeffs = new double[x.Length];
-            evenIdx = 0; 
+            evenIdx = 0;
             oddIdx = 0;
             for (int i = 0; i < x.Length; i++)
             {
@@ -553,7 +641,7 @@ namespace Interpolation
         {
             int n = dataX.Length;
             int xs = -1;
-            bool isRightPoint = false; 
+            bool isRightPoint = false;
             for (int i = 0; i < n - 1; i++)
             {
                 if (x >= dataX[i] && x <= dataX[i + 1])
@@ -632,6 +720,86 @@ namespace Interpolation
 
             return (xs, selectedX, selectedY);
         }
+        // Gauss I
+        private double[] SolveGaussI(double[] x, double[] y, int precision,
+    out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs)
+        {
+            diffTable = Gauss.BuildGaussForwardTable(x, y, precision);
+
+            int n = x.Length;
+            vectorCoeffs = new double[n];
+
+            int center = (n - 1) / 2;
+
+            vectorCoeffs[0] = diffTable[center, 1] ?? 0.0;
+            int currentRow = center;
+
+            for (int j = 2; j <= n; j++)
+            {
+                if (j % 2 != 0)
+                    currentRow--;
+
+                if (currentRow >= 0 && currentRow < n - j + 1)
+                {
+                    vectorCoeffs[j - 1] = (diffTable[currentRow, j] ?? 0.0) / Function.Factorial(j - 1);
+                    vectorCoeffs[j - 1] = Math.Round(vectorCoeffs[j - 1], precision);
+                }
+            }
+            double[] tPattern = new double[n - 1];
+            for (int i = 0; i < n - 1; i++)
+            {
+                if (i == 0)
+                    tPattern[i] = 0;
+                else if (i % 2 == 1)
+                    tPattern[i] = (i + 1) / 2.0; 
+                else
+                    tPattern[i] = - (i / 2.0);    
+            }
+
+            prodTable = Horner.ProductTable(tPattern, precision);
+            return Function.FindPolynomial(vectorCoeffs, prodTable, precision);
+        }
+        // Gauss II
+        private double[] SolveGaussII(double[] x, double[] y, int precision,
+    out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs)
+        {
+            diffTable = Gauss.BuildGaussForwardTable(x, y, precision);
+
+            int n = x.Length;
+            vectorCoeffs = new double[n];
+
+            int center = (n - 1) / 2;
+
+            vectorCoeffs[0] = diffTable[center, 1] ?? 0.0;
+            int currentRow = center;
+
+            for (int j = 2; j <= n; j++)
+            {
+                if (j % 2 == 0)
+                    currentRow--;
+
+                if (currentRow >= 0 && currentRow < n - j + 1)
+                {
+                    vectorCoeffs[j - 1] = (diffTable[currentRow, j] ?? 0.0) / Function.Factorial(j - 1);
+                    vectorCoeffs[j - 1] = Math.Round(vectorCoeffs[j - 1], precision);
+                }
+            }
+
+            double[] tPattern = new double[n - 1];
+            for (int i = 0; i < n - 1; i++)
+            {
+                if (i == 0)
+                    tPattern[i] = 0;
+                else if (i % 2 == 1)
+                    tPattern[i] = -(i + 1) / 2.0;   
+                else
+                    tPattern[i] = i / 2.0;
+            }
+            prodTable = Horner.ProductTable(tPattern, precision);
+
+            return Function.FindPolynomial(vectorCoeffs, prodTable, precision);
+        }
+
         #endregion
 
         #region UI
@@ -758,6 +926,21 @@ namespace Interpolation
 
             richTextBoxFindPoints.Clear();
             richTextBoxFindPoints.AppendText(sb.ToString());
+        }
+        private void DisplayGaussIResults(DataGridView dgv, int n, double?[,] diffTable,
+    double[] coeffsVector, double[,] productTable, double[] gaussIPolynomial)
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, n + 1, "Ghi chú");
+
+            AddNullableTable(dgv, diffTable, "Bảng sai phân hữu hạn (Gauss I)");
+            AddSectionBreak(dgv);
+            AddRow(dgv, coeffsVector, "Hệ số trích xuất (Δⁿf/n!)");
+            AddSectionBreak(dgv);
+            AddTable(dgv, productTable, "Bảng tích", "t = 0, 1, 2, 3...");
+            AddSectionBreak(dgv);
+            AddRow(dgv, gaussIPolynomial, "Hệ số đa thức nội suy Gauss I");
         }
         #endregion
 
@@ -900,8 +1083,8 @@ namespace Interpolation
         {
             var xList = new List<double>();
             var yList = new List<double>();
-            var seenXValues = new HashSet<double>(); 
-            int duplicateCount = 0; 
+            var seenXValues = new HashSet<double>();
+            int duplicateCount = 0;
 
             FileInfo fileInfo = new FileInfo(filePath);
 
@@ -950,5 +1133,44 @@ namespace Interpolation
             }
         }
         #endregion
+        private void SetupDataGridViewColumnTypes()
+        {
+            // Gauss I
+            if (dataXYGaussI.Columns.Contains("colsXGaussI"))
+                dataXYGaussI.Columns["colsXGaussI"].ValueType = typeof(double);
+            if (dataXYGaussI.Columns.Contains("colsYGaussI"))
+                dataXYGaussI.Columns["colsYGaussI"].ValueType = typeof(double);
+
+            // Newton
+            if (dataXYNewton.Columns.Contains("colsXNewton"))
+                dataXYNewton.Columns["colsXNewton"].ValueType = typeof(double);
+            if (dataXYNewton.Columns.Contains("colsYNewton"))
+                dataXYNewton.Columns["colsYNewton"].ValueType = typeof(double);
+
+            // Newton Finite
+            if (dataGridViewXYNewtonFinite.Columns.Contains("colsXNewtonFinite"))
+                dataGridViewXYNewtonFinite.Columns["colsXNewtonFinite"].ValueType = typeof(double);
+            if (dataGridViewXYNewtonFinite.Columns.Contains("colsYNewtonFinite"))
+                dataGridViewXYNewtonFinite.Columns["colsYNewtonFinite"].ValueType = typeof(double);
+
+            // Stirling
+            if (dataXYStirling.Columns.Contains("colsXStirling"))
+                dataXYStirling.Columns["colsXStirling"].ValueType = typeof(double);
+            if (dataXYStirling.Columns.Contains("colsYStirling"))
+                dataXYStirling.Columns["colsYStirling"].ValueType = typeof(double);
+
+            // Bessel
+            if (dataXYBessel.Columns.Contains("colsXBessel"))
+                dataXYBessel.Columns["colsXBessel"].ValueType = typeof(double);
+            if (dataXYBessel.Columns.Contains("colsYBessel"))
+                dataXYBessel.Columns["colsYBessel"].ValueType = typeof(double);
+
+            // Gauss II
+            if (dataXYGaussII.Columns.Contains("colsXGaussII"))
+                dataXYGaussII.Columns["colsXGaussII"].ValueType = typeof(double);
+            if (dataXYGaussII.Columns.Contains("colsYGaussII"))
+                dataXYGaussII.Columns["colsYGaussII"].ValueType = typeof(double);
+        }
+
     }
 }
