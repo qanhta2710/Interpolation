@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Interpolation
 {
@@ -15,6 +16,9 @@ namespace Interpolation
         private double[] lastPolynomialCoeffs;
         private double[] xValues;
         private double[] yValues;
+        private double lastYTarget;
+        private List<(int startIndex, int endIndex)> lastIsolationIntervals;
+        private List<(int startIndex, int endIndex, bool isIncreasing, double[] selectedX, double[] selectedY)> lastMonotonicIntervals;
         public Form1()
         {
             InitializeComponent();
@@ -336,7 +340,7 @@ namespace Interpolation
                     out double[] vectorCoeffs);
 
                 lastPolynomialCoeffs = gaussIIPolynomial;
-                DisplayGaussIResults(dataResultGaussII, x.Length, diffTable, vectorCoeffs, prodTable, gaussIIPolynomial);
+                DisplayGaussIIResults(dataResultGaussII, x.Length, diffTable, vectorCoeffs, prodTable, gaussIIPolynomial);
 
                 lblResultGaussII.Text = Function.PolynomialToString(gaussIIPolynomial, "t");
                 lblResultGaussII.Visible = true;
@@ -439,7 +443,85 @@ namespace Interpolation
             }
             DisplayInterpolationPointsResult(xAvg, result);
         }
+        private void btnOpenExcelReverse_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
 
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out xValues, out yValues);
+
+                        MessageBox.Show(
+                            $"Đã đọc thành công {xValues.Length} điểm dữ liệu từ file Excel!\n\n",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        private void btnFindReversePoints_Click(object sender, EventArgs e)
+        {
+            if (xValues == null || yValues == null || xValues.Length == 0)
+            {
+                MessageBox.Show("Vui lòng mở file Excel trước");
+                return;
+            }
+
+            try
+            {
+                double yTarget = Convert.ToDouble(txtBoxY.Text);
+
+                var isolationIntervals = FindAllIsolationIntervals(yTarget, yValues);
+
+                if (isolationIntervals.Count == 0)
+                {
+                    MessageBox.Show($"Không tìm thấy khoảng nào chứa y = {yTarget}\n" +
+                                  $"Phạm vi dữ liệu: [{yValues.Min()}, {yValues.Max()}]",
+                                  "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var monotonicIntervals = FindMonotonicIntervals(isolationIntervals, xValues, yValues);
+                lastYTarget = yTarget;
+                lastIsolationIntervals = isolationIntervals;
+                lastMonotonicIntervals = monotonicIntervals;
+
+                DisplayMonotonicIntervalsResult(yTarget, isolationIntervals, monotonicIntervals);
+                var result = MessageBox.Show(
+                    $"Đã tìm thấy {monotonicIntervals.Count} khoảng đơn điệu.\n\nBạn có muốn xuất dữ liệu ra file Excel không?",
+                    "Xuất dữ liệu",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    ExportMonotonicIntervalsToExcel(yTarget, monotonicIntervals);
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Lỗi định dạng dữ liệu đầu vào", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
         #region Core
         private double[] SolveLagrange(double[] x, double[] y, int precision, out double[] coeffsD, out double[,] productTable, out double[,] divideTable, out double[,] arrMatrix)
@@ -799,7 +881,148 @@ namespace Interpolation
 
             return Function.FindPolynomial(vectorCoeffs, prodTable, precision);
         }
+        private List<(int startIndex, int endIndex)> FindAllIsolationIntervals(double y, double[] dataY)
+        {
+            int n = dataY.Length;
+            var isolationIntervals = new List<(int startIndex, int endIndex)>();
 
+            // Tìm các khoảng cách ly chứa y
+            for (int i = 0; i < n - 1; i++)
+            {
+                // Kiểm tra nếu y nằm trong khoảng [dataY[i], dataY[i+1]]
+                double minY = Math.Min(dataY[i], dataY[i + 1]);
+                double maxY = Math.Max(dataY[i], dataY[i + 1]);
+
+                if (y >= minY && y <= maxY)
+                {
+                    isolationIntervals.Add((i, i + 1));
+                }
+            }
+
+            return isolationIntervals;
+        }
+        private List<(int startIndex, int endIndex, bool isIncreasing, double[] selectedX, double[] selectedY)> FindMonotonicIntervals(
+            List<(int startIndex, int endIndex)> isolationIntervals,
+            double[] dataX,
+            double[] dataY)
+        {
+            var monotonicIntervals = new List<(int startIndex, int endIndex, bool isIncreasing, double[] selectedX, double[] selectedY)>();
+            int n = dataY.Length;
+
+            foreach (var isolation in isolationIntervals)
+            {
+                int isoStart = isolation.startIndex;
+                int isoEnd = isolation.endIndex;
+
+                // Xác định xu hướng của khoảng cách ly
+                bool isIncreasing = dataY[isoEnd] > dataY[isoStart];
+
+                // Mở rộng về trái để tìm khoảng đơn điệu
+                int monotonicStart = isoStart;
+                while (monotonicStart > 0)
+                {
+                    bool prevIncreasing = dataY[monotonicStart] > dataY[monotonicStart - 1];
+                    if (prevIncreasing == isIncreasing)
+                    {
+                        monotonicStart--;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // Mở rộng về phải để tìm khoảng đơn điệu
+                int monotonicEnd = isoEnd;
+                while (monotonicEnd < n - 1)
+                {
+                    bool nextIncreasing = dataY[monotonicEnd + 1] > dataY[monotonicEnd];
+                    if (nextIncreasing == isIncreasing)
+                    {
+                        monotonicEnd++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // Lấy TẤT CẢ các điểm trong khoảng đơn điệu
+                var selectedIndices = new List<int>();
+                for (int idx = monotonicStart; idx <= monotonicEnd; idx++)
+                {
+                    selectedIndices.Add(idx);
+                }
+
+                double[] selectedX = selectedIndices.Select(idx => dataX[idx]).ToArray();
+                double[] selectedY = selectedIndices.Select(idx => dataY[idx]).ToArray();
+
+                monotonicIntervals.Add((monotonicStart, monotonicEnd, isIncreasing, selectedX, selectedY));
+            }
+
+            return monotonicIntervals;
+        }
+        private void ExportMonotonicIntervalsToExcel(
+    double y,
+    List<(int startIndex, int endIndex, bool isIncreasing, double[] selectedX, double[] selectedY)> monotonicIntervals)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Excel Files|*.xlsx";
+                    saveFileDialog.Title = "Xuất dữ liệu ra Excel";
+                    saveFileDialog.FileName = $"ReverseInterpolation_y_{y}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = saveFileDialog.FileName;
+
+                        using (ExcelPackage package = new ExcelPackage())
+                        {
+                            // Tạo worksheet cho mỗi khoảng đơn điệu
+                            for (int idx = 0; idx < monotonicIntervals.Count; idx++)
+                            {
+                                var monotonic = monotonicIntervals[idx];
+
+                                // Tạo worksheet với tên đơn giản
+                                string worksheetName = $"Khoang_{idx + 1}";
+                                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(worksheetName);
+
+                                // Điền dữ liệu trực tiếp từ hàng 1, không có header
+                                int row = 1;
+                                for (int i = 0; i < monotonic.selectedX.Length; i++)
+                                {
+                                    worksheet.Cells[row, 1].Value = monotonic.selectedX[i];
+                                    worksheet.Cells[row, 2].Value = monotonic.selectedY[i];
+                                    row++;
+                                }
+                                // Auto-fit columns
+                                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+                            }
+
+                            // Lưu file
+                            FileInfo fileInfo = new FileInfo(filePath);
+                            package.SaveAs(fileInfo);
+
+                            MessageBox.Show(
+                                $"Đã xuất thành công {monotonicIntervals.Count} khoảng đơn điệu ra file:\n{filePath}",
+                                "Thành công",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xuất file Excel: {ex.Message}",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
         #region UI
@@ -934,13 +1157,87 @@ namespace Interpolation
             dgv.Columns.Clear();
             SetupColumns(dgv, n + 1, "Ghi chú");
 
-            AddNullableTable(dgv, diffTable, "Bảng sai phân hữu hạn (Gauss I)");
+            AddNullableTable(dgv, diffTable, "Bảng sai phân");
             AddSectionBreak(dgv);
             AddRow(dgv, coeffsVector, "Hệ số trích xuất (Δⁿf/n!)");
             AddSectionBreak(dgv);
-            AddTable(dgv, productTable, "Bảng tích", "t = 0, 1, 2, 3...");
+            AddTable(dgv, productTable, "Bảng tích", "t = 0, 1, -1, 2, -2...");
             AddSectionBreak(dgv);
             AddRow(dgv, gaussIPolynomial, "Hệ số đa thức nội suy Gauss I");
+        }
+        private void DisplayGaussIIResults(DataGridView dgv, int n, double?[,] diffTable,
+    double[] coeffsVector, double[,] productTable, double[] gaussIPolynomial)
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, n + 1, "Ghi chú");
+
+            AddNullableTable(dgv, diffTable, "Bảng sai phân");
+            AddSectionBreak(dgv);
+            AddRow(dgv, coeffsVector, "Hệ số trích xuất (Δⁿf/n!)");
+            AddSectionBreak(dgv);
+            AddTable(dgv, productTable, "Bảng tích", "t = 0, -1, 1, -2, 2...");
+            AddSectionBreak(dgv);
+            AddRow(dgv, gaussIPolynomial, "Hệ số đa thức nội suy Gauss II");
+        }
+        private void DisplayMonotonicIntervalsResult(double y,
+            List<(int startIndex, int endIndex)> isolationIntervals,
+            List<(int startIndex, int endIndex, bool isIncreasing, double[] selectedX, double[] selectedY)> monotonicIntervals)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine($"TÌM KHOẢNG ĐƠN ĐIỆU CHỨA CÁC KHOẢNG CÁCH LY y = {y}");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
+
+            if (isolationIntervals.Count == 0)
+            {
+                sb.AppendLine($"Không tìm thấy khoảng nào chứa y = {y}");
+                sb.AppendLine($"Phạm vi dữ liệu: [{yValues.Min():F6}, {yValues.Max():F6}]");
+            }
+            else
+            {
+                sb.AppendLine($"Tìm thấy {isolationIntervals.Count} khoảng cách ly chứa y = {y}");
+                sb.AppendLine($"Tìm thấy {monotonicIntervals.Count} khoảng đơn điệu tương ứng\n");
+
+                for (int idx = 0; idx < monotonicIntervals.Count; idx++)
+                {
+                    var isolation = isolationIntervals[idx];
+                    var monotonic = monotonicIntervals[idx];
+
+                    sb.AppendLine("╔═══════════════════════════════════════════════════════════════╗");
+                    sb.AppendLine($"KHOẢNG {idx + 1}");
+                    sb.AppendLine("╠═══════════════════════════════════════════════════════════════╣");
+
+                    // Thông tin khoảng cách ly
+                    sb.AppendLine("KHOẢNG CÁCH LY:");
+                    sb.AppendLine($"f(x) ∈ [{yValues[isolation.startIndex]}, {yValues[isolation.endIndex]}]");
+                    sb.AppendLine($"x    ∈ [{xValues[isolation.startIndex]}, {xValues[isolation.endIndex]}]");
+                    sb.AppendLine("╠═══════════════════════════════════════════════════════════════╣");
+
+                    // Thông tin khoảng đơn điệu
+                    string monotonicType = monotonic.isIncreasing ? "TĂNG" : "GIẢM";
+                    sb.AppendLine($"KHOẢNG ĐƠN ĐIỆU ({monotonicType}):");
+                    sb.AppendLine($"f(x) ∈ [{monotonic.selectedY.Min()}, {monotonic.selectedY.Max()}]");
+                    sb.AppendLine($"x    ∈ [{monotonic.selectedX.Min()}, {monotonic.selectedX.Max()}]");
+                    sb.AppendLine($"Số điểm: {monotonic.selectedX.Length}");
+                    sb.AppendLine("╠═══════════════════════════════════════════════════════════════╣");
+                    sb.AppendLine("CÁC MỐC NỘI SUY:");
+                    sb.AppendLine("╠═══════════════════════════════════════════════════════════════╣");
+                    sb.AppendLine("           x                           f(x)                         ");
+                    sb.AppendLine("╠═══════════════════════════════════════════════════════════════╣");
+
+                    for (int i = 0; i < monotonic.selectedX.Length; i++)
+                    {
+                        sb.AppendLine(String.Format("  {0,18}      {1,18}       ",
+                            monotonic.selectedX[i], monotonic.selectedY[i]));
+                    }
+
+                    sb.AppendLine("╚═══════════════════════════════════════════════════════════════╝\n");
+                }
+            }
+            richTextBoxFindReversePoints.Clear();
+            richTextBoxFindReversePoints.AppendText(sb.ToString());
         }
         #endregion
 
@@ -1132,7 +1429,6 @@ namespace Interpolation
                     MessageBoxIcon.Warning);
             }
         }
-        #endregion
         private void SetupDataGridViewColumnTypes()
         {
             // Gauss I
@@ -1171,6 +1467,6 @@ namespace Interpolation
             if (dataXYGaussII.Columns.Contains("colsYGaussII"))
                 dataXYGaussII.Columns["colsYGaussII"].ValueType = typeof(double);
         }
-
+        #endregion
     }
 }

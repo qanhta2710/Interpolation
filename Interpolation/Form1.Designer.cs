@@ -114,6 +114,30 @@
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtboxPrecisionBessel = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.dataResultGaussI = new System.Windows.Forms.DataGridView();
+            this.dataXYGaussI = new System.Windows.Forms.DataGridView();
+            this.colsXGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnGaussIToEval = new System.Windows.Forms.Button();
+            this.lblResultGaussI = new System.Windows.Forms.Label();
+            this.btnSolveGaussI = new System.Windows.Forms.Button();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionGaussI = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.dataResultGaussII = new System.Windows.Forms.DataGridView();
+            this.dataXYGaussII = new System.Windows.Forms.DataGridView();
+            this.colsXGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnGaussIIToEval = new System.Windows.Forms.Button();
+            this.lblResultGaussII = new System.Windows.Forms.Label();
+            this.btnSolveGaussII = new System.Windows.Forms.Button();
+            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionGaussII = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.richTextBoxResult = new System.Windows.Forms.RichTextBox();
@@ -143,30 +167,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.richTextBoxInterPoints = new System.Windows.Forms.RichTextBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.dataResultGaussI = new System.Windows.Forms.DataGridView();
-            this.dataXYGaussI = new System.Windows.Forms.DataGridView();
-            this.colsXGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colsYGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnGaussIToEval = new System.Windows.Forms.Button();
-            this.lblResultGaussI = new System.Windows.Forms.Label();
-            this.btnSolveGaussI = new System.Windows.Forms.Button();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtBoxPrecisionGaussI = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnGaussIIToEval = new System.Windows.Forms.Button();
-            this.lblResultGaussII = new System.Windows.Forms.Label();
-            this.btnSolveGaussII = new System.Windows.Forms.Button();
-            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtBoxPrecisionGaussII = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.dataXYGaussII = new System.Windows.Forms.DataGridView();
-            this.dataResultGaussII = new System.Windows.Forms.DataGridView();
-            this.colsXGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colsYGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.richTextBoxFindReversePoints = new System.Windows.Forms.RichTextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOpenExcelReverse = new System.Windows.Forms.Button();
+            this.btnFindReversePoints = new System.Windows.Forms.Button();
+            this.txtBoxY = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -201,6 +209,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).BeginInit();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).BeginInit();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.flowLayoutPanel8.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -211,16 +229,9 @@
             this.tabPage8.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).BeginInit();
-            this.tableLayoutPanel11.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
-            this.tabPage10.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
-            this.flowLayoutPanel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).BeginInit();
+            this.tabPage11.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -440,6 +451,7 @@
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1213,6 +1225,292 @@
             this.label16.TabIndex = 1;
             this.label16.Text = "Số chữ số phần thập phân";
             // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.dataResultGaussI);
+            this.tabPage9.Controls.Add(this.dataXYGaussI);
+            this.tabPage9.Controls.Add(this.tableLayoutPanel11);
+            this.tabPage9.Location = new System.Drawing.Point(4, 25);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "Gauss I";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // dataResultGaussI
+            // 
+            this.dataResultGaussI.AllowUserToAddRows = false;
+            this.dataResultGaussI.AllowUserToDeleteRows = false;
+            this.dataResultGaussI.AllowUserToResizeColumns = false;
+            this.dataResultGaussI.AllowUserToResizeRows = false;
+            this.dataResultGaussI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultGaussI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataResultGaussI.Location = new System.Drawing.Point(251, 3);
+            this.dataResultGaussI.Name = "dataResultGaussI";
+            this.dataResultGaussI.ReadOnly = true;
+            this.dataResultGaussI.RowHeadersWidth = 51;
+            this.dataResultGaussI.RowTemplate.Height = 24;
+            this.dataResultGaussI.Size = new System.Drawing.Size(884, 540);
+            this.dataResultGaussI.TabIndex = 7;
+            // 
+            // dataXYGaussI
+            // 
+            this.dataXYGaussI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYGaussI.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXGaussI,
+            this.colsYGaussI});
+            this.dataXYGaussI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYGaussI.Location = new System.Drawing.Point(3, 3);
+            this.dataXYGaussI.Name = "dataXYGaussI";
+            this.dataXYGaussI.RowHeadersWidth = 51;
+            this.dataXYGaussI.RowTemplate.Height = 24;
+            this.dataXYGaussI.Size = new System.Drawing.Size(248, 540);
+            this.dataXYGaussI.TabIndex = 6;
+            // 
+            // colsXGaussI
+            // 
+            this.colsXGaussI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXGaussI.HeaderText = "X";
+            this.colsXGaussI.MinimumWidth = 6;
+            this.colsXGaussI.Name = "colsXGaussI";
+            // 
+            // colsYGaussI
+            // 
+            this.colsYGaussI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYGaussI.HeaderText = "Y";
+            this.colsYGaussI.MinimumWidth = 6;
+            this.colsYGaussI.Name = "colsYGaussI";
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel11.Controls.Add(this.btnGaussIToEval, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.lblResultGaussI, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.btnSolveGaussI, 1, 1);
+            this.tableLayoutPanel11.Controls.Add(this.flowLayoutPanel7, 0, 1);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel11.TabIndex = 5;
+            // 
+            // btnGaussIToEval
+            // 
+            this.btnGaussIToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGaussIToEval.AutoSize = true;
+            this.btnGaussIToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGaussIToEval.Location = new System.Drawing.Point(39, 8);
+            this.btnGaussIToEval.Name = "btnGaussIToEval";
+            this.btnGaussIToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnGaussIToEval.TabIndex = 5;
+            this.btnGaussIToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnGaussIToEval.UseVisualStyleBackColor = true;
+            this.btnGaussIToEval.Visible = false;
+            this.btnGaussIToEval.Click += new System.EventHandler(this.btnGaussIToEval_Click);
+            // 
+            // lblResultGaussI
+            // 
+            this.lblResultGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultGaussI.AutoSize = true;
+            this.lblResultGaussI.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultGaussI.Location = new System.Drawing.Point(686, 14);
+            this.lblResultGaussI.Name = "lblResultGaussI";
+            this.lblResultGaussI.Size = new System.Drawing.Size(70, 22);
+            this.lblResultGaussI.TabIndex = 0;
+            this.lblResultGaussI.Text = "label2";
+            this.lblResultGaussI.Visible = false;
+            // 
+            // btnSolveGaussI
+            // 
+            this.btnSolveGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveGaussI.AutoSize = true;
+            this.btnSolveGaussI.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveGaussI.Location = new System.Drawing.Point(632, 57);
+            this.btnSolveGaussI.Name = "btnSolveGaussI";
+            this.btnSolveGaussI.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveGaussI.TabIndex = 1;
+            this.btnSolveGaussI.Text = "Tìm đa thức nội suy";
+            this.btnSolveGaussI.UseVisualStyleBackColor = true;
+            this.btnSolveGaussI.Click += new System.EventHandler(this.btnSolveGaussI_Click);
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.txtBoxPrecisionGaussI);
+            this.flowLayoutPanel7.Controls.Add(this.label19);
+            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(305, 44);
+            this.flowLayoutPanel7.TabIndex = 2;
+            // 
+            // txtBoxPrecisionGaussI
+            // 
+            this.txtBoxPrecisionGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionGaussI.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionGaussI.Name = "txtBoxPrecisionGaussI";
+            this.txtBoxPrecisionGaussI.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionGaussI.TabIndex = 0;
+            this.txtBoxPrecisionGaussI.Text = "15";
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(109, 6);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(161, 16);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Số chữ số phần thập phân";
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.dataResultGaussII);
+            this.tabPage10.Controls.Add(this.dataXYGaussII);
+            this.tabPage10.Controls.Add(this.tableLayoutPanel12);
+            this.tabPage10.Location = new System.Drawing.Point(4, 25);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage10.TabIndex = 9;
+            this.tabPage10.Text = "Gauss II";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // dataResultGaussII
+            // 
+            this.dataResultGaussII.AllowUserToAddRows = false;
+            this.dataResultGaussII.AllowUserToDeleteRows = false;
+            this.dataResultGaussII.AllowUserToResizeColumns = false;
+            this.dataResultGaussII.AllowUserToResizeRows = false;
+            this.dataResultGaussII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataResultGaussII.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataResultGaussII.Location = new System.Drawing.Point(251, 3);
+            this.dataResultGaussII.Name = "dataResultGaussII";
+            this.dataResultGaussII.ReadOnly = true;
+            this.dataResultGaussII.RowHeadersWidth = 51;
+            this.dataResultGaussII.RowTemplate.Height = 24;
+            this.dataResultGaussII.Size = new System.Drawing.Size(884, 540);
+            this.dataResultGaussII.TabIndex = 8;
+            // 
+            // dataXYGaussII
+            // 
+            this.dataXYGaussII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYGaussII.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXGaussII,
+            this.colsYGaussII});
+            this.dataXYGaussII.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYGaussII.Location = new System.Drawing.Point(3, 3);
+            this.dataXYGaussII.Name = "dataXYGaussII";
+            this.dataXYGaussII.RowHeadersWidth = 51;
+            this.dataXYGaussII.RowTemplate.Height = 24;
+            this.dataXYGaussII.Size = new System.Drawing.Size(248, 540);
+            this.dataXYGaussII.TabIndex = 7;
+            // 
+            // colsXGaussII
+            // 
+            this.colsXGaussII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXGaussII.HeaderText = "X";
+            this.colsXGaussII.MinimumWidth = 6;
+            this.colsXGaussII.Name = "colsXGaussII";
+            // 
+            // colsYGaussII
+            // 
+            this.colsYGaussII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYGaussII.HeaderText = "Y";
+            this.colsYGaussII.MinimumWidth = 6;
+            this.colsYGaussII.Name = "colsYGaussII";
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 2;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel12.Controls.Add(this.btnGaussIIToEval, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.lblResultGaussII, 1, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnSolveGaussII, 1, 1);
+            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel8, 0, 1);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 2;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel12.TabIndex = 6;
+            // 
+            // btnGaussIIToEval
+            // 
+            this.btnGaussIIToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGaussIIToEval.AutoSize = true;
+            this.btnGaussIIToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGaussIIToEval.Location = new System.Drawing.Point(39, 8);
+            this.btnGaussIIToEval.Name = "btnGaussIIToEval";
+            this.btnGaussIIToEval.Size = new System.Drawing.Size(232, 33);
+            this.btnGaussIIToEval.TabIndex = 5;
+            this.btnGaussIIToEval.Text = "Chuyển hệ số để tính giá trị";
+            this.btnGaussIIToEval.UseVisualStyleBackColor = true;
+            this.btnGaussIIToEval.Visible = false;
+            this.btnGaussIIToEval.Click += new System.EventHandler(this.btnGaussIIToEval_Click);
+            // 
+            // lblResultGaussII
+            // 
+            this.lblResultGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultGaussII.AutoSize = true;
+            this.lblResultGaussII.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultGaussII.Location = new System.Drawing.Point(686, 14);
+            this.lblResultGaussII.Name = "lblResultGaussII";
+            this.lblResultGaussII.Size = new System.Drawing.Size(70, 22);
+            this.lblResultGaussII.TabIndex = 0;
+            this.lblResultGaussII.Text = "label2";
+            this.lblResultGaussII.Visible = false;
+            // 
+            // btnSolveGaussII
+            // 
+            this.btnSolveGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveGaussII.AutoSize = true;
+            this.btnSolveGaussII.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveGaussII.Location = new System.Drawing.Point(632, 57);
+            this.btnSolveGaussII.Name = "btnSolveGaussII";
+            this.btnSolveGaussII.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveGaussII.TabIndex = 1;
+            this.btnSolveGaussII.Text = "Tìm đa thức nội suy";
+            this.btnSolveGaussII.UseVisualStyleBackColor = true;
+            this.btnSolveGaussII.Click += new System.EventHandler(this.btnSolveGaussII_Click);
+            // 
+            // flowLayoutPanel8
+            // 
+            this.flowLayoutPanel8.Controls.Add(this.txtBoxPrecisionGaussII);
+            this.flowLayoutPanel8.Controls.Add(this.label20);
+            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(305, 44);
+            this.flowLayoutPanel8.TabIndex = 2;
+            // 
+            // txtBoxPrecisionGaussII
+            // 
+            this.txtBoxPrecisionGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionGaussII.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionGaussII.Name = "txtBoxPrecisionGaussII";
+            this.txtBoxPrecisionGaussII.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionGaussII.TabIndex = 0;
+            this.txtBoxPrecisionGaussII.Text = "15";
+            // 
+            // label20
+            // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(109, 6);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(161, 16);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "Số chữ số phần thập phân";
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.tableLayoutPanel6);
@@ -1334,11 +1632,11 @@
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Right;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(796, 0);
+            this.label11.Location = new System.Drawing.Point(861, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(170, 17);
+            this.label11.Size = new System.Drawing.Size(105, 17);
             this.label11.TabIndex = 7;
-            this.label11.Text = "Đây chỉ là BẢNG THƯƠNG";
+            this.label11.Text = "BẢNG THƯƠNG";
             // 
             // label9
             // 
@@ -1550,291 +1848,100 @@
             this.richTextBoxInterPoints.TabIndex = 3;
             this.richTextBoxInterPoints.Text = "";
             // 
-            // tabPage9
+            // tabPage11
             // 
-            this.tabPage9.Controls.Add(this.dataResultGaussI);
-            this.tabPage9.Controls.Add(this.dataXYGaussI);
-            this.tabPage9.Controls.Add(this.tableLayoutPanel11);
-            this.tabPage9.Location = new System.Drawing.Point(4, 25);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage9.TabIndex = 8;
-            this.tabPage9.Text = "Gauss I";
-            this.tabPage9.UseVisualStyleBackColor = true;
+            this.tabPage11.Controls.Add(this.richTextBoxFindReversePoints);
+            this.tabPage11.Controls.Add(this.panel6);
+            this.tabPage11.Location = new System.Drawing.Point(4, 25);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage11.TabIndex = 10;
+            this.tabPage11.Text = "Tìm mốc nội suy ngược";
+            this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // dataResultGaussI
+            // richTextBoxFindReversePoints
             // 
-            this.dataResultGaussI.AllowUserToAddRows = false;
-            this.dataResultGaussI.AllowUserToDeleteRows = false;
-            this.dataResultGaussI.AllowUserToResizeColumns = false;
-            this.dataResultGaussI.AllowUserToResizeRows = false;
-            this.dataResultGaussI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataResultGaussI.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataResultGaussI.Location = new System.Drawing.Point(251, 3);
-            this.dataResultGaussI.Name = "dataResultGaussI";
-            this.dataResultGaussI.ReadOnly = true;
-            this.dataResultGaussI.RowHeadersWidth = 51;
-            this.dataResultGaussI.RowTemplate.Height = 24;
-            this.dataResultGaussI.Size = new System.Drawing.Size(884, 540);
-            this.dataResultGaussI.TabIndex = 7;
+            this.richTextBoxFindReversePoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxFindReversePoints.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxFindReversePoints.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxFindReversePoints.Name = "richTextBoxFindReversePoints";
+            this.richTextBoxFindReversePoints.Size = new System.Drawing.Size(1132, 471);
+            this.richTextBoxFindReversePoints.TabIndex = 7;
+            this.richTextBoxFindReversePoints.Text = "";
             // 
-            // dataXYGaussI
+            // panel6
             // 
-            this.dataXYGaussI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYGaussI.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colsXGaussI,
-            this.colsYGaussI});
-            this.dataXYGaussI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataXYGaussI.Location = new System.Drawing.Point(3, 3);
-            this.dataXYGaussI.Name = "dataXYGaussI";
-            this.dataXYGaussI.RowHeadersWidth = 51;
-            this.dataXYGaussI.RowTemplate.Height = 24;
-            this.dataXYGaussI.Size = new System.Drawing.Size(248, 540);
-            this.dataXYGaussI.TabIndex = 6;
+            this.panel6.Controls.Add(this.tableLayoutPanel13);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(3, 474);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1132, 169);
+            this.panel6.TabIndex = 0;
             // 
-            // colsXGaussI
+            // tableLayoutPanel13
             // 
-            this.colsXGaussI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsXGaussI.HeaderText = "X";
-            this.colsXGaussI.MinimumWidth = 6;
-            this.colsXGaussI.Name = "colsXGaussI";
+            this.tableLayoutPanel13.ColumnCount = 3;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 362F));
+            this.tableLayoutPanel13.Controls.Add(this.btnOpenExcelReverse, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.btnFindReversePoints, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.txtBoxY, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label18, 1, 0);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 2;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(1132, 169);
+            this.tableLayoutPanel13.TabIndex = 1;
             // 
-            // colsYGaussI
+            // btnOpenExcelReverse
             // 
-            this.colsYGaussI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsYGaussI.HeaderText = "Y";
-            this.colsYGaussI.MinimumWidth = 6;
-            this.colsYGaussI.Name = "colsYGaussI";
+            this.btnOpenExcelReverse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelReverse.AutoSize = true;
+            this.btnOpenExcelReverse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelReverse.Location = new System.Drawing.Point(132, 27);
+            this.btnOpenExcelReverse.Name = "btnOpenExcelReverse";
+            this.btnOpenExcelReverse.Size = new System.Drawing.Size(120, 30);
+            this.btnOpenExcelReverse.TabIndex = 2;
+            this.btnOpenExcelReverse.Text = "Nhập File Excel";
+            this.btnOpenExcelReverse.UseVisualStyleBackColor = true;
+            this.btnOpenExcelReverse.Click += new System.EventHandler(this.btnOpenExcelReverse_Click);
             // 
-            // tableLayoutPanel11
+            // btnFindReversePoints
             // 
-            this.tableLayoutPanel11.ColumnCount = 2;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
-            this.tableLayoutPanel11.Controls.Add(this.btnGaussIToEval, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.lblResultGaussI, 1, 0);
-            this.tableLayoutPanel11.Controls.Add(this.btnSolveGaussI, 1, 1);
-            this.tableLayoutPanel11.Controls.Add(this.flowLayoutPanel7, 0, 1);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 543);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(1132, 100);
-            this.tableLayoutPanel11.TabIndex = 5;
+            this.btnFindReversePoints.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnFindReversePoints.AutoSize = true;
+            this.btnFindReversePoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindReversePoints.Location = new System.Drawing.Point(114, 112);
+            this.btnFindReversePoints.Name = "btnFindReversePoints";
+            this.btnFindReversePoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnFindReversePoints.Size = new System.Drawing.Size(156, 28);
+            this.btnFindReversePoints.TabIndex = 3;
+            this.btnFindReversePoints.Text = "Tìm các mốc nội suy";
+            this.btnFindReversePoints.UseVisualStyleBackColor = true;
+            this.btnFindReversePoints.Click += new System.EventHandler(this.btnFindReversePoints_Click);
             // 
-            // btnGaussIToEval
+            // txtBoxY
             // 
-            this.btnGaussIToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnGaussIToEval.AutoSize = true;
-            this.btnGaussIToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGaussIToEval.Location = new System.Drawing.Point(39, 8);
-            this.btnGaussIToEval.Name = "btnGaussIToEval";
-            this.btnGaussIToEval.Size = new System.Drawing.Size(232, 33);
-            this.btnGaussIToEval.TabIndex = 5;
-            this.btnGaussIToEval.Text = "Chuyển hệ số để tính giá trị";
-            this.btnGaussIToEval.UseVisualStyleBackColor = true;
-            this.btnGaussIToEval.Visible = false;
-            this.btnGaussIToEval.Click += new System.EventHandler(this.btnGaussIToEval_Click);
+            this.txtBoxY.Location = new System.Drawing.Point(388, 87);
+            this.txtBoxY.Name = "txtBoxY";
+            this.txtBoxY.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxY.TabIndex = 4;
             // 
-            // lblResultGaussI
+            // label18
             // 
-            this.lblResultGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResultGaussI.AutoSize = true;
-            this.lblResultGaussI.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultGaussI.Location = new System.Drawing.Point(686, 14);
-            this.lblResultGaussI.Name = "lblResultGaussI";
-            this.lblResultGaussI.Size = new System.Drawing.Size(70, 22);
-            this.lblResultGaussI.TabIndex = 0;
-            this.lblResultGaussI.Text = "label2";
-            this.lblResultGaussI.Visible = false;
-            // 
-            // btnSolveGaussI
-            // 
-            this.btnSolveGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveGaussI.AutoSize = true;
-            this.btnSolveGaussI.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveGaussI.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveGaussI.Name = "btnSolveGaussI";
-            this.btnSolveGaussI.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveGaussI.TabIndex = 1;
-            this.btnSolveGaussI.Text = "Tìm đa thức nội suy";
-            this.btnSolveGaussI.UseVisualStyleBackColor = true;
-            this.btnSolveGaussI.Click += new System.EventHandler(this.btnSolveGaussI_Click);
-            // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Controls.Add(this.txtBoxPrecisionGaussI);
-            this.flowLayoutPanel7.Controls.Add(this.label19);
-            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 53);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(305, 44);
-            this.flowLayoutPanel7.TabIndex = 2;
-            // 
-            // txtBoxPrecisionGaussI
-            // 
-            this.txtBoxPrecisionGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBoxPrecisionGaussI.Location = new System.Drawing.Point(3, 3);
-            this.txtBoxPrecisionGaussI.Name = "txtBoxPrecisionGaussI";
-            this.txtBoxPrecisionGaussI.Size = new System.Drawing.Size(100, 22);
-            this.txtBoxPrecisionGaussI.TabIndex = 0;
-            this.txtBoxPrecisionGaussI.Text = "15";
-            // 
-            // label19
-            // 
-            this.label19.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(109, 6);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(161, 16);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Số chữ số phần thập phân";
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.Controls.Add(this.dataResultGaussII);
-            this.tabPage10.Controls.Add(this.dataXYGaussII);
-            this.tabPage10.Controls.Add(this.tableLayoutPanel12);
-            this.tabPage10.Location = new System.Drawing.Point(4, 25);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage10.TabIndex = 9;
-            this.tabPage10.Text = "Gauss II";
-            this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.ColumnCount = 2;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
-            this.tableLayoutPanel12.Controls.Add(this.btnGaussIIToEval, 0, 0);
-            this.tableLayoutPanel12.Controls.Add(this.lblResultGaussII, 1, 0);
-            this.tableLayoutPanel12.Controls.Add(this.btnSolveGaussII, 1, 1);
-            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel8, 0, 1);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 543);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 2;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(1132, 100);
-            this.tableLayoutPanel12.TabIndex = 6;
-            // 
-            // btnGaussIIToEval
-            // 
-            this.btnGaussIIToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnGaussIIToEval.AutoSize = true;
-            this.btnGaussIIToEval.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGaussIIToEval.Location = new System.Drawing.Point(39, 8);
-            this.btnGaussIIToEval.Name = "btnGaussIIToEval";
-            this.btnGaussIIToEval.Size = new System.Drawing.Size(232, 33);
-            this.btnGaussIIToEval.TabIndex = 5;
-            this.btnGaussIIToEval.Text = "Chuyển hệ số để tính giá trị";
-            this.btnGaussIIToEval.UseVisualStyleBackColor = true;
-            this.btnGaussIIToEval.Visible = false;
-            this.btnGaussIIToEval.Click += new System.EventHandler(this.btnGaussIIToEval_Click);
-            // 
-            // lblResultGaussII
-            // 
-            this.lblResultGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResultGaussII.AutoSize = true;
-            this.lblResultGaussII.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultGaussII.Location = new System.Drawing.Point(686, 14);
-            this.lblResultGaussII.Name = "lblResultGaussII";
-            this.lblResultGaussII.Size = new System.Drawing.Size(70, 22);
-            this.lblResultGaussII.TabIndex = 0;
-            this.lblResultGaussII.Text = "label2";
-            this.lblResultGaussII.Visible = false;
-            // 
-            // btnSolveGaussII
-            // 
-            this.btnSolveGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveGaussII.AutoSize = true;
-            this.btnSolveGaussII.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveGaussII.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveGaussII.Name = "btnSolveGaussII";
-            this.btnSolveGaussII.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveGaussII.TabIndex = 1;
-            this.btnSolveGaussII.Text = "Tìm đa thức nội suy";
-            this.btnSolveGaussII.UseVisualStyleBackColor = true;
-            this.btnSolveGaussII.Click += new System.EventHandler(this.btnSolveGaussII_Click);
-            // 
-            // flowLayoutPanel8
-            // 
-            this.flowLayoutPanel8.Controls.Add(this.txtBoxPrecisionGaussII);
-            this.flowLayoutPanel8.Controls.Add(this.label20);
-            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(3, 53);
-            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(305, 44);
-            this.flowLayoutPanel8.TabIndex = 2;
-            // 
-            // txtBoxPrecisionGaussII
-            // 
-            this.txtBoxPrecisionGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBoxPrecisionGaussII.Location = new System.Drawing.Point(3, 3);
-            this.txtBoxPrecisionGaussII.Name = "txtBoxPrecisionGaussII";
-            this.txtBoxPrecisionGaussII.Size = new System.Drawing.Size(100, 22);
-            this.txtBoxPrecisionGaussII.TabIndex = 0;
-            this.txtBoxPrecisionGaussII.Text = "15";
-            // 
-            // label20
-            // 
-            this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(109, 6);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(161, 16);
-            this.label20.TabIndex = 1;
-            this.label20.Text = "Số chữ số phần thập phân";
-            // 
-            // dataXYGaussII
-            // 
-            this.dataXYGaussII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYGaussII.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colsXGaussII,
-            this.colsYGaussII});
-            this.dataXYGaussII.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataXYGaussII.Location = new System.Drawing.Point(3, 3);
-            this.dataXYGaussII.Name = "dataXYGaussII";
-            this.dataXYGaussII.RowHeadersWidth = 51;
-            this.dataXYGaussII.RowTemplate.Height = 24;
-            this.dataXYGaussII.Size = new System.Drawing.Size(248, 540);
-            this.dataXYGaussII.TabIndex = 7;
-            // 
-            // dataResultGaussII
-            // 
-            this.dataResultGaussII.AllowUserToAddRows = false;
-            this.dataResultGaussII.AllowUserToDeleteRows = false;
-            this.dataResultGaussII.AllowUserToResizeColumns = false;
-            this.dataResultGaussII.AllowUserToResizeRows = false;
-            this.dataResultGaussII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataResultGaussII.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataResultGaussII.Location = new System.Drawing.Point(251, 3);
-            this.dataResultGaussII.Name = "dataResultGaussII";
-            this.dataResultGaussII.ReadOnly = true;
-            this.dataResultGaussII.RowHeadersWidth = 51;
-            this.dataResultGaussII.RowTemplate.Height = 24;
-            this.dataResultGaussII.Size = new System.Drawing.Size(884, 540);
-            this.dataResultGaussII.TabIndex = 8;
-            // 
-            // colsXGaussII
-            // 
-            this.colsXGaussII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsXGaussII.HeaderText = "X";
-            this.colsXGaussII.MinimumWidth = 6;
-            this.colsXGaussII.Name = "colsXGaussII";
-            // 
-            // colsYGaussII
-            // 
-            this.colsYGaussII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsYGaussII.HeaderText = "Y";
-            this.colsYGaussII.MinimumWidth = 6;
-            this.colsYGaussII.Name = "colsYGaussII";
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(388, 66);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(95, 18);
+            this.label18.TabIndex = 6;
+            this.label18.Text = "Nhập giá trị Y";
             // 
             // Form1
             // 
@@ -1894,6 +2001,20 @@
             this.tableLayoutPanel10.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).EndInit();
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
+            this.tabPage10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).EndInit();
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
+            this.flowLayoutPanel8.ResumeLayout(false);
+            this.flowLayoutPanel8.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
@@ -1906,20 +2027,10 @@
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tabPage9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).EndInit();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel11.PerformLayout();
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
-            this.tabPage10.ResumeLayout(false);
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel12.PerformLayout();
-            this.flowLayoutPanel8.ResumeLayout(false);
-            this.flowLayoutPanel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).EndInit();
+            this.tabPage11.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2063,6 +2174,14 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsXGaussII;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsYGaussII;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.RichTextBox richTextBoxFindReversePoints;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.Button btnOpenExcelReverse;
+        private System.Windows.Forms.Button btnFindReversePoints;
+        private System.Windows.Forms.TextBox txtBoxY;
+        private System.Windows.Forms.Label label18;
     }
 }
 
