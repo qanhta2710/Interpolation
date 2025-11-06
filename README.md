@@ -40,7 +40,11 @@
 ## Contributors
 - Cảm ơn bác [TontonYuta](https://github.com/TontonYuta) đã giúp em tạo ý tưởng thực hiện tạo App này.
 
-## Donate
-- Nếu mọi người muốn ủng hộ dự án có thể donate qua STK sau **190127102005 Ngân hàng MB Bank**
-![QR](./images/MB.jpg)
-![QR2](./images/momo.jpg)
+## 💖 Donate
+
+Nếu mọi người muốn ủng hộ dự án có thể donate qua STK **190127102005 (Ngân hàng MB Bank)** hoặc qua **MoMo**.
+
+<p align="center">
+  <img src="./images/MB.jpg" alt="QR MB Bank" width="220" style="border-radius:10px; margin:10px;"/>
+  <img src="./images/momo.jpg" alt="QR MoMo" width="220" style="border-radius:10px; margin:10px;"/>
+</p>
