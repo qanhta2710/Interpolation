@@ -3,6 +3,7 @@
 ## Mục đích:
 - Thực hiện gần hết các chức năng cần thiết trong chương nội suy môn phương pháp số
 - Giúp đỡ mọi người qua học phần Phương pháp số
+- Source code hoàn toàn được public nên mọi người có thể dựa vào đó để viết lại thuật toán 
 
 ## Tính năng:
 - Hiển thị đầy đủ quá trình tìm đa thức nội suy và sử dụng lược đồ Horner để nhân chia đa thức ...
@@ -10,9 +11,6 @@
 - Nếu có góp ý sửa lỗi hãy tạo Issues mới hoặc nếu có ý tưởng cải tiến hãy tạo Pull requests
 
 ## WIP
-- Thêm giao diện cảnh báo + lưu ý 
-- Có thể sẽ sửa lại cấu trúc của 2 nội suy trung tâm (?) -- **Hiện tại đang có khá nhiều code thừa chưa tối ưu của 2 phương pháp này do làm vội**
-- Thêm chức năng nhập dữ liệu từ file Excel (?)
 - ...
 
 ## Hướng dẫn sử dụng (?)
@@ -29,6 +27,8 @@
 - Giá trị in đậm trong bảng thương **CHƯA PHẢI** là giá trị cuối cùng của đạo hàm cấp k của P(x = c) người dùng cần phải lấy kết quả in đậm đó nhân với k! (k là đạo hàm cấp cần tính) để ra kết quả cuối cùng
 - Giá trị ở màn hình thông báo là giá trị cuối cùng cần tìm
 
+**Ảnh minh hoạ đã cũ, hãy tự trải nghiệm ứng dụng để hiểu tính năng mới**
+
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 - Khi nhập lưu ý dùng dấu **.** để biểu diễn phần thập phân
@@ -39,3 +39,8 @@
 
 ## Contributors
 - Cảm ơn bác [TontonYuta](https://github.com/TontonYuta) đã giúp em tạo ý tưởng thực hiện tạo App này.
+
+## Donate
+- Nếu mọi người muốn ủng hộ dự án có thể donate qua STK sau **190127102005 Ngân hàng MB Bank**
+![QR](./images/MB.jpg)
+![QR2](./images/momo.jpg)
