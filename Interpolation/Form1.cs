@@ -349,7 +349,31 @@ namespace Interpolation
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}");
-                throw;
+            }
+        }
+        private void btnSolveIteration_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridViewXYIteration.Sort(dataGridViewXYIteration.Columns["colsXIteration"], System.ComponentModel.ListSortDirection.Ascending);
+                RemoveDuplicate(dataGridViewXYIteration);
+
+                double[] x = GetXValues(dataGridViewXYIteration);
+                double[] y = GetYValues(dataGridViewXYIteration);
+                double yTarget = Convert.ToDouble(txtBoxYAvg.Text);
+                int precision = Convert.ToInt32(txtBoxPrecisionIteration.Text);
+
+                double result = SolveIterationForward(x, y, yTarget, precision, out double?[,] diffTable, out var iterationSteps);
+
+                DisplayIterationResults(dataGridViewIteration, richTextBoxIterationResult, diffTable, iterationSteps,
+            x, y, yTarget, result, precision);
+
+                lblResultIteration.Text = $"{result}";
+                lblResultIteration.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
             }
         }
         private void btnLagrangeToEval_Click(object sender, EventArgs e)
@@ -802,7 +826,6 @@ namespace Interpolation
 
             return (xs, selectedX, selectedY);
         }
-        // Gauss I
         private double[] SolveGaussI(double[] x, double[] y, int precision,
     out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs)
         {
@@ -841,7 +864,6 @@ namespace Interpolation
             prodTable = Horner.ProductTable(tPattern, precision);
             return Function.FindPolynomial(vectorCoeffs, prodTable, precision);
         }
-        // Gauss II
         private double[] SolveGaussII(double[] x, double[] y, int precision,
     out double?[,] diffTable, out double[,] prodTable, out double[] vectorCoeffs)
         {
@@ -1023,7 +1045,61 @@ namespace Interpolation
                     MessageBoxIcon.Error);
             }
         }
-        #endregion
+        private double SolveIterationForward(double[] x, double[] y, double yTarget, int precision,
+     out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, double sum, double error, List<(int r, double deltaR, double factorial, double prod, double term)> details)> iterationSteps)
+        {
+            diffTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
+            iterationSteps = new List<(int, double, double, double, double, List<(int, double, double, double, double)>)>();
+            double h = Math.Round(x[1] - x[0], precision);
+            double y0 = y[0];
+
+            // Sai phân bậc 1
+            double delta1 = diffTable[1, 2] ?? 0.0;
+
+            // Giá trị khởi tạo t_0
+            double t_prev, t_n = Math.Round((yTarget - y0) / delta1, precision);
+            double epsilon = 1e-8;
+            int maxIterations = 100;
+            int iteration = 0;
+
+            iterationSteps.Add((0, 0, t_n, 0, 0, new List<(int, double, double, double, double)>()));
+
+            do
+            {
+                t_prev = t_n;
+                double sum = 0.0;
+                var stepDetails = new List<(int r, double deltaR, double factorial, double prod, double term)>();
+
+                for (int r = 2; r < x.Length; r++)
+                {
+                    double deltaR = diffTable[r, r + 1] ?? 0.0;
+                    double factorial = Function.Factorial(r);
+
+                    double prod = 1.0;
+                    for (int i = 0; i < r; i++)
+                    {
+                        prod *= (t_prev - i);
+                    }
+                    double term = Math.Round((deltaR / factorial) * prod, precision);
+                    sum += term;
+
+                    stepDetails.Add((r, deltaR, factorial, prod, term));
+                }
+
+                t_n = Math.Round(((yTarget - y0) / delta1) - (sum / delta1), precision);
+                double error = Math.Abs(t_n - t_prev);
+
+                iterationSteps.Add((iteration + 1, t_prev, t_n, sum, error, stepDetails));
+
+                iteration++;
+
+                if (iteration > maxIterations) break;
+            } while (Math.Abs(t_n - t_prev) >= epsilon);
+
+            double res = x[0] + h * t_n; 
+            return res;
+        }
+        #endregion 
 
         #region UI
         private void DisplayLagrangeResults(DataGridView dgv, int n, double[] coeffsD, double[,] productTable, double[,] divideTable, double[] lagrangePolynomial, double[,] arrMatrix) // n là số nút nội suy
@@ -1234,10 +1310,96 @@ namespace Interpolation
                     }
 
                     sb.AppendLine("╚═══════════════════════════════════════════════════════════════╝\n");
+                    sb.AppendLine("- Nếu sử dụng phương pháp hàm ngược để tìm đa thức nội suy thì nhập file Excel đã xuất vào chức năng tìm mốc nội suy cách đều để chọn ra các điểm nội suy sao cho khoảng cách ly nằm giữa khoảng đơn điệu");
+                    sb.AppendLine("-Nếu sử dụng phương pháp lặp để tìm đa thức nội suy, hãy tự chọn ra các mốc sao cho khoảng cách ly nằm ở đầu (Nếu sử dụng Newton tiến) hoặc khoảng cách ly nằm ở cuối (Nếu sử dụng Newton lùi)");
                 }
             }
             richTextBoxFindReversePoints.Clear();
             richTextBoxFindReversePoints.AppendText(sb.ToString());
+        }
+        private void DisplayIterationResults(DataGridView dgv, RichTextBox rtb, double?[,] diffTable,
+            List<(int iteration, double t_prev, double t_n, double sum, double error, List<(int r, double deltaR, double factorial, double prod, double term)> details)> iterationSteps,
+            double[] x, double[] y, double yTarget, double result, int precision)
+        {
+            // Hiển thị bảng tỷ sai phân
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, diffTable.GetLength(1), "Ghi chú");
+            AddNullableTable(dgv, diffTable, "Bảng tỷ sai phân");
+
+            // Hiển thị quá trình lặp
+            rtb.Clear();
+
+            double h = x[1] - x[0];
+            double y0 = y[0];
+            double delta1 = diffTable[1, 2] ?? 0.0;
+
+            var sb = new StringBuilder();
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("QUÁ TRÌNH LẶP");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
+            sb.AppendLine("Dữ liệu ban đầu:");
+            sb.AppendLine($"  h = {h}");
+            sb.AppendLine($"  y₀ = {y0}");
+            sb.AppendLine($"  y_target = {yTarget}");
+            sb.AppendLine($"  Δy₀ = {delta1}");
+            sb.AppendLine($"  epsilon = 1e-8");
+            sb.AppendLine($"  Max iterations = 100\n");
+
+            foreach (var step in iterationSteps)
+            {
+                if (step.iteration == 0)
+                {
+                    sb.AppendLine("KHỞI TẠO:");
+                    sb.AppendLine("───────────────────────────────────────────────────────────────");
+                    sb.AppendLine($"t₀ = (y_target - y₀) / Δy₀ = ({yTarget} - {y0}) / {delta1} = {step.t_n}\n");
+                }
+                else
+                {
+                    sb.Append($"t_{step.iteration} = φ(t_{step.iteration - 1}) = {(yTarget - y0) / delta1}");
+
+                    if (step.details.Count > 0)
+                    {
+                        sb.Append($" - (1/{delta1}) × [");
+
+                        var terms = new List<string>();
+                        foreach (var detail in step.details)
+                        {
+                            var prodTerms = new List<string>();
+                            for (int i = 0; i < detail.r; i++)
+                            {
+                                prodTerms.Add($"({step.t_prev} - {i})");
+                            }
+
+                            string termStr = $"({detail.deltaR}/{detail.factorial}) × {string.Join(" × ", prodTerms)}";
+                            terms.Add(termStr);
+                        }
+
+                        sb.Append(string.Join(" + ", terms));
+                        sb.Append("]");
+                    }
+
+                    sb.AppendLine($" = {step.t_n}");
+                    sb.AppendLine($"  → Sai số = |t_{step.iteration} - t_{step.iteration - 1}| = {step.error}\n");
+                }
+            }
+
+            var lastStep = iterationSteps[iterationSteps.Count - 1];
+            if (lastStep.iteration >= 100)
+            {
+                sb.AppendLine("⚠ Đã đạt số vòng lặp tối đa: 100\n");
+            }
+
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("KẾT QUẢ CUỐI CÙNG:");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine($"Số vòng lặp: {lastStep.iteration}");
+            sb.AppendLine($"t_final = {lastStep.t_n}");
+            sb.AppendLine($"\nTính giá trị x:");
+            sb.AppendLine($"x = x₀ + h × t_n = {x[0]} + {h} × {lastStep.t_n} = {result}");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+
+            rtb.AppendText(sb.ToString());
         }
         #endregion
 
@@ -1466,7 +1628,13 @@ namespace Interpolation
                 dataXYGaussII.Columns["colsXGaussII"].ValueType = typeof(double);
             if (dataXYGaussII.Columns.Contains("colsYGaussII"))
                 dataXYGaussII.Columns["colsYGaussII"].ValueType = typeof(double);
+
+            if (dataGridViewXYIteration.Columns.Contains("colsXIteration"))
+                dataGridViewXYIteration.Columns["colsXIteration"].ValueType = typeof(double);
+            if (dataGridViewXYIteration.Columns.Contains("colsYIteration"))
+                dataGridViewXYIteration.Columns["colsYIteration"].ValueType = typeof(double);
         }
         #endregion
+
     }
 }
