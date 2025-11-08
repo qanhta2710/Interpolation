@@ -18,7 +18,6 @@
 ## Hướng dẫn sử dụng 
 
 [Video hướng dẫn](https://youtu.be/W5qSPlaAW-c)
-**Ảnh minh hoạ đã cũ, sẽ có Vid hướng dẫn thao tác**
 
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
