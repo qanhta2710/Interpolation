@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Interpolation
 {
@@ -27,6 +26,7 @@ namespace Interpolation
         {
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
             comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
+            comboBoxLeastSquares.SelectedIndex = 0; // Lựa chọn mặc định phương pháp bình phương tối thiểu tuyến tính
             SetupDataGridViewColumnTypes();
         }
         #region Event Handlers
@@ -79,6 +79,42 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        private void btnOpenExcelLagrange_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYLagrange.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYLagrange.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
 
         // Tìm đa thức nội suy bằng Newton
         private void btnSolveNewton_Click(object sender, EventArgs e)
@@ -128,6 +164,43 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        private void btnOpenExcelNewton_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYNewton.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYNewton.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Tìm đa thức nội suy Newton mốc cách đều
         private void btnSolveNewtonFinite_Click(object sender, EventArgs e)
         {
             try
@@ -173,7 +246,43 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
-        // Tính giá trị đa thức và các đạo hàm tại điểm c bằng phương pháp Horner
+        private void btnOpenExcelNewtonFinite_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataGridViewXYNewtonFinite.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataGridViewXYNewtonFinite.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Tính giá trị đa thức và các đạo hàm tại 1 điểm bằng phương pháp Horner
         private void btnEval_Click(object sender, EventArgs e)
         {
             try
@@ -235,6 +344,43 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        private void btnOpenExcelStirling_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYStirling.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYStirling.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Tìm đa thức nội suy trung tâm bằng Bessel
         private void btnSolveBessel_Click(object sender, EventArgs e)
         {
             try
@@ -273,6 +419,43 @@ namespace Interpolation
                 MessageBox.Show("Lỗi định dạng");
             }
         }
+        private void btnOpenExcelBessel_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYBessel.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYBessel.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Tìm đa thức nội suy trung tâm bằng Gauss I
         private void btnSolveGaussI_Click(object sender, EventArgs e)
         {
             try
@@ -312,6 +495,43 @@ namespace Interpolation
                 MessageBox.Show($"Lỗi: {ex.Message}");
             }
         }
+        private void btnOpenExcelGaussI_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYGaussI.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYGaussI.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Tìm đa thức nội suy trung tâm bằng Gauss II
         private void btnSolveGaussII_Click(object sender, EventArgs e)
         {
             try
@@ -351,6 +571,43 @@ namespace Interpolation
                 MessageBox.Show($"Lỗi: {ex.Message}");
             }
         }
+        private void btnOpenExcelGaussII_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYGaussII.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYGaussII.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Phương pháp lặp
         private void btnSolveIteration_Click(object sender, EventArgs e)
         {
             try
@@ -374,6 +631,114 @@ namespace Interpolation
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}");
+            }
+        }
+        private void btnOpenExcelIteration_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataGridViewXYIteration.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataGridViewXYIteration.Rows.Add(xValues[i], yValues[i]);
+                        }
+
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
+            }
+        }
+        // Phương pháp bình phương tối thiểu
+        private void btnSolveLeastSquares_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double[] x = GetXValues(dataXYLeastSquares);
+                double[] y = GetYValues(dataXYLeastSquares);
+                string[] phiExpressions = txtBoxLeastSquares.Text
+            .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(s => s.Trim())
+            .ToArray();
+                if (comboBoxLeastSquares.SelectedIndex == 0)
+                {
+                    SolveLinearLeastSquares(x, y, phiExpressions, out double[] coeffs, out double MSE, out string equation, out double[,] thetaMatrix, out double[,] M, out double[] b);
+                    DisplayLeastSquaresResults(rtbResultLeastSquares, phiExpressions, thetaMatrix, M, b, coeffs, MSE, equation, x, y);
+                    lblResultLeastSquares.Text = "Hàm tuyến tính";
+                }
+                else if (comboBoxLeastSquares.SelectedIndex == 1)
+                {
+                    SolvePowerLawLeastSquares(x, y, out double a, out double p, out double MSE, out double[,] thetaMatrix, out double[,] M, out double[] r);
+                    DisplayPowerLawLeastSquaresResults(rtbResultLeastSquares, thetaMatrix, M, r, a, p, MSE, x, y);
+                    lblResultLeastSquares.Text = $"Hàm dạng y = ax^b";
+                }
+                else if (comboBoxLeastSquares.SelectedIndex == 2)
+                {
+                    SolveExponentialLeastSquares(x, y, phiExpressions, out double a, out double[] b, out double MSE, out double[,] thetaMatrix, out double[,] M, out double[] r);
+                    DisplayExponentialLeastSquaresResults(rtbResultLeastSquares, phiExpressions, thetaMatrix, M, r, a, b, MSE, x, y);
+                    lblResultLeastSquares.Text = $"Hàm dạng y = ae^(b1φ₁(x) + b2φ₂(x) + ...)";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+                throw;
+            }
+
+        }
+        private void btnOpenExcelLeastSquares_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out double[] xValues, out double[] yValues);
+                        dataXYLeastSquares.Rows.Clear();
+                        for (int i = 0; i < xValues.Length; i++)
+                        {
+                            dataXYLeastSquares.Rows.Add(xValues[i], yValues[i]);
+                        }
+                        MessageBox.Show(
+                            $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
             }
         }
         private void btnLagrangeToEval_Click(object sender, EventArgs e)
@@ -411,6 +776,32 @@ namespace Interpolation
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
+        // Tìm mốc nội suy cách đều
+        private void btnFindPoints_Click(object sender, EventArgs e)
+        {
+            if (xValues == null || yValues == null || xValues.Length == 0)
+            {
+                MessageBox.Show("Vui lòng mở file Excel trước");
+                return;
+            }
+
+            double xAvg = Convert.ToDouble(txtBoxX.Text);
+            int k = Convert.ToInt32(textBoxK.Text);
+
+            if (k > xValues.Length)
+            {
+                MessageBox.Show($"Số mốc nội suy k = {k} lớn hơn số điểm dữ liệu {xValues.Length}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var result = FindInterpolationPoints(xAvg, k, xValues, yValues);
+            if (result.xs == -1)
+            {
+                MessageBox.Show($"Giá trị x = {xAvg} nằm ngoài phạm vi dữ liệu [{xValues.Min()}, {xValues.Max()}]",
+                              "Không tìm thấy", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DisplayInterpolationPointsResult(xAvg, result);
+        }
         private void btnOpenExcel_Click(object sender, EventArgs e)
         {
             ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
@@ -442,62 +833,7 @@ namespace Interpolation
                       MessageBoxIcon.Error);
             }
         }
-        private void btnFindPoints_Click(object sender, EventArgs e)
-        {
-            if (xValues == null || yValues == null || xValues.Length == 0)
-            {
-                MessageBox.Show("Vui lòng mở file Excel trước");
-                return;
-            }
-
-            double xAvg = Convert.ToDouble(txtBoxX.Text);
-            int k = Convert.ToInt32(textBoxK.Text);
-
-            if (k > xValues.Length)
-            {
-                MessageBox.Show($"Số mốc nội suy k = {k} lớn hơn số điểm dữ liệu {xValues.Length}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            var result = FindInterpolationPoints(xAvg, k, xValues, yValues);
-            if (result.xs == -1)
-            {
-                MessageBox.Show($"Giá trị x = {xAvg} nằm ngoài phạm vi dữ liệu [{xValues.Min()}, {xValues.Max()}]",
-                              "Không tìm thấy", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            DisplayInterpolationPointsResult(xAvg, result);
-        }
-        private void btnOpenExcelReverse_Click(object sender, EventArgs e)
-        {
-            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
-            try
-            {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
-                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
-                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string filePath = openFileDialog.FileName;
-                        ReadExcelData(filePath, out xValues, out yValues);
-
-                        MessageBox.Show(
-                            $"Đã đọc thành công {xValues.Length} điểm dữ liệu từ file Excel!\n\n",
-                            "Thành công",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
-                      "Lỗi",
-                      MessageBoxButtons.OK,
-                      MessageBoxIcon.Error);
-            }
-        }
+        // Tìm mốc nội suy ngược
         private void btnFindReversePoints_Click(object sender, EventArgs e)
         {
             if (xValues == null || yValues == null || xValues.Length == 0)
@@ -544,6 +880,37 @@ namespace Interpolation
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnOpenExcelReverse_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+                    openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        ReadExcelData(filePath, out xValues, out yValues);
+
+                        MessageBox.Show(
+                            $"Đã đọc thành công {xValues.Length} điểm dữ liệu từ file Excel!\n\n",
+                            "Thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
+                      "Lỗi",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -856,9 +1223,9 @@ namespace Interpolation
                 if (i == 0)
                     tPattern[i] = 0;
                 else if (i % 2 == 1)
-                    tPattern[i] = (i + 1) / 2.0; 
+                    tPattern[i] = (i + 1) / 2.0;
                 else
-                    tPattern[i] = - (i / 2.0);    
+                    tPattern[i] = -(i / 2.0);
             }
 
             prodTable = Horner.ProductTable(tPattern, precision);
@@ -895,7 +1262,7 @@ namespace Interpolation
                 if (i == 0)
                     tPattern[i] = 0;
                 else if (i % 2 == 1)
-                    tPattern[i] = -(i + 1) / 2.0;   
+                    tPattern[i] = -(i + 1) / 2.0;
                 else
                     tPattern[i] = i / 2.0;
             }
@@ -1096,9 +1463,135 @@ namespace Interpolation
                 if (iteration > maxIterations) break;
             } while (Math.Abs(t_n - t_prev) >= epsilon);
 
-            double res = x[0] + h * t_n; 
+            double res = x[0] + h * t_n;
             return res;
         }
+        private void SolveLinearLeastSquares(double[] x, double[] y, string[] phiExpressions,
+    out double[] coeffs, out double MSE, out string equation,
+    out double[,] thetaMatrix, out double[,] M, out double[] b)
+        {
+            int n = x.Length;
+            int m = phiExpressions.Length;
+
+            thetaMatrix = new double[n, m];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    var expr = new NCalc.Expression(phiExpressions[j]);
+                    expr.Parameters["x"] = x[i];
+                    thetaMatrix[i, j] = Convert.ToDouble(expr.Evaluate());
+                }
+            }
+
+            var Theta = MathNet.Numerics.LinearAlgebra.Matrix<double>.Build.DenseOfArray(thetaMatrix);
+            var Y = MathNet.Numerics.LinearAlgebra.Vector<double>.Build.Dense(y);
+
+            var MMatrix = Theta.TransposeThisAndMultiply(Theta);
+            var bVec = Theta.TransposeThisAndMultiply(Y);
+
+            M = MMatrix.ToArray();
+            b = bVec.ToArray();
+
+            var res = MMatrix.Solve(bVec);
+            coeffs = res.ToArray();
+
+            var yTarget = Theta * res;
+            MSE = Math.Sqrt((Y - yTarget).PointwisePower(2).Sum() / n);
+
+            var coeffs_copy = coeffs;
+            equation = "y ≈ " + string.Join(" + ",
+                phiExpressions.Select((phi, j) => $"{coeffs_copy[j]:F6}*({phi})"));
+        }
+        private void SolvePowerLawLeastSquares(double[] x, double[] y,
+    out double a, out double p, out double MSE,
+    out double[,] ThetaMatrix, out double[,] M, out double[] r)
+        {
+            int n = x.Length;
+
+            bool allPositive = y.All(v => v > 0);
+            bool allNegative = y.All(v => v < 0);
+            if (!allPositive && !allNegative)
+            {
+                throw new ArgumentException("Giá trị y phải cùng dấu để áp dụng phương pháp hàm mũ.");
+            }
+            double[] X = x.Select(xi => Math.Log(xi)).ToArray();
+            double[] Y = y.Select(yi => Math.Log(Math.Abs(yi))).ToArray();
+
+            ThetaMatrix = new double[n, 2];
+            for (int i = 0; i < n; i++)
+            {
+                ThetaMatrix[i, 0] = 1.0;
+                ThetaMatrix[i, 1] = X[i];
+            }
+
+            var Theta = MathNet.Numerics.LinearAlgebra.Matrix<double>.Build.DenseOfArray(ThetaMatrix);
+            var Yvec = MathNet.Numerics.LinearAlgebra.Vector<double>.Build.Dense(Y);
+
+            var MMatrix = Theta.TransposeThisAndMultiply(Theta);
+            var rVec = Theta.TransposeThisAndMultiply(Yvec);
+
+            M = MMatrix.ToArray();
+            r = rVec.ToArray();
+
+            var A = MMatrix.Solve(rVec);
+
+            a = Math.Exp(A[0]);
+            p = A[1];
+            if (allNegative)
+            {
+                a = -a;
+            }
+            var Y_pred = Theta * A;
+            MSE = Math.Sqrt((Yvec - Y_pred).PointwisePower(2).Sum() / n);
+        }
+        private void SolveExponentialLeastSquares(
+    double[] x, double[] y, string[] phiExpressions,
+    out double a, out double[] b, out double MSE,
+    out double[,] ThetaMatrix, out double[,] M, out double[] r)
+        {
+            int n = x.Length;
+            int m = phiExpressions.Length;
+
+            bool allPositive = y.All(v => v > 0);
+            bool allNegative = y.All(v => v < 0);
+            if (!allPositive && !allNegative)
+                throw new Exception("Dữ liệu y chứa cả giá trị dương và âm — không thể tuyến tính hoá bằng logarit.");
+
+            double[] Y = y.Select(yi => Math.Log(Math.Abs(yi))).ToArray();
+
+            ThetaMatrix = new double[n, m + 1];
+            for (int i = 0; i < n; i++)
+            {
+                ThetaMatrix[i, 0] = 1.0; 
+                for (int j = 0; j < m; j++)
+                {
+                    var expr = new NCalc.Expression(phiExpressions[j]);
+                    expr.Parameters["x"] = x[i];
+                    ThetaMatrix[i, j + 1] = Convert.ToDouble(expr.Evaluate());
+                }
+            }
+
+            var Theta = MathNet.Numerics.LinearAlgebra.Matrix<double>.Build.DenseOfArray(ThetaMatrix);
+            var Yvec = MathNet.Numerics.LinearAlgebra.Vector<double>.Build.Dense(Y);
+
+            var MMatrix = Theta.TransposeThisAndMultiply(Theta);
+            var rVec = Theta.TransposeThisAndMultiply(Yvec);
+
+            M = MMatrix.ToArray();
+            r = rVec.ToArray();
+
+            var C = MMatrix.Solve(rVec).ToArray();
+
+            a = Math.Exp(C[0]);
+            if (allNegative) a = -a; 
+
+            b = C.Skip(1).ToArray();
+
+            var Y_pred = Theta * MathNet.Numerics.LinearAlgebra.Vector<double>.Build.Dense(C);
+            MSE = Math.Sqrt((Yvec - Y_pred).PointwisePower(2).Sum() / n);
+        }
+
         #endregion 
 
         #region UI
@@ -1401,6 +1894,361 @@ namespace Interpolation
 
             rtb.AppendText(sb.ToString());
         }
+        private void DisplayLeastSquaresResults(RichTextBox rtb, string[] phiExpressions, double[,] thetaMatrix, double[,] M, double[] b, double[] coeffs, double MSE, string equation, double[] x, double[] y)
+        {
+            rtb.Clear();
+            var sb = new StringBuilder();
+
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("KẾT QUẢ PHƯƠNG PHÁP BÌNH PHƯƠNG TỐI THIỂU");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
+
+            // 1. Hiển thị tập cơ sở
+            sb.AppendLine("TẬP HÀM CƠ SỞ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                sb.AppendLine($"  φ{j + 1}(x) = {phiExpressions[j]}");
+            }
+            sb.AppendLine();
+
+            // 2. Hiển thị ma trận Theta
+            sb.AppendLine("MA TRẬN Θ (THETA):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("Θ[i,j] = φj(xi), với i = 1..n (số điểm), j = 1..m (số hàm cơ sở)");
+            sb.AppendLine();
+
+            // Header
+            sb.Append("   i |");
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                sb.Append($"    φ{j + 1}(xi)    |");
+            }
+            sb.AppendLine();
+            sb.AppendLine(new string('─', 10 + phiExpressions.Length * 16));
+
+            // Data rows
+            for (int i = 0; i < thetaMatrix.GetLength(0); i++)
+            {
+                sb.Append($"  {i + 1,2} |");
+                for (int j = 0; j < thetaMatrix.GetLength(1); j++)
+                {
+                    sb.Append($" {thetaMatrix[i, j],12:F6} |");
+                }
+                sb.AppendLine();
+            }
+            sb.AppendLine();
+
+            // 3. Hiển thị ma trận M = Θ^T × Θ
+            sb.AppendLine("MA TRẬN M = Θ^T × Θ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            for (int i = 0; i < M.GetLength(0); i++)
+            {
+                sb.Append("  [");
+                for (int j = 0; j < M.GetLength(1); j++)
+                {
+                    sb.Append($" {M[i, j],12:F6}");
+                }
+                sb.AppendLine(" ]");
+            }
+            sb.AppendLine();
+
+            // 4. Hiển thị vector b = Θ^T × y
+            sb.AppendLine("VECTOR b = Θ^T × y:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.Append("  b = [");
+            for (int i = 0; i < b.Length; i++)
+            {
+                sb.Append($" {b[i],12:F6}");
+                if (i < b.Length - 1) sb.Append(",");
+            }
+            sb.AppendLine(" ]^T\n");
+
+            // 5. Hiển thị hệ số (giải M × a = b)
+            sb.AppendLine("HỆ SỐ TÌM ĐƯỢC (Giải M × a = b):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            for (int i = 0; i < coeffs.Length; i++)
+            {
+                sb.AppendLine($"  a{i + 1} = {coeffs[i]:F8}");
+            }
+            sb.AppendLine();
+
+            // 6. Hiển thị phương trình
+            sb.AppendLine("PHƯƠNG TRÌNH XẤP XỈ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  {equation}");
+            sb.AppendLine();
+
+            // 7. Hiển thị MSE
+            sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  MSE = {MSE:F8}");
+            sb.AppendLine();
+
+            rtb.AppendText(sb.ToString());
+        }
+        private void DisplayPowerLawLeastSquaresResults(RichTextBox rtb, double[,] thetaMatrix, double[,] M, double[] r, double a, double p, double MSE, double[] x, double[] y)
+        {
+            rtb.Clear();
+            var sb = new StringBuilder();
+
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("KẾT QUẢ PHƯƠNG PHÁP BÌNH PHƯƠNG TỐI THIỂU");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
+
+            // 1. Hiển thị mô hình
+            sb.AppendLine("MÔ HÌNH:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("  y = a × x^p");
+            sb.AppendLine("  Biến đổi logarit: ln(y) = ln(a) + p × ln(x)");
+            sb.AppendLine("  Đặt: Y = ln(y), X = ln(x), A₀ = ln(a), A₁ = p");
+            sb.AppendLine("  => Y = A₀ + A₁ × X\n");
+
+            // 2. Hiển thị ma trận Theta (sau khi ln)
+            sb.AppendLine("MA TRẬN Θ SAU KHI BIẾN ĐỔI:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("Θ = [1, ln(xᵢ)], với i = 1..n (số điểm dữ liệu)");
+            sb.AppendLine();
+
+            // Header
+            sb.AppendLine("   i |      1       |    ln(xi)    |");
+            sb.AppendLine(new string('─', 40));
+
+            // Data rows
+            for (int i = 0; i < thetaMatrix.GetLength(0); i++)
+            {
+                sb.Append($"  {i + 1,2} |");
+                for (int j = 0; j < thetaMatrix.GetLength(1); j++)
+                {
+                    sb.Append($" {thetaMatrix[i, j],12:F6} |");
+                }
+                sb.AppendLine();
+            }
+            sb.AppendLine();
+
+            // 3. Hiển thị dữ liệu gốc và sau biến đổi
+            sb.AppendLine("DỮ LIỆU GỐC VÀ SAU BIẾN ĐỔI:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("   i |      x       |      y       |    ln(x)     |    ln(y)     |");
+            sb.AppendLine(new string('─', 70));
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                sb.AppendLine($"  {i + 1,2} | {x[i],12:F6} | {y[i],12:F6} | {Math.Log(x[i]),12:F6} | {Math.Log(Math.Abs(y[i])),12:F6} |");
+            }
+            sb.AppendLine();
+
+            // 4. Hiển thị ma trận M = Θ^T × Θ
+            sb.AppendLine("MA TRẬN M = Θ^T × Θ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            for (int i = 0; i < M.GetLength(0); i++)
+            {
+                sb.Append("  [");
+                for (int j = 0; j < M.GetLength(1); j++)
+                {
+                    sb.Append($" {M[i, j],12:F6}");
+                }
+                sb.AppendLine(" ]");
+            }
+            sb.AppendLine();
+
+            // 5. Hiển thị vector r = Θ^T × Y
+            sb.AppendLine("VECTOR r = Θ^T × Y:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.Append("  r = [");
+            for (int i = 0; i < r.Length; i++)
+            {
+                sb.Append($" {r[i],12:F6}");
+                if (i < r.Length - 1) sb.Append(",");
+            }
+            sb.AppendLine(" ]^T\n");
+
+            // 6. Hiển thị hệ số (giải M × A = r)
+            sb.AppendLine("HỆ SỐ TÌM ĐƯỢC (Giải M × A = r):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  A₀ = ln(a) = {Math.Log(Math.Abs(a)):F8}");
+            sb.AppendLine($"  A₁ = b     = {p:F8}");
+            sb.AppendLine();
+
+            // 7. Hiển thị tham số cuối cùng
+            sb.AppendLine("THAM SỐ CUỐI CÙNG:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  a = {a:F8}");
+            sb.AppendLine($"  b = {p:F8}");
+            sb.AppendLine();
+
+            // 8. Hiển thị phương trình
+            sb.AppendLine("PHƯƠNG TRÌNH XẤP XỈ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  y ≈ {a:F8} × x^({p:F8})");
+            sb.AppendLine();
+
+            // 9. Hiển thị MSE
+            //sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG:");
+            //sb.AppendLine("───────────────────────────────────────────────────────────────");
+            //sb.AppendLine($"  MSE = {MSE:F8}");
+            //sb.AppendLine("  (Tính trên không gian logarit: ln(y))");
+            //sb.AppendLine();
+
+            rtb.AppendText(sb.ToString());
+        }
+        private void DisplayExponentialLeastSquaresResults(RichTextBox rtb, string[] phiExpressions, double[,] thetaMatrix, double[,] M, double[] r, double a, double[] b, double MSE, double[] x, double[] y)
+        {
+            rtb.Clear();
+            var sb = new StringBuilder();
+
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("KẾT QUẢ PHƯƠNG PHÁP BÌNH PHƯƠNG TỐI THIỂU DẠNG MÕ");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
+
+            // 1. Hiển thị mô hình
+            sb.AppendLine("MÔ HÌNH:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.Append("  y = a × e^(");
+            var expTerms = new List<string>();
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                expTerms.Add($"b{j + 1}×{phiExpressions[j]}");
+            }
+            sb.Append(string.Join(" + ", expTerms));
+            sb.AppendLine(")");
+
+            sb.Append("  Biến đổi logarit: ln(|y|) = ln(a) + ");
+            var lnTerms = new List<string>();
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                lnTerms.Add($"b{j + 1}×{phiExpressions[j]}");
+            }
+            sb.AppendLine(string.Join(" + ", lnTerms));
+
+            sb.AppendLine("  Đặt: Y = ln(|y|), C₀ = ln(|a|), C₁ = b₁, C₂ = b₂, ...");
+            sb.Append("  => Y = C₀ + C₁×φ₁(x)");
+            if (phiExpressions.Length > 1)
+            {
+                for (int j = 1; j < phiExpressions.Length; j++)
+                {
+                    sb.Append($" + C{j + 1}×φ{j + 1}(x)");
+                }
+            }
+            sb.AppendLine("\n");
+
+            // 2. Hiển thị ma trận Theta (sau khi ln)
+            sb.AppendLine("MA TRẬN Θ SAU KHI BIẾN ĐỔI:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.Append("Θ = [1");
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                sb.Append($", φ{j + 1}(xᵢ)");
+            }
+            sb.AppendLine("], với i = 1..n (số điểm dữ liệu)");
+            sb.AppendLine();
+
+            // Header
+            sb.Append("   i |      1       |");
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                sb.Append($"    φ{j + 1}(xi)    |");
+            }
+            sb.AppendLine();
+            sb.AppendLine(new string('─', 20 + phiExpressions.Length * 16));
+
+            // Data rows
+            for (int i = 0; i < thetaMatrix.GetLength(0); i++)
+            {
+                sb.Append($"  {i + 1,2} |");
+                for (int j = 0; j < thetaMatrix.GetLength(1); j++)
+                {
+                    sb.Append($" {thetaMatrix[i, j],12:F6} |");
+                }
+                sb.AppendLine();
+            }
+            sb.AppendLine();
+
+            // 3. Hiển thị dữ liệu gốc và sau biến đổi
+            sb.AppendLine("DỮ LIỆU GỐC VÀ SAU BIẾN ĐỔI:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+
+            // Build header dynamically
+            sb.Append("   i |      x       |      y       |");
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                sb.Append($"   φ{j + 1}(x)     |");
+            }
+            sb.AppendLine("   ln(|y|)    |");
+            sb.AppendLine(new string('─', 40 + phiExpressions.Length * 14 + 14));
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                sb.Append($"  {i + 1,2} | {x[i],12:F6} | {y[i],12:F6} |");
+                for (int j = 0; j < phiExpressions.Length; j++)
+                {
+                    sb.Append($" {thetaMatrix[i, j + 1],12:F6} |");
+                }
+                sb.AppendLine($" {Math.Log(Math.Abs(y[i])),12:F6} |");
+            }
+            sb.AppendLine();
+
+            // 4. Hiển thị ma trận M = Θ^T × Θ
+            sb.AppendLine("MA TRẬN M = Θ^T × Θ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            for (int i = 0; i < M.GetLength(0); i++)
+            {
+                sb.Append("  [");
+                for (int j = 0; j < M.GetLength(1); j++)
+                {
+                    sb.Append($" {M[i, j],12:F6}");
+                }
+                sb.AppendLine(" ]");
+            }
+            sb.AppendLine();
+
+            // 5. Hiển thị vector r = Θ^T × Y
+            sb.AppendLine("VECTOR r = Θ^T × Y:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.Append("  r = [");
+            for (int i = 0; i < r.Length; i++)
+            {
+                sb.Append($" {r[i],12:F6}");
+                if (i < r.Length - 1) sb.Append(",");
+            }
+            sb.AppendLine(" ]^T\n");
+
+            // 6. Hiển thị hệ số (giải M × C = r)
+            sb.AppendLine("HỆ SỐ TÌM ĐƯỢC (Giải M × C = r):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  C₀ = ln(|a|) = {Math.Log(Math.Abs(a)):F8}");
+            for (int j = 0; j < b.Length; j++)
+            {
+                sb.AppendLine($"  C{j + 1} = b{j + 1}     = {b[j]:F8}");
+            }
+            sb.AppendLine();
+
+            // 7. Hiển thị tham số cuối cùng
+            sb.AppendLine("THAM SỐ CUỐI CÙNG:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  a  = {a:F8}");
+            for (int j = 0; j < b.Length; j++)
+            {
+                sb.AppendLine($"  b{j + 1} = {b[j]:F8}");
+            }
+            sb.AppendLine();
+
+            // 8. Hiển thị phương trình
+            sb.AppendLine("PHƯƠNG TRÌNH XẤP XỈ:");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.Append($"  y ≈ {a:F8} × e^(");
+            var finalTerms = new List<string>();
+            for (int j = 0; j < phiExpressions.Length; j++)
+            {
+                string sign = b[j] >= 0 ? "+" : "";
+                finalTerms.Add($"{sign}{b[j]:F8}×({phiExpressions[j]})");
+            }
+            sb.Append(string.Join(" ", finalTerms));
+            sb.AppendLine(")");
+            sb.AppendLine();
+
+            rtb.AppendText(sb.ToString());
+        }
         #endregion
 
         #region Utilities
@@ -1629,12 +2477,18 @@ namespace Interpolation
             if (dataXYGaussII.Columns.Contains("colsYGaussII"))
                 dataXYGaussII.Columns["colsYGaussII"].ValueType = typeof(double);
 
+            // Iteration
             if (dataGridViewXYIteration.Columns.Contains("colsXIteration"))
                 dataGridViewXYIteration.Columns["colsXIteration"].ValueType = typeof(double);
             if (dataGridViewXYIteration.Columns.Contains("colsYIteration"))
                 dataGridViewXYIteration.Columns["colsYIteration"].ValueType = typeof(double);
+
+            // Least Squares
+            if (dataXYLeastSquares != null && dataXYLeastSquares.Columns.Contains("colsXLeastSquares"))
+                dataXYLeastSquares.Columns["colsXLeastSquares"].ValueType = typeof(double);
+            if (dataXYLeastSquares != null && dataXYLeastSquares.Columns.Contains("colsYLeastSquares"))
+                dataXYLeastSquares.Columns["colsYLeastSquares"].ValueType = typeof(double);
         }
         #endregion
-
     }
 }

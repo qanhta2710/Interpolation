@@ -55,12 +55,14 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblResult = new System.Windows.Forms.Label();
-            this.btnSolveLagrange = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxPrecisionLagrange = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.btnLagrangeToEval = new System.Windows.Forms.Button();
+            this.lblResult = new System.Windows.Forms.Label();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOpenExcelLagrange = new System.Windows.Forms.Button();
+            this.btnSolveLagrange = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridViewNewton = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -73,9 +75,10 @@
             this.txtBoxPrecisionNewton = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxNewton = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnNewtonToEval = new System.Windows.Forms.Button();
+            this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOpenExcelNewton = new System.Windows.Forms.Button();
             this.btnSolveNewton = new System.Windows.Forms.Button();
+            this.btnNewtonToEval = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridViewNewtonFinite = new System.Windows.Forms.DataGridView();
             this.dataGridViewXYNewtonFinite = new System.Windows.Forms.DataGridView();
@@ -87,7 +90,8 @@
             this.txtBoxPrecisionNewtonFinite = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.comboBoxNewtonFinite = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOpenExcelNewtonFinite = new System.Windows.Forms.Button();
             this.btnNewtonFiniteToEval = new System.Windows.Forms.Button();
             this.btnSolveNewtonFinite = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -96,9 +100,11 @@
             this.colsXStirling = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colsYStirling = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveStirling = new System.Windows.Forms.Button();
+            this.btnOpenExcelStirling = new System.Windows.Forms.Button();
             this.btnStirlingToEval = new System.Windows.Forms.Button();
             this.lblStirling = new System.Windows.Forms.Label();
-            this.btnSolveStirling = new System.Windows.Forms.Button();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtboxPrecisionStirling = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -108,9 +114,11 @@
             this.colsXBessel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveBessel = new System.Windows.Forms.Button();
+            this.btnOpenExcelBessel = new System.Windows.Forms.Button();
             this.btnBesselToEval = new System.Windows.Forms.Button();
             this.lblResultBessel = new System.Windows.Forms.Label();
-            this.btnSolveBessel = new System.Windows.Forms.Button();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtboxPrecisionBessel = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -120,9 +128,11 @@
             this.colsXGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colsYGaussI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveGaussI = new System.Windows.Forms.Button();
+            this.btnOpenExcelGaussI = new System.Windows.Forms.Button();
             this.btnGaussIToEval = new System.Windows.Forms.Button();
             this.lblResultGaussI = new System.Windows.Forms.Label();
-            this.btnSolveGaussI = new System.Windows.Forms.Button();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxPrecisionGaussI = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -132,9 +142,11 @@
             this.colsXGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colsYGaussII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveGaussII = new System.Windows.Forms.Button();
+            this.btnOpenExcelGaussII = new System.Windows.Forms.Button();
             this.btnGaussIIToEval = new System.Windows.Forms.Button();
             this.lblResultGaussII = new System.Windows.Forms.Label();
-            this.btnSolveGaussII = new System.Windows.Forms.Button();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxPrecisionGaussII = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -147,13 +159,16 @@
             this.colsXIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colsYIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSolveIteration = new System.Windows.Forms.Button();
+            this.btnOpenExcelIteration = new System.Windows.Forms.Button();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxPrecisionIteration = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtBoxYAvg = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.lblResultIteration = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBoxFindPoints = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -191,7 +206,23 @@
             this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
             this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblResultIteration = new System.Windows.Forms.Label();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataXYLeastSquares = new System.Windows.Forms.DataGridView();
+            this.dataXLeastSquares = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataYLeastSquares = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtBoxLeastSquares = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.rtbResultLeastSquares = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveLeastSquares = new System.Windows.Forms.Button();
+            this.btnOpenExcelLeastSquares = new System.Windows.Forms.Button();
+            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblResultLeastSquares = new System.Windows.Forms.Label();
+            this.comboBoxLeastSquares = new System.Windows.Forms.ComboBox();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -203,38 +234,43 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel16.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewton)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYNewton)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.tableLayoutPanel17.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewtonFinite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewXYNewtonFinite)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.tableLayoutPanel18.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultStirling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYStirling)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel19.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultBessel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel20.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).BeginInit();
             this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel21.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResultGaussII)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).BeginInit();
             this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel22.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.tabPage12.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -242,6 +278,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIteration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewXYIteration)).BeginInit();
             this.tableLayoutPanel14.SuspendLayout();
+            this.tableLayoutPanel23.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -257,6 +294,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerDerivative)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).BeginInit();
+            this.tabPage13.SuspendLayout();
+            this.tableLayoutPanel26.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYLeastSquares)).BeginInit();
+            this.tableLayoutPanel27.SuspendLayout();
+            this.tableLayoutPanel24.SuspendLayout();
+            this.tableLayoutPanel25.SuspendLayout();
+            this.tableLayoutPanel28.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -475,6 +519,8 @@
             this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage12);
+            this.tabControl1.Controls.Add(this.tabPage13);
+            this.tabControl1.Controls.Add(this.tabPage14);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -547,10 +593,10 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
-            this.tableLayoutPanel2.Controls.Add(this.lblResult, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnSolveLagrange, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.btnLagrangeToEval, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblResult, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel16, 1, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 543);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -559,31 +605,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // lblResult
-            // 
-            this.lblResult.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(671, 14);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(100, 22);
-            this.lblResult.TabIndex = 0;
-            this.lblResult.Text = "lblResult";
-            this.lblResult.Visible = false;
-            // 
-            // btnSolveLagrange
-            // 
-            this.btnSolveLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveLagrange.AutoSize = true;
-            this.btnSolveLagrange.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveLagrange.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveLagrange.Name = "btnSolveLagrange";
-            this.btnSolveLagrange.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveLagrange.TabIndex = 1;
-            this.btnSolveLagrange.Text = "Tìm đa thức nội suy";
-            this.btnSolveLagrange.UseVisualStyleBackColor = true;
-            this.btnSolveLagrange.Click += new System.EventHandler(this.btnSolveLagrange_Click_1);
             // 
             // flowLayoutPanel2
             // 
@@ -627,6 +648,59 @@
             this.btnLagrangeToEval.UseVisualStyleBackColor = true;
             this.btnLagrangeToEval.Visible = false;
             this.btnLagrangeToEval.Click += new System.EventHandler(this.btnLagrangeToEval_Click);
+            // 
+            // lblResult
+            // 
+            this.lblResult.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResult.AutoSize = true;
+            this.lblResult.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(671, 14);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(100, 22);
+            this.lblResult.TabIndex = 0;
+            this.lblResult.Text = "lblResult";
+            this.lblResult.Visible = false;
+            // 
+            // tableLayoutPanel16
+            // 
+            this.tableLayoutPanel16.ColumnCount = 2;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel16.Controls.Add(this.btnOpenExcelLagrange, 1, 0);
+            this.tableLayoutPanel16.Controls.Add(this.btnSolveLagrange, 0, 0);
+            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(314, 53);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 1;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(815, 44);
+            this.tableLayoutPanel16.TabIndex = 4;
+            // 
+            // btnOpenExcelLagrange
+            // 
+            this.btnOpenExcelLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelLagrange.AutoSize = true;
+            this.btnOpenExcelLagrange.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelLagrange.Location = new System.Drawing.Point(522, 4);
+            this.btnOpenExcelLagrange.Name = "btnOpenExcelLagrange";
+            this.btnOpenExcelLagrange.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelLagrange.TabIndex = 2;
+            this.btnOpenExcelLagrange.Text = "Nhập dữ liệu";
+            this.btnOpenExcelLagrange.UseVisualStyleBackColor = true;
+            this.btnOpenExcelLagrange.Click += new System.EventHandler(this.btnOpenExcelLagrange_Click);
+            // 
+            // btnSolveLagrange
+            // 
+            this.btnSolveLagrange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveLagrange.AutoSize = true;
+            this.btnSolveLagrange.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveLagrange.Location = new System.Drawing.Point(114, 4);
+            this.btnSolveLagrange.Name = "btnSolveLagrange";
+            this.btnSolveLagrange.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveLagrange.TabIndex = 1;
+            this.btnSolveLagrange.Text = "Tìm đa thức nội suy";
+            this.btnSolveLagrange.UseVisualStyleBackColor = true;
+            this.btnSolveLagrange.Click += new System.EventHandler(this.btnSolveLagrange_Click_1);
             // 
             // tabPage3
             // 
@@ -702,7 +776,7 @@
             this.tableLayoutPanel5.Controls.Add(this.lblResultNewton, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel3, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.comboBoxNewton, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.panel3, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel17, 1, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 543);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -766,41 +840,62 @@
             this.comboBoxNewton.Size = new System.Drawing.Size(164, 24);
             this.comboBoxNewton.TabIndex = 3;
             // 
-            // panel3
+            // tableLayoutPanel17
             // 
-            this.panel3.Controls.Add(this.btnNewtonToEval);
-            this.panel3.Controls.Add(this.btnSolveNewton);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(314, 53);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(815, 44);
-            this.panel3.TabIndex = 4;
+            this.tableLayoutPanel17.AutoSize = true;
+            this.tableLayoutPanel17.ColumnCount = 3;
+            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 281F));
+            this.tableLayoutPanel17.Controls.Add(this.btnOpenExcelNewton, 1, 0);
+            this.tableLayoutPanel17.Controls.Add(this.btnSolveNewton, 0, 0);
+            this.tableLayoutPanel17.Controls.Add(this.btnNewtonToEval, 2, 0);
+            this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel17.Location = new System.Drawing.Point(314, 53);
+            this.tableLayoutPanel17.Name = "tableLayoutPanel17";
+            this.tableLayoutPanel17.RowCount = 1;
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(815, 44);
+            this.tableLayoutPanel17.TabIndex = 6;
+            // 
+            // btnOpenExcelNewton
+            // 
+            this.btnOpenExcelNewton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelNewton.AutoSize = true;
+            this.btnOpenExcelNewton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelNewton.Location = new System.Drawing.Point(311, 4);
+            this.btnOpenExcelNewton.Name = "btnOpenExcelNewton";
+            this.btnOpenExcelNewton.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelNewton.TabIndex = 5;
+            this.btnOpenExcelNewton.Text = "Nhập dữ liệu";
+            this.btnOpenExcelNewton.UseVisualStyleBackColor = true;
+            this.btnOpenExcelNewton.Click += new System.EventHandler(this.btnOpenExcelNewton_Click);
+            // 
+            // btnSolveNewton
+            // 
+            this.btnSolveNewton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveNewton.AutoSize = true;
+            this.btnSolveNewton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveNewton.Location = new System.Drawing.Point(44, 3);
+            this.btnSolveNewton.Name = "btnSolveNewton";
+            this.btnSolveNewton.Size = new System.Drawing.Size(178, 38);
+            this.btnSolveNewton.TabIndex = 1;
+            this.btnSolveNewton.Text = "Tìm đa thức nội suy";
+            this.btnSolveNewton.UseVisualStyleBackColor = true;
+            this.btnSolveNewton.Click += new System.EventHandler(this.btnSolveNewton_Click);
             // 
             // btnNewtonToEval
             // 
-            this.btnNewtonToEval.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNewtonToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNewtonToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewtonToEval.Location = new System.Drawing.Point(583, 0);
+            this.btnNewtonToEval.Location = new System.Drawing.Point(558, 3);
             this.btnNewtonToEval.Name = "btnNewtonToEval";
-            this.btnNewtonToEval.Size = new System.Drawing.Size(232, 44);
+            this.btnNewtonToEval.Size = new System.Drawing.Size(232, 38);
             this.btnNewtonToEval.TabIndex = 4;
             this.btnNewtonToEval.Text = "Chuyển hệ số để tính giá trị";
             this.btnNewtonToEval.UseVisualStyleBackColor = true;
             this.btnNewtonToEval.Visible = false;
             this.btnNewtonToEval.Click += new System.EventHandler(this.btnNewtonToEval_Click);
-            // 
-            // btnSolveNewton
-            // 
-            this.btnSolveNewton.AutoSize = true;
-            this.btnSolveNewton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSolveNewton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveNewton.Location = new System.Drawing.Point(0, 0);
-            this.btnSolveNewton.Name = "btnSolveNewton";
-            this.btnSolveNewton.Size = new System.Drawing.Size(178, 44);
-            this.btnSolveNewton.TabIndex = 1;
-            this.btnSolveNewton.Text = "Tìm đa thức nội suy";
-            this.btnSolveNewton.UseVisualStyleBackColor = true;
-            this.btnSolveNewton.Click += new System.EventHandler(this.btnSolveNewton_Click);
             // 
             // tabPage5
             // 
@@ -867,7 +962,7 @@
             this.tableLayoutPanel8.Controls.Add(this.lblNewtonFinite, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.flowLayoutPanel4, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.comboBoxNewtonFinite, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.panel4, 1, 1);
+            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel18, 1, 1);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 543);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -930,23 +1025,43 @@
             this.comboBoxNewtonFinite.Size = new System.Drawing.Size(164, 24);
             this.comboBoxNewtonFinite.TabIndex = 3;
             // 
-            // panel4
+            // tableLayoutPanel18
             // 
-            this.panel4.Controls.Add(this.btnNewtonFiniteToEval);
-            this.panel4.Controls.Add(this.btnSolveNewtonFinite);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(314, 53);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(815, 44);
-            this.panel4.TabIndex = 4;
+            this.tableLayoutPanel18.ColumnCount = 3;
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.14418F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.85582F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 249F));
+            this.tableLayoutPanel18.Controls.Add(this.btnOpenExcelNewtonFinite, 1, 0);
+            this.tableLayoutPanel18.Controls.Add(this.btnNewtonFiniteToEval, 2, 0);
+            this.tableLayoutPanel18.Controls.Add(this.btnSolveNewtonFinite, 0, 0);
+            this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel18.Location = new System.Drawing.Point(314, 53);
+            this.tableLayoutPanel18.Name = "tableLayoutPanel18";
+            this.tableLayoutPanel18.RowCount = 1;
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(815, 44);
+            this.tableLayoutPanel18.TabIndex = 6;
+            // 
+            // btnOpenExcelNewtonFinite
+            // 
+            this.btnOpenExcelNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelNewtonFinite.AutoSize = true;
+            this.btnOpenExcelNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(312, 4);
+            this.btnOpenExcelNewtonFinite.Name = "btnOpenExcelNewtonFinite";
+            this.btnOpenExcelNewtonFinite.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelNewtonFinite.TabIndex = 6;
+            this.btnOpenExcelNewtonFinite.Text = "Nhập dữ liệu";
+            this.btnOpenExcelNewtonFinite.UseVisualStyleBackColor = true;
+            this.btnOpenExcelNewtonFinite.Click += new System.EventHandler(this.btnOpenExcelNewtonFinite_Click);
             // 
             // btnNewtonFiniteToEval
             // 
-            this.btnNewtonFiniteToEval.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNewtonFiniteToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNewtonFiniteToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(583, 0);
+            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(574, 3);
             this.btnNewtonFiniteToEval.Name = "btnNewtonFiniteToEval";
-            this.btnNewtonFiniteToEval.Size = new System.Drawing.Size(232, 44);
+            this.btnNewtonFiniteToEval.Size = new System.Drawing.Size(232, 38);
             this.btnNewtonFiniteToEval.TabIndex = 5;
             this.btnNewtonFiniteToEval.Text = "Chuyển hệ số để tính giá trị";
             this.btnNewtonFiniteToEval.UseVisualStyleBackColor = true;
@@ -955,12 +1070,12 @@
             // 
             // btnSolveNewtonFinite
             // 
+            this.btnSolveNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSolveNewtonFinite.AutoSize = true;
-            this.btnSolveNewtonFinite.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSolveNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(0, 0);
+            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(30, 3);
             this.btnSolveNewtonFinite.Name = "btnSolveNewtonFinite";
-            this.btnSolveNewtonFinite.Size = new System.Drawing.Size(178, 44);
+            this.btnSolveNewtonFinite.Size = new System.Drawing.Size(178, 38);
             this.btnSolveNewtonFinite.TabIndex = 1;
             this.btnSolveNewtonFinite.Text = "Tìm đa thức nội suy";
             this.btnSolveNewtonFinite.UseVisualStyleBackColor = true;
@@ -1028,9 +1143,9 @@
             this.tableLayoutPanel9.ColumnCount = 2;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel19, 1, 1);
             this.tableLayoutPanel9.Controls.Add(this.btnStirlingToEval, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.lblStirling, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.btnSolveStirling, 1, 1);
             this.tableLayoutPanel9.Controls.Add(this.flowLayoutPanel5, 0, 1);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 543);
@@ -1040,6 +1155,47 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel9.TabIndex = 3;
+            // 
+            // tableLayoutPanel19
+            // 
+            this.tableLayoutPanel19.ColumnCount = 2;
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel19.Controls.Add(this.btnSolveStirling, 0, 0);
+            this.tableLayoutPanel19.Controls.Add(this.btnOpenExcelStirling, 1, 0);
+            this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel19.Location = new System.Drawing.Point(314, 53);
+            this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+            this.tableLayoutPanel19.RowCount = 1;
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel19.Size = new System.Drawing.Size(815, 44);
+            this.tableLayoutPanel19.TabIndex = 5;
+            // 
+            // btnSolveStirling
+            // 
+            this.btnSolveStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveStirling.AutoSize = true;
+            this.btnSolveStirling.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveStirling.Location = new System.Drawing.Point(114, 4);
+            this.btnSolveStirling.Name = "btnSolveStirling";
+            this.btnSolveStirling.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveStirling.TabIndex = 1;
+            this.btnSolveStirling.Text = "Tìm đa thức nội suy";
+            this.btnSolveStirling.UseVisualStyleBackColor = true;
+            this.btnSolveStirling.Click += new System.EventHandler(this.btnSolveStirling_Click);
+            // 
+            // btnOpenExcelStirling
+            // 
+            this.btnOpenExcelStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelStirling.AutoSize = true;
+            this.btnOpenExcelStirling.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelStirling.Location = new System.Drawing.Point(522, 4);
+            this.btnOpenExcelStirling.Name = "btnOpenExcelStirling";
+            this.btnOpenExcelStirling.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelStirling.TabIndex = 2;
+            this.btnOpenExcelStirling.Text = "Nhập dữ liệu";
+            this.btnOpenExcelStirling.UseVisualStyleBackColor = true;
+            this.btnOpenExcelStirling.Click += new System.EventHandler(this.btnOpenExcelStirling_Click);
             // 
             // btnStirlingToEval
             // 
@@ -1066,19 +1222,6 @@
             this.lblStirling.TabIndex = 0;
             this.lblStirling.Text = "label2";
             this.lblStirling.Visible = false;
-            // 
-            // btnSolveStirling
-            // 
-            this.btnSolveStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveStirling.AutoSize = true;
-            this.btnSolveStirling.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveStirling.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveStirling.Name = "btnSolveStirling";
-            this.btnSolveStirling.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveStirling.TabIndex = 1;
-            this.btnSolveStirling.Text = "Tìm đa thức nội suy";
-            this.btnSolveStirling.UseVisualStyleBackColor = true;
-            this.btnSolveStirling.Click += new System.EventHandler(this.btnSolveStirling_Click);
             // 
             // flowLayoutPanel5
             // 
@@ -1170,9 +1313,9 @@
             this.tableLayoutPanel10.ColumnCount = 2;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel20, 1, 1);
             this.tableLayoutPanel10.Controls.Add(this.btnBesselToEval, 0, 0);
             this.tableLayoutPanel10.Controls.Add(this.lblResultBessel, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.btnSolveBessel, 1, 1);
             this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel6, 0, 1);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 546);
@@ -1182,6 +1325,47 @@
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(1138, 100);
             this.tableLayoutPanel10.TabIndex = 4;
+            // 
+            // tableLayoutPanel20
+            // 
+            this.tableLayoutPanel20.ColumnCount = 2;
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.Controls.Add(this.btnSolveBessel, 0, 0);
+            this.tableLayoutPanel20.Controls.Add(this.btnOpenExcelBessel, 1, 0);
+            this.tableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel20.Location = new System.Drawing.Point(315, 53);
+            this.tableLayoutPanel20.Name = "tableLayoutPanel20";
+            this.tableLayoutPanel20.RowCount = 1;
+            this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(820, 44);
+            this.tableLayoutPanel20.TabIndex = 6;
+            // 
+            // btnSolveBessel
+            // 
+            this.btnSolveBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveBessel.AutoSize = true;
+            this.btnSolveBessel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveBessel.Location = new System.Drawing.Point(116, 4);
+            this.btnSolveBessel.Name = "btnSolveBessel";
+            this.btnSolveBessel.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveBessel.TabIndex = 1;
+            this.btnSolveBessel.Text = "Tìm đa thức nội suy";
+            this.btnSolveBessel.UseVisualStyleBackColor = true;
+            this.btnSolveBessel.Click += new System.EventHandler(this.btnSolveBessel_Click);
+            // 
+            // btnOpenExcelBessel
+            // 
+            this.btnOpenExcelBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelBessel.AutoSize = true;
+            this.btnOpenExcelBessel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelBessel.Location = new System.Drawing.Point(526, 4);
+            this.btnOpenExcelBessel.Name = "btnOpenExcelBessel";
+            this.btnOpenExcelBessel.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelBessel.TabIndex = 2;
+            this.btnOpenExcelBessel.Text = "Nhập dữ liệu";
+            this.btnOpenExcelBessel.UseVisualStyleBackColor = true;
+            this.btnOpenExcelBessel.Click += new System.EventHandler(this.btnOpenExcelBessel_Click);
             // 
             // btnBesselToEval
             // 
@@ -1208,19 +1392,6 @@
             this.lblResultBessel.TabIndex = 0;
             this.lblResultBessel.Text = "label2";
             this.lblResultBessel.Visible = false;
-            // 
-            // btnSolveBessel
-            // 
-            this.btnSolveBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveBessel.AutoSize = true;
-            this.btnSolveBessel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveBessel.Location = new System.Drawing.Point(636, 57);
-            this.btnSolveBessel.Name = "btnSolveBessel";
-            this.btnSolveBessel.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveBessel.TabIndex = 1;
-            this.btnSolveBessel.Text = "Tìm đa thức nội suy";
-            this.btnSolveBessel.UseVisualStyleBackColor = true;
-            this.btnSolveBessel.Click += new System.EventHandler(this.btnSolveBessel_Click);
             // 
             // flowLayoutPanel6
             // 
@@ -1313,9 +1484,9 @@
             this.tableLayoutPanel11.ColumnCount = 2;
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel21, 1, 1);
             this.tableLayoutPanel11.Controls.Add(this.btnGaussIToEval, 0, 0);
             this.tableLayoutPanel11.Controls.Add(this.lblResultGaussI, 1, 0);
-            this.tableLayoutPanel11.Controls.Add(this.btnSolveGaussI, 1, 1);
             this.tableLayoutPanel11.Controls.Add(this.flowLayoutPanel7, 0, 1);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 543);
@@ -1325,6 +1496,47 @@
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel11.TabIndex = 5;
+            // 
+            // tableLayoutPanel21
+            // 
+            this.tableLayoutPanel21.ColumnCount = 2;
+            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel21.Controls.Add(this.btnSolveGaussI, 0, 0);
+            this.tableLayoutPanel21.Controls.Add(this.btnOpenExcelGaussI, 1, 0);
+            this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(314, 53);
+            this.tableLayoutPanel21.Name = "tableLayoutPanel21";
+            this.tableLayoutPanel21.RowCount = 1;
+            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(815, 44);
+            this.tableLayoutPanel21.TabIndex = 7;
+            // 
+            // btnSolveGaussI
+            // 
+            this.btnSolveGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveGaussI.AutoSize = true;
+            this.btnSolveGaussI.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveGaussI.Location = new System.Drawing.Point(114, 4);
+            this.btnSolveGaussI.Name = "btnSolveGaussI";
+            this.btnSolveGaussI.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveGaussI.TabIndex = 1;
+            this.btnSolveGaussI.Text = "Tìm đa thức nội suy";
+            this.btnSolveGaussI.UseVisualStyleBackColor = true;
+            this.btnSolveGaussI.Click += new System.EventHandler(this.btnSolveGaussI_Click);
+            // 
+            // btnOpenExcelGaussI
+            // 
+            this.btnOpenExcelGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelGaussI.AutoSize = true;
+            this.btnOpenExcelGaussI.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelGaussI.Location = new System.Drawing.Point(522, 4);
+            this.btnOpenExcelGaussI.Name = "btnOpenExcelGaussI";
+            this.btnOpenExcelGaussI.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelGaussI.TabIndex = 2;
+            this.btnOpenExcelGaussI.Text = "Nhập dữ liệu";
+            this.btnOpenExcelGaussI.UseVisualStyleBackColor = true;
+            this.btnOpenExcelGaussI.Click += new System.EventHandler(this.btnOpenExcelGaussI_Click);
             // 
             // btnGaussIToEval
             // 
@@ -1351,19 +1563,6 @@
             this.lblResultGaussI.TabIndex = 0;
             this.lblResultGaussI.Text = "label2";
             this.lblResultGaussI.Visible = false;
-            // 
-            // btnSolveGaussI
-            // 
-            this.btnSolveGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveGaussI.AutoSize = true;
-            this.btnSolveGaussI.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveGaussI.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveGaussI.Name = "btnSolveGaussI";
-            this.btnSolveGaussI.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveGaussI.TabIndex = 1;
-            this.btnSolveGaussI.Text = "Tìm đa thức nội suy";
-            this.btnSolveGaussI.UseVisualStyleBackColor = true;
-            this.btnSolveGaussI.Click += new System.EventHandler(this.btnSolveGaussI_Click);
             // 
             // flowLayoutPanel7
             // 
@@ -1456,9 +1655,9 @@
             this.tableLayoutPanel12.ColumnCount = 2;
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.5F));
+            this.tableLayoutPanel12.Controls.Add(this.tableLayoutPanel22, 1, 1);
             this.tableLayoutPanel12.Controls.Add(this.btnGaussIIToEval, 0, 0);
             this.tableLayoutPanel12.Controls.Add(this.lblResultGaussII, 1, 0);
-            this.tableLayoutPanel12.Controls.Add(this.btnSolveGaussII, 1, 1);
             this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel8, 0, 1);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 543);
@@ -1468,6 +1667,47 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel12.TabIndex = 6;
+            // 
+            // tableLayoutPanel22
+            // 
+            this.tableLayoutPanel22.ColumnCount = 2;
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel22.Controls.Add(this.btnSolveGaussII, 0, 0);
+            this.tableLayoutPanel22.Controls.Add(this.btnOpenExcelGaussII, 1, 0);
+            this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel22.Location = new System.Drawing.Point(314, 53);
+            this.tableLayoutPanel22.Name = "tableLayoutPanel22";
+            this.tableLayoutPanel22.RowCount = 1;
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(815, 44);
+            this.tableLayoutPanel22.TabIndex = 8;
+            // 
+            // btnSolveGaussII
+            // 
+            this.btnSolveGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveGaussII.AutoSize = true;
+            this.btnSolveGaussII.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveGaussII.Location = new System.Drawing.Point(114, 4);
+            this.btnSolveGaussII.Name = "btnSolveGaussII";
+            this.btnSolveGaussII.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveGaussII.TabIndex = 1;
+            this.btnSolveGaussII.Text = "Tìm đa thức nội suy";
+            this.btnSolveGaussII.UseVisualStyleBackColor = true;
+            this.btnSolveGaussII.Click += new System.EventHandler(this.btnSolveGaussII_Click);
+            // 
+            // btnOpenExcelGaussII
+            // 
+            this.btnOpenExcelGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelGaussII.AutoSize = true;
+            this.btnOpenExcelGaussII.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelGaussII.Location = new System.Drawing.Point(522, 4);
+            this.btnOpenExcelGaussII.Name = "btnOpenExcelGaussII";
+            this.btnOpenExcelGaussII.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelGaussII.TabIndex = 2;
+            this.btnOpenExcelGaussII.Text = "Nhập dữ liệu";
+            this.btnOpenExcelGaussII.UseVisualStyleBackColor = true;
+            this.btnOpenExcelGaussII.Click += new System.EventHandler(this.btnOpenExcelGaussII_Click);
             // 
             // btnGaussIIToEval
             // 
@@ -1494,19 +1734,6 @@
             this.lblResultGaussII.TabIndex = 0;
             this.lblResultGaussII.Text = "label2";
             this.lblResultGaussII.Visible = false;
-            // 
-            // btnSolveGaussII
-            // 
-            this.btnSolveGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveGaussII.AutoSize = true;
-            this.btnSolveGaussII.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveGaussII.Location = new System.Drawing.Point(632, 57);
-            this.btnSolveGaussII.Name = "btnSolveGaussII";
-            this.btnSolveGaussII.Size = new System.Drawing.Size(178, 35);
-            this.btnSolveGaussII.TabIndex = 1;
-            this.btnSolveGaussII.Text = "Tìm đa thức nội suy";
-            this.btnSolveGaussII.UseVisualStyleBackColor = true;
-            this.btnSolveGaussII.Click += new System.EventHandler(this.btnSolveGaussII_Click);
             // 
             // flowLayoutPanel8
             // 
@@ -1628,7 +1855,7 @@
             this.tableLayoutPanel14.ColumnCount = 2;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.12367F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.87633F));
-            this.tableLayoutPanel14.Controls.Add(this.btnSolveIteration, 1, 1);
+            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel23, 1, 1);
             this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel9, 0, 1);
             this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel10, 0, 0);
             this.tableLayoutPanel14.Controls.Add(this.lblResultIteration, 1, 0);
@@ -1642,18 +1869,46 @@
             this.tableLayoutPanel14.Size = new System.Drawing.Size(1132, 100);
             this.tableLayoutPanel14.TabIndex = 5;
             // 
+            // tableLayoutPanel23
+            // 
+            this.tableLayoutPanel23.ColumnCount = 2;
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel23.Controls.Add(this.btnSolveIteration, 0, 0);
+            this.tableLayoutPanel23.Controls.Add(this.btnOpenExcelIteration, 1, 0);
+            this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel23.Location = new System.Drawing.Point(343, 53);
+            this.tableLayoutPanel23.Name = "tableLayoutPanel23";
+            this.tableLayoutPanel23.RowCount = 1;
+            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(786, 44);
+            this.tableLayoutPanel23.TabIndex = 9;
+            // 
             // btnSolveIteration
             // 
             this.btnSolveIteration.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSolveIteration.AutoSize = true;
-            this.btnSolveIteration.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveIteration.Location = new System.Drawing.Point(647, 57);
+            this.btnSolveIteration.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveIteration.Location = new System.Drawing.Point(144, 4);
             this.btnSolveIteration.Name = "btnSolveIteration";
-            this.btnSolveIteration.Size = new System.Drawing.Size(178, 35);
+            this.btnSolveIteration.Size = new System.Drawing.Size(104, 35);
             this.btnSolveIteration.TabIndex = 1;
             this.btnSolveIteration.Text = "Tìm x";
             this.btnSolveIteration.UseVisualStyleBackColor = true;
             this.btnSolveIteration.Click += new System.EventHandler(this.btnSolveIteration_Click);
+            // 
+            // btnOpenExcelIteration
+            // 
+            this.btnOpenExcelIteration.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelIteration.AutoSize = true;
+            this.btnOpenExcelIteration.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelIteration.Location = new System.Drawing.Point(500, 4);
+            this.btnOpenExcelIteration.Name = "btnOpenExcelIteration";
+            this.btnOpenExcelIteration.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelIteration.TabIndex = 2;
+            this.btnOpenExcelIteration.Text = "Nhập dữ liệu";
+            this.btnOpenExcelIteration.UseVisualStyleBackColor = true;
+            this.btnOpenExcelIteration.Click += new System.EventHandler(this.btnOpenExcelIteration_Click);
             // 
             // flowLayoutPanel9
             // 
@@ -1710,6 +1965,18 @@
             this.label23.Size = new System.Drawing.Size(53, 16);
             this.label23.TabIndex = 2;
             this.label23.Text = "Giá trị Y";
+            // 
+            // lblResultIteration
+            // 
+            this.lblResultIteration.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultIteration.AutoSize = true;
+            this.lblResultIteration.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultIteration.Location = new System.Drawing.Point(692, 13);
+            this.lblResultIteration.Name = "lblResultIteration";
+            this.lblResultIteration.Size = new System.Drawing.Size(87, 23);
+            this.lblResultIteration.TabIndex = 4;
+            this.lblResultIteration.Text = "label21";
+            this.lblResultIteration.Visible = false;
             // 
             // tabPage8
             // 
@@ -2143,17 +2410,215 @@
             this.coeffsP.MinimumWidth = 6;
             this.coeffsP.Name = "coeffsP";
             // 
-            // lblResultIteration
+            // tabPage13
             // 
-            this.lblResultIteration.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResultIteration.AutoSize = true;
-            this.lblResultIteration.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultIteration.Location = new System.Drawing.Point(692, 13);
-            this.lblResultIteration.Name = "lblResultIteration";
-            this.lblResultIteration.Size = new System.Drawing.Size(87, 23);
-            this.lblResultIteration.TabIndex = 4;
-            this.lblResultIteration.Text = "label21";
-            this.lblResultIteration.Visible = false;
+            this.tabPage13.Controls.Add(this.tableLayoutPanel26);
+            this.tabPage13.Controls.Add(this.tableLayoutPanel24);
+            this.tabPage13.Location = new System.Drawing.Point(4, 25);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage13.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage13.TabIndex = 12;
+            this.tabPage13.Text = "Bình phương tối thiểu";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.ColumnCount = 3;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.83247F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.16753F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 651F));
+            this.tableLayoutPanel26.Controls.Add(this.dataXYLeastSquares, 0, 0);
+            this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 1, 0);
+            this.tableLayoutPanel26.Controls.Add(this.rtbResultLeastSquares, 2, 0);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 1;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(1132, 540);
+            this.tableLayoutPanel26.TabIndex = 7;
+            // 
+            // dataXYLeastSquares
+            // 
+            this.dataXYLeastSquares.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYLeastSquares.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataXLeastSquares,
+            this.dataYLeastSquares});
+            this.dataXYLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataXYLeastSquares.Location = new System.Drawing.Point(3, 3);
+            this.dataXYLeastSquares.Name = "dataXYLeastSquares";
+            this.dataXYLeastSquares.RowHeadersWidth = 51;
+            this.dataXYLeastSquares.RowTemplate.Height = 24;
+            this.dataXYLeastSquares.Size = new System.Drawing.Size(200, 534);
+            this.dataXYLeastSquares.TabIndex = 6;
+            // 
+            // dataXLeastSquares
+            // 
+            this.dataXLeastSquares.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataXLeastSquares.HeaderText = "X";
+            this.dataXLeastSquares.MinimumWidth = 6;
+            this.dataXLeastSquares.Name = "dataXLeastSquares";
+            // 
+            // dataYLeastSquares
+            // 
+            this.dataYLeastSquares.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataYLeastSquares.HeaderText = "Y";
+            this.dataYLeastSquares.MinimumWidth = 6;
+            this.dataYLeastSquares.Name = "dataYLeastSquares";
+            // 
+            // tableLayoutPanel27
+            // 
+            this.tableLayoutPanel27.ColumnCount = 1;
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel27.Controls.Add(this.txtBoxLeastSquares, 0, 1);
+            this.tableLayoutPanel27.Controls.Add(this.label21, 0, 0);
+            this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel27.Location = new System.Drawing.Point(209, 3);
+            this.tableLayoutPanel27.Name = "tableLayoutPanel27";
+            this.tableLayoutPanel27.RowCount = 2;
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.85768F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.14232F));
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(268, 534);
+            this.tableLayoutPanel27.TabIndex = 8;
+            // 
+            // txtBoxLeastSquares
+            // 
+            this.txtBoxLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxLeastSquares.Location = new System.Drawing.Point(3, 77);
+            this.txtBoxLeastSquares.Multiline = true;
+            this.txtBoxLeastSquares.Name = "txtBoxLeastSquares";
+            this.txtBoxLeastSquares.Size = new System.Drawing.Size(262, 454);
+            this.txtBoxLeastSquares.TabIndex = 8;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(3, 45);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(180, 29);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Nhập tập cơ sở:";
+            // 
+            // rtbResultLeastSquares
+            // 
+            this.rtbResultLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbResultLeastSquares.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbResultLeastSquares.Location = new System.Drawing.Point(483, 3);
+            this.rtbResultLeastSquares.Name = "rtbResultLeastSquares";
+            this.rtbResultLeastSquares.ReadOnly = true;
+            this.rtbResultLeastSquares.Size = new System.Drawing.Size(646, 534);
+            this.rtbResultLeastSquares.TabIndex = 9;
+            this.rtbResultLeastSquares.Text = "";
+            // 
+            // tableLayoutPanel24
+            // 
+            this.tableLayoutPanel24.ColumnCount = 1;
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 0, 1);
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel28, 0, 0);
+            this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel24.Name = "tableLayoutPanel24";
+            this.tableLayoutPanel24.RowCount = 2;
+            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel24.TabIndex = 6;
+            // 
+            // tableLayoutPanel25
+            // 
+            this.tableLayoutPanel25.ColumnCount = 2;
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Controls.Add(this.btnSolveLeastSquares, 0, 0);
+            this.tableLayoutPanel25.Controls.Add(this.btnOpenExcelLeastSquares, 1, 0);
+            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel25.Location = new System.Drawing.Point(3, 53);
+            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+            this.tableLayoutPanel25.RowCount = 1;
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(1126, 44);
+            this.tableLayoutPanel25.TabIndex = 9;
+            // 
+            // btnSolveLeastSquares
+            // 
+            this.btnSolveLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveLeastSquares.AutoSize = true;
+            this.btnSolveLeastSquares.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveLeastSquares.Location = new System.Drawing.Point(183, 4);
+            this.btnSolveLeastSquares.Name = "btnSolveLeastSquares";
+            this.btnSolveLeastSquares.Size = new System.Drawing.Size(196, 35);
+            this.btnSolveLeastSquares.TabIndex = 1;
+            this.btnSolveLeastSquares.Text = "Tìm hàm thực nghiệm";
+            this.btnSolveLeastSquares.UseVisualStyleBackColor = true;
+            this.btnSolveLeastSquares.Click += new System.EventHandler(this.btnSolveLeastSquares_Click);
+            // 
+            // btnOpenExcelLeastSquares
+            // 
+            this.btnOpenExcelLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelLeastSquares.AutoSize = true;
+            this.btnOpenExcelLeastSquares.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelLeastSquares.Location = new System.Drawing.Point(755, 4);
+            this.btnOpenExcelLeastSquares.Name = "btnOpenExcelLeastSquares";
+            this.btnOpenExcelLeastSquares.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelLeastSquares.TabIndex = 2;
+            this.btnOpenExcelLeastSquares.Text = "Nhập dữ liệu";
+            this.btnOpenExcelLeastSquares.UseVisualStyleBackColor = true;
+            this.btnOpenExcelLeastSquares.Click += new System.EventHandler(this.btnOpenExcelLeastSquares_Click);
+            // 
+            // tableLayoutPanel28
+            // 
+            this.tableLayoutPanel28.ColumnCount = 2;
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.Controls.Add(this.lblResultLeastSquares, 1, 0);
+            this.tableLayoutPanel28.Controls.Add(this.comboBoxLeastSquares, 0, 0);
+            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel28.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+            this.tableLayoutPanel28.RowCount = 1;
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(1126, 44);
+            this.tableLayoutPanel28.TabIndex = 10;
+            // 
+            // lblResultLeastSquares
+            // 
+            this.lblResultLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultLeastSquares.AutoSize = true;
+            this.lblResultLeastSquares.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultLeastSquares.Location = new System.Drawing.Point(801, 10);
+            this.lblResultLeastSquares.Name = "lblResultLeastSquares";
+            this.lblResultLeastSquares.Size = new System.Drawing.Size(87, 23);
+            this.lblResultLeastSquares.TabIndex = 5;
+            this.lblResultLeastSquares.Text = "label21";
+            this.lblResultLeastSquares.Visible = false;
+            // 
+            // comboBoxLeastSquares
+            // 
+            this.comboBoxLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxLeastSquares.FormattingEnabled = true;
+            this.comboBoxLeastSquares.Items.AddRange(new object[] {
+            "Tuyến tính",
+            "ax^b",
+            "ae^(b1φ1(x) + b2φ2(x) + ...)"});
+            this.comboBoxLeastSquares.Location = new System.Drawing.Point(167, 10);
+            this.comboBoxLeastSquares.Name = "comboBoxLeastSquares";
+            this.comboBoxLeastSquares.Size = new System.Drawing.Size(228, 24);
+            this.comboBoxLeastSquares.TabIndex = 0;
+            // 
+            // tabPage14
+            // 
+            this.tabPage14.Location = new System.Drawing.Point(4, 25);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage14.TabIndex = 13;
+            this.tabPage14.Text = "Spline";
+            this.tabPage14.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2180,6 +2645,8 @@
             this.tableLayoutPanel2.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel16.ResumeLayout(false);
+            this.tableLayoutPanel16.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewton)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -2188,8 +2655,8 @@
             this.tableLayoutPanel5.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.tableLayoutPanel17.ResumeLayout(false);
+            this.tableLayoutPanel17.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewtonFinite)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewXYNewtonFinite)).EndInit();
@@ -2197,13 +2664,15 @@
             this.tableLayoutPanel8.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.tableLayoutPanel18.ResumeLayout(false);
+            this.tableLayoutPanel18.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataResultStirling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYStirling)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel19.ResumeLayout(false);
+            this.tableLayoutPanel19.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
             this.tabPage7.ResumeLayout(false);
@@ -2211,6 +2680,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataXYBessel)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
+            this.tableLayoutPanel20.ResumeLayout(false);
+            this.tableLayoutPanel20.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
             this.tabPage9.ResumeLayout(false);
@@ -2218,6 +2689,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussI)).EndInit();
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
+            this.tableLayoutPanel21.ResumeLayout(false);
+            this.tableLayoutPanel21.PerformLayout();
             this.flowLayoutPanel7.ResumeLayout(false);
             this.flowLayoutPanel7.PerformLayout();
             this.tabPage10.ResumeLayout(false);
@@ -2225,6 +2698,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataXYGaussII)).EndInit();
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
+            this.tableLayoutPanel22.ResumeLayout(false);
+            this.tableLayoutPanel22.PerformLayout();
             this.flowLayoutPanel8.ResumeLayout(false);
             this.flowLayoutPanel8.PerformLayout();
             this.tabPage12.ResumeLayout(false);
@@ -2234,6 +2709,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewXYIteration)).EndInit();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
+            this.tableLayoutPanel23.ResumeLayout(false);
+            this.tableLayoutPanel23.PerformLayout();
             this.flowLayoutPanel9.ResumeLayout(false);
             this.flowLayoutPanel9.PerformLayout();
             this.flowLayoutPanel10.ResumeLayout(false);
@@ -2254,6 +2731,16 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).EndInit();
+            this.tabPage13.ResumeLayout(false);
+            this.tableLayoutPanel26.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYLeastSquares)).EndInit();
+            this.tableLayoutPanel27.ResumeLayout(false);
+            this.tableLayoutPanel27.PerformLayout();
+            this.tableLayoutPanel24.ResumeLayout(false);
+            this.tableLayoutPanel25.ResumeLayout(false);
+            this.tableLayoutPanel25.PerformLayout();
+            this.tableLayoutPanel28.ResumeLayout(false);
+            this.tableLayoutPanel28.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2355,11 +2842,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnLagrangeToEval;
         private System.Windows.Forms.Button btnStirlingToEval;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnNewtonToEval;
         private System.Windows.Forms.Label lblResultNewton;
         private System.Windows.Forms.Label lblNewtonFinite;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnNewtonFiniteToEval;
         private System.Windows.Forms.Button btnBesselToEval;
         private System.Windows.Forms.TabPage tabPage8;
@@ -2422,6 +2907,39 @@
         private System.Windows.Forms.DataGridView dataGridViewIteration;
         private System.Windows.Forms.RichTextBox richTextBoxIterationResult;
         private System.Windows.Forms.Label lblResultIteration;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
+        private System.Windows.Forms.Button btnOpenExcelLagrange;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
+        private System.Windows.Forms.Button btnOpenExcelNewton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
+        private System.Windows.Forms.Button btnOpenExcelNewtonFinite;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
+        private System.Windows.Forms.Button btnOpenExcelStirling;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
+        private System.Windows.Forms.Button btnOpenExcelBessel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
+        private System.Windows.Forms.Button btnOpenExcelGaussI;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
+        private System.Windows.Forms.Button btnOpenExcelGaussII;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
+        private System.Windows.Forms.Button btnOpenExcelIteration;
+        private System.Windows.Forms.TabPage tabPage13;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
+        private System.Windows.Forms.DataGridView dataXYLeastSquares;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataXLeastSquares;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataYLeastSquares;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
+        private System.Windows.Forms.Button btnSolveLeastSquares;
+        private System.Windows.Forms.Button btnOpenExcelLeastSquares;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtBoxLeastSquares;
+        private System.Windows.Forms.RichTextBox rtbResultLeastSquares;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
+        private System.Windows.Forms.ComboBox comboBoxLeastSquares;
+        private System.Windows.Forms.Label lblResultLeastSquares;
     }
 }
 
