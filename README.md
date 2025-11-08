@@ -1,17 +1,20 @@
 # Phương pháp số - Đa thức nội suy
 
 ## Mục đích:
-- Thực hiện gần hết các chức năng cần thiết trong chương nội suy môn phương pháp số
 - Giúp đỡ mọi người qua học phần Phương pháp số
 - Source code hoàn toàn được public nên mọi người có thể dựa vào đó để viết lại thuật toán 
-
-## Tính năng:
-- Hiển thị đầy đủ quá trình tìm đa thức nội suy và sử dụng lược đồ Horner để nhân chia đa thức ...
-- Khi phát hiện điểm nội suy trùng nhau, tự động giữ lại điểm đầu tiên và loại bỏ tất cả các điểm đằng sau
 - Nếu có góp ý sửa lỗi hãy tạo Issues mới hoặc nếu có ý tưởng cải tiến hãy tạo Pull requests
 
+## Tính năng:
+- Tìm đa thức nội suy bằng Nội suy mốc bất kì _(Lagrange, Newton)_, Nội suy mốc cách đều _(Newton)_, Nội suy trung tâm _(Stirling, Bessel, Gauss I, Gauss II)_, Nội suy ngược _(Phương pháp lặp)_, Hàm ghép trơn _(Spline)_
+- Tìm hàm thực nghiệm bằng phương pháp bình phương tối thiểu _(Dạng tuyến tính và Dạng phi tuyến có thể đưa về tuyến tính)_
+- Tìm các mốc nội suy cách đều phù hợp cho bài toán **Nội suy trung tâm** từ tập dữ liệu, Tìm các mốc nội suy phù hợp cho bài toán **nội suy ngược** từ tập dữ liệu
+- Tính giá trị đa thức tại 1 điểm _(Sử dụng lược đồ Hoocne)_, Tính đạo hàm các cấp của đa thức tại 1 điểm
+- Khi phát hiện điểm nội suy trùng nhau, tự động giữ lại điểm đầu tiên và loại bỏ tất cả các điểm còn lại
+- Tự động nhập dữ liệu từ File Excel
+
 ## WIP
-- ...
+- Hàm ghép trơn (Spline)
 
 ## Hướng dẫn sử dụng (?)
 ![Ảnh minh hoạ chức năng tìm mốc nội suy Chebyshev](./images/Chebyshev.png)
@@ -27,12 +30,12 @@
 - Giá trị in đậm trong bảng thương **CHƯA PHẢI** là giá trị cuối cùng của đạo hàm cấp k của P(x = c) người dùng cần phải lấy kết quả in đậm đó nhân với k! (k là đạo hàm cấp cần tính) để ra kết quả cuối cùng
 - Giá trị ở màn hình thông báo là giá trị cuối cùng cần tìm
 
-**Ảnh minh hoạ đã cũ, hãy tự trải nghiệm ứng dụng để hiểu tính năng mới**
+**Ảnh minh hoạ đã cũ, sẽ có Vid hướng dẫn thao tác**
 
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 - Khi nhập lưu ý dùng dấu **.** để biểu diễn phần thập phân
-- **LUÔN LUÔN** để cách 1 dòng khi nhập giá trị
+- **LUÔN LUÔN** để trống 1 dòng khi nhập giá trị
 
 ## Tải
 - Tải ở Releases hoặc ấn vào [đây](https://github.com/qanhta2710/Interpolation/releases) 
