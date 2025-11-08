@@ -14,34 +14,28 @@
 - Tự động nhập dữ liệu từ File Excel
 
 ## WIP
-- Hàm ghép trơn (Spline)
 
-## Hướng dẫn sử dụng (?)
-![Ảnh minh hoạ chức năng tìm mốc nội suy Chebyshev](./images/Chebyshev.png)
-- Dữ liệu nhập vào gồm: (a, b) và n là bậc của đa thức nội suy (Nếu đề bài cho n là số điểm nội suy thì nhập vào giá trị n - 1)
+## Hướng dẫn sử dụng 
 
-![Ảnh minh hoạ chức năng Lagrange](./images/Lagrange.png)
-![Ảnh minh hoạ chức năng Newton](./images/Newton.png)
-
-- Khi nhập vào bộ dữ liệu điểm (x, y) **LUÔN LUÔN** để thừa ra **1 DÒNG** như trong hình
-
-![Ảnh minh hoạ chức năng Horner](./images/Horner.png)
-- Khi nhập vào mảng hệ số **LUÔN LUÔN** để thừa ra **1 DÒNG** như trong hình
-- Giá trị in đậm trong bảng thương **CHƯA PHẢI** là giá trị cuối cùng của đạo hàm cấp k của P(x = c) người dùng cần phải lấy kết quả in đậm đó nhân với k! (k là đạo hàm cấp cần tính) để ra kết quả cuối cùng
-- Giá trị ở màn hình thông báo là giá trị cuối cùng cần tìm
-
+[Video hướng dẫn](https://youtu.be/W5qSPlaAW-c)
 **Ảnh minh hoạ đã cũ, sẽ có Vid hướng dẫn thao tác**
 
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 - Khi nhập lưu ý dùng dấu **.** để biểu diễn phần thập phân
 - **LUÔN LUÔN** để trống 1 dòng khi nhập giá trị
+- Khi nhập hàm cơ sở trong chức năng _Phương pháp bình phương tối thiểu_, ngăn cách các hàm bằng phím Enter xuống dòng và lưu ý cú pháp nhập 1 số hàm như sau: 
+  - Hàm lượng giác: Cos(x), Sin(x), Tan(x)
+  - Hàm e mũ x: Exp(x)
+  - Hàm luỹ thừa (Ví dụ x^2): Pow(x, 2)
+  - Logarit theo cơ số a: Log(value, base). Ví dụ: Log(100, 10)
+  - Hàm ln: Log(x)
 
 ## Tải
 - Tải ở Releases hoặc ấn vào [đây](https://github.com/qanhta2710/Interpolation/releases) 
 
 ## Contributors
-- Cảm ơn bác [TontonYuta](https://github.com/TontonYuta) đã giúp em tạo ý tưởng thực hiện tạo App này.
+- Cảm ơn bác [TontonYuta](https://github.com/TontonYuta) đã giúp em có ý tưởng thực hiện làm ra App này.
 
 ## 💖 Donate
 
