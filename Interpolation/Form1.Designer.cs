@@ -223,6 +223,20 @@
             this.lblResultLeastSquares = new System.Windows.Forms.Label();
             this.comboBoxLeastSquares = new System.Windows.Forms.ComboBox();
             this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveSpline = new System.Windows.Forms.Button();
+            this.btnOpenExcelSpline = new System.Windows.Forms.Button();
+            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionSpline = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblSpline = new System.Windows.Forms.Label();
+            this.comboBoxSpline = new System.Windows.Forms.ComboBox();
+            this.dataXYSpline = new System.Windows.Forms.DataGridView();
+            this.rtbResultSpline = new System.Windows.Forms.RichTextBox();
+            this.colsXSpline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYSpline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -301,6 +315,12 @@
             this.tableLayoutPanel24.SuspendLayout();
             this.tableLayoutPanel25.SuspendLayout();
             this.tableLayoutPanel28.SuspendLayout();
+            this.tabPage14.SuspendLayout();
+            this.tableLayoutPanel29.SuspendLayout();
+            this.tableLayoutPanel30.SuspendLayout();
+            this.flowLayoutPanel11.SuspendLayout();
+            this.flowLayoutPanel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYSpline)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -2310,9 +2330,9 @@
             this.label12.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(0, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(105, 17);
+            this.label12.Size = new System.Drawing.Size(124, 17);
             this.label12.TabIndex = 8;
-            this.label12.Text = "Lược đồ Horner";
+            this.label12.Text = "LƯỢC ĐỒ HORNER";
             // 
             // label11
             // 
@@ -2612,6 +2632,9 @@
             // 
             // tabPage14
             // 
+            this.tabPage14.Controls.Add(this.rtbResultSpline);
+            this.tabPage14.Controls.Add(this.dataXYSpline);
+            this.tabPage14.Controls.Add(this.tableLayoutPanel29);
             this.tabPage14.Location = new System.Drawing.Point(4, 25);
             this.tabPage14.Name = "tabPage14";
             this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
@@ -2619,6 +2642,167 @@
             this.tabPage14.TabIndex = 13;
             this.tabPage14.Text = "Spline";
             this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel29
+            // 
+            this.tableLayoutPanel29.ColumnCount = 2;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.12367F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.87633F));
+            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel30, 1, 1);
+            this.tableLayoutPanel29.Controls.Add(this.flowLayoutPanel11, 0, 1);
+            this.tableLayoutPanel29.Controls.Add(this.flowLayoutPanel12, 0, 0);
+            this.tableLayoutPanel29.Controls.Add(this.lblSpline, 1, 0);
+            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+            this.tableLayoutPanel29.RowCount = 2;
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel29.TabIndex = 6;
+            // 
+            // tableLayoutPanel30
+            // 
+            this.tableLayoutPanel30.ColumnCount = 2;
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.Controls.Add(this.btnOpenExcelSpline, 1, 0);
+            this.tableLayoutPanel30.Controls.Add(this.btnSolveSpline, 0, 0);
+            this.tableLayoutPanel30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel30.Location = new System.Drawing.Point(343, 53);
+            this.tableLayoutPanel30.Name = "tableLayoutPanel30";
+            this.tableLayoutPanel30.RowCount = 1;
+            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.Size = new System.Drawing.Size(786, 44);
+            this.tableLayoutPanel30.TabIndex = 9;
+            // 
+            // btnSolveSpline
+            // 
+            this.btnSolveSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveSpline.AutoSize = true;
+            this.btnSolveSpline.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveSpline.Location = new System.Drawing.Point(109, 4);
+            this.btnSolveSpline.Name = "btnSolveSpline";
+            this.btnSolveSpline.Size = new System.Drawing.Size(175, 35);
+            this.btnSolveSpline.TabIndex = 1;
+            this.btnSolveSpline.Text = "Tìm hàm ghép trơn";
+            this.btnSolveSpline.UseVisualStyleBackColor = true;
+            this.btnSolveSpline.Click += new System.EventHandler(this.btnSolveSpline_Click);
+            // 
+            // btnOpenExcelSpline
+            // 
+            this.btnOpenExcelSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelSpline.AutoSize = true;
+            this.btnOpenExcelSpline.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelSpline.Location = new System.Drawing.Point(500, 4);
+            this.btnOpenExcelSpline.Name = "btnOpenExcelSpline";
+            this.btnOpenExcelSpline.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelSpline.TabIndex = 2;
+            this.btnOpenExcelSpline.Text = "Nhập dữ liệu";
+            this.btnOpenExcelSpline.UseVisualStyleBackColor = true;
+            this.btnOpenExcelSpline.Click += new System.EventHandler(this.btnOpenExcelSpline_Click);
+            // 
+            // flowLayoutPanel11
+            // 
+            this.flowLayoutPanel11.Controls.Add(this.txtBoxPrecisionSpline);
+            this.flowLayoutPanel11.Controls.Add(this.label24);
+            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(334, 44);
+            this.flowLayoutPanel11.TabIndex = 2;
+            // 
+            // txtBoxPrecisionSpline
+            // 
+            this.txtBoxPrecisionSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionSpline.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionSpline.Name = "txtBoxPrecisionSpline";
+            this.txtBoxPrecisionSpline.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionSpline.TabIndex = 0;
+            this.txtBoxPrecisionSpline.Text = "15";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(109, 6);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(161, 16);
+            this.label24.TabIndex = 1;
+            this.label24.Text = "Số chữ số phần thập phân";
+            // 
+            // flowLayoutPanel12
+            // 
+            this.flowLayoutPanel12.Controls.Add(this.comboBoxSpline);
+            this.flowLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel12.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
+            this.flowLayoutPanel12.Size = new System.Drawing.Size(334, 44);
+            this.flowLayoutPanel12.TabIndex = 3;
+            // 
+            // lblSpline
+            // 
+            this.lblSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblSpline.AutoSize = true;
+            this.lblSpline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpline.Location = new System.Drawing.Point(692, 13);
+            this.lblSpline.Name = "lblSpline";
+            this.lblSpline.Size = new System.Drawing.Size(87, 23);
+            this.lblSpline.TabIndex = 4;
+            this.lblSpline.Text = "label21";
+            this.lblSpline.Visible = false;
+            // 
+            // comboBoxSpline
+            // 
+            this.comboBoxSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxSpline.FormattingEnabled = true;
+            this.comboBoxSpline.Items.AddRange(new object[] {
+            "Spline tuyến tính (Cấp 1)",
+            "Spline cấp 2",
+            "Spline cấp 3"});
+            this.comboBoxSpline.Location = new System.Drawing.Point(3, 3);
+            this.comboBoxSpline.Name = "comboBoxSpline";
+            this.comboBoxSpline.Size = new System.Drawing.Size(228, 24);
+            this.comboBoxSpline.TabIndex = 1;
+            // 
+            // dataXYSpline
+            // 
+            this.dataXYSpline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYSpline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXSpline,
+            this.colsYSpline});
+            this.dataXYSpline.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYSpline.Location = new System.Drawing.Point(3, 3);
+            this.dataXYSpline.Name = "dataXYSpline";
+            this.dataXYSpline.RowHeadersWidth = 51;
+            this.dataXYSpline.RowTemplate.Height = 24;
+            this.dataXYSpline.Size = new System.Drawing.Size(248, 540);
+            this.dataXYSpline.TabIndex = 7;
+            // 
+            // rtbResultSpline
+            // 
+            this.rtbResultSpline.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbResultSpline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbResultSpline.Location = new System.Drawing.Point(251, 3);
+            this.rtbResultSpline.Name = "rtbResultSpline";
+            this.rtbResultSpline.Size = new System.Drawing.Size(884, 540);
+            this.rtbResultSpline.TabIndex = 8;
+            this.rtbResultSpline.Text = "";
+            // 
+            // colsXSpline
+            // 
+            this.colsXSpline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXSpline.HeaderText = "X";
+            this.colsXSpline.MinimumWidth = 6;
+            this.colsXSpline.Name = "colsXSpline";
+            // 
+            // colsYSpline
+            // 
+            this.colsYSpline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYSpline.HeaderText = "Y";
+            this.colsYSpline.MinimumWidth = 6;
+            this.colsYSpline.Name = "colsYSpline";
             // 
             // Form1
             // 
@@ -2741,6 +2925,15 @@
             this.tableLayoutPanel25.PerformLayout();
             this.tableLayoutPanel28.ResumeLayout(false);
             this.tableLayoutPanel28.PerformLayout();
+            this.tabPage14.ResumeLayout(false);
+            this.tableLayoutPanel29.ResumeLayout(false);
+            this.tableLayoutPanel29.PerformLayout();
+            this.tableLayoutPanel30.ResumeLayout(false);
+            this.tableLayoutPanel30.PerformLayout();
+            this.flowLayoutPanel11.ResumeLayout(false);
+            this.flowLayoutPanel11.PerformLayout();
+            this.flowLayoutPanel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYSpline)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2940,6 +3133,20 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
         private System.Windows.Forms.ComboBox comboBoxLeastSquares;
         private System.Windows.Forms.Label lblResultLeastSquares;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel29;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel30;
+        private System.Windows.Forms.Button btnSolveSpline;
+        private System.Windows.Forms.Button btnOpenExcelSpline;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
+        private System.Windows.Forms.TextBox txtBoxPrecisionSpline;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel12;
+        private System.Windows.Forms.ComboBox comboBoxSpline;
+        private System.Windows.Forms.Label lblSpline;
+        private System.Windows.Forms.DataGridView dataXYSpline;
+        private System.Windows.Forms.RichTextBox rtbResultSpline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colsXSpline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colsYSpline;
     }
 }
 
