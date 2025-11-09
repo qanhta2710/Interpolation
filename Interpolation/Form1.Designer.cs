@@ -169,6 +169,36 @@
             this.txtBoxYAvg = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.lblResultIteration = new System.Windows.Forms.Label();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataXYLeastSquares = new System.Windows.Forms.DataGridView();
+            this.dataXLeastSquares = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataYLeastSquares = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtBoxLeastSquares = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.rtbResultLeastSquares = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSolveLeastSquares = new System.Windows.Forms.Button();
+            this.btnOpenExcelLeastSquares = new System.Windows.Forms.Button();
+            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblResultLeastSquares = new System.Windows.Forms.Label();
+            this.comboBoxLeastSquares = new System.Windows.Forms.ComboBox();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.rtbResultSpline = new System.Windows.Forms.RichTextBox();
+            this.dataXYSpline = new System.Windows.Forms.DataGridView();
+            this.colsXSpline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colsYSpline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOpenExcelSpline = new System.Windows.Forms.Button();
+            this.btnSolveSpline = new System.Windows.Forms.Button();
+            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtBoxPrecisionSpline = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
+            this.comboBoxSpline = new System.Windows.Forms.ComboBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBoxFindPoints = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -206,37 +236,6 @@
             this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
             this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataXYLeastSquares = new System.Windows.Forms.DataGridView();
-            this.dataXLeastSquares = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataYLeastSquares = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtBoxLeastSquares = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.rtbResultLeastSquares = new System.Windows.Forms.RichTextBox();
-            this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSolveLeastSquares = new System.Windows.Forms.Button();
-            this.btnOpenExcelLeastSquares = new System.Windows.Forms.Button();
-            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblResultLeastSquares = new System.Windows.Forms.Label();
-            this.comboBoxLeastSquares = new System.Windows.Forms.ComboBox();
-            this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSolveSpline = new System.Windows.Forms.Button();
-            this.btnOpenExcelSpline = new System.Windows.Forms.Button();
-            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtBoxPrecisionSpline = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblSpline = new System.Windows.Forms.Label();
-            this.comboBoxSpline = new System.Windows.Forms.ComboBox();
-            this.dataXYSpline = new System.Windows.Forms.DataGridView();
-            this.rtbResultSpline = new System.Windows.Forms.RichTextBox();
-            this.colsXSpline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colsYSpline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -295,6 +294,19 @@
             this.tableLayoutPanel23.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
+            this.tabPage13.SuspendLayout();
+            this.tableLayoutPanel26.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYLeastSquares)).BeginInit();
+            this.tableLayoutPanel27.SuspendLayout();
+            this.tableLayoutPanel24.SuspendLayout();
+            this.tableLayoutPanel25.SuspendLayout();
+            this.tableLayoutPanel28.SuspendLayout();
+            this.tabPage14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYSpline)).BeginInit();
+            this.tableLayoutPanel29.SuspendLayout();
+            this.tableLayoutPanel30.SuspendLayout();
+            this.flowLayoutPanel11.SuspendLayout();
+            this.flowLayoutPanel12.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -308,19 +320,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHornerDerivative)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).BeginInit();
-            this.tabPage13.SuspendLayout();
-            this.tableLayoutPanel26.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYLeastSquares)).BeginInit();
-            this.tableLayoutPanel27.SuspendLayout();
-            this.tableLayoutPanel24.SuspendLayout();
-            this.tableLayoutPanel25.SuspendLayout();
-            this.tableLayoutPanel28.SuspendLayout();
-            this.tabPage14.SuspendLayout();
-            this.tableLayoutPanel29.SuspendLayout();
-            this.tableLayoutPanel30.SuspendLayout();
-            this.flowLayoutPanel11.SuspendLayout();
-            this.flowLayoutPanel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYSpline)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -540,10 +539,10 @@
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage12);
             this.tabControl1.Controls.Add(this.tabPage13);
-            this.tabControl1.Controls.Add(this.tabPage14);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage14);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -643,7 +642,7 @@
             this.txtBoxPrecisionLagrange.Name = "txtBoxPrecisionLagrange";
             this.txtBoxPrecisionLagrange.Size = new System.Drawing.Size(100, 22);
             this.txtBoxPrecisionLagrange.TabIndex = 0;
-            this.txtBoxPrecisionLagrange.Text = "15";
+            this.txtBoxPrecisionLagrange.Text = "7";
             // 
             // label13
             // 
@@ -836,7 +835,7 @@
             this.txtBoxPrecisionNewton.Name = "txtBoxPrecisionNewton";
             this.txtBoxPrecisionNewton.Size = new System.Drawing.Size(100, 22);
             this.txtBoxPrecisionNewton.TabIndex = 0;
-            this.txtBoxPrecisionNewton.Text = "15";
+            this.txtBoxPrecisionNewton.Text = "7";
             // 
             // label3
             // 
@@ -1022,7 +1021,7 @@
             this.txtBoxPrecisionNewtonFinite.Name = "txtBoxPrecisionNewtonFinite";
             this.txtBoxPrecisionNewtonFinite.Size = new System.Drawing.Size(100, 22);
             this.txtBoxPrecisionNewtonFinite.TabIndex = 0;
-            this.txtBoxPrecisionNewtonFinite.Text = "15";
+            this.txtBoxPrecisionNewtonFinite.Text = "7";
             // 
             // label14
             // 
@@ -1050,7 +1049,7 @@
             this.tableLayoutPanel18.ColumnCount = 3;
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.14418F));
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.85582F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 249F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 251F));
             this.tableLayoutPanel18.Controls.Add(this.btnOpenExcelNewtonFinite, 1, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnNewtonFiniteToEval, 2, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnSolveNewtonFinite, 0, 0);
@@ -1067,7 +1066,7 @@
             this.btnOpenExcelNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnOpenExcelNewtonFinite.AutoSize = true;
             this.btnOpenExcelNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(312, 4);
+            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(311, 4);
             this.btnOpenExcelNewtonFinite.Name = "btnOpenExcelNewtonFinite";
             this.btnOpenExcelNewtonFinite.Size = new System.Drawing.Size(178, 35);
             this.btnOpenExcelNewtonFinite.TabIndex = 6;
@@ -1079,7 +1078,7 @@
             // 
             this.btnNewtonFiniteToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNewtonFiniteToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(574, 3);
+            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(573, 3);
             this.btnNewtonFiniteToEval.Name = "btnNewtonFiniteToEval";
             this.btnNewtonFiniteToEval.Size = new System.Drawing.Size(232, 38);
             this.btnNewtonFiniteToEval.TabIndex = 5;
@@ -1093,7 +1092,7 @@
             this.btnSolveNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSolveNewtonFinite.AutoSize = true;
             this.btnSolveNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(30, 3);
+            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(29, 3);
             this.btnSolveNewtonFinite.Name = "btnSolveNewtonFinite";
             this.btnSolveNewtonFinite.Size = new System.Drawing.Size(178, 38);
             this.btnSolveNewtonFinite.TabIndex = 1;
@@ -1260,7 +1259,7 @@
             this.txtboxPrecisionStirling.Name = "txtboxPrecisionStirling";
             this.txtboxPrecisionStirling.Size = new System.Drawing.Size(100, 22);
             this.txtboxPrecisionStirling.TabIndex = 0;
-            this.txtboxPrecisionStirling.Text = "15";
+            this.txtboxPrecisionStirling.Text = "7";
             // 
             // label15
             // 
@@ -1430,7 +1429,7 @@
             this.txtboxPrecisionBessel.Name = "txtboxPrecisionBessel";
             this.txtboxPrecisionBessel.Size = new System.Drawing.Size(100, 22);
             this.txtboxPrecisionBessel.TabIndex = 0;
-            this.txtboxPrecisionBessel.Text = "15";
+            this.txtboxPrecisionBessel.Text = "7";
             // 
             // label16
             // 
@@ -1601,7 +1600,7 @@
             this.txtBoxPrecisionGaussI.Name = "txtBoxPrecisionGaussI";
             this.txtBoxPrecisionGaussI.Size = new System.Drawing.Size(100, 22);
             this.txtBoxPrecisionGaussI.TabIndex = 0;
-            this.txtBoxPrecisionGaussI.Text = "15";
+            this.txtBoxPrecisionGaussI.Text = "7";
             // 
             // label19
             // 
@@ -1772,7 +1771,7 @@
             this.txtBoxPrecisionGaussII.Name = "txtBoxPrecisionGaussII";
             this.txtBoxPrecisionGaussII.Size = new System.Drawing.Size(100, 22);
             this.txtBoxPrecisionGaussII.TabIndex = 0;
-            this.txtBoxPrecisionGaussII.Text = "15";
+            this.txtBoxPrecisionGaussII.Text = "7";
             // 
             // label20
             // 
@@ -1947,7 +1946,7 @@
             this.txtBoxPrecisionIteration.Name = "txtBoxPrecisionIteration";
             this.txtBoxPrecisionIteration.Size = new System.Drawing.Size(100, 22);
             this.txtBoxPrecisionIteration.TabIndex = 0;
-            this.txtBoxPrecisionIteration.Text = "15";
+            this.txtBoxPrecisionIteration.Text = "7";
             // 
             // label22
             // 
@@ -1997,6 +1996,366 @@
             this.lblResultIteration.TabIndex = 4;
             this.lblResultIteration.Text = "label21";
             this.lblResultIteration.Visible = false;
+            // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.tableLayoutPanel26);
+            this.tabPage13.Controls.Add(this.tableLayoutPanel24);
+            this.tabPage13.Location = new System.Drawing.Point(4, 25);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage13.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage13.TabIndex = 12;
+            this.tabPage13.Text = "Bình phương tối thiểu";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.ColumnCount = 3;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.83247F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.16753F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 653F));
+            this.tableLayoutPanel26.Controls.Add(this.dataXYLeastSquares, 0, 0);
+            this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 1, 0);
+            this.tableLayoutPanel26.Controls.Add(this.rtbResultLeastSquares, 2, 0);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 1;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(1132, 540);
+            this.tableLayoutPanel26.TabIndex = 7;
+            // 
+            // dataXYLeastSquares
+            // 
+            this.dataXYLeastSquares.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYLeastSquares.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataXLeastSquares,
+            this.dataYLeastSquares});
+            this.dataXYLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataXYLeastSquares.Location = new System.Drawing.Point(3, 3);
+            this.dataXYLeastSquares.Name = "dataXYLeastSquares";
+            this.dataXYLeastSquares.RowHeadersWidth = 51;
+            this.dataXYLeastSquares.RowTemplate.Height = 24;
+            this.dataXYLeastSquares.Size = new System.Drawing.Size(199, 534);
+            this.dataXYLeastSquares.TabIndex = 6;
+            // 
+            // dataXLeastSquares
+            // 
+            this.dataXLeastSquares.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataXLeastSquares.HeaderText = "X";
+            this.dataXLeastSquares.MinimumWidth = 6;
+            this.dataXLeastSquares.Name = "dataXLeastSquares";
+            // 
+            // dataYLeastSquares
+            // 
+            this.dataYLeastSquares.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataYLeastSquares.HeaderText = "Y";
+            this.dataYLeastSquares.MinimumWidth = 6;
+            this.dataYLeastSquares.Name = "dataYLeastSquares";
+            // 
+            // tableLayoutPanel27
+            // 
+            this.tableLayoutPanel27.ColumnCount = 1;
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel27.Controls.Add(this.txtBoxLeastSquares, 0, 1);
+            this.tableLayoutPanel27.Controls.Add(this.label21, 0, 0);
+            this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel27.Location = new System.Drawing.Point(208, 3);
+            this.tableLayoutPanel27.Name = "tableLayoutPanel27";
+            this.tableLayoutPanel27.RowCount = 2;
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.85768F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.14232F));
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(267, 534);
+            this.tableLayoutPanel27.TabIndex = 8;
+            // 
+            // txtBoxLeastSquares
+            // 
+            this.txtBoxLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxLeastSquares.Location = new System.Drawing.Point(3, 77);
+            this.txtBoxLeastSquares.Multiline = true;
+            this.txtBoxLeastSquares.Name = "txtBoxLeastSquares";
+            this.txtBoxLeastSquares.Size = new System.Drawing.Size(261, 454);
+            this.txtBoxLeastSquares.TabIndex = 8;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(3, 45);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(180, 29);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Nhập tập cơ sở:";
+            // 
+            // rtbResultLeastSquares
+            // 
+            this.rtbResultLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbResultLeastSquares.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbResultLeastSquares.Location = new System.Drawing.Point(481, 3);
+            this.rtbResultLeastSquares.Name = "rtbResultLeastSquares";
+            this.rtbResultLeastSquares.ReadOnly = true;
+            this.rtbResultLeastSquares.Size = new System.Drawing.Size(648, 534);
+            this.rtbResultLeastSquares.TabIndex = 9;
+            this.rtbResultLeastSquares.Text = "";
+            // 
+            // tableLayoutPanel24
+            // 
+            this.tableLayoutPanel24.ColumnCount = 1;
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 0, 1);
+            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel28, 0, 0);
+            this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel24.Name = "tableLayoutPanel24";
+            this.tableLayoutPanel24.RowCount = 2;
+            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel24.TabIndex = 6;
+            // 
+            // tableLayoutPanel25
+            // 
+            this.tableLayoutPanel25.ColumnCount = 2;
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Controls.Add(this.btnSolveLeastSquares, 0, 0);
+            this.tableLayoutPanel25.Controls.Add(this.btnOpenExcelLeastSquares, 1, 0);
+            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel25.Location = new System.Drawing.Point(3, 53);
+            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+            this.tableLayoutPanel25.RowCount = 1;
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(1126, 44);
+            this.tableLayoutPanel25.TabIndex = 9;
+            // 
+            // btnSolveLeastSquares
+            // 
+            this.btnSolveLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveLeastSquares.AutoSize = true;
+            this.btnSolveLeastSquares.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveLeastSquares.Location = new System.Drawing.Point(183, 4);
+            this.btnSolveLeastSquares.Name = "btnSolveLeastSquares";
+            this.btnSolveLeastSquares.Size = new System.Drawing.Size(196, 35);
+            this.btnSolveLeastSquares.TabIndex = 1;
+            this.btnSolveLeastSquares.Text = "Tìm hàm thực nghiệm";
+            this.btnSolveLeastSquares.UseVisualStyleBackColor = true;
+            this.btnSolveLeastSquares.Click += new System.EventHandler(this.btnSolveLeastSquares_Click);
+            // 
+            // btnOpenExcelLeastSquares
+            // 
+            this.btnOpenExcelLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelLeastSquares.AutoSize = true;
+            this.btnOpenExcelLeastSquares.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelLeastSquares.Location = new System.Drawing.Point(755, 4);
+            this.btnOpenExcelLeastSquares.Name = "btnOpenExcelLeastSquares";
+            this.btnOpenExcelLeastSquares.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelLeastSquares.TabIndex = 2;
+            this.btnOpenExcelLeastSquares.Text = "Nhập dữ liệu";
+            this.btnOpenExcelLeastSquares.UseVisualStyleBackColor = true;
+            this.btnOpenExcelLeastSquares.Click += new System.EventHandler(this.btnOpenExcelLeastSquares_Click);
+            // 
+            // tableLayoutPanel28
+            // 
+            this.tableLayoutPanel28.ColumnCount = 2;
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.Controls.Add(this.lblResultLeastSquares, 1, 0);
+            this.tableLayoutPanel28.Controls.Add(this.comboBoxLeastSquares, 0, 0);
+            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel28.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+            this.tableLayoutPanel28.RowCount = 1;
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(1126, 44);
+            this.tableLayoutPanel28.TabIndex = 10;
+            // 
+            // lblResultLeastSquares
+            // 
+            this.lblResultLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblResultLeastSquares.AutoSize = true;
+            this.lblResultLeastSquares.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultLeastSquares.Location = new System.Drawing.Point(801, 10);
+            this.lblResultLeastSquares.Name = "lblResultLeastSquares";
+            this.lblResultLeastSquares.Size = new System.Drawing.Size(87, 23);
+            this.lblResultLeastSquares.TabIndex = 5;
+            this.lblResultLeastSquares.Text = "label21";
+            this.lblResultLeastSquares.Visible = false;
+            // 
+            // comboBoxLeastSquares
+            // 
+            this.comboBoxLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxLeastSquares.FormattingEnabled = true;
+            this.comboBoxLeastSquares.Items.AddRange(new object[] {
+            "Tuyến tính",
+            "ax^b",
+            "ae^(b1φ1(x) + b2φ2(x) + ...)"});
+            this.comboBoxLeastSquares.Location = new System.Drawing.Point(167, 10);
+            this.comboBoxLeastSquares.Name = "comboBoxLeastSquares";
+            this.comboBoxLeastSquares.Size = new System.Drawing.Size(228, 24);
+            this.comboBoxLeastSquares.TabIndex = 0;
+            // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.rtbResultSpline);
+            this.tabPage14.Controls.Add(this.dataXYSpline);
+            this.tabPage14.Controls.Add(this.tableLayoutPanel29);
+            this.tabPage14.Location = new System.Drawing.Point(4, 25);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(1138, 646);
+            this.tabPage14.TabIndex = 13;
+            this.tabPage14.Text = "Spline (Đang sửa)";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // rtbResultSpline
+            // 
+            this.rtbResultSpline.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbResultSpline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbResultSpline.Location = new System.Drawing.Point(251, 3);
+            this.rtbResultSpline.Name = "rtbResultSpline";
+            this.rtbResultSpline.Size = new System.Drawing.Size(884, 540);
+            this.rtbResultSpline.TabIndex = 8;
+            this.rtbResultSpline.Text = "";
+            // 
+            // dataXYSpline
+            // 
+            this.dataXYSpline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataXYSpline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colsXSpline,
+            this.colsYSpline});
+            this.dataXYSpline.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataXYSpline.Location = new System.Drawing.Point(3, 3);
+            this.dataXYSpline.Name = "dataXYSpline";
+            this.dataXYSpline.RowHeadersWidth = 51;
+            this.dataXYSpline.RowTemplate.Height = 24;
+            this.dataXYSpline.Size = new System.Drawing.Size(248, 540);
+            this.dataXYSpline.TabIndex = 7;
+            // 
+            // colsXSpline
+            // 
+            this.colsXSpline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsXSpline.HeaderText = "X";
+            this.colsXSpline.MinimumWidth = 6;
+            this.colsXSpline.Name = "colsXSpline";
+            // 
+            // colsYSpline
+            // 
+            this.colsYSpline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colsYSpline.HeaderText = "Y";
+            this.colsYSpline.MinimumWidth = 6;
+            this.colsYSpline.Name = "colsYSpline";
+            // 
+            // tableLayoutPanel29
+            // 
+            this.tableLayoutPanel29.ColumnCount = 2;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.12367F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.87633F));
+            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel30, 1, 1);
+            this.tableLayoutPanel29.Controls.Add(this.flowLayoutPanel11, 0, 1);
+            this.tableLayoutPanel29.Controls.Add(this.flowLayoutPanel12, 0, 0);
+            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(3, 543);
+            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+            this.tableLayoutPanel29.RowCount = 2;
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(1132, 100);
+            this.tableLayoutPanel29.TabIndex = 6;
+            // 
+            // tableLayoutPanel30
+            // 
+            this.tableLayoutPanel30.ColumnCount = 2;
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.Controls.Add(this.btnOpenExcelSpline, 1, 0);
+            this.tableLayoutPanel30.Controls.Add(this.btnSolveSpline, 0, 0);
+            this.tableLayoutPanel30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel30.Location = new System.Drawing.Point(343, 53);
+            this.tableLayoutPanel30.Name = "tableLayoutPanel30";
+            this.tableLayoutPanel30.RowCount = 1;
+            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel30.Size = new System.Drawing.Size(786, 44);
+            this.tableLayoutPanel30.TabIndex = 9;
+            // 
+            // btnOpenExcelSpline
+            // 
+            this.btnOpenExcelSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenExcelSpline.AutoSize = true;
+            this.btnOpenExcelSpline.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenExcelSpline.Location = new System.Drawing.Point(500, 4);
+            this.btnOpenExcelSpline.Name = "btnOpenExcelSpline";
+            this.btnOpenExcelSpline.Size = new System.Drawing.Size(178, 35);
+            this.btnOpenExcelSpline.TabIndex = 2;
+            this.btnOpenExcelSpline.Text = "Nhập dữ liệu";
+            this.btnOpenExcelSpline.UseVisualStyleBackColor = true;
+            this.btnOpenExcelSpline.Click += new System.EventHandler(this.btnOpenExcelSpline_Click);
+            // 
+            // btnSolveSpline
+            // 
+            this.btnSolveSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSolveSpline.AutoSize = true;
+            this.btnSolveSpline.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSolveSpline.Location = new System.Drawing.Point(109, 4);
+            this.btnSolveSpline.Name = "btnSolveSpline";
+            this.btnSolveSpline.Size = new System.Drawing.Size(175, 35);
+            this.btnSolveSpline.TabIndex = 1;
+            this.btnSolveSpline.Text = "Tìm hàm ghép trơn";
+            this.btnSolveSpline.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel11
+            // 
+            this.flowLayoutPanel11.Controls.Add(this.txtBoxPrecisionSpline);
+            this.flowLayoutPanel11.Controls.Add(this.label24);
+            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(3, 53);
+            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(334, 44);
+            this.flowLayoutPanel11.TabIndex = 2;
+            // 
+            // txtBoxPrecisionSpline
+            // 
+            this.txtBoxPrecisionSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBoxPrecisionSpline.Location = new System.Drawing.Point(3, 3);
+            this.txtBoxPrecisionSpline.Name = "txtBoxPrecisionSpline";
+            this.txtBoxPrecisionSpline.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxPrecisionSpline.TabIndex = 0;
+            this.txtBoxPrecisionSpline.Text = "15";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(109, 6);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(161, 16);
+            this.label24.TabIndex = 1;
+            this.label24.Text = "Số chữ số phần thập phân";
+            // 
+            // flowLayoutPanel12
+            // 
+            this.flowLayoutPanel12.Controls.Add(this.comboBoxSpline);
+            this.flowLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel12.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
+            this.flowLayoutPanel12.Size = new System.Drawing.Size(334, 44);
+            this.flowLayoutPanel12.TabIndex = 3;
+            // 
+            // comboBoxSpline
+            // 
+            this.comboBoxSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxSpline.FormattingEnabled = true;
+            this.comboBoxSpline.Items.AddRange(new object[] {
+            "Spline tuyến tính (Cấp 1)",
+            "Spline cấp 2",
+            "Spline cấp 3"});
+            this.comboBoxSpline.Location = new System.Drawing.Point(3, 3);
+            this.comboBoxSpline.Name = "comboBoxSpline";
+            this.comboBoxSpline.Size = new System.Drawing.Size(228, 24);
+            this.comboBoxSpline.TabIndex = 1;
             // 
             // tabPage8
             // 
@@ -2084,6 +2443,7 @@
             this.textBoxK.Name = "textBoxK";
             this.textBoxK.Size = new System.Drawing.Size(100, 22);
             this.textBoxK.TabIndex = 5;
+            this.textBoxK.Text = "5";
             // 
             // txtBoxX
             // 
@@ -2408,7 +2768,7 @@
             this.txtBoxPrecisionEval.Name = "txtBoxPrecisionEval";
             this.txtBoxPrecisionEval.Size = new System.Drawing.Size(182, 22);
             this.txtBoxPrecisionEval.TabIndex = 0;
-            this.txtBoxPrecisionEval.Text = "15";
+            this.txtBoxPrecisionEval.Text = "7";
             // 
             // dataGridViewCoeffsP
             // 
@@ -2429,380 +2789,6 @@
             this.coeffsP.HeaderText = "Hệ số";
             this.coeffsP.MinimumWidth = 6;
             this.coeffsP.Name = "coeffsP";
-            // 
-            // tabPage13
-            // 
-            this.tabPage13.Controls.Add(this.tableLayoutPanel26);
-            this.tabPage13.Controls.Add(this.tableLayoutPanel24);
-            this.tabPage13.Location = new System.Drawing.Point(4, 25);
-            this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage13.TabIndex = 12;
-            this.tabPage13.Text = "Bình phương tối thiểu";
-            this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel26
-            // 
-            this.tableLayoutPanel26.ColumnCount = 3;
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.83247F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.16753F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 651F));
-            this.tableLayoutPanel26.Controls.Add(this.dataXYLeastSquares, 0, 0);
-            this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 1, 0);
-            this.tableLayoutPanel26.Controls.Add(this.rtbResultLeastSquares, 2, 0);
-            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
-            this.tableLayoutPanel26.RowCount = 1;
-            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel26.Size = new System.Drawing.Size(1132, 540);
-            this.tableLayoutPanel26.TabIndex = 7;
-            // 
-            // dataXYLeastSquares
-            // 
-            this.dataXYLeastSquares.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYLeastSquares.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataXLeastSquares,
-            this.dataYLeastSquares});
-            this.dataXYLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataXYLeastSquares.Location = new System.Drawing.Point(3, 3);
-            this.dataXYLeastSquares.Name = "dataXYLeastSquares";
-            this.dataXYLeastSquares.RowHeadersWidth = 51;
-            this.dataXYLeastSquares.RowTemplate.Height = 24;
-            this.dataXYLeastSquares.Size = new System.Drawing.Size(200, 534);
-            this.dataXYLeastSquares.TabIndex = 6;
-            // 
-            // dataXLeastSquares
-            // 
-            this.dataXLeastSquares.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataXLeastSquares.HeaderText = "X";
-            this.dataXLeastSquares.MinimumWidth = 6;
-            this.dataXLeastSquares.Name = "dataXLeastSquares";
-            // 
-            // dataYLeastSquares
-            // 
-            this.dataYLeastSquares.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataYLeastSquares.HeaderText = "Y";
-            this.dataYLeastSquares.MinimumWidth = 6;
-            this.dataYLeastSquares.Name = "dataYLeastSquares";
-            // 
-            // tableLayoutPanel27
-            // 
-            this.tableLayoutPanel27.ColumnCount = 1;
-            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel27.Controls.Add(this.txtBoxLeastSquares, 0, 1);
-            this.tableLayoutPanel27.Controls.Add(this.label21, 0, 0);
-            this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel27.Location = new System.Drawing.Point(209, 3);
-            this.tableLayoutPanel27.Name = "tableLayoutPanel27";
-            this.tableLayoutPanel27.RowCount = 2;
-            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.85768F));
-            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.14232F));
-            this.tableLayoutPanel27.Size = new System.Drawing.Size(268, 534);
-            this.tableLayoutPanel27.TabIndex = 8;
-            // 
-            // txtBoxLeastSquares
-            // 
-            this.txtBoxLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxLeastSquares.Location = new System.Drawing.Point(3, 77);
-            this.txtBoxLeastSquares.Multiline = true;
-            this.txtBoxLeastSquares.Name = "txtBoxLeastSquares";
-            this.txtBoxLeastSquares.Size = new System.Drawing.Size(262, 454);
-            this.txtBoxLeastSquares.TabIndex = 8;
-            // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(3, 45);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(180, 29);
-            this.label21.TabIndex = 7;
-            this.label21.Text = "Nhập tập cơ sở:";
-            // 
-            // rtbResultLeastSquares
-            // 
-            this.rtbResultLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbResultLeastSquares.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbResultLeastSquares.Location = new System.Drawing.Point(483, 3);
-            this.rtbResultLeastSquares.Name = "rtbResultLeastSquares";
-            this.rtbResultLeastSquares.ReadOnly = true;
-            this.rtbResultLeastSquares.Size = new System.Drawing.Size(646, 534);
-            this.rtbResultLeastSquares.TabIndex = 9;
-            this.rtbResultLeastSquares.Text = "";
-            // 
-            // tableLayoutPanel24
-            // 
-            this.tableLayoutPanel24.ColumnCount = 1;
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 0, 1);
-            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel28, 0, 0);
-            this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 543);
-            this.tableLayoutPanel24.Name = "tableLayoutPanel24";
-            this.tableLayoutPanel24.RowCount = 2;
-            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel24.Size = new System.Drawing.Size(1132, 100);
-            this.tableLayoutPanel24.TabIndex = 6;
-            // 
-            // tableLayoutPanel25
-            // 
-            this.tableLayoutPanel25.ColumnCount = 2;
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel25.Controls.Add(this.btnSolveLeastSquares, 0, 0);
-            this.tableLayoutPanel25.Controls.Add(this.btnOpenExcelLeastSquares, 1, 0);
-            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel25.Location = new System.Drawing.Point(3, 53);
-            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
-            this.tableLayoutPanel25.RowCount = 1;
-            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel25.Size = new System.Drawing.Size(1126, 44);
-            this.tableLayoutPanel25.TabIndex = 9;
-            // 
-            // btnSolveLeastSquares
-            // 
-            this.btnSolveLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveLeastSquares.AutoSize = true;
-            this.btnSolveLeastSquares.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveLeastSquares.Location = new System.Drawing.Point(183, 4);
-            this.btnSolveLeastSquares.Name = "btnSolveLeastSquares";
-            this.btnSolveLeastSquares.Size = new System.Drawing.Size(196, 35);
-            this.btnSolveLeastSquares.TabIndex = 1;
-            this.btnSolveLeastSquares.Text = "Tìm hàm thực nghiệm";
-            this.btnSolveLeastSquares.UseVisualStyleBackColor = true;
-            this.btnSolveLeastSquares.Click += new System.EventHandler(this.btnSolveLeastSquares_Click);
-            // 
-            // btnOpenExcelLeastSquares
-            // 
-            this.btnOpenExcelLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnOpenExcelLeastSquares.AutoSize = true;
-            this.btnOpenExcelLeastSquares.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcelLeastSquares.Location = new System.Drawing.Point(755, 4);
-            this.btnOpenExcelLeastSquares.Name = "btnOpenExcelLeastSquares";
-            this.btnOpenExcelLeastSquares.Size = new System.Drawing.Size(178, 35);
-            this.btnOpenExcelLeastSquares.TabIndex = 2;
-            this.btnOpenExcelLeastSquares.Text = "Nhập dữ liệu";
-            this.btnOpenExcelLeastSquares.UseVisualStyleBackColor = true;
-            this.btnOpenExcelLeastSquares.Click += new System.EventHandler(this.btnOpenExcelLeastSquares_Click);
-            // 
-            // tableLayoutPanel28
-            // 
-            this.tableLayoutPanel28.ColumnCount = 2;
-            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel28.Controls.Add(this.lblResultLeastSquares, 1, 0);
-            this.tableLayoutPanel28.Controls.Add(this.comboBoxLeastSquares, 0, 0);
-            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel28.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
-            this.tableLayoutPanel28.RowCount = 1;
-            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel28.Size = new System.Drawing.Size(1126, 44);
-            this.tableLayoutPanel28.TabIndex = 10;
-            // 
-            // lblResultLeastSquares
-            // 
-            this.lblResultLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblResultLeastSquares.AutoSize = true;
-            this.lblResultLeastSquares.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultLeastSquares.Location = new System.Drawing.Point(801, 10);
-            this.lblResultLeastSquares.Name = "lblResultLeastSquares";
-            this.lblResultLeastSquares.Size = new System.Drawing.Size(87, 23);
-            this.lblResultLeastSquares.TabIndex = 5;
-            this.lblResultLeastSquares.Text = "label21";
-            this.lblResultLeastSquares.Visible = false;
-            // 
-            // comboBoxLeastSquares
-            // 
-            this.comboBoxLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBoxLeastSquares.FormattingEnabled = true;
-            this.comboBoxLeastSquares.Items.AddRange(new object[] {
-            "Tuyến tính",
-            "ax^b",
-            "ae^(b1φ1(x) + b2φ2(x) + ...)"});
-            this.comboBoxLeastSquares.Location = new System.Drawing.Point(167, 10);
-            this.comboBoxLeastSquares.Name = "comboBoxLeastSquares";
-            this.comboBoxLeastSquares.Size = new System.Drawing.Size(228, 24);
-            this.comboBoxLeastSquares.TabIndex = 0;
-            // 
-            // tabPage14
-            // 
-            this.tabPage14.Controls.Add(this.rtbResultSpline);
-            this.tabPage14.Controls.Add(this.dataXYSpline);
-            this.tabPage14.Controls.Add(this.tableLayoutPanel29);
-            this.tabPage14.Location = new System.Drawing.Point(4, 25);
-            this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage14.Size = new System.Drawing.Size(1138, 646);
-            this.tabPage14.TabIndex = 13;
-            this.tabPage14.Text = "Spline";
-            this.tabPage14.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel29
-            // 
-            this.tableLayoutPanel29.ColumnCount = 2;
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.12367F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.87633F));
-            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel30, 1, 1);
-            this.tableLayoutPanel29.Controls.Add(this.flowLayoutPanel11, 0, 1);
-            this.tableLayoutPanel29.Controls.Add(this.flowLayoutPanel12, 0, 0);
-            this.tableLayoutPanel29.Controls.Add(this.lblSpline, 1, 0);
-            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel29.Location = new System.Drawing.Point(3, 543);
-            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
-            this.tableLayoutPanel29.RowCount = 2;
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel29.Size = new System.Drawing.Size(1132, 100);
-            this.tableLayoutPanel29.TabIndex = 6;
-            // 
-            // tableLayoutPanel30
-            // 
-            this.tableLayoutPanel30.ColumnCount = 2;
-            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel30.Controls.Add(this.btnOpenExcelSpline, 1, 0);
-            this.tableLayoutPanel30.Controls.Add(this.btnSolveSpline, 0, 0);
-            this.tableLayoutPanel30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel30.Location = new System.Drawing.Point(343, 53);
-            this.tableLayoutPanel30.Name = "tableLayoutPanel30";
-            this.tableLayoutPanel30.RowCount = 1;
-            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel30.Size = new System.Drawing.Size(786, 44);
-            this.tableLayoutPanel30.TabIndex = 9;
-            // 
-            // btnSolveSpline
-            // 
-            this.btnSolveSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSolveSpline.AutoSize = true;
-            this.btnSolveSpline.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveSpline.Location = new System.Drawing.Point(109, 4);
-            this.btnSolveSpline.Name = "btnSolveSpline";
-            this.btnSolveSpline.Size = new System.Drawing.Size(175, 35);
-            this.btnSolveSpline.TabIndex = 1;
-            this.btnSolveSpline.Text = "Tìm hàm ghép trơn";
-            this.btnSolveSpline.UseVisualStyleBackColor = true;
-            this.btnSolveSpline.Click += new System.EventHandler(this.btnSolveSpline_Click);
-            // 
-            // btnOpenExcelSpline
-            // 
-            this.btnOpenExcelSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnOpenExcelSpline.AutoSize = true;
-            this.btnOpenExcelSpline.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcelSpline.Location = new System.Drawing.Point(500, 4);
-            this.btnOpenExcelSpline.Name = "btnOpenExcelSpline";
-            this.btnOpenExcelSpline.Size = new System.Drawing.Size(178, 35);
-            this.btnOpenExcelSpline.TabIndex = 2;
-            this.btnOpenExcelSpline.Text = "Nhập dữ liệu";
-            this.btnOpenExcelSpline.UseVisualStyleBackColor = true;
-            this.btnOpenExcelSpline.Click += new System.EventHandler(this.btnOpenExcelSpline_Click);
-            // 
-            // flowLayoutPanel11
-            // 
-            this.flowLayoutPanel11.Controls.Add(this.txtBoxPrecisionSpline);
-            this.flowLayoutPanel11.Controls.Add(this.label24);
-            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(3, 53);
-            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(334, 44);
-            this.flowLayoutPanel11.TabIndex = 2;
-            // 
-            // txtBoxPrecisionSpline
-            // 
-            this.txtBoxPrecisionSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBoxPrecisionSpline.Location = new System.Drawing.Point(3, 3);
-            this.txtBoxPrecisionSpline.Name = "txtBoxPrecisionSpline";
-            this.txtBoxPrecisionSpline.Size = new System.Drawing.Size(100, 22);
-            this.txtBoxPrecisionSpline.TabIndex = 0;
-            this.txtBoxPrecisionSpline.Text = "15";
-            // 
-            // label24
-            // 
-            this.label24.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(109, 6);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(161, 16);
-            this.label24.TabIndex = 1;
-            this.label24.Text = "Số chữ số phần thập phân";
-            // 
-            // flowLayoutPanel12
-            // 
-            this.flowLayoutPanel12.Controls.Add(this.comboBoxSpline);
-            this.flowLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel12.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
-            this.flowLayoutPanel12.Size = new System.Drawing.Size(334, 44);
-            this.flowLayoutPanel12.TabIndex = 3;
-            // 
-            // lblSpline
-            // 
-            this.lblSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblSpline.AutoSize = true;
-            this.lblSpline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpline.Location = new System.Drawing.Point(692, 13);
-            this.lblSpline.Name = "lblSpline";
-            this.lblSpline.Size = new System.Drawing.Size(87, 23);
-            this.lblSpline.TabIndex = 4;
-            this.lblSpline.Text = "label21";
-            this.lblSpline.Visible = false;
-            // 
-            // comboBoxSpline
-            // 
-            this.comboBoxSpline.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBoxSpline.FormattingEnabled = true;
-            this.comboBoxSpline.Items.AddRange(new object[] {
-            "Spline tuyến tính (Cấp 1)",
-            "Spline cấp 2",
-            "Spline cấp 3"});
-            this.comboBoxSpline.Location = new System.Drawing.Point(3, 3);
-            this.comboBoxSpline.Name = "comboBoxSpline";
-            this.comboBoxSpline.Size = new System.Drawing.Size(228, 24);
-            this.comboBoxSpline.TabIndex = 1;
-            // 
-            // dataXYSpline
-            // 
-            this.dataXYSpline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataXYSpline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colsXSpline,
-            this.colsYSpline});
-            this.dataXYSpline.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataXYSpline.Location = new System.Drawing.Point(3, 3);
-            this.dataXYSpline.Name = "dataXYSpline";
-            this.dataXYSpline.RowHeadersWidth = 51;
-            this.dataXYSpline.RowTemplate.Height = 24;
-            this.dataXYSpline.Size = new System.Drawing.Size(248, 540);
-            this.dataXYSpline.TabIndex = 7;
-            // 
-            // rtbResultSpline
-            // 
-            this.rtbResultSpline.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbResultSpline.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbResultSpline.Location = new System.Drawing.Point(251, 3);
-            this.rtbResultSpline.Name = "rtbResultSpline";
-            this.rtbResultSpline.Size = new System.Drawing.Size(884, 540);
-            this.rtbResultSpline.TabIndex = 8;
-            this.rtbResultSpline.Text = "";
-            // 
-            // colsXSpline
-            // 
-            this.colsXSpline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsXSpline.HeaderText = "X";
-            this.colsXSpline.MinimumWidth = 6;
-            this.colsXSpline.Name = "colsXSpline";
-            // 
-            // colsYSpline
-            // 
-            this.colsYSpline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colsYSpline.HeaderText = "Y";
-            this.colsYSpline.MinimumWidth = 6;
-            this.colsYSpline.Name = "colsYSpline";
             // 
             // Form1
             // 
@@ -2899,6 +2885,24 @@
             this.flowLayoutPanel9.PerformLayout();
             this.flowLayoutPanel10.ResumeLayout(false);
             this.flowLayoutPanel10.PerformLayout();
+            this.tabPage13.ResumeLayout(false);
+            this.tableLayoutPanel26.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYLeastSquares)).EndInit();
+            this.tableLayoutPanel27.ResumeLayout(false);
+            this.tableLayoutPanel27.PerformLayout();
+            this.tableLayoutPanel24.ResumeLayout(false);
+            this.tableLayoutPanel25.ResumeLayout(false);
+            this.tableLayoutPanel25.PerformLayout();
+            this.tableLayoutPanel28.ResumeLayout(false);
+            this.tableLayoutPanel28.PerformLayout();
+            this.tabPage14.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataXYSpline)).EndInit();
+            this.tableLayoutPanel29.ResumeLayout(false);
+            this.tableLayoutPanel30.ResumeLayout(false);
+            this.tableLayoutPanel30.PerformLayout();
+            this.flowLayoutPanel11.ResumeLayout(false);
+            this.flowLayoutPanel11.PerformLayout();
+            this.flowLayoutPanel12.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -2915,25 +2919,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoeffsP)).EndInit();
-            this.tabPage13.ResumeLayout(false);
-            this.tableLayoutPanel26.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYLeastSquares)).EndInit();
-            this.tableLayoutPanel27.ResumeLayout(false);
-            this.tableLayoutPanel27.PerformLayout();
-            this.tableLayoutPanel24.ResumeLayout(false);
-            this.tableLayoutPanel25.ResumeLayout(false);
-            this.tableLayoutPanel25.PerformLayout();
-            this.tableLayoutPanel28.ResumeLayout(false);
-            this.tableLayoutPanel28.PerformLayout();
-            this.tabPage14.ResumeLayout(false);
-            this.tableLayoutPanel29.ResumeLayout(false);
-            this.tableLayoutPanel29.PerformLayout();
-            this.tableLayoutPanel30.ResumeLayout(false);
-            this.tableLayoutPanel30.PerformLayout();
-            this.flowLayoutPanel11.ResumeLayout(false);
-            this.flowLayoutPanel11.PerformLayout();
-            this.flowLayoutPanel12.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataXYSpline)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3142,7 +3127,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel12;
         private System.Windows.Forms.ComboBox comboBoxSpline;
-        private System.Windows.Forms.Label lblSpline;
         private System.Windows.Forms.DataGridView dataXYSpline;
         private System.Windows.Forms.RichTextBox rtbResultSpline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsXSpline;
