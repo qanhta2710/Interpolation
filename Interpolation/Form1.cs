@@ -866,6 +866,16 @@ namespace Interpolation
                 return;
             }
             DisplayInterpolationPointsResult(xAvg, result);
+            var exportResult = MessageBox.Show(
+        $"Đã tìm thấy {result.selectedX.Length} mốc nội suy.\n\nBạn có muốn xuất dữ liệu ra file Excel không?",
+        "Xuất dữ liệu",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question);
+
+            if (exportResult == DialogResult.Yes)
+            {
+                ExportInterpolationPointsToExcel(xAvg, result.xs, result.selectedX, result.selectedY);
+            }
         }
         private void btnOpenExcel_Click(object sender, EventArgs e)
         {
@@ -1477,6 +1487,64 @@ namespace Interpolation
                     MessageBoxIcon.Error);
             }
         }
+        private void ExportInterpolationPointsToExcel(
+    double x,
+    int xs,
+    double[] selectedX,
+    double[] selectedY)
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
+            try
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Excel Files|*.xlsx";
+                    saveFileDialog.Title = "Xuất dữ liệu ra Excel";
+                    saveFileDialog.FileName = $"InterpolationPoints_x_{x}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = saveFileDialog.FileName;
+
+                        using (ExcelPackage package = new ExcelPackage())
+                        {
+                            // Tạo worksheet
+                            string worksheetName = "Moc_Noi_Suy";
+                            ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(worksheetName);
+
+                            // Điền dữ liệu trực tiếp từ hàng 1, không có header
+                            int row = 1;
+                            for (int i = 0; i < selectedX.Length; i++)
+                            {
+                                worksheet.Cells[row, 1].Value = selectedX[i];
+                                worksheet.Cells[row, 2].Value = selectedY[i];
+                                row++;
+                            }
+
+                            // Auto-fit columns
+                            worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+                            // Lưu file
+                            FileInfo fileInfo = new FileInfo(filePath);
+                            package.SaveAs(fileInfo);
+
+                            MessageBox.Show(
+                                $"Đã xuất thành công {selectedX.Length} mốc nội suy ra file:\n{filePath}",
+                                "Thành công",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xuất file Excel: {ex.Message}",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
         private double SolveIterationForward(double[] x, double[] y, double yTarget, int precision,
      out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, double sum, double error, List<(int r, double deltaR, double factorial, double prod, double term)> details)> iterationSteps)
         {
@@ -1961,12 +2029,12 @@ namespace Interpolation
 
             for (int i = 0; i < result.selectedX.Length; i++)
             {
-                sb.AppendLine(String.Format("{0,-5} {1,15} {2,15}",
+                sb.AppendLine(String.Format("{0,-5} {1,15:G10} {2,15:G10}",
                     i + 1, result.selectedX[i], result.selectedY[i]));
             }
 
             sb.AppendLine("───────────────────────────────────────────────");
-            sb.AppendLine($"\nĐiểm trung tâm xs = {xValues[result.xs]:F6}");
+            sb.AppendLine($"\nĐiểm trung tâm xs = {xValues[result.xs]:G10}");
             sb.AppendLine("═══════════════════════════════════════════════");
 
             richTextBoxFindPoints.Clear();
