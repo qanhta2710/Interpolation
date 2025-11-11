@@ -21,7 +21,16 @@
 
 ## Hướng dẫn clone Source code
 
-[Video hướng dẫn](./images/HDSD2.mp4)
+<div align="center">
+  <video controls width="720" preload="metadata" poster="./images/thumb_hdsd.jpg?raw=1">
+    <source src="./images/HDSD2.mp4?raw=1" type="video/mp4">
+    Trình duyệt của bạn không hỗ trợ video HTML5.
+  </video>
+  <br/>
+  <em>Video hướng dẫn (xem trực tiếp)</em>
+  <br/>
+  <a href="./images/HDSD2.mp4?raw=1">Mở video trong tab mới</a>
+</div>
 
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
