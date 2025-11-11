@@ -27,6 +27,7 @@ namespace Interpolation
             comboBoxNewton.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy bất kì
             comboBoxNewtonFinite.SelectedIndex = 0; // Lựa chọn mặc định mốc nội suy cách đều tăng dần
             comboBoxLeastSquares.SelectedIndex = 0; // Lựa chọn mặc định phương pháp bình phương tối thiểu tuyến tính
+            comboBoxIteration.SelectedIndex = 0; // Lựa chọn mặc định phương pháp lặp tiến
             SetupDataGridViewColumnTypes();
         }
         #region Event Handlers
@@ -620,13 +621,22 @@ namespace Interpolation
                 double yTarget = Convert.ToDouble(txtBoxYAvg.Text);
                 int precision = Convert.ToInt32(txtBoxPrecisionIteration.Text);
 
-                double result = SolveIterationForward(x, y, yTarget, precision, out double?[,] diffTable, out var iterationSteps);
-
-                DisplayIterationResults(dataGridViewIteration, richTextBoxIterationResult, diffTable, iterationSteps,
-            x, y, yTarget, result, precision);
-
-                lblResultIteration.Text = $"{result}";
-                lblResultIteration.Visible = true;
+                if (comboBoxIteration.SelectedIndex == 0)
+                {
+                    double result = SolveIterationForward(x, y, yTarget, precision, out double?[,] diffTable, out var iterationSteps);
+                    DisplayIterationForwardResults(dataGridViewIteration, richTextBoxIterationResult, diffTable, iterationSteps,
+                x, y, yTarget, result, precision);
+                    lblResultIteration.Text = $"x = {result}";
+                    lblResultIteration.Visible = true;
+                }
+                else if (comboBoxIteration.SelectedIndex == 1)
+                {
+                    double result = SolveIterationBackward(x, y, yTarget, precision, out double?[,] diffTable, out var iterationSteps);
+                    DisplayIterationBackwardResults(dataGridViewIteration, richTextBoxIterationResult, diffTable, iterationSteps,
+               x, y, yTarget, result, precision);
+                    lblResultIteration.Text = $"x = {result}";
+                    lblResultIteration.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -1599,6 +1609,62 @@ namespace Interpolation
             double res = x[0] + h * t_n;
             return res;
         }
+        private double SolveIterationBackward(double[] x, double[] y, double yTarget, int precision,
+out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, double sum, double error, List<(int r, double deltaR, double factorial, double prod, double term)> details)> iterationSteps)
+        {
+            diffTable = Newton.BuildFiniteDifferenceTable(x, y, precision);
+            iterationSteps = new List<(int, double, double, double, double, List<(int, double, double, double, double)>)>();
+
+            int n = x.Length;
+            double h = Math.Round(x[1] - x[0], precision);
+
+            double y_n_minus_1 = y[n - 1];
+            double x_n_minus_1 = x[n - 1];
+
+            double nabla1 = diffTable[n - 2, 2] ?? 0.0;
+
+            double t_prev, t_n = Math.Round((yTarget - y_n_minus_1) / nabla1, precision);
+            double epsilon = 1e-8;
+            int maxIterations = 1000;
+            int iteration = 0;
+
+            iterationSteps.Add((0, 0, t_n, 0, 0, new List<(int, double, double, double, double)>()));
+
+            do
+            {
+                t_prev = t_n;
+                double sum = 0.0;
+                var stepDetails = new List<(int r, double deltaR, double factorial, double prod, double term)>();
+
+                for (int r = 2; r < n; r++)
+                {
+                    double deltaR = diffTable[n - 1 - r, r + 1] ?? 0.0;
+                    double factorial = Function.Factorial(r);
+
+                    double prod = 1.0;
+                    for (int i = 0; i < r; i++)
+                    {
+                        prod *= (t_prev + i);
+                    }
+                    double term = Math.Round((deltaR / factorial) * prod, precision);
+                    sum += term;
+
+                    stepDetails.Add((r, deltaR, factorial, prod, term));
+                }
+
+                t_n = Math.Round(((yTarget - y_n_minus_1) / nabla1) - (sum / nabla1), precision);
+                double error = Math.Abs(t_n - t_prev);
+
+                iterationSteps.Add((iteration + 1, t_prev, t_n, sum, error, stepDetails));
+
+                iteration++;
+
+                if (iteration > maxIterations) break;
+            } while (Math.Abs(t_n - t_prev) >= epsilon);
+
+            double res = x_n_minus_1 + h * t_n;
+            return res;
+        }
         private void SolveLinearLeastSquares(double[] x, double[] y, string[] phiExpressions,
     out double[] coeffs, out double MSE, out string equation,
     out double[,] thetaMatrix, out double[,] M, out double[] b, out double[] yPred)
@@ -2119,19 +2185,19 @@ namespace Interpolation
 
                     for (int i = 0; i < monotonic.selectedX.Length; i++)
                     {
-                        sb.AppendLine(String.Format("  {0,18}      {1,18}       ",
+                        sb.AppendLine(String.Format("  {0,18:G10}      {1,18:G10}       ",
                             monotonic.selectedX[i], monotonic.selectedY[i]));
                     }
 
                     sb.AppendLine("╚═══════════════════════════════════════════════════════════════╝\n");
-                    sb.AppendLine("- Nếu sử dụng phương pháp hàm ngược để tìm đa thức nội suy thì nhập file Excel đã xuất vào chức năng tìm mốc nội suy cách đều để chọn ra các điểm nội suy sao cho khoảng cách ly nằm giữa khoảng đơn điệu");
-                    sb.AppendLine("-Nếu sử dụng phương pháp lặp để tìm đa thức nội suy, hãy tự chọn ra các mốc sao cho khoảng cách ly nằm ở đầu (Nếu sử dụng Newton tiến) hoặc khoảng cách ly nằm ở cuối (Nếu sử dụng Newton lùi)");
                 }
+                sb.AppendLine("- Nếu sử dụng phương pháp hàm ngược để tìm đa thức nội suy thì nhập file Excel đã xuất vào chức năng tìm mốc nội suy cách đều để chọn ra các điểm nội suy sao cho khoảng cách ly nằm giữa khoảng đơn điệu");
+                sb.AppendLine("-Nếu sử dụng phương pháp lặp để tìm đa thức nội suy, hãy tự chọn ra các mốc sao cho khoảng cách ly nằm ở đầu (Nếu sử dụng Newton tiến) hoặc khoảng cách ly nằm ở cuối (Nếu sử dụng Newton lùi)");
             }
             richTextBoxFindReversePoints.Clear();
             richTextBoxFindReversePoints.AppendText(sb.ToString());
         }
-        private void DisplayIterationResults(DataGridView dgv, RichTextBox rtb, double?[,] diffTable,
+        private void DisplayIterationForwardResults(DataGridView dgv, RichTextBox rtb, double?[,] diffTable,
             List<(int iteration, double t_prev, double t_n, double sum, double error, List<(int r, double deltaR, double factorial, double prod, double term)> details)> iterationSteps,
             double[] x, double[] y, double yTarget, double result, int precision)
         {
@@ -2313,6 +2379,93 @@ namespace Interpolation
             sb.AppendLine("───────────────────────────────────────────────────────────────");
             sb.AppendLine($"  MSE = {MSE:F8}");
             sb.AppendLine();
+
+            rtb.AppendText(sb.ToString());
+        }
+        private void DisplayIterationBackwardResults(DataGridView dgv, RichTextBox rtb, double?[,] diffTable,
+    List<(int iteration, double t_prev, double t_n, double sum, double error, List<(int r, double deltaR, double factorial, double prod, double term)> details)> iterationSteps,
+    double[] x, double[] y, double yTarget, double result, int precision)
+        {
+            // Hiển thị bảng tỷ sai phân
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            SetupColumns(dgv, diffTable.GetLength(1), "Ghi chú");
+            AddNullableTable(dgv, diffTable, "Bảng tỷ sai phân");
+
+            // Hiển thị quá trình lặp
+            rtb.Clear();
+
+            int n = x.Length;
+            double h = x[1] - x[0];
+            double y_n_minus_1 = y[n - 1];
+            double x_n_minus_1 = x[n - 1];
+            double nabla1 = diffTable[n - 2, 2] ?? 0.0;
+
+            var sb = new StringBuilder();
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("QUÁ TRÌNH LẶP (NEWTON LÙI)");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
+            sb.AppendLine("Dữ liệu ban đầu:");
+            sb.AppendLine($"  h = {h}");
+            sb.AppendLine($"  x_{{n-1}} = {x_n_minus_1}");
+            sb.AppendLine($"  y_{{n-1}} = {y_n_minus_1}");
+            sb.AppendLine($"  y_target = {yTarget}");
+            sb.AppendLine($"  ∇y_{{n-1}} = {nabla1}");
+            sb.AppendLine($"  epsilon = 1e-8");
+            sb.AppendLine($"  Max iterations = 1000\n");
+
+            foreach (var step in iterationSteps)
+            {
+                if (step.iteration == 0)
+                {
+                    sb.AppendLine("KHỞI TẠO:");
+                    sb.AppendLine("───────────────────────────────────────────────────────────────");
+                    sb.AppendLine($"t₀ = (y_target - y_{{n-1}}) / ∇y_{{n-1}} = ({yTarget} - {y_n_minus_1}) / {nabla1} = {step.t_n}\n");
+                }
+                else
+                {
+                    sb.Append($"t_{step.iteration} = φ(t_{step.iteration - 1}) = {(yTarget - y_n_minus_1) / nabla1}");
+
+                    if (step.details.Count > 0)
+                    {
+                        sb.Append($" - (1/{nabla1}) × [");
+
+                        var terms = new List<string>();
+                        foreach (var detail in step.details)
+                        {
+                            var prodTerms = new List<string>();
+                            for (int i = 0; i < detail.r; i++)
+                            {
+                                prodTerms.Add($"({step.t_prev} + {i})");
+                            }
+
+                            string termStr = $"({detail.deltaR}/{detail.factorial}) × {string.Join(" × ", prodTerms)}";
+                            terms.Add(termStr);
+                        }
+
+                        sb.Append(string.Join(" + ", terms));
+                        sb.Append("]");
+                    }
+
+                    sb.AppendLine($" = {step.t_n}");
+                    sb.AppendLine($"  → Sai số = |t_{step.iteration} - t_{step.iteration - 1}| = {step.error}\n");
+                }
+            }
+
+            var lastStep = iterationSteps[iterationSteps.Count - 1];
+            if (lastStep.iteration >= 1000)
+            {
+                sb.AppendLine("⚠ Đã đạt số vòng lặp tối đa: 1000\n");
+            }
+
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine("KẾT QUẢ CUỐI CÙNG:");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine($"Số vòng lặp: {lastStep.iteration}");
+            sb.AppendLine($"t_final = {lastStep.t_n}");
+            sb.AppendLine($"\nTính giá trị x:");
+            sb.AppendLine($"x = x_{{n-1}} + h × t_n = {x_n_minus_1} + {h} × {lastStep.t_n} = {result}");
+            sb.AppendLine("═══════════════════════════════════════════════════════════════");
 
             rtb.AppendText(sb.ToString());
         }
