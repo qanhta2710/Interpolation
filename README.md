@@ -19,6 +19,10 @@
 
 [Video hướng dẫn](https://youtu.be/W5qSPlaAW-c)
 
+## Hướng dẫn clone Source code
+
+[Video hướng dẫn](./images/HDSD2.mp4)
+
 ## **Lưu ý khi sử dụng**
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 - Khi nhập lưu ý dùng dấu **.** để biểu diễn phần thập phân
