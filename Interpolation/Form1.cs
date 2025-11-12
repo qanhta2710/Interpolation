@@ -1568,7 +1568,7 @@ namespace Interpolation
 
             // Giá trị khởi tạo t_0
             double t_prev, t_n = Math.Round((yTarget - y0) / delta1, precision);
-            double epsilon = 1e-8;
+            double epsilon = 1e-6;
             int maxIterations = 1000;
             int iteration = 0;
 
@@ -1624,7 +1624,7 @@ out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, do
             double nabla1 = diffTable[n - 2, 2] ?? 0.0;
 
             double t_prev, t_n = Math.Round((yTarget - y_n_minus_1) / nabla1, precision);
-            double epsilon = 1e-8;
+            double epsilon = 1e-6;
             int maxIterations = 1000;
             int iteration = 0;
 
@@ -2223,8 +2223,8 @@ out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, do
             sb.AppendLine($"  y₀ = {y0}");
             sb.AppendLine($"  y_target = {yTarget}");
             sb.AppendLine($"  Δy₀ = {delta1}");
-            sb.AppendLine($"  epsilon = 1e-8");
-            sb.AppendLine($"  Max iterations = 100\n");
+            sb.AppendLine($"  epsilon = 1e-6");
+            sb.AppendLine($"  Max iterations = 1000\n");
 
             foreach (var step in iterationSteps)
             {
@@ -2265,9 +2265,9 @@ out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, do
             }
 
             var lastStep = iterationSteps[iterationSteps.Count - 1];
-            if (lastStep.iteration >= 100)
+            if (lastStep.iteration >= 1000)
             {
-                sb.AppendLine("⚠ Đã đạt số vòng lặp tối đa: 100\n");
+                sb.AppendLine("⚠ Đã đạt số vòng lặp tối đa: 1000\n");
             }
 
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
@@ -2411,7 +2411,7 @@ out double?[,] diffTable, out List<(int iteration, double t_prev, double t_n, do
             sb.AppendLine($"  y_{{n-1}} = {y_n_minus_1}");
             sb.AppendLine($"  y_target = {yTarget}");
             sb.AppendLine($"  ∇y_{{n-1}} = {nabla1}");
-            sb.AppendLine($"  epsilon = 1e-8");
+            sb.AppendLine($"  epsilon = 1e-6");
             sb.AppendLine($"  Max iterations = 1000\n");
 
             foreach (var step in iterationSteps)
