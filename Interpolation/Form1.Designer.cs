@@ -673,10 +673,10 @@
             // 
             this.lblResult.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(671, 14);
+            this.lblResult.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(681, 16);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(100, 22);
+            this.lblResult.Size = new System.Drawing.Size(80, 18);
             this.lblResult.TabIndex = 0;
             this.lblResult.Text = "lblResult";
             this.lblResult.Visible = false;
@@ -811,10 +811,10 @@
             // 
             this.lblResultNewton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultNewton.AutoSize = true;
-            this.lblResultNewton.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultNewton.Location = new System.Drawing.Point(686, 14);
+            this.lblResultNewton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultNewton.Location = new System.Drawing.Point(693, 16);
             this.lblResultNewton.Name = "lblResultNewton";
-            this.lblResultNewton.Size = new System.Drawing.Size(70, 22);
+            this.lblResultNewton.Size = new System.Drawing.Size(56, 18);
             this.lblResultNewton.TabIndex = 5;
             this.lblResultNewton.Text = "label1";
             this.lblResultNewton.Visible = false;
@@ -997,10 +997,10 @@
             // 
             this.lblNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblNewtonFinite.AutoSize = true;
-            this.lblNewtonFinite.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewtonFinite.Location = new System.Drawing.Point(686, 14);
+            this.lblNewtonFinite.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNewtonFinite.Location = new System.Drawing.Point(693, 16);
             this.lblNewtonFinite.Name = "lblNewtonFinite";
-            this.lblNewtonFinite.Size = new System.Drawing.Size(70, 22);
+            this.lblNewtonFinite.Size = new System.Drawing.Size(56, 18);
             this.lblNewtonFinite.TabIndex = 5;
             this.lblNewtonFinite.Text = "label2";
             this.lblNewtonFinite.Visible = false;
@@ -1050,7 +1050,7 @@
             this.tableLayoutPanel18.ColumnCount = 3;
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.14418F));
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.85582F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 254F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 256F));
             this.tableLayoutPanel18.Controls.Add(this.btnOpenExcelNewtonFinite, 1, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnNewtonFiniteToEval, 2, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnSolveNewtonFinite, 0, 0);
@@ -1067,7 +1067,7 @@
             this.btnOpenExcelNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnOpenExcelNewtonFinite.AutoSize = true;
             this.btnOpenExcelNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(309, 4);
+            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(307, 4);
             this.btnOpenExcelNewtonFinite.Name = "btnOpenExcelNewtonFinite";
             this.btnOpenExcelNewtonFinite.Size = new System.Drawing.Size(178, 35);
             this.btnOpenExcelNewtonFinite.TabIndex = 6;
@@ -1079,7 +1079,7 @@
             // 
             this.btnNewtonFiniteToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNewtonFiniteToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(571, 3);
+            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(570, 3);
             this.btnNewtonFiniteToEval.Name = "btnNewtonFiniteToEval";
             this.btnNewtonFiniteToEval.Size = new System.Drawing.Size(232, 38);
             this.btnNewtonFiniteToEval.TabIndex = 5;
@@ -1093,7 +1093,7 @@
             this.btnSolveNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSolveNewtonFinite.AutoSize = true;
             this.btnSolveNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(29, 3);
+            this.btnSolveNewtonFinite.Location = new System.Drawing.Point(28, 3);
             this.btnSolveNewtonFinite.Name = "btnSolveNewtonFinite";
             this.btnSolveNewtonFinite.Size = new System.Drawing.Size(178, 38);
             this.btnSolveNewtonFinite.TabIndex = 1;
@@ -1235,10 +1235,10 @@
             // 
             this.lblStirling.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblStirling.AutoSize = true;
-            this.lblStirling.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStirling.Location = new System.Drawing.Point(686, 14);
+            this.lblStirling.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStirling.Location = new System.Drawing.Point(693, 16);
             this.lblStirling.Name = "lblStirling";
-            this.lblStirling.Size = new System.Drawing.Size(70, 22);
+            this.lblStirling.Size = new System.Drawing.Size(56, 18);
             this.lblStirling.TabIndex = 0;
             this.lblStirling.Text = "label2";
             this.lblStirling.Visible = false;
@@ -1405,10 +1405,10 @@
             // 
             this.lblResultBessel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultBessel.AutoSize = true;
-            this.lblResultBessel.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultBessel.Location = new System.Drawing.Point(690, 14);
+            this.lblResultBessel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultBessel.Location = new System.Drawing.Point(697, 16);
             this.lblResultBessel.Name = "lblResultBessel";
-            this.lblResultBessel.Size = new System.Drawing.Size(70, 22);
+            this.lblResultBessel.Size = new System.Drawing.Size(56, 18);
             this.lblResultBessel.TabIndex = 0;
             this.lblResultBessel.Text = "label2";
             this.lblResultBessel.Visible = false;
@@ -1576,10 +1576,10 @@
             // 
             this.lblResultGaussI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultGaussI.AutoSize = true;
-            this.lblResultGaussI.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultGaussI.Location = new System.Drawing.Point(686, 14);
+            this.lblResultGaussI.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultGaussI.Location = new System.Drawing.Point(693, 16);
             this.lblResultGaussI.Name = "lblResultGaussI";
-            this.lblResultGaussI.Size = new System.Drawing.Size(70, 22);
+            this.lblResultGaussI.Size = new System.Drawing.Size(56, 18);
             this.lblResultGaussI.TabIndex = 0;
             this.lblResultGaussI.Text = "label2";
             this.lblResultGaussI.Visible = false;
@@ -1747,10 +1747,10 @@
             // 
             this.lblResultGaussII.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultGaussII.AutoSize = true;
-            this.lblResultGaussII.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultGaussII.Location = new System.Drawing.Point(686, 14);
+            this.lblResultGaussII.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultGaussII.Location = new System.Drawing.Point(693, 16);
             this.lblResultGaussII.Name = "lblResultGaussII";
-            this.lblResultGaussII.Size = new System.Drawing.Size(70, 22);
+            this.lblResultGaussII.Size = new System.Drawing.Size(56, 18);
             this.lblResultGaussII.TabIndex = 0;
             this.lblResultGaussII.Text = "label2";
             this.lblResultGaussII.Visible = false;
@@ -1934,10 +1934,10 @@
             // 
             this.lblResultIteration.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultIteration.AutoSize = true;
-            this.lblResultIteration.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultIteration.Location = new System.Drawing.Point(692, 26);
+            this.lblResultIteration.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultIteration.Location = new System.Drawing.Point(704, 28);
             this.lblResultIteration.Name = "lblResultIteration";
-            this.lblResultIteration.Size = new System.Drawing.Size(87, 23);
+            this.lblResultIteration.Size = new System.Drawing.Size(64, 18);
             this.lblResultIteration.TabIndex = 4;
             this.lblResultIteration.Text = "label21";
             this.lblResultIteration.Visible = false;
@@ -2028,7 +2028,7 @@
             this.tableLayoutPanel26.ColumnCount = 3;
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.83247F));
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.16753F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 656F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 658F));
             this.tableLayoutPanel26.Controls.Add(this.dataXYLeastSquares, 0, 0);
             this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 1, 0);
             this.tableLayoutPanel26.Controls.Add(this.rtbResultLeastSquares, 2, 0);
@@ -2080,7 +2080,7 @@
             this.tableLayoutPanel27.RowCount = 2;
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.85768F));
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.14232F));
-            this.tableLayoutPanel27.Size = new System.Drawing.Size(266, 534);
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(264, 534);
             this.tableLayoutPanel27.TabIndex = 8;
             // 
             // txtBoxLeastSquares
@@ -2089,7 +2089,7 @@
             this.txtBoxLeastSquares.Location = new System.Drawing.Point(3, 77);
             this.txtBoxLeastSquares.Multiline = true;
             this.txtBoxLeastSquares.Name = "txtBoxLeastSquares";
-            this.txtBoxLeastSquares.Size = new System.Drawing.Size(260, 454);
+            this.txtBoxLeastSquares.Size = new System.Drawing.Size(258, 454);
             this.txtBoxLeastSquares.TabIndex = 8;
             // 
             // label21
@@ -2107,10 +2107,10 @@
             // 
             this.rtbResultLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbResultLeastSquares.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbResultLeastSquares.Location = new System.Drawing.Point(478, 3);
+            this.rtbResultLeastSquares.Location = new System.Drawing.Point(476, 3);
             this.rtbResultLeastSquares.Name = "rtbResultLeastSquares";
             this.rtbResultLeastSquares.ReadOnly = true;
-            this.rtbResultLeastSquares.Size = new System.Drawing.Size(651, 534);
+            this.rtbResultLeastSquares.Size = new System.Drawing.Size(653, 534);
             this.rtbResultLeastSquares.TabIndex = 9;
             this.rtbResultLeastSquares.Text = "";
             // 
@@ -2190,10 +2190,10 @@
             // 
             this.lblResultLeastSquares.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultLeastSquares.AutoSize = true;
-            this.lblResultLeastSquares.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultLeastSquares.Location = new System.Drawing.Point(801, 10);
+            this.lblResultLeastSquares.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultLeastSquares.Location = new System.Drawing.Point(812, 13);
             this.lblResultLeastSquares.Name = "lblResultLeastSquares";
-            this.lblResultLeastSquares.Size = new System.Drawing.Size(87, 23);
+            this.lblResultLeastSquares.Size = new System.Drawing.Size(64, 18);
             this.lblResultLeastSquares.TabIndex = 5;
             this.lblResultLeastSquares.Text = "label21";
             this.lblResultLeastSquares.Visible = false;
@@ -2463,7 +2463,7 @@
             // richTextBoxResult
             // 
             this.richTextBoxResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxResult.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxResult.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxResult.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxResult.Name = "richTextBoxResult";
             this.richTextBoxResult.ReadOnly = true;

@@ -92,19 +92,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gauss.cs" />
-    <Compile Include="Horner.cs" />
-    <Compile Include="Chebyshev.cs" />
+    <Compile Include="Methods\FindInterpolationPoints.cs" />
+    <Compile Include="Methods\Gauss.cs" />
+    <Compile Include="Methods\Bessel.cs" />
+    <Compile Include="Methods\Horner.cs" />
+    <Compile Include="Methods\Chebyshev.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lagrange.cs" />
-    <Compile Include="Newton.cs" />
+    <Compile Include="Methods\Lagrange.cs" />
+    <Compile Include="Methods\LeastSquares.cs" />
+    <Compile Include="Methods\Newton.cs" />
+    <Compile Include="Methods\NewtonIteration.cs" />
+    <Compile Include="Methods\Spline.cs" />
+    <Compile Include="Methods\Stirling.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\DataGridViewHelper.cs" />
+    <Compile Include="Utilities\DifferenceTable.cs" />
+    <Compile Include="Utilities\Function.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

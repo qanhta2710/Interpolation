@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Interpolation
+namespace Interpolation.Utilities
 {
-    public class Newton
+    public static class DifferenceTable
     {
         public static double?[,] BuildDividedDifferenceTable(double[] x, double[] y, int precision)
         {

@@ -2,7 +2,7 @@
 
 namespace Interpolation
 {
-    public class InterpolationPoints
+    public class Chebyshev
     {
         public static double[] FindOptimizedPoints(int n, double a, double b, int precision)
         {
