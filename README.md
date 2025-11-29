@@ -1,5 +1,5 @@
-# Phương pháp số - Đa thức nội suy
-
+# Phương pháp số
+# **Lưu ý: Tạm thời sẽ ẩn đi toàn bộ Source Code của chương trình (Sau vài ngày nữa sẽ public lại)**
 ## Mục đích:
 - Giúp đỡ mọi người qua học phần Phương pháp số
 - Source code hoàn toàn được public nên mọi người có thể dựa vào đó để viết lại thuật toán 
@@ -12,16 +12,15 @@
 - Tính giá trị đa thức tại 1 điểm _(Sử dụng lược đồ Hoocne)_, Tính đạo hàm các cấp của đa thức tại 1 điểm
 - Khi phát hiện điểm nội suy trùng nhau, tự động giữ lại điểm đầu tiên và loại bỏ tất cả các điểm còn lại
 - Tự động nhập dữ liệu từ File Excel
+- Tính gần đúng đạo hàm tại 1 điểm bằng **công thức 2 / 3 / 4 điểm**
+- Tính gần đúng tích phân tại 1 điểm bằng **Công thức hình thang** và **Công thức Simpson**
+- Đánh giá sai số tính gần đúng theo công thức lưới phủ (Runge) hoặc sai số theo lý thuyết
 
-## WIP
-
-## Hướng dẫn sử dụng 
+## Hướng dẫn sử dụng - ĐÃ CŨ
 
 [Video hướng dẫn](https://youtu.be/W5qSPlaAW-c)
 
 ## Hướng dẫn clone Source code
-
-
 
 https://github.com/user-attachments/assets/3e09bbde-6182-4d59-b7ec-0133be25dbe1
 
@@ -30,12 +29,7 @@ https://github.com/user-attachments/assets/3e09bbde-6182-4d59-b7ec-0133be25dbe1
 - Nếu báo **lỗi định dạng** thì kiểm tra lại dữ liệu nhập vào
 - Khi nhập lưu ý dùng dấu **.** để biểu diễn phần thập phân
 - **LUÔN LUÔN** để trống 1 dòng khi nhập giá trị
-- Khi nhập hàm cơ sở trong chức năng _Phương pháp bình phương tối thiểu_, ngăn cách các hàm bằng phím Enter xuống dòng và lưu ý cú pháp nhập 1 số hàm như sau: 
-  - Hàm lượng giác: Cos(x), Sin(x), Tan(x)
-  - Hàm e mũ x: Exp(x)
-  - Hàm luỹ thừa (Ví dụ x^2): Pow(x, 2)
-  - Logarit theo cơ số a: Log(value, base). Ví dụ: Log(100, 10)
-  - Hàm ln: Log(x)
+- Khi nhập hàm cơ sở trong chức năng _Phương pháp bình phương tối thiểu_, ngăn cách các hàm bằng phím Enter xuống dòng
 
 ## Tải
 - Tải ở Releases hoặc ấn vào [đây](https://github.com/qanhta2710/Interpolation/releases) 

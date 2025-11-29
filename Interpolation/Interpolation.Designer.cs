@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Interpolation));
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,7 +49,6 @@
             this.b = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.n = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chebyshevPoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridViewLagrange = new System.Windows.Forms.DataGridView();
             this.dataXYLagrange = new System.Windows.Forms.DataGridView();
@@ -237,12 +237,12 @@
             this.label24 = new System.Windows.Forms.Label();
             this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
             this.comboBoxSpline = new System.Windows.Forms.ComboBox();
+            this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataChebyshev)).BeginInit();
-            this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).BeginInit();
@@ -322,6 +322,29 @@
             this.flowLayoutPanel11.SuspendLayout();
             this.flowLayoutPanel12.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Controls.Add(this.tabPage12);
+            this.tabControl1.Controls.Add(this.tabPage13);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage11);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage14);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1146, 675);
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -527,29 +550,6 @@
             this.chebyshevPoints.HeaderText = "Mốc nội suy";
             this.chebyshevPoints.MinimumWidth = 6;
             this.chebyshevPoints.Name = "chebyshevPoints";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Controls.Add(this.tabPage10);
-            this.tabControl1.Controls.Add(this.tabPage12);
-            this.tabControl1.Controls.Add(this.tabPage13);
-            this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage11);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage14);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1146, 675);
-            this.tabControl1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -1050,7 +1050,7 @@
             this.tableLayoutPanel18.ColumnCount = 3;
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.14418F));
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.85582F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 256F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 258F));
             this.tableLayoutPanel18.Controls.Add(this.btnOpenExcelNewtonFinite, 1, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnNewtonFiniteToEval, 2, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnSolveNewtonFinite, 0, 0);
@@ -1067,7 +1067,7 @@
             this.btnOpenExcelNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnOpenExcelNewtonFinite.AutoSize = true;
             this.btnOpenExcelNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(307, 4);
+            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(306, 4);
             this.btnOpenExcelNewtonFinite.Name = "btnOpenExcelNewtonFinite";
             this.btnOpenExcelNewtonFinite.Size = new System.Drawing.Size(178, 35);
             this.btnOpenExcelNewtonFinite.TabIndex = 6;
@@ -1079,7 +1079,7 @@
             // 
             this.btnNewtonFiniteToEval.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNewtonFiniteToEval.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(570, 3);
+            this.btnNewtonFiniteToEval.Location = new System.Drawing.Point(569, 3);
             this.btnNewtonFiniteToEval.Name = "btnNewtonFiniteToEval";
             this.btnNewtonFiniteToEval.Size = new System.Drawing.Size(232, 38);
             this.btnNewtonFiniteToEval.TabIndex = 5;
@@ -2028,7 +2028,7 @@
             this.tableLayoutPanel26.ColumnCount = 3;
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.83247F));
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.16753F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 658F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 660F));
             this.tableLayoutPanel26.Controls.Add(this.dataXYLeastSquares, 0, 0);
             this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 1, 0);
             this.tableLayoutPanel26.Controls.Add(this.rtbResultLeastSquares, 2, 0);
@@ -2051,7 +2051,7 @@
             this.dataXYLeastSquares.Name = "dataXYLeastSquares";
             this.dataXYLeastSquares.RowHeadersWidth = 51;
             this.dataXYLeastSquares.RowTemplate.Height = 24;
-            this.dataXYLeastSquares.Size = new System.Drawing.Size(197, 534);
+            this.dataXYLeastSquares.Size = new System.Drawing.Size(196, 534);
             this.dataXYLeastSquares.TabIndex = 6;
             // 
             // dataXLeastSquares
@@ -2075,12 +2075,12 @@
             this.tableLayoutPanel27.Controls.Add(this.txtBoxLeastSquares, 0, 1);
             this.tableLayoutPanel27.Controls.Add(this.label21, 0, 0);
             this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel27.Location = new System.Drawing.Point(206, 3);
+            this.tableLayoutPanel27.Location = new System.Drawing.Point(205, 3);
             this.tableLayoutPanel27.Name = "tableLayoutPanel27";
             this.tableLayoutPanel27.RowCount = 2;
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.85768F));
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.14232F));
-            this.tableLayoutPanel27.Size = new System.Drawing.Size(264, 534);
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(263, 534);
             this.tableLayoutPanel27.TabIndex = 8;
             // 
             // txtBoxLeastSquares
@@ -2089,7 +2089,7 @@
             this.txtBoxLeastSquares.Location = new System.Drawing.Point(3, 77);
             this.txtBoxLeastSquares.Multiline = true;
             this.txtBoxLeastSquares.Name = "txtBoxLeastSquares";
-            this.txtBoxLeastSquares.Size = new System.Drawing.Size(258, 454);
+            this.txtBoxLeastSquares.Size = new System.Drawing.Size(257, 454);
             this.txtBoxLeastSquares.TabIndex = 8;
             // 
             // label21
@@ -2107,10 +2107,10 @@
             // 
             this.rtbResultLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbResultLeastSquares.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbResultLeastSquares.Location = new System.Drawing.Point(476, 3);
+            this.rtbResultLeastSquares.Location = new System.Drawing.Point(474, 3);
             this.rtbResultLeastSquares.Name = "rtbResultLeastSquares";
             this.rtbResultLeastSquares.ReadOnly = true;
-            this.rtbResultLeastSquares.Size = new System.Drawing.Size(653, 534);
+            this.rtbResultLeastSquares.Size = new System.Drawing.Size(655, 534);
             this.rtbResultLeastSquares.TabIndex = 9;
             this.rtbResultLeastSquares.Text = "";
             // 
@@ -2804,16 +2804,17 @@
             this.comboBoxSpline.Size = new System.Drawing.Size(228, 24);
             this.comboBoxSpline.TabIndex = 1;
             // 
-            // Form1
+            // Interpolation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1146, 675);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "Interpolation";
             this.Text = "Nội suy";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
@@ -2821,7 +2822,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataChebyshev)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLagrange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYLagrange)).EndInit();
@@ -2938,24 +2938,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox txtBoxPrecision;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtBoxn;
-        private System.Windows.Forms.TextBox txtBoxb;
-        private System.Windows.Forms.TextBox txtBoxa;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnSolveChebyshev;
-        private System.Windows.Forms.DataGridView dataChebyshev;
-        private System.Windows.Forms.DataGridViewTextBoxColumn a;
-        private System.Windows.Forms.DataGridViewTextBoxColumn b;
-        private System.Windows.Forms.DataGridViewTextBoxColumn n;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chebyshevPoints;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataXYNewton;
@@ -2985,7 +2967,6 @@
         private System.Windows.Forms.TextBox txtBoxk;
         private System.Windows.Forms.DataGridView dataGridViewHornerEval;
         private System.Windows.Forms.DataGridView dataGridViewHornerDerivative;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabPage5;
@@ -3146,6 +3127,25 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox comboBoxIteration;
         private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox txtBoxPrecision;
+        private System.Windows.Forms.Button btnSolveChebyshev;
+        private System.Windows.Forms.TextBox txtBoxn;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtBoxb;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtBoxa;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView dataChebyshev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn a;
+        private System.Windows.Forms.DataGridViewTextBoxColumn b;
+        private System.Windows.Forms.DataGridViewTextBoxColumn n;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chebyshevPoints;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
 
