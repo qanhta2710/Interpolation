@@ -1,5 +1,4 @@
 # Phương pháp số
-# **Lưu ý: Tạm thời sẽ ẩn đi toàn bộ Source Code của chương trình (Sau vài ngày nữa sẽ public lại)**
 ## Mục đích:
 - Giúp đỡ mọi người qua học phần Phương pháp số
 - Source code hoàn toàn được public nên mọi người có thể dựa vào đó để viết lại thuật toán 

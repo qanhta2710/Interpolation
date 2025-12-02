@@ -296,19 +296,6 @@ namespace Interpolation
                 
                 return maxValue;
             }
-            catch (TypeInitializationException typeEx)
-            {
-                // Lấy lỗi gốc nằm bên trong
-                Exception inner = typeEx.InnerException;
-                while (inner.InnerException != null)
-                {
-                    inner = inner.InnerException;
-                }
-
-                MessageBox.Show($"Lỗi GỐC: {inner.Message}\n\nĐề nghị kiểm tra lại App.config hoặc thư mục bin.",
-                                "Tìm ra nguyên nhân", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
-            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tính M₂: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
