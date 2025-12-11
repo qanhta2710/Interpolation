@@ -12,13 +12,12 @@ namespace Interpolation.Methods
         public double[] YData { get; set; }
         public Entity FunctionExpr { get; set; }
 
-        public double A { get; set; }
-        public double B { get; set; }
-        public double H { get; set; }
-        public int N { get; set; }
-        public double Epsilon { get; set; }
-        public double M2 { get; set; }
-
+        public double A { get; set; } // Cận dưới
+        public double B { get; set; } // Cận trên
+        public double H { get; set; } // Bước nhảy
+        public int N { get; set; } // Số khoảng chia
+        public double Epsilon { get; set; } 
+        public double M2 { get; set; } // Max |f''(x)| trên [a, b]
         public double Result { get; set; }
         public double EstimatedError { get; set; }
         public bool IsFromData { get; private set; }
@@ -35,6 +34,7 @@ namespace Interpolation.Methods
             Epsilon = epsilon;
             IsFromData = true;
             Solve();
+            EstimateErrorGeneral();
         }
         // Hàm F(x) với sai số cho trước
         public TrapezoidalIntegration(string functionStr, double a, double b, double epsilon, double m2)
@@ -75,13 +75,8 @@ namespace Interpolation.Methods
             M2 = m2;
             IsFromData = false;
             Solve();
-        }
-
-        private void CalculateOptimalN()
-        {
-            double numerator = Math.Pow(B - A, 3) * M2;
-            double denominator = 12 * Epsilon;
-            N = (int)Math.Ceiling(Math.Sqrt(numerator / denominator));
+            CalculateTheoreticalError();
+            EstimateErrorGeneral();
         }
 
         private void Solve()
@@ -96,8 +91,6 @@ namespace Interpolation.Methods
             {
                 SolveFromFunction();
             }
-
-            EstimateErrorGeneral();
         }
 
         // Dữ liệu rời rạc
@@ -167,7 +160,6 @@ namespace Interpolation.Methods
         {
             H = (B - A) / N;
 
-            // Khởi tạo mảng dữ liệu để dùng cho hàm tính sai số
             XData = new double[N + 1];
             YData = new double[N + 1];
 
@@ -207,7 +199,6 @@ namespace Interpolation.Methods
                 double xi = A + i * H;
                 double fxi = EvaluateFunction(compiledFunc, xi);
 
-                // Lưu vào mảng
                 XData[i] = xi;
                 YData[i] = fxi;
 
@@ -229,8 +220,6 @@ namespace Interpolation.Methods
             calculationSteps.AppendLine($"I ≈ ({H}/2) × [{YData[0]:F8} + 2×{middleSum:F8} + {YData[N]:F8}]");
             calculationSteps.AppendLine($"  = ({H}/2) × {sum:F8}");
             calculationSteps.AppendLine($"  = {Result}");
-
-            if (M2 > 0) CalculateTheoreticalError();
         }
 
         private void CalculateTheoreticalError()
@@ -261,7 +250,7 @@ namespace Interpolation.Methods
             if (p == -1)
             {
                 calculationSteps.AppendLine();
-                calculationSteps.AppendLine($"(!) N = {N} là số nguyên tố. Không thể chia lưới đều để đánh giá sai số.");
+                calculationSteps.AppendLine($"(!) N = {N} là số nguyên tố. Không thể chia lưới đều để đánh giá sai số. (Tách thành 2 khoảng rồi tính / Đang hoàn thiện tính năng)");
                 EstimatedError = 0;
                 return;
             }
@@ -286,7 +275,6 @@ namespace Interpolation.Methods
             double denominator = Math.Pow(p, 2) - 1;
             EstimatedError = Math.Abs(Result - I_coarse) / denominator;
 
-            // 5. Ghi log hiển thị
             calculationSteps.AppendLine();
             calculationSteps.AppendLine("═══ SAI SỐ LƯỚI PHỦ (Runge) ═══");
             calculationSteps.AppendLine($"Lưới ban đầu (mịn): N = {N} khoảng, h = {H}");
@@ -327,6 +315,12 @@ namespace Interpolation.Methods
             sb.AppendLine($"KẾT QUẢ: ∫f(x)dx ≈ {Result}");
 
             rtb.Text = sb.ToString();
+        }
+        private void CalculateOptimalN()
+        {
+            double numerator = Math.Pow(B - A, 3) * M2;
+            double denominator = 12 * Epsilon;
+            N = (int)Math.Ceiling(Math.Sqrt(numerator / denominator));
         }
     }
 }

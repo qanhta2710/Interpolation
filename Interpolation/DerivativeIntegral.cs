@@ -15,17 +15,18 @@ namespace Interpolation
         }
         private void DerivativeIntegral_Load(object sender, EventArgs e)
         {
-            comboBoxDerivative.SelectedIndex = 0;
             cmbMethod.SelectedIndex = 0;
         }
+
         #region Derivative
-        private void btnOpenExcelDerivative_Click(object sender, EventArgs e)
+        private void btnOpenExcelDerivative_Click_1(object sender, EventArgs e)
         {
             InputHelper.OpenExcelAndLoadData(dataXYDerivative);
         }
 
-        private void btnDerivative_Click(object sender, EventArgs e)
+        private void btnDerivative_Click_1(object sender, EventArgs e)
         {
+
             try
             {
                 dataXYDerivative.Sort(dataXYDerivative.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
@@ -35,27 +36,9 @@ namespace Interpolation
                 int precision = Convert.ToInt32(txtBoxPrecisionDerivative.Text);
                 double[] x = InputHelper.GetXValues(dataXYDerivative);
                 double[] y = InputHelper.GetYValues(dataXYDerivative);
-                
-                DerivativeMethod method;
-                switch (comboBoxDerivative.SelectedIndex)
-                {
-                    case 0:
-                        method = DerivativeMethod.TwoPoints;
-                        break;
-                    case 1:
-                        method = DerivativeMethod.ThreePoints;
-                        break;
-                    case 2:
-                        method = DerivativeMethod.FourPoints;
-                        break;
-                    default:
-                        MessageBox.Show("Vui lòng chọn công thức tính!");
-                        return;
-                }
+                int p = Convert.ToInt32(txtOrderP.Text);
 
-                string functionStr = string.IsNullOrWhiteSpace(txtBoxFunction.Text) ? null : txtBoxFunction.Text.Trim();
-                
-                Derivative derivative = new Derivative(x, y, xTarget, method, precision, functionStr);
+                Derivative derivative = new Derivative(x, y, xTarget, p, precision);
                 derivative.DisplayResults(rtbDerivativeResult);
             }
             catch (Exception ex)
@@ -113,9 +96,6 @@ namespace Interpolation
                         return;
                     }
 
-                    // Kiểm tra phương pháp: 0 = Hình thang, 1 = Simpson, 2 = ...
-                    bool isSimpson = cmbMethod.SelectedIndex == 1;
-
                     if (rdoFixedN.Checked)
                     {
                         if (string.IsNullOrWhiteSpace(txtN.Text))
@@ -131,28 +111,26 @@ namespace Interpolation
                             MessageBox.Show("Số khoảng chia phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-
-                        if (isSimpson && n % 2 != 0)
+                        // Công thức hình thang = 0
+                        // Công thức Simpson = 1
+                        if (cmbMethod.SelectedIndex == 0)
+                        {
+                            // Công thức hình thang với n cho trước
+                            double m2 = CalculateM2(func, a, b);
+                            var trapezoidal = new TrapezoidalIntegration(func, a, b, n, m2);
+                            trapezoidal.DisplayResults(rtbIntegralResult);
+                        }
+                        else if (cmbMethod.SelectedIndex == 1 && n % 2 != 0)
                         {
                             MessageBox.Show("Công thức Simpson yêu cầu n chẵn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-
-                        if (isSimpson)
+                        else if (cmbMethod.SelectedIndex == 1)
                         {
-                            // Công thức hình thang
+                            // Công thức Simpson với n cho trước
                             double m4 = CalculateM4(func, a, b);
                             var simpson = new SimpsonIntegration(func, a, b, n, m4);
                             simpson.DisplayResults(rtbIntegralResult);
-                            lblIntegralResult.Text = $"Kết quả: ∫f(x)dx ≈ {simpson.Result}";
-                        }
-                        else
-                        {
-                            // Công thức Simpson
-                            double m2 = CalculateM2(func, a, b);
-                            var trapezoidal = new TrapezoidalIntegration(func, a, b, n, m2);
-                            trapezoidal.DisplayResults(rtbIntegralResult);
-                            lblIntegralResult.Text = $"Kết quả: ∫f(x)dx ≈ {trapezoidal.Result}";
                         }
                     }
                     else
@@ -171,7 +149,7 @@ namespace Interpolation
                             return;
                         }
 
-                        if (isSimpson)
+                        if (cmbMethod.SelectedIndex == 1)
                         {
                             // Công thức Simpson với epsilon
                             double m4 = CalculateM4(func, a, b);
@@ -185,7 +163,6 @@ namespace Interpolation
 
                             var simpson = new SimpsonIntegration(func, a, b, epsilon, m4);
                             simpson.DisplayResults(rtbIntegralResult);
-                            lblIntegralResult.Text = $"Kết quả: ∫[{a}, {b}] f(x)dx ≈ {simpson.Result}";
                         }
                         else
                         {
@@ -201,7 +178,6 @@ namespace Interpolation
 
                             var trapezoidal = new TrapezoidalIntegration(func, a, b, epsilon, m2);
                             trapezoidal.DisplayResults(rtbIntegralResult);
-                            lblIntegralResult.Text = $"Kết quả: ∫[{a}, {b}] f(x)dx ≈ {trapezoidal.Result}";
                         }
                     }
 
@@ -228,16 +204,12 @@ namespace Interpolation
                     {
                         var simpson = new SimpsonIntegration(x, y, a, b, epsilon);
                         simpson.DisplayResults(rtbIntegralResult);
-                        lblIntegralResult.Text = $"Kết quả: ∫f(x)dx ≈ {simpson.Result}";
                     }
                     else
                     {
                         var trapezoidal = new TrapezoidalIntegration(x, y, a, b, epsilon);
                         trapezoidal.DisplayResults(rtbIntegralResult);
-                        lblIntegralResult.Text = $"Kết quả: ∫f(x)dx ≈ {trapezoidal.Result}";
                     }
-
-                    lblIntegralResult.Visible = true;
                 }
             }
             catch (FormatException)

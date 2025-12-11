@@ -160,6 +160,7 @@
     <Compile Include="Utilities\DifferenceTable.cs" />
     <Compile Include="Utilities\Function.cs" />
     <Compile Include="Utilities\InputHelper.cs" />
+    <Compile Include="Utilities\UpdateManager.cs" />
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>

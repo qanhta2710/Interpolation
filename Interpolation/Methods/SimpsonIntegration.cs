@@ -35,6 +35,7 @@ namespace Interpolation.Methods
             Epsilon = epsilon;
             IsFromData = true;
             Solve();
+            EstimateErrorGeneral();
         }
 
         // Hàm F(x) với sai số cho trước
@@ -82,21 +83,10 @@ namespace Interpolation.Methods
             M4 = m4;
             IsFromData = false;
             Solve();
+            CalculateTheoreticalError();
+            EstimateErrorGeneral();
         }
 
-        private void CalculateOptimalN()
-        {
-            double numerator = Math.Pow(B - A, 5) * M4;
-            double denominator = 180 * Epsilon;
-            int n = (int)Math.Ceiling(Math.Pow(numerator / denominator, 0.25));
-
-            if (n % 2 != 0)
-            {
-                n++;
-            }
-
-            N = n;
-        }
 
         private void Solve()
         {
@@ -110,9 +100,6 @@ namespace Interpolation.Methods
             {
                 SolveFromFunction();
             }
-
-            // Gọi hàm tính sai số lưới phủ sau khi đã có kết quả
-            EstimateErrorGeneral();
         }
 
         // Dữ liệu rời rạc
@@ -160,8 +147,8 @@ namespace Interpolation.Methods
             calculationSteps.AppendLine();
 
             double sum = YData[indexA] + YData[indexB];
-            double oddSum = 0;   // y₁, y₃, y₅, ... (chỉ số lẻ)
-            double evenSum = 0;  // y₂, y₄, y₆, ... (chỉ số chẵn)
+            double oddSum = 0;   // chỉ số lẻ
+            double evenSum = 0;  // chỉ số chẵn
 
             calculationSteps.AppendLine($"y₀ = {YData[indexA]}");
             calculationSteps.AppendLine($"yₙ = {YData[indexB]}");
@@ -195,7 +182,6 @@ namespace Interpolation.Methods
         {
             H = (B - A) / N;
 
-            // Khởi tạo mảng dữ liệu để phục vụ tính sai số lưới phủ
             XData = new double[N + 1];
             YData = new double[N + 1];
 
@@ -237,16 +223,14 @@ namespace Interpolation.Methods
             var compiledFunc = FunctionExpr.Compile("x");
 
             double sum = 0;
-            double oddSum = 0;   // Các điểm có chỉ số lẻ (x₁, x₃, x₅, ...)
-            double evenSum = 0;  // Các điểm có chỉ số chẵn (x₂, x₄, x₆, ...)
+            double oddSum = 0;   
+            double evenSum = 0;  
 
-            // Tính toán và lưu trữ dữ liệu
             for (int i = 0; i <= N; i++)
             {
                 double xi = A + i * H;
                 double fxi = EvaluateFunction(compiledFunc, xi);
 
-                // Lưu vào mảng
                 XData[i] = xi;
                 YData[i] = fxi;
 
@@ -269,7 +253,6 @@ namespace Interpolation.Methods
             calculationSteps.AppendLine();
 
             calculationSteps.AppendLine("Các điểm có chỉ số lẻ:");
-            // In log cho các điểm lẻ (đã tính ở trên)
             for (int i = 1; i < N; i += 2)
             {
                 calculationSteps.AppendLine($"  f(x{i}) = f({XData[i]:F6}) = {YData[i]:F8}");
@@ -278,7 +261,6 @@ namespace Interpolation.Methods
             calculationSteps.AppendLine();
 
             calculationSteps.AppendLine("Các điểm có chỉ số chẵn:");
-            // In log cho các điểm chẵn
             for (int i = 2; i < N; i += 2)
             {
                 calculationSteps.AppendLine($"  f(x{i}) = f({XData[i]:F6}) = {YData[i]:F8}");
@@ -292,12 +274,6 @@ namespace Interpolation.Methods
             calculationSteps.AppendLine($"I ≈ ({H}/3) × [{YData[0]:F8} + 4×{oddSum:F8} + 2×{evenSum:F8} + {YData[N]:F8}]");
             calculationSteps.AppendLine($"  = ({H}/3) × {sum + 4 * oddSum + 2 * evenSum:F8}");
             calculationSteps.AppendLine($"  = {Result}");
-
-            // Tính sai số lý thuyết
-            if (M4 > 0)
-            {
-                CalculateTheoreticalError();
-            }
         }
 
         private void CalculateTheoreticalError()
@@ -314,23 +290,16 @@ namespace Interpolation.Methods
 
         private void EstimateErrorGeneral()
         {
-            // 1. Kiểm tra điều kiện cơ bản
-            // Simpson cần ít nhất 4 đoạn để có thể chia đôi lưới (mỗi lưới con phải chẵn)
             if (N < 2)
             {
                 EstimatedError = 0;
                 return;
             }
 
-            // 2. Tìm p sao cho N chia hết cho p VÀ (N/p) cũng phải là số chẵn
-            // Vì lưới thưa (Coarse) dùng cho Simpson cũng yêu cầu số khoảng chia là chẵn.
             int p = -1;
 
-            // Duyệt tìm p. 
-            // Ta ưu tiên p nhỏ nhất để lưới thưa gần lưới mịn nhất (thường là p=2 nếu N chẵn)
             for (int i = 2; i <= Math.Sqrt(N); i++)
             {
-                // Điều kiện: N chia hết cho i VÀ số khoảng mới (N/i) phải chẵn
                 if (N % i == 0 && (N / i) % 2 == 0)
                 {
                     p = i;
@@ -338,44 +307,35 @@ namespace Interpolation.Methods
                 }
             }
 
-            // Nếu không tìm thấy p (ví dụ N=6, chia 2 được 3 (lẻ) -> không dùng Simpson cho lưới thưa được
-            // hoặc N là số nguyên tố)
             if (p == -1)
             {
                 calculationSteps.AppendLine();
-                calculationSteps.AppendLine($"(!) Không tìm được tỷ lệ p sao cho lưới thưa có số khoảng chẵn (N={N}).");
-                calculationSteps.AppendLine("    Không thể áp dụng đánh giá sai số lưới phủ cho Simpson.");
+                calculationSteps.AppendLine($"(!) Không tìm được tỷ lệ p sao cho lưới thưa có số khoảng chẵn (N={N}). Tách khoảng + Tính trên từng khoảng (Sẽ Update thêm sau)");
+                calculationSteps.AppendLine("    Không thể áp dụng đánh giá sai số lưới phủ cho Simpson. (Sẽ Update chức năng sau)");
                 EstimatedError = 0;
                 return;
             }
-
-            // 3. Thiết lập lưới thưa
-            // Lưới mịn: N khoảng.
-            // Lưới thưa: N' = N/p khoảng (N' chẵn). Bước nhảy h' = p*h.
 
             int n_coarse = N / p;
             double h_coarse = H * p;
 
             int indexA = Array.IndexOf(XData, A);
 
-            // Xử lý an toàn indexA
             if (indexA == -1 && !IsFromData) indexA = 0;
 
-            // Tính Simpson cho lưới thưa
-            double sumCoarse = YData[indexA] + YData[indexA + N]; // Đầu + Cuối
+            double sumCoarse = YData[indexA] + YData[indexA + N]; 
             double oddSumCoarse = 0;
             double evenSumCoarse = 0;
 
-            // Duyệt qua các điểm của lưới thưa: 1, 2, ..., n_coarse - 1
             for (int i = 1; i < n_coarse; i++)
             {
-                int originalIndex = indexA + (i * p); // Chỉ số tương ứng trên mảng dữ liệu gốc
+                int originalIndex = indexA + (i * p); 
 
-                if (i % 2 == 1) // Lẻ trên lưới thưa
+                if (i % 2 == 1)
                 {
                     oddSumCoarse += YData[originalIndex];
                 }
-                else // Chẵn trên lưới thưa
+                else 
                 {
                     evenSumCoarse += YData[originalIndex];
                 }
@@ -383,13 +343,9 @@ namespace Interpolation.Methods
 
             double I_coarse = (h_coarse / 3.0) * (sumCoarse + 4 * oddSumCoarse + 2 * evenSumCoarse);
 
-            // 4. Tính sai số theo công thức Runge cho Simpson (O(h^4))
-            // R = |I_fine - I_coarse| / (p^4 - 1)
-
             double denominator = Math.Pow(p, 4) - 1;
             EstimatedError = Math.Abs(Result - I_coarse) / denominator;
 
-            // 5. Ghi log
             calculationSteps.AppendLine();
             calculationSteps.AppendLine("═══ SAI SỐ LƯỚI PHỦ (Runge) ═══");
             calculationSteps.AppendLine($"Lưới ban đầu (mịn): N = {N} khoảng (chẵn), h = {H}");
@@ -430,6 +386,19 @@ namespace Interpolation.Methods
             sb.AppendLine($"KẾT QUẢ: ∫f(x)dx ≈ {Result}");
 
             rtb.Text = sb.ToString();
+        }
+        private void CalculateOptimalN()
+        {
+            double numerator = Math.Pow(B - A, 5) * M4;
+            double denominator = 180 * Epsilon;
+            int n = (int)Math.Ceiling(Math.Pow(numerator / denominator, 0.25));
+
+            if (n % 2 != 0)
+            {
+                n++;
+            }
+
+            N = n;
         }
     }
 }
