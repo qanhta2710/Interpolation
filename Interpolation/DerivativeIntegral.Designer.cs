@@ -62,6 +62,8 @@
             this.grpMethod = new System.Windows.Forms.GroupBox();
             this.cmbMethod = new System.Windows.Forms.ComboBox();
             this.lblMethod = new System.Windows.Forms.Label();
+            this.lblNewtonOrder = new System.Windows.Forms.Label();
+            this.txtNewtonOrder = new System.Windows.Forms.TextBox();
             this.panelData = new System.Windows.Forms.Panel();
             this.txtDataEpsilon = new System.Windows.Forms.TextBox();
             this.lblDataEpsilon = new System.Windows.Forms.Label();
@@ -85,6 +87,27 @@
             this.grpInputType = new System.Windows.Forms.GroupBox();
             this.rdoData = new System.Windows.Forms.RadioButton();
             this.rdoFunction = new System.Windows.Forms.RadioButton();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.rtbResult2D = new System.Windows.Forms.RichTextBox();
+            this.panelDoubleInput = new System.Windows.Forms.Panel();
+            this.btnCalcDouble = new System.Windows.Forms.Button();
+            this.lblMethod2D = new System.Windows.Forms.Label();
+            this.cmbMethod2D = new System.Windows.Forms.ComboBox();
+            this.grpDoubleY = new System.Windows.Forms.GroupBox();
+            this.txtYm = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtY0 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.grpDoubleX = new System.Windows.Forms.GroupBox();
+            this.txtXn = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtX0 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtFunction2D = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtBoxErrorGeneral = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYDerivative)).BeginInit();
@@ -100,12 +123,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvIntegralData)).BeginInit();
             this.panelFunction.SuspendLayout();
             this.grpInputType.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panelDoubleInput.SuspendLayout();
+            this.grpDoubleY.SuspendLayout();
+            this.grpDoubleX.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -229,7 +257,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 106F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(599, 106);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
@@ -414,9 +442,9 @@
             this.lblN.AutoSize = true;
             this.lblN.Location = new System.Drawing.Point(40, 50);
             this.lblN.Name = "lblN";
-            this.lblN.Size = new System.Drawing.Size(24, 16);
+            this.lblN.Size = new System.Drawing.Size(27, 16);
             this.lblN.TabIndex = 2;
-            this.lblN.Text = "n =";
+            this.lblN.Text = "N =";
             // 
             // rdoCalculateN
             // 
@@ -434,10 +462,10 @@
             this.rdoFixedN.Checked = true;
             this.rdoFixedN.Location = new System.Drawing.Point(20, 26);
             this.rdoFixedN.Name = "rdoFixedN";
-            this.rdoFixedN.Size = new System.Drawing.Size(188, 20);
+            this.rdoFixedN.Size = new System.Drawing.Size(191, 20);
             this.rdoFixedN.TabIndex = 0;
             this.rdoFixedN.TabStop = true;
-            this.rdoFixedN.Text = "Cho trước số khoảng chia n";
+            this.rdoFixedN.Text = "Cho trước số khoảng chia N";
             this.rdoFixedN.UseVisualStyleBackColor = true;
             this.rdoFixedN.CheckedChanged += new System.EventHandler(this.rdoFixedN_CheckedChanged);
             // 
@@ -445,6 +473,8 @@
             // 
             this.grpMethod.Controls.Add(this.cmbMethod);
             this.grpMethod.Controls.Add(this.lblMethod);
+            this.grpMethod.Controls.Add(this.lblNewtonOrder);
+            this.grpMethod.Controls.Add(this.txtNewtonOrder);
             this.grpMethod.Location = new System.Drawing.Point(20, 400);
             this.grpMethod.Name = "grpMethod";
             this.grpMethod.Size = new System.Drawing.Size(1150, 70);
@@ -458,11 +488,14 @@
             this.cmbMethod.FormattingEnabled = true;
             this.cmbMethod.Items.AddRange(new object[] {
             "Hình thang",
-            "Simpson"});
+            "Simpson",
+            "Điểm giữa",
+            "Newton-Cotes"});
             this.cmbMethod.Location = new System.Drawing.Point(160, 27);
             this.cmbMethod.Name = "cmbMethod";
             this.cmbMethod.Size = new System.Drawing.Size(250, 24);
             this.cmbMethod.TabIndex = 1;
+            this.cmbMethod.SelectedIndexChanged += new System.EventHandler(this.cmbMethod_SelectedIndexChanged);
             // 
             // lblMethod
             // 
@@ -472,6 +505,25 @@
             this.lblMethod.Size = new System.Drawing.Size(123, 16);
             this.lblMethod.TabIndex = 0;
             this.lblMethod.Text = "Chọn phương pháp:";
+            // 
+            // lblNewtonOrder
+            // 
+            this.lblNewtonOrder.AutoSize = true;
+            this.lblNewtonOrder.Location = new System.Drawing.Point(450, 30);
+            this.lblNewtonOrder.Name = "lblNewtonOrder";
+            this.lblNewtonOrder.Size = new System.Drawing.Size(138, 16);
+            this.lblNewtonOrder.TabIndex = 2;
+            this.lblNewtonOrder.Text = "Bậc n (Newton-Cotez):";
+            this.lblNewtonOrder.Visible = false;
+            // 
+            // txtNewtonOrder
+            // 
+            this.txtNewtonOrder.Location = new System.Drawing.Point(604, 27);
+            this.txtNewtonOrder.Name = "txtNewtonOrder";
+            this.txtNewtonOrder.Size = new System.Drawing.Size(60, 22);
+            this.txtNewtonOrder.TabIndex = 3;
+            this.txtNewtonOrder.Text = "4";
+            this.txtNewtonOrder.Visible = false;
             // 
             // panelData
             // 
@@ -693,6 +745,212 @@
             this.rdoFunction.UseVisualStyleBackColor = true;
             this.rdoFunction.CheckedChanged += new System.EventHandler(this.rdoFunction_CheckedChanged);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.rtbResult2D);
+            this.tabPage3.Controls.Add(this.panelDoubleInput);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1216, 586);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Tích phân kép";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // rtbResult2D
+            // 
+            this.rtbResult2D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbResult2D.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbResult2D.Location = new System.Drawing.Point(3, 223);
+            this.rtbResult2D.Name = "rtbResult2D";
+            this.rtbResult2D.ReadOnly = true;
+            this.rtbResult2D.Size = new System.Drawing.Size(1210, 360);
+            this.rtbResult2D.TabIndex = 1;
+            this.rtbResult2D.Text = "";
+            // 
+            // panelDoubleInput
+            // 
+            this.panelDoubleInput.Controls.Add(this.label2);
+            this.panelDoubleInput.Controls.Add(this.txtBoxErrorGeneral);
+            this.panelDoubleInput.Controls.Add(this.btnCalcDouble);
+            this.panelDoubleInput.Controls.Add(this.lblMethod2D);
+            this.panelDoubleInput.Controls.Add(this.cmbMethod2D);
+            this.panelDoubleInput.Controls.Add(this.grpDoubleY);
+            this.panelDoubleInput.Controls.Add(this.grpDoubleX);
+            this.panelDoubleInput.Controls.Add(this.txtFunction2D);
+            this.panelDoubleInput.Controls.Add(this.label6);
+            this.panelDoubleInput.Controls.Add(this.label1);
+            this.panelDoubleInput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelDoubleInput.Location = new System.Drawing.Point(3, 3);
+            this.panelDoubleInput.Name = "panelDoubleInput";
+            this.panelDoubleInput.Size = new System.Drawing.Size(1210, 220);
+            this.panelDoubleInput.TabIndex = 0;
+            // 
+            // btnCalcDouble
+            // 
+            this.btnCalcDouble.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalcDouble.Location = new System.Drawing.Point(850, 160);
+            this.btnCalcDouble.Name = "btnCalcDouble";
+            this.btnCalcDouble.Size = new System.Drawing.Size(200, 40);
+            this.btnCalcDouble.TabIndex = 7;
+            this.btnCalcDouble.Text = "Tính tích phân kép";
+            this.btnCalcDouble.UseVisualStyleBackColor = true;
+            this.btnCalcDouble.Click += new System.EventHandler(this.btnCalcDouble_Click);
+            // 
+            // lblMethod2D
+            // 
+            this.lblMethod2D.AutoSize = true;
+            this.lblMethod2D.Location = new System.Drawing.Point(20, 172);
+            this.lblMethod2D.Name = "lblMethod2D";
+            this.lblMethod2D.Size = new System.Drawing.Size(123, 16);
+            this.lblMethod2D.TabIndex = 6;
+            this.lblMethod2D.Text = "Chọn phương pháp:";
+            // 
+            // cmbMethod2D
+            // 
+            this.cmbMethod2D.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMethod2D.FormattingEnabled = true;
+            this.cmbMethod2D.Items.AddRange(new object[] {
+            "Hình thang",
+            "Simpson"});
+            this.cmbMethod2D.Location = new System.Drawing.Point(160, 169);
+            this.cmbMethod2D.Name = "cmbMethod2D";
+            this.cmbMethod2D.Size = new System.Drawing.Size(200, 24);
+            this.cmbMethod2D.TabIndex = 5;
+            // 
+            // grpDoubleY
+            // 
+            this.grpDoubleY.Controls.Add(this.txtYm);
+            this.grpDoubleY.Controls.Add(this.label11);
+            this.grpDoubleY.Controls.Add(this.txtY0);
+            this.grpDoubleY.Controls.Add(this.label12);
+            this.grpDoubleY.Location = new System.Drawing.Point(550, 60);
+            this.grpDoubleY.Name = "grpDoubleY";
+            this.grpDoubleY.Size = new System.Drawing.Size(500, 80);
+            this.grpDoubleY.TabIndex = 4;
+            this.grpDoubleY.TabStop = false;
+            this.grpDoubleY.Text = "Cận Y";
+            // 
+            // txtYm
+            // 
+            this.txtYm.Location = new System.Drawing.Point(210, 30);
+            this.txtYm.Name = "txtYm";
+            this.txtYm.Size = new System.Drawing.Size(80, 22);
+            this.txtYm.TabIndex = 3;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(170, 33);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(18, 16);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "d:";
+            // 
+            // txtY0
+            // 
+            this.txtY0.Location = new System.Drawing.Point(70, 30);
+            this.txtY0.Name = "txtY0";
+            this.txtY0.Size = new System.Drawing.Size(80, 22);
+            this.txtY0.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(20, 33);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 16);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "c:";
+            // 
+            // grpDoubleX
+            // 
+            this.grpDoubleX.Controls.Add(this.txtXn);
+            this.grpDoubleX.Controls.Add(this.label8);
+            this.grpDoubleX.Controls.Add(this.txtX0);
+            this.grpDoubleX.Controls.Add(this.label7);
+            this.grpDoubleX.Location = new System.Drawing.Point(20, 60);
+            this.grpDoubleX.Name = "grpDoubleX";
+            this.grpDoubleX.Size = new System.Drawing.Size(500, 80);
+            this.grpDoubleX.TabIndex = 3;
+            this.grpDoubleX.TabStop = false;
+            this.grpDoubleX.Text = "Cận X";
+            // 
+            // txtXn
+            // 
+            this.txtXn.Location = new System.Drawing.Point(210, 30);
+            this.txtXn.Name = "txtXn";
+            this.txtXn.Size = new System.Drawing.Size(80, 22);
+            this.txtXn.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(170, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(18, 16);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "b:";
+            // 
+            // txtX0
+            // 
+            this.txtX0.Location = new System.Drawing.Point(70, 30);
+            this.txtX0.Name = "txtX0";
+            this.txtX0.Size = new System.Drawing.Size(80, 22);
+            this.txtX0.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(20, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(18, 16);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "a:";
+            // 
+            // txtFunction2D
+            // 
+            this.txtFunction2D.Location = new System.Drawing.Point(120, 20);
+            this.txtFunction2D.Name = "txtFunction2D";
+            this.txtFunction2D.Size = new System.Drawing.Size(400, 22);
+            this.txtFunction2D.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Gray;
+            this.label6.Location = new System.Drawing.Point(540, 23);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(193, 16);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "(Ví dụ: x^2 + y^2, sin(x)*cos(y)...)";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Hàm f(x, y):";
+            // 
+            // txtBoxErrorGeneral
+            // 
+            this.txtBoxErrorGeneral.Location = new System.Drawing.Point(523, 169);
+            this.txtBoxErrorGeneral.Name = "txtBoxErrorGeneral";
+            this.txtBoxErrorGeneral.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxErrorGeneral.TabIndex = 8;
+            this.txtBoxErrorGeneral.Text = "0.00001";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(403, 172);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 16);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Sai số cho phép";
+            // 
             // DerivativeIntegral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -728,6 +986,13 @@
             this.panelFunction.PerformLayout();
             this.grpInputType.ResumeLayout(false);
             this.grpInputType.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.panelDoubleInput.ResumeLayout(false);
+            this.panelDoubleInput.PerformLayout();
+            this.grpDoubleY.ResumeLayout(false);
+            this.grpDoubleY.PerformLayout();
+            this.grpDoubleX.ResumeLayout(false);
+            this.grpDoubleX.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -777,6 +1042,8 @@
         private System.Windows.Forms.GroupBox grpMethod;
         private System.Windows.Forms.ComboBox cmbMethod;
         private System.Windows.Forms.Label lblMethod;
+        private System.Windows.Forms.Label lblNewtonOrder;
+        private System.Windows.Forms.TextBox txtNewtonOrder;
         private System.Windows.Forms.GroupBox grpConfiguration;
         private System.Windows.Forms.TextBox txtEpsilon;
         private System.Windows.Forms.Label lblEpsilon;
@@ -790,5 +1057,26 @@
         private System.Windows.Forms.RichTextBox rtbIntegralResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsXIntegral;
         private System.Windows.Forms.DataGridViewTextBoxColumn colsYIntegral;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Panel panelDoubleInput;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFunction2D;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox grpDoubleX;
+        private System.Windows.Forms.TextBox txtX0;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox grpDoubleY;
+        private System.Windows.Forms.TextBox txtXn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtYm;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtY0;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblMethod2D;
+        private System.Windows.Forms.ComboBox cmbMethod2D;
+        private System.Windows.Forms.Button btnCalcDouble;
+        private System.Windows.Forms.RichTextBox rtbResult2D;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtBoxErrorGeneral;
     }
 }

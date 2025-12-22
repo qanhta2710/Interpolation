@@ -49,6 +49,20 @@ namespace Interpolation
         #endregion
 
         #region Integral
+        private void cmbMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Kiểm tra nếu mục được chọn là "Newton-Cotes"
+            if (cmbMethod.SelectedItem != null && cmbMethod.SelectedItem.ToString() == "Newton-Cotes")
+            {
+                lblNewtonOrder.Visible = true;
+                txtNewtonOrder.Visible = true;
+            }
+            else
+            {
+                lblNewtonOrder.Visible = false;
+                txtNewtonOrder.Visible = false;
+            }
+        }
         private void btnOpenExcelIntegral_Click(object sender, EventArgs e)
         {
             InputHelper.OpenExcelAndLoadData(dgvIntegralData);
@@ -59,6 +73,7 @@ namespace Interpolation
             {
                 double a, b;
 
+                // 1. Lấy và kiểm tra cận tích phân
                 if (rdoFunction.Checked)
                 {
                     if (string.IsNullOrWhiteSpace(txtLowerBound.Text) || string.IsNullOrWhiteSpace(txtUpperBound.Text))
@@ -86,16 +101,87 @@ namespace Interpolation
                     return;
                 }
 
+                // 2. Xử lý trường hợp nhập HÀM SỐ
                 if (rdoFunction.Checked)
                 {
                     string func = txtFunction.Text.Trim();
-
                     if (string.IsNullOrEmpty(func))
                     {
                         MessageBox.Show("Vui lòng nhập hàm f(x)!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
+                    int methodIndex = cmbMethod.SelectedIndex; // 0: Hình thang, 1: Simpson, 2: Điểm giữa, 3: Newton-Cotes
+
+                    // Xử lý Newton-Cotes
+                    if (cmbMethod.SelectedItem != null && cmbMethod.SelectedItem.ToString() == "Newton-Cotes")
+                    {
+                        if (string.IsNullOrWhiteSpace(txtNewtonOrder.Text))
+                        {
+                            MessageBox.Show("Vui lòng nhập bậc Newton-Cotes!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        int order = Convert.ToInt32(txtNewtonOrder.Text);
+
+                        if (order < 1 || order > 8)
+                        {
+                            MessageBox.Show("Bậc Newton-Cotes phải từ 1 đến 8!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // TRƯỜNG HỢP: TÍNH N TỪ EPSILON
+                        if (rdoCalculateN.Checked)
+                        {
+                            if (string.IsNullOrWhiteSpace(txtEpsilon.Text))
+                            {
+                                MessageBox.Show("Vui lòng nhập epsilon!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            double epsilon = Convert.ToDouble(txtEpsilon.Text);
+                            if (epsilon <= 0)
+                            {
+                                MessageBox.Show("Epsilon phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var nc = new NewtonCotesIntegration(func, a, b, epsilon, order);
+                            nc.DisplayResults(rtbIntegralResult);
+                        }
+                        // TRƯỜNG HỢP: N CHO TRƯỚC
+                        else
+                        {
+                            if (string.IsNullOrWhiteSpace(txtN.Text))
+                            {
+                                MessageBox.Show("Vui lòng nhập số khoảng chia n!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            int n = Convert.ToInt32(txtN.Text);
+                            
+                            if (n <= 0)
+                            {
+                                MessageBox.Show("Số khoảng chia phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            // Kiểm tra n phải chia hết cho order
+                            if (n % order != 0)
+                            {
+                                MessageBox.Show($"Số khoảng chia N phải chia hết cho bậc {order}!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var nc = new NewtonCotesIntegration(func, a, b, n, order);
+                            nc.DisplayResults(rtbIntegralResult);
+                        }
+
+                        lblIntegralResult.Visible = true;
+                        return;
+                    }
+
+                    // TRƯỜNG HỢP: BIẾT TRƯỚC N
                     if (rdoFixedN.Checked)
                     {
                         if (string.IsNullOrWhiteSpace(txtN.Text))
@@ -105,34 +191,42 @@ namespace Interpolation
                         }
 
                         int n = Convert.ToInt32(txtN.Text);
-
                         if (n <= 0)
                         {
                             MessageBox.Show("Số khoảng chia phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        // Công thức hình thang = 0
-                        // Công thức Simpson = 1
-                        if (cmbMethod.SelectedIndex == 0)
+
+                        switch (methodIndex)
                         {
-                            // Công thức hình thang với n cho trước
-                            double m2 = CalculateM2(func, a, b);
-                            var trapezoidal = new TrapezoidalIntegration(func, a, b, n, m2);
-                            trapezoidal.DisplayResults(rtbIntegralResult);
-                        }
-                        else if (cmbMethod.SelectedIndex == 1 && n % 2 != 0)
-                        {
-                            MessageBox.Show("Công thức Simpson yêu cầu n chẵn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        else if (cmbMethod.SelectedIndex == 1)
-                        {
-                            // Công thức Simpson với n cho trước
-                            double m4 = CalculateM4(func, a, b);
-                            var simpson = new SimpsonIntegration(func, a, b, n, m4);
-                            simpson.DisplayResults(rtbIntegralResult);
+                            case 0: // Hình thang
+                                double m2Trap = CalculateM2(func, a, b);
+                                var trapezoidal = new TrapezoidalIntegration(func, a, b, n, m2Trap);
+                                trapezoidal.DisplayResults(rtbIntegralResult);
+                                break;
+
+                            case 1: // Simpson
+                                if (n % 2 != 0)
+                                {
+                                    MessageBox.Show("Công thức Simpson yêu cầu n chẵn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                                double m4Simp = CalculateM4(func, a, b);
+                                var simpson = new SimpsonIntegration(func, a, b, n, m4Simp);
+                                simpson.DisplayResults(rtbIntegralResult);
+                                break;
+
+                            case 2: // Điểm giữa
+                                var midpoint = new MidpointIntegration(func, a, b, n);
+                                midpoint.DisplayResults(rtbIntegralResult);
+                                break;
+
+                            default:
+                                MessageBox.Show("Vui lòng chọn phương pháp tính!");
+                                return;
                         }
                     }
+                    // TRƯỜNG HỢP: TÍNH N TỪ EPSILON
                     else
                     {
                         if (string.IsNullOrWhiteSpace(txtEpsilon.Text))
@@ -142,52 +236,38 @@ namespace Interpolation
                         }
 
                         double epsilon = Convert.ToDouble(txtEpsilon.Text);
-
                         if (epsilon <= 0)
                         {
                             MessageBox.Show("Epsilon phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        if (cmbMethod.SelectedIndex == 1)
+                        if (methodIndex == 1) // Simpson dùng M4
                         {
-                            // Công thức Simpson với epsilon
                             double m4 = CalculateM4(func, a, b);
-                            
-                            if (m4 <= 0)
-                            {
-                                MessageBox.Show("Không thể tính M₄ tự động. Hàm có thể không có đạo hàm bậc 4 hoặc công thức không hợp lệ.", 
-                                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
+                            if (m4 <= 0) { MessageBox.Show("Không thể tính M4 tự động."); return; }
                             var simpson = new SimpsonIntegration(func, a, b, epsilon, m4);
                             simpson.DisplayResults(rtbIntegralResult);
                         }
-                        else
+                        else if (methodIndex == 0) // Hình thang dùng M2
                         {
-                            // Công thức Hình thang với epsilon
                             double m2 = CalculateM2(func, a, b);
-                            
-                            if (m2 <= 0)
-                            {
-                                MessageBox.Show("Không thể tính M₂ tự động. Hàm có thể không có đạo hàm bậc 2 hoặc công thức không hợp lệ.", 
-                                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
+                            if (m2 <= 0) { MessageBox.Show("Không thể tính M2 tự động."); return; }
                             var trapezoidal = new TrapezoidalIntegration(func, a, b, epsilon, m2);
                             trapezoidal.DisplayResults(rtbIntegralResult);
                         }
+                        else if (methodIndex == 2) // Điểm giữa dùng M2
+                        {
+                            var midpoint = new MidpointIntegration(func, a, b, epsilon);
+                            midpoint.DisplayResults(rtbIntegralResult);
+                        }
                     }
-
                     lblIntegralResult.Visible = true;
                 }
+                // 3. Xử lý trường hợp DỮ LIỆU RỜI RẠC
                 else
                 {
-                    // Tập dữ liệu rời rạc
                     InputHelper.RemoveDuplicate(dgvIntegralData);
-
                     if (dgvIntegralData.Rows.Count <= 1)
                     {
                         MessageBox.Show("Vui lòng nhập dữ liệu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -198,14 +278,41 @@ namespace Interpolation
                     double[] y = InputHelper.GetYValues(dgvIntegralData);
                     double epsilon = Convert.ToDouble(txtDataEpsilon.Text);
 
-                    bool isSimpson = cmbMethod.SelectedIndex == 1;
+                    // Xử lý Newton-Cotes cho dữ liệu rời rạc
+                    if (cmbMethod.SelectedItem != null && cmbMethod.SelectedItem.ToString() == "Newton-Cotes")
+                    {
+                        if (string.IsNullOrWhiteSpace(txtNewtonOrder.Text))
+                        {
+                            MessageBox.Show("Vui lòng nhập bậc Newton-Cotes!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
 
-                    if (isSimpson)
+                        int order = Convert.ToInt32(txtNewtonOrder.Text);
+
+                        if (order < 1 || order > 8)
+                        {
+                            MessageBox.Show("Bậc Newton-Cotes phải từ 1 đến 8!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        var nc = new NewtonCotesIntegration(x, y, a, b, epsilon, order);
+                        nc.DisplayResults(rtbIntegralResult);
+                        return;
+                    }
+
+                    int methodIndex = cmbMethod.SelectedIndex;
+
+                    if (methodIndex == 1) // Simpson
                     {
                         var simpson = new SimpsonIntegration(x, y, a, b, epsilon);
                         simpson.DisplayResults(rtbIntegralResult);
                     }
-                    else
+                    else if (methodIndex == 2) // Điểm giữa
+                    {
+                        var midpoint = new MidpointIntegration(x, y, a, b, epsilon);
+                        midpoint.DisplayResults(rtbIntegralResult);
+                    }
+                    else // Hình thang (mặc định hoặc index 0)
                     {
                         var trapezoidal = new TrapezoidalIntegration(x, y, a, b, epsilon);
                         trapezoidal.DisplayResults(rtbIntegralResult);
@@ -214,12 +321,44 @@ namespace Interpolation
             }
             catch (FormatException)
             {
-                MessageBox.Show("Lỗi định dạng dữ liệu. Vui lòng kiểm tra lại các giá trị nhập vào!",
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi định dạng dữ liệu. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnCalcDouble_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string func = txtFunction2D.Text;
+
+                // Lấy cận
+                double x0 = double.Parse(txtX0.Text);
+                double xn = double.Parse(txtXn.Text);
+                double y0 = double.Parse(txtY0.Text);
+                double ym = double.Parse(txtYm.Text);
+
+                double epsilon = Convert.ToDouble(txtBoxErrorGeneral.Text);
+
+                // Khởi tạo class với Epsilon thay vì Nx, Ny
+                var solver = new DoubleIntegration(func, x0, xn, y0, ym, epsilon);
+
+                if (cmbMethod2D.SelectedIndex == 0) // Hình thang
+                {
+                    solver.CalculateTrapezoidalAuto();
+                }
+                else // Simpson
+                {
+                    solver.CalculateSimpsonAuto();
+                }
+
+                solver.DisplayResults(rtbResult2D);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
         #endregion 

@@ -50,5 +50,13 @@ namespace Interpolation
             form2.ShowDialog();
             this.Show();
         }
+
+        private void btnODE_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ODE form3 = new ODE();
+            form3.ShowDialog();
+            this.Show();
+        }
     }
 }

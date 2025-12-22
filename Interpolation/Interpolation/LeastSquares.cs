@@ -34,7 +34,7 @@ namespace Interpolation.Methods
             bool allNegative = Array.TrueForAll(YData, v => v < 0);
 
             if (!allPositive && !allNegative)
-                throw new ArgumentException("Dữ liệu y chứa cả giá trị dương và âm");
+                throw new ArgumentException("Dữ liệu y chứa cả giá trị dương và âm, người dùng cần tự xử lý dữ liệu để chỉ chứa giá trị dương hoặc âm");
         }
         
         protected double EvaluatePhi(string phiExpression, double xValue)
