@@ -7,14 +7,14 @@
 ## Tính năng:
 - Tìm đa thức nội suy bằng Nội suy mốc bất kì _(Lagrange, Newton)_, Nội suy mốc cách đều _(Newton)_, Nội suy trung tâm _(Stirling, Bessel, Gauss I, Gauss II)_, Nội suy ngược _(Phương pháp lặp)_, Hàm ghép trơn _(Spline)_
 - Tìm hàm thực nghiệm bằng phương pháp bình phương tối thiểu _(Dạng tuyến tính và Dạng phi tuyến có thể đưa về tuyến tính)_
-- Tìm các mốc nội suy cách đều phù hợp cho bài toán **Nội suy trung tâm** từ tập dữ liệu, Tìm các mốc nội suy phù hợp cho bài toán **nội suy ngược** từ tập dữ liệu
+- Tìm các mốc nội suy cách đều phù hợp cho bài toán **Nội suy trung tâm** từ tập dữ liệu, Tìm các mốc nội suy phù hợp cho bài toán **Nội suy ngược** từ tập dữ liệu
 - Tính giá trị đa thức tại 1 điểm _(Sử dụng lược đồ Hoocne)_, Tính đạo hàm các cấp của đa thức tại 1 điểm
 - Khi phát hiện điểm nội suy trùng nhau, tự động giữ lại điểm đầu tiên và loại bỏ tất cả các điểm còn lại
 - Tự động nhập dữ liệu từ File Excel
-- Tính gần đúng đạo hàm tại 1 điểm bằng **công thức 2 / 3 / 4 điểm**
-- Tính gần đúng tích phân tại 1 điểm bằng **Công thức hình thang** và **Công thức Simpson**
-- Đánh giá sai số tính gần đúng theo công thức lưới phủ (Runge) hoặc sai số theo lý thuyết
-
+- Tính gần đúng đạo hàm tại 1 điểm bằng **Công thức p + 1 điểm**
+- Tính gần đúng tích phân tại 1 điểm bằng **Công thức hình thang**, **Công thức Simpson**, **Công thức Newton-Cotez**, **Công thức điểm giữa**
+- Đánh giá sai số tính gần đúng theo công thức lưới phủ (Runge) và sai số lý thuyết
+- Tìm nghiệm số của phương trình vi phân bằng **Phương pháp Euler hiện**, **Euler ẩn** và **Phương pháp hình thang**
 ## Hướng dẫn sử dụng - ĐÃ CŨ
 
 [Video hướng dẫn](https://youtu.be/W5qSPlaAW-c)
@@ -35,6 +35,7 @@ https://github.com/user-attachments/assets/3e09bbde-6182-4d59-b7ec-0133be25dbe1
 
 ## Contributors
 - Cảm ơn bác [TontonYuta](https://github.com/TontonYuta) đã giúp em có ý tưởng thực hiện làm ra App này.
+- Cảm ơn bác [Tuan Anh Nguyen](https://www.facebook.com/11hnatgn) đã giúp thêm tính năng Update
 
 ## 💖 Donate
 
