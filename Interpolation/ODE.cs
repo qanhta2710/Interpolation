@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -19,14 +18,16 @@ namespace Interpolation
             UpdateSystemUI();
             UpdateHighOrderUI();
         }
-
-        // --- CÁC SỰ KIỆN UI (Giữ nguyên) ---
+        private void rdoSys1_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
         private void rdoSys2_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
         private void rdoSys3_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
         private void cmbOrder_SelectedIndexChanged(object sender, EventArgs e) { UpdateHighOrderUI(); }
 
         private void UpdateSystemUI()
         {
+            bool is2D = rdoSys2.Checked || rdoSys3.Checked;
+            label6.Visible = is2D; txtFuncY.Visible = is2D;
+            label9.Visible = is2D; txtInitY.Visible = is2D;
             bool is3D = rdoSys3.Checked;
             label7.Visible = is3D; txtFuncZ.Visible = is3D;
             label10.Visible = is3D; txtInitZ.Visible = is3D;
@@ -48,22 +49,31 @@ namespace Interpolation
 
                 if (tabInput.SelectedTab == tabSystem)
                 {
-                    dim = rdoSys3.Checked ? 3 : 2;
-                    y0 = new double[dim];
-                    y0[0] = double.Parse(txtInitX.Text);
-                    y0[1] = double.Parse(txtInitY.Text);
-                    if (dim == 3) y0[2] = double.Parse(txtInitZ.Text);
+                    if (rdoSys1.Checked) dim = 1;
+                    else if (rdoSys2.Checked) dim = 2;
+                    else if (rdoSys3.Checked) dim = 3;
 
+                    y0 = new double[dim];
                     strFuncs = new string[dim];
+                    y0[0] = double.Parse(txtInitX.Text);
                     strFuncs[0] = txtFuncX.Text;
-                    strFuncs[1] = txtFuncY.Text;
-                    if (dim == 3) strFuncs[2] = txtFuncZ.Text;
+                    if (dim >= 2)
+                    {
+                        y0[1] = double.Parse(txtInitY.Text);
+                        strFuncs[1] = txtFuncY.Text;
+                    }
+                    if (dim >= 3)
+                    {
+                        y0[2] = double.Parse(txtInitZ.Text);
+                        strFuncs[2] = txtFuncZ.Text;
+                    }
                 }
                 else
                 {
                     int order = cmbOrder.SelectedIndex + 1;
                     dim = order;
                     y0 = new double[dim];
+
                     y0[0] = double.Parse(txtInitY_High.Text);
                     if (order >= 2) y0[1] = double.Parse(txtInitDy.Text);
                     if (order >= 3) y0[2] = double.Parse(txtInitD2y.Text);
@@ -83,9 +93,30 @@ namespace Interpolation
                 List<double[]> results = null;
                 int methodIndex = cmbMethod.SelectedIndex;
 
-                if (methodIndex == 0) results = ODESolver.SolveEulerExplicit(derivativeFunc, y0, t0, tend, h);
-                else if (methodIndex == 1) results = ODESolver.SolveEulerImplicit(derivativeFunc, y0, t0, tend, h, epsilon);
-                else results = ODESolver.SolveTrapezoidal(derivativeFunc, y0, t0, tend, h, epsilon);
+                if (methodIndex == 0)
+                {
+                    results = ODESolver.SolveEulerExplicit(derivativeFunc, y0, t0, tend, h); // Euler hiện
+                }
+                else if (methodIndex == 1)
+                {
+                    results = ODESolver.SolveEulerImplicit(derivativeFunc, y0, t0, tend, h, epsilon); // Euler ẩn
+                }
+                else if (methodIndex == 2)
+                {
+                    results = ODESolver.SolveTrapezoidal(derivativeFunc, y0, t0, tend, h, epsilon); // Hình thang
+                }
+                else if (methodIndex == 3)
+                {
+                    results = ODESolver.SolveRK2(derivativeFunc, y0, t0, tend, h); // RK2
+                }
+                else if (methodIndex == 4)
+                {
+                    results = ODESolver.SolveRK3(derivativeFunc, y0, t0, tend, h); // RK3
+                }
+                else if (methodIndex == 5)
+                {
+                    results = ODESolver.SolveRK4(derivativeFunc, y0, t0, tend, h); // RK4
+                }
 
                 DisplayTable(results, dim);
 
@@ -142,10 +173,31 @@ namespace Interpolation
                 sb.AppendLine("   u* = u[k] + h * F(t[k], u[k])");
                 sb.AppendLine("   CT Lặp: u[k+1] = u[k] + h * F(t[k+1], u*)");
             }
-            else // Hình thang
+            else if (method == "Hình thang")
             {
                 sb.AppendLine("   u* = u[k] + h * F(t[k], u[k])");
                 sb.AppendLine("   CT Lặp: u[k+1] = u[k] + (h/2) * [F(t[k], u[k]) + F(t[k+1], u*)]");
+            }
+            else if (method.Contains("Runge-Kutta 2"))
+            {
+                sb.AppendLine("   k1 = h * F(t[k], u[k])");
+                sb.AppendLine("   k2 = h * F(t[k] + h, u[k] + k1)");
+                sb.AppendLine("   u[k+1] = u[k] + 0.5 * (k1 + k2)");
+            }
+            else if (method.Contains("Runge-Kutta 3"))
+            {
+                sb.AppendLine("   k1 = h * F(t[k], u[k])");
+                sb.AppendLine("   k2 = h * F(t[k] + h/2, u[k] + k1/2)");
+                sb.AppendLine("   k3 = h * F(t[k] + h, u[k] - k1 + 2k2)");
+                sb.AppendLine("   u[k+1] = u[k] + (1/6) * (k1 + 4k2 + k3)");
+            }
+            else if (method.Contains("Runge-Kutta 4"))
+            {
+                sb.AppendLine("   k1 = h * F(t[k], u[k])");
+                sb.AppendLine("   k2 = h * F(t[k] + h/2, u[k] + k1/2)");
+                sb.AppendLine("   k3 = h * F(t[k] + h/2, u[k] + k2/2)");
+                sb.AppendLine("   k4 = h * F(t[k] + h, u[k] + k3)");
+                sb.AppendLine("   u[k+1] = u[k] + (1/6) * (k1 + 2k2 + 2k3 + k4)");
             }
             sb.AppendLine();
             sb.AppendLine("5. Bảng giá trị (Xem Tab 'Bảng kết quả')");
@@ -176,11 +228,11 @@ namespace Interpolation
             for (int i = 0; i < dim; i++)
             {
                 Series series = new Series(seriesNames[i]);
-                series.ChartType = SeriesChartType.Line; 
+                series.ChartType = SeriesChartType.Line;
                 series.BorderWidth = 2;
                 chartResult.Series.Add(series);
             }
-            int step = data.Count > 1000 ? data.Count / 1000 : 1; 
+            int step = data.Count > 1000 ? data.Count / 1000 : 1;
 
             for (int i = 0; i < data.Count; i += step)
             {
@@ -195,7 +247,7 @@ namespace Interpolation
         {
             dgvResult.Rows.Clear();
             dgvResult.Columns.Clear();
-            dgvResult.Columns.Add("t", "t (x_k)"); 
+            dgvResult.Columns.Add("t", "t (x_k)");
 
             string[] headers;
             if (tabInput.SelectedTab == tabSystem) headers = new[] { "u1 (x)", "u2 (y)", "u3 (z)" };
@@ -225,14 +277,40 @@ namespace Interpolation
 
         private string ReplaceHighOrderVars(string input, int order)
         {
-            string result = input.ToLower();
-            if (order >= 3) result = result.Replace("d2y", "z");
-            if (order >= 2) result = result.Replace("dy", "y");
+            string temp = input.Replace(" ", "").ToLower();
 
-            string temp = result;
-            temp = temp.Replace("d2y", "@Z@").Replace("dy", "@Y@").Replace("y", "x");
-            temp = temp.Replace("@Y@", "y").Replace("@Z@", "z");
+            if (order >= 3)
+            {
+                temp = temp.Replace("y''", "##Z##");
+                temp = temp.Replace("d2y", "##Z##");
+            }
+            if (order >= 2)
+            {
+                temp = temp.Replace("y'", "##Y##");
+                temp = temp.Replace("dy", "##Y##");
+            }
+            temp = temp.Replace("y", "##X##");
+
+            if (order == 1)
+            {
+                // Cấp 1: y -> x
+                temp = temp.Replace("##X##", "x");
+            }
+            else if (order == 2)
+            {
+                // Cấp 2: y -> x, y' -> y
+                temp = temp.Replace("##X##", "x");
+                temp = temp.Replace("##Y##", "y");
+            }
+            else if (order == 3)
+            {
+                // Cấp 3: y -> x, y' -> y, y'' -> z
+                temp = temp.Replace("##X##", "x");
+                temp = temp.Replace("##Y##", "y");
+                temp = temp.Replace("##Z##", "z");
+            }
             return temp;
         }
+
     }
 }

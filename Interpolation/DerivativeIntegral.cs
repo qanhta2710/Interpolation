@@ -1,6 +1,6 @@
-﻿using Interpolation.Methods;
+﻿using AngouriMath;
+using Interpolation.Methods;
 using Interpolation.Utilities;
-using AngouriMath;
 using System;
 using System.Windows.Forms;
 
@@ -159,7 +159,7 @@ namespace Interpolation
                             }
 
                             int n = Convert.ToInt32(txtN.Text);
-                            
+
                             if (n <= 0)
                             {
                                 MessageBox.Show("Số khoảng chia phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -368,21 +368,21 @@ namespace Interpolation
             {
                 // Parse hàm f(x)
                 Entity function = functionStr;
-                
+
                 // Tính đạo hàm bậc 1: f'(x)
                 var firstDerivative = function.Differentiate("x");
-                
+
                 // Tính đạo hàm bậc 2: f''(x)
                 var secondDerivative = firstDerivative.Differentiate("x");
-                
+
                 // Compile f''(x) để tính giá trị
                 var compiledSecondDerivative = secondDerivative.Compile("x");
-                
+
                 // Tìm max |f''(x)| trên [a, b] bằng cách lấy mẫu
                 int samplePoints = 100; // Số điểm lấy mẫu
                 double step = (b - a) / samplePoints;
                 double maxValue = 0;
-                
+
                 for (int i = 0; i <= samplePoints; i++)
                 {
                     double x = a + i * step;
@@ -399,12 +399,12 @@ namespace Interpolation
                         continue;
                     }
                 }
-                
+
                 if (maxValue < 1e-10)
                 {
                     maxValue = 1e-6;
                 }
-                
+
                 return maxValue;
             }
             catch (Exception ex)
@@ -418,19 +418,19 @@ namespace Interpolation
             try
             {
                 Entity function = functionStr;
-                
+
                 // Tính đạo hàm bậc 4
                 var d1 = function.Differentiate("x");
                 var d2 = d1.Differentiate("x");
                 var d3 = d2.Differentiate("x");
                 var d4 = d3.Differentiate("x");
-                
+
                 var compiledFourthDerivative = d4.Compile("x");
-                
+
                 int samplePoints = 100;
                 double step = (b - a) / samplePoints;
                 double maxValue = 0;
-                
+
                 for (int i = 0; i <= samplePoints; i++)
                 {
                     double x = a + i * step;
@@ -447,12 +447,12 @@ namespace Interpolation
                         continue;
                     }
                 }
-                
+
                 if (maxValue < 1e-10)
                 {
                     maxValue = 1e-6;
                 }
-                
+
                 return maxValue;
             }
             catch (Exception ex)

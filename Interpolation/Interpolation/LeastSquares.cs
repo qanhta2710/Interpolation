@@ -36,7 +36,7 @@ namespace Interpolation.Methods
             if (!allPositive && !allNegative)
                 throw new ArgumentException("Dữ liệu y chứa cả giá trị dương và âm, người dùng cần tự xử lý dữ liệu để chỉ chứa giá trị dương hoặc âm");
         }
-        
+
         protected double EvaluatePhi(string phiExpression, double xValue)
         {
             try
@@ -52,7 +52,7 @@ namespace Interpolation.Methods
             }
         }
     }
-    
+
     public class LinearLeastSquares : LeastSquaresBase
     {
         public string[] PhiExpressions { get; private set; }
@@ -196,7 +196,7 @@ namespace Interpolation.Methods
             rtb.AppendText(sb.ToString());
         }
     }
-    
+
     public class PowerLawLeastSquares : LeastSquaresBase
     {
         public double A { get; private set; }
@@ -338,7 +338,7 @@ namespace Interpolation.Methods
             rtb.AppendText(sb.ToString());
         }
     }
-    
+
     public class ExponentialLeastSquares : LeastSquaresBase
     {
         public string[] PhiExpressions { get; private set; }

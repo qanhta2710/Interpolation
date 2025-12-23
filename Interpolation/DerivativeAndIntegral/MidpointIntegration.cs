@@ -2,8 +2,6 @@
 using System;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Interpolation.Methods
 {

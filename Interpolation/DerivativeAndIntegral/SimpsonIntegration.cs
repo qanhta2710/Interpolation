@@ -223,8 +223,8 @@ namespace Interpolation.Methods
             var compiledFunc = FunctionExpr.Compile("x");
 
             double sum = 0;
-            double oddSum = 0;   
-            double evenSum = 0;  
+            double oddSum = 0;
+            double evenSum = 0;
 
             for (int i = 0; i <= N; i++)
             {
@@ -323,19 +323,19 @@ namespace Interpolation.Methods
 
             if (indexA == -1 && !IsFromData) indexA = 0;
 
-            double sumCoarse = YData[indexA] + YData[indexA + N]; 
+            double sumCoarse = YData[indexA] + YData[indexA + N];
             double oddSumCoarse = 0;
             double evenSumCoarse = 0;
 
             for (int i = 1; i < n_coarse; i++)
             {
-                int originalIndex = indexA + (i * p); 
+                int originalIndex = indexA + (i * p);
 
                 if (i % 2 == 1)
                 {
                     oddSumCoarse += YData[originalIndex];
                 }
-                else 
+                else
                 {
                     evenSumCoarse += YData[originalIndex];
                 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Interpolation.Utilities;
+using System;
 using System.Windows.Forms;
-using Interpolation.Utilities;
 namespace Interpolation
 {
     public partial class Dashboard : Form
@@ -8,15 +8,6 @@ namespace Interpolation
         public Dashboard()
         {
             InitializeComponent();
-        }
-        private async void Dashboard_Load(object sender, EventArgs e)
-        {
-            chkAutoUpdate.Checked = Properties.Settings.Default.IsAutoUpdate;
-
-            if (chkAutoUpdate.Checked)
-            {
-                await UpdateManager.CheckForUpdateAsync(false);
-            }
         }
 
         private async void btnCheckUpdate_Click(object sender, EventArgs e)
@@ -28,12 +19,6 @@ namespace Interpolation
 
             btnCheckUpdate.Text = "Kiểm tra cập nhật";
             btnCheckUpdate.Enabled = true;
-        }
-
-        private void chkAutoUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.IsAutoUpdate = chkAutoUpdate.Checked;
-            Properties.Settings.Default.Save();
         }
         private void btnInterpolation_Click(object sender, EventArgs e)
         {

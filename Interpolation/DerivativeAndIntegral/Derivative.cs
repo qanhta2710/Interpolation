@@ -71,7 +71,7 @@ namespace Interpolation.Methods
                 int dataIndex = startIndex + i;
                 sum += coefficients[i] * YData[dataIndex];
             }
-            
+
             Result = sum / H;
             Result = Math.Round(Result, precision);
         }
@@ -94,7 +94,7 @@ namespace Interpolation.Methods
             for (int i = 0; i <= p; i++)
             {
                 coefficientStepBuilder.AppendLine($"Hệ số C[{i}]:");
-                
+
                 coefficientStepBuilder.Append("  Mẫu = ");
                 double denominator = 1.0;
                 StringBuilder denomBuilder = new StringBuilder();
@@ -112,14 +112,14 @@ namespace Interpolation.Methods
                 coefficientStepBuilder.Append("  Tử = ");
                 double numeratorDeriv = 0.0;
                 StringBuilder numBuilder = new StringBuilder();
-                
+
                 for (int m = 0; m <= p; m++)
                 {
                     if (m == i) continue;
-                    
+
                     double term = 1.0;
                     StringBuilder termBuilder = new StringBuilder();
-                    
+
                     for (int j = 0; j <= p; j++)
                     {
                         if (j != i && j != m)
@@ -129,18 +129,18 @@ namespace Interpolation.Methods
                             termBuilder.Append($"({targetNode} - {nodes[j]})");
                         }
                     }
-                    
+
                     numeratorDeriv += term;
-                    
+
                     if (numBuilder.Length > 0) numBuilder.Append(" + ");
                     if (termBuilder.Length > 0)
                         numBuilder.Append($"[{termBuilder}]");
                     else
                         numBuilder.Append("1");
                 }
-                
+
                 coefficientStepBuilder.AppendLine($"{numBuilder} = {numeratorDeriv}");
-                
+
                 coeffs[i] = numeratorDeriv / denominator;
                 coefficientStepBuilder.AppendLine($"  => C[{i}] = {numeratorDeriv} / {denominator} = {coeffs[i]:F6}");
                 coefficientStepBuilder.AppendLine();
@@ -155,7 +155,7 @@ namespace Interpolation.Methods
             substitutionStepBuilder.AppendLine("═══ CÔNG THỨC VỚI HỆ SỐ ═══");
             substitutionStepBuilder.AppendLine();
             substitutionStepBuilder.Append("f'(x) ≈ (1/h) × [ ");
-            
+
             for (int i = 0; i <= P; i++)
             {
                 string sign = (coefficients[i] >= 0 && i > 0) ? " + " : " ";

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnSolve = new System.Windows.Forms.Button();
             this.tabInput = new System.Windows.Forms.TabControl();
@@ -50,6 +50,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtFuncX = new System.Windows.Forms.TextBox();
             this.panelSysConfig = new System.Windows.Forms.Panel();
+            this.rdoSys1 = new System.Windows.Forms.RadioButton();
             this.rdoSys3 = new System.Windows.Forms.RadioButton();
             this.rdoSys2 = new System.Windows.Forms.RadioButton();
             this.tabHighOrder = new System.Windows.Forms.TabPage();
@@ -297,6 +298,7 @@
             // 
             // panelSysConfig
             // 
+            this.panelSysConfig.Controls.Add(this.rdoSys1);
             this.panelSysConfig.Controls.Add(this.rdoSys3);
             this.panelSysConfig.Controls.Add(this.rdoSys2);
             this.panelSysConfig.Dock = System.Windows.Forms.DockStyle.Top;
@@ -305,10 +307,21 @@
             this.panelSysConfig.Size = new System.Drawing.Size(416, 40);
             this.panelSysConfig.TabIndex = 0;
             // 
+            // rdoSys1
+            // 
+            this.rdoSys1.AutoSize = true;
+            this.rdoSys1.Location = new System.Drawing.Point(7, 10);
+            this.rdoSys1.Name = "rdoSys1";
+            this.rdoSys1.Size = new System.Drawing.Size(108, 20);
+            this.rdoSys1.TabIndex = 2;
+            this.rdoSys1.Text = "Hệ 1 chiều (x)";
+            this.rdoSys1.UseVisualStyleBackColor = true;
+            this.rdoSys1.CheckedChanged += new System.EventHandler(this.rdoSys1_CheckedChanged);
+            // 
             // rdoSys3
             // 
             this.rdoSys3.AutoSize = true;
-            this.rdoSys3.Location = new System.Drawing.Point(150, 10);
+            this.rdoSys3.Location = new System.Drawing.Point(272, 10);
             this.rdoSys3.Name = "rdoSys3";
             this.rdoSys3.Size = new System.Drawing.Size(127, 20);
             this.rdoSys3.TabIndex = 1;
@@ -320,7 +333,7 @@
             // 
             this.rdoSys2.AutoSize = true;
             this.rdoSys2.Checked = true;
-            this.rdoSys2.Location = new System.Drawing.Point(10, 10);
+            this.rdoSys2.Location = new System.Drawing.Point(133, 10);
             this.rdoSys2.Name = "rdoSys2";
             this.rdoSys2.Size = new System.Drawing.Size(118, 20);
             this.rdoSys2.TabIndex = 0;
@@ -426,9 +439,9 @@
             this.lblHighHint.ForeColor = System.Drawing.Color.Gray;
             this.lblHighHint.Location = new System.Drawing.Point(80, 55);
             this.lblHighHint.Name = "lblHighHint";
-            this.lblHighHint.Size = new System.Drawing.Size(219, 16);
+            this.lblHighHint.Size = new System.Drawing.Size(214, 16);
             this.lblHighHint.TabIndex = 2;
-            this.lblHighHint.Text = "Dùng: t, y, dy (đạo hàm cấp 1), d2y...";
+            this.lblHighHint.Text = "Dùng: t, y, dy hoặc y\', d2y hoặc y\'\'...";
             // 
             // txtFuncHigh
             // 
@@ -532,7 +545,10 @@
             this.cmbMethod.Items.AddRange(new object[] {
             "Euler hiện",
             "Euler ẩn",
-            "Hình thang"});
+            "Hình thang",
+            "Runge-Kutta 2 (Heun)",
+            "Runge-Kutta 3",
+            "Runge-Kutta 4"});
             this.cmbMethod.Location = new System.Drawing.Point(130, 127);
             this.cmbMethod.Name = "cmbMethod";
             this.cmbMethod.Size = new System.Drawing.Size(200, 24);
@@ -618,14 +634,14 @@
             this.dgvResult.AllowUserToDeleteRows = false;
             this.dgvResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
@@ -648,11 +664,11 @@
             // 
             // chartResult
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartResult.ChartAreas.Add(chartArea1);
+            chartArea5.Name = "ChartArea1";
+            this.chartResult.ChartAreas.Add(chartArea5);
             this.chartResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartResult.Legends.Add(legend1);
+            legend5.Name = "Legend1";
+            this.chartResult.Legends.Add(legend5);
             this.chartResult.Location = new System.Drawing.Point(3, 3);
             this.chartResult.Name = "chartResult";
             this.chartResult.Size = new System.Drawing.Size(694, 598);
@@ -776,5 +792,6 @@
         private System.Windows.Forms.RichTextBox rtbLog;
         private System.Windows.Forms.TabPage tabGraph;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartResult;
+        private System.Windows.Forms.RadioButton rdoSys1;
     }
 }

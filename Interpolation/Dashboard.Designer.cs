@@ -34,7 +34,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnODE = new System.Windows.Forms.Button();
             this.btnCheckUpdate = new System.Windows.Forms.Button();
-            this.chkAutoUpdate = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,23 +103,11 @@
             this.btnCheckUpdate.UseVisualStyleBackColor = true;
             this.btnCheckUpdate.Click += new System.EventHandler(this.btnCheckUpdate_Click);
             // 
-            // chkAutoUpdate
-            // 
-            this.chkAutoUpdate.AutoSize = true;
-            this.chkAutoUpdate.Location = new System.Drawing.Point(445, 419);
-            this.chkAutoUpdate.Name = "chkAutoUpdate";
-            this.chkAutoUpdate.Size = new System.Drawing.Size(133, 20);
-            this.chkAutoUpdate.TabIndex = 7;
-            this.chkAutoUpdate.Text = "Tự động cập nhật";
-            this.chkAutoUpdate.UseVisualStyleBackColor = true;
-            this.chkAutoUpdate.Click += new System.EventHandler(this.chkAutoUpdate_CheckedChanged);
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.chkAutoUpdate);
             this.Controls.Add(this.btnCheckUpdate);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -141,7 +128,6 @@
         private System.Windows.Forms.Button btnDerivativeIntegral;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnCheckUpdate;
-        private System.Windows.Forms.CheckBox chkAutoUpdate;
         private System.Windows.Forms.Button btnODE;
     }
 }

@@ -16,7 +16,7 @@ namespace Interpolation.Methods
         public double B { get; set; } // Cận trên
         public double H { get; set; } // Bước nhảy
         public int N { get; set; } // Số khoảng chia
-        public double Epsilon { get; set; } 
+        public double Epsilon { get; set; }
         public double M2 { get; set; } // Max |f''(x)| trên [a, b]
         public double Result { get; set; }
         public double EstimatedError { get; set; }
@@ -262,7 +262,7 @@ namespace Interpolation.Methods
 
             if (indexA == -1 && !IsFromData) indexA = 0;
 
-            double sumCoarse = YData[indexA] + YData[indexA + N]; 
+            double sumCoarse = YData[indexA] + YData[indexA + N];
 
             for (int i = 1; i < n_coarse; i++)
             {
