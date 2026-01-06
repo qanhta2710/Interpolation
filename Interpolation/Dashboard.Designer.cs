@@ -34,6 +34,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnODE = new System.Windows.Forms.Button();
             this.btnCheckUpdate = new System.Windows.Forms.Button();
+            this.btnBVP = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             this.btnInterpolation.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnInterpolation.AutoSize = true;
             this.btnInterpolation.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInterpolation.Location = new System.Drawing.Point(353, 53);
+            this.btnInterpolation.Location = new System.Drawing.Point(145, 81);
             this.btnInterpolation.Name = "btnInterpolation";
             this.btnInterpolation.Size = new System.Drawing.Size(97, 33);
             this.btnInterpolation.TabIndex = 0;
@@ -55,7 +56,7 @@
             this.btnDerivativeIntegral.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnDerivativeIntegral.AutoSize = true;
             this.btnDerivativeIntegral.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDerivativeIntegral.Location = new System.Drawing.Point(287, 201);
+            this.btnDerivativeIntegral.Location = new System.Drawing.Point(481, 81);
             this.btnDerivativeIntegral.Name = "btnDerivativeIntegral";
             this.btnDerivativeIntegral.Size = new System.Drawing.Size(229, 33);
             this.btnDerivativeIntegral.TabIndex = 3;
@@ -66,17 +67,18 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 417F));
+            this.tableLayoutPanel1.Controls.Add(this.btnBVP, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnInterpolation, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnDerivativeIntegral, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnODE, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnDerivativeIntegral, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnODE, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(-2, -1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(804, 413);
             this.tableLayoutPanel1.TabIndex = 5;
@@ -84,12 +86,13 @@
             // btnODE
             // 
             this.btnODE.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnODE.AutoSize = true;
             this.btnODE.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnODE.Location = new System.Drawing.Point(238, 331);
+            this.btnODE.Location = new System.Drawing.Point(87, 281);
             this.btnODE.Name = "btnODE";
-            this.btnODE.Size = new System.Drawing.Size(327, 46);
+            this.btnODE.Size = new System.Drawing.Size(212, 46);
             this.btnODE.TabIndex = 4;
-            this.btnODE.Text = "Giải phương trình vi phân";
+            this.btnODE.Text = "Bài toán Cauchy";
             this.btnODE.UseVisualStyleBackColor = true;
             this.btnODE.Click += new System.EventHandler(this.btnODE_Click);
             // 
@@ -102,6 +105,19 @@
             this.btnCheckUpdate.Text = "Kiểm tra cập nhật";
             this.btnCheckUpdate.UseVisualStyleBackColor = true;
             this.btnCheckUpdate.Click += new System.EventHandler(this.btnCheckUpdate_Click);
+            // 
+            // btnBVP
+            // 
+            this.btnBVP.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBVP.AutoSize = true;
+            this.btnBVP.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBVP.Location = new System.Drawing.Point(489, 281);
+            this.btnBVP.Name = "btnBVP";
+            this.btnBVP.Size = new System.Drawing.Size(212, 46);
+            this.btnBVP.TabIndex = 5;
+            this.btnBVP.Text = "Bài toán biên";
+            this.btnBVP.UseVisualStyleBackColor = true;
+            this.btnBVP.Click += new System.EventHandler(this.btnBVP_Click);
             // 
             // Dashboard
             // 
@@ -129,5 +145,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnCheckUpdate;
         private System.Windows.Forms.Button btnODE;
+        private System.Windows.Forms.Button btnBVP;
     }
 }

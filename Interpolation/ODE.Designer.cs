@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnSolve = new System.Windows.Forms.Button();
             this.tabInput = new System.Windows.Forms.TabControl();
@@ -79,6 +79,8 @@
             this.txtTend = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtT0 = new System.Windows.Forms.TextBox();
+            this.lblAdamsS = new System.Windows.Forms.Label();
+            this.cmbAdamsOrder = new System.Windows.Forms.ComboBox();
             this.tabOutput = new System.Windows.Forms.TabControl();
             this.tabTable = new System.Windows.Forms.TabPage();
             this.dgvResult = new System.Windows.Forms.DataGridView();
@@ -126,7 +128,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabOutput);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(10);
             this.splitContainer1.Size = new System.Drawing.Size(1182, 653);
-            this.splitContainer1.SplitterDistance = 450;
+            this.splitContainer1.SplitterDistance = 459;
             this.splitContainer1.TabIndex = 0;
             // 
             // btnSolve
@@ -138,7 +140,7 @@
             this.btnSolve.ForeColor = System.Drawing.Color.White;
             this.btnSolve.Location = new System.Drawing.Point(10, 593);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(430, 50);
+            this.btnSolve.Size = new System.Drawing.Size(439, 50);
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "GIẢI PHƯƠNG TRÌNH";
             this.btnSolve.UseVisualStyleBackColor = false;
@@ -152,7 +154,7 @@
             this.tabInput.Location = new System.Drawing.Point(10, 185);
             this.tabInput.Name = "tabInput";
             this.tabInput.SelectedIndex = 0;
-            this.tabInput.Size = new System.Drawing.Size(430, 400);
+            this.tabInput.Size = new System.Drawing.Size(439, 400);
             this.tabInput.TabIndex = 1;
             // 
             // tabSystem
@@ -163,7 +165,7 @@
             this.tabSystem.Location = new System.Drawing.Point(4, 25);
             this.tabSystem.Name = "tabSystem";
             this.tabSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSystem.Size = new System.Drawing.Size(422, 371);
+            this.tabSystem.Size = new System.Drawing.Size(431, 371);
             this.tabSystem.TabIndex = 0;
             this.tabSystem.Text = "Hệ phương trình";
             this.tabSystem.UseVisualStyleBackColor = true;
@@ -179,7 +181,7 @@
             this.grpSysInit.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpSysInit.Location = new System.Drawing.Point(3, 213);
             this.grpSysInit.Name = "grpSysInit";
-            this.grpSysInit.Size = new System.Drawing.Size(416, 150);
+            this.grpSysInit.Size = new System.Drawing.Size(425, 150);
             this.grpSysInit.TabIndex = 2;
             this.grpSysInit.TabStop = false;
             this.grpSysInit.Text = "Giá trị ban đầu (tại t0)";
@@ -243,7 +245,7 @@
             this.grpSysEq.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpSysEq.Location = new System.Drawing.Point(3, 43);
             this.grpSysEq.Name = "grpSysEq";
-            this.grpSysEq.Size = new System.Drawing.Size(416, 170);
+            this.grpSysEq.Size = new System.Drawing.Size(425, 170);
             this.grpSysEq.TabIndex = 1;
             this.grpSysEq.TabStop = false;
             this.grpSysEq.Text = "Vế phải phương trình";
@@ -304,7 +306,7 @@
             this.panelSysConfig.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSysConfig.Location = new System.Drawing.Point(3, 3);
             this.panelSysConfig.Name = "panelSysConfig";
-            this.panelSysConfig.Size = new System.Drawing.Size(416, 40);
+            this.panelSysConfig.Size = new System.Drawing.Size(425, 40);
             this.panelSysConfig.TabIndex = 0;
             // 
             // rdoSys1
@@ -504,10 +506,12 @@
             this.grpCommon.Controls.Add(this.txtTend);
             this.grpCommon.Controls.Add(this.label1);
             this.grpCommon.Controls.Add(this.txtT0);
+            this.grpCommon.Controls.Add(this.lblAdamsS);
+            this.grpCommon.Controls.Add(this.cmbAdamsOrder);
             this.grpCommon.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpCommon.Location = new System.Drawing.Point(10, 10);
             this.grpCommon.Name = "grpCommon";
-            this.grpCommon.Size = new System.Drawing.Size(430, 175);
+            this.grpCommon.Size = new System.Drawing.Size(439, 175);
             this.grpCommon.TabIndex = 0;
             this.grpCommon.TabStop = false;
             this.grpCommon.Text = "Cấu hình chung";
@@ -548,7 +552,8 @@
             "Hình thang",
             "Runge-Kutta 2 (Heun)",
             "Runge-Kutta 3",
-            "Runge-Kutta 4"});
+            "Runge-Kutta 4",
+            "ABs-AMs"});
             this.cmbMethod.Location = new System.Drawing.Point(130, 127);
             this.cmbMethod.Name = "cmbMethod";
             this.cmbMethod.Size = new System.Drawing.Size(200, 24);
@@ -605,6 +610,31 @@
             this.txtT0.TabIndex = 0;
             this.txtT0.Text = "0";
             // 
+            // lblAdamsS
+            // 
+            this.lblAdamsS.AutoSize = true;
+            this.lblAdamsS.Location = new System.Drawing.Point(336, 130);
+            this.lblAdamsS.Name = "lblAdamsS";
+            this.lblAdamsS.Size = new System.Drawing.Size(44, 16);
+            this.lblAdamsS.TabIndex = 10;
+            this.lblAdamsS.Text = "Bậc s:";
+            this.lblAdamsS.Visible = false;
+            // 
+            // cmbAdamsOrder
+            // 
+            this.cmbAdamsOrder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAdamsOrder.FormattingEnabled = true;
+            this.cmbAdamsOrder.Items.AddRange(new object[] {
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cmbAdamsOrder.Location = new System.Drawing.Point(385, 127);
+            this.cmbAdamsOrder.Name = "cmbAdamsOrder";
+            this.cmbAdamsOrder.Size = new System.Drawing.Size(40, 24);
+            this.cmbAdamsOrder.TabIndex = 11;
+            this.cmbAdamsOrder.Visible = false;
+            // 
             // tabOutput
             // 
             this.tabOutput.Controls.Add(this.tabTable);
@@ -614,7 +644,7 @@
             this.tabOutput.Location = new System.Drawing.Point(10, 10);
             this.tabOutput.Name = "tabOutput";
             this.tabOutput.SelectedIndex = 0;
-            this.tabOutput.Size = new System.Drawing.Size(708, 633);
+            this.tabOutput.Size = new System.Drawing.Size(699, 633);
             this.tabOutput.TabIndex = 0;
             // 
             // tabTable
@@ -623,7 +653,7 @@
             this.tabTable.Location = new System.Drawing.Point(4, 25);
             this.tabTable.Name = "tabTable";
             this.tabTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTable.Size = new System.Drawing.Size(700, 604);
+            this.tabTable.Size = new System.Drawing.Size(691, 604);
             this.tabTable.TabIndex = 0;
             this.tabTable.Text = "Bảng kết quả";
             this.tabTable.UseVisualStyleBackColor = true;
@@ -634,21 +664,21 @@
             this.dgvResult.AllowUserToDeleteRows = false;
             this.dgvResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.ReadOnly = true;
             this.dgvResult.RowHeadersWidth = 51;
             this.dgvResult.RowTemplate.Height = 24;
-            this.dgvResult.Size = new System.Drawing.Size(694, 598);
+            this.dgvResult.Size = new System.Drawing.Size(685, 598);
             this.dgvResult.TabIndex = 0;
             // 
             // tabGraph
@@ -664,11 +694,11 @@
             // 
             // chartResult
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chartResult.ChartAreas.Add(chartArea5);
+            chartArea2.Name = "ChartArea1";
+            this.chartResult.ChartAreas.Add(chartArea2);
             this.chartResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend5.Name = "Legend1";
-            this.chartResult.Legends.Add(legend5);
+            legend2.Name = "Legend1";
+            this.chartResult.Legends.Add(legend2);
             this.chartResult.Location = new System.Drawing.Point(3, 3);
             this.chartResult.Name = "chartResult";
             this.chartResult.Size = new System.Drawing.Size(694, 598);
@@ -793,5 +823,7 @@
         private System.Windows.Forms.TabPage tabGraph;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartResult;
         private System.Windows.Forms.RadioButton rdoSys1;
+        private System.Windows.Forms.Label lblAdamsS;
+        private System.Windows.Forms.ComboBox cmbAdamsOrder;
     }
 }

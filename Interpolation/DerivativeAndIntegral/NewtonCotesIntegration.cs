@@ -43,9 +43,6 @@ namespace Interpolation.Methods
         }
 
         // --- CONSTRUCTOR 2: Hàm F(x) với Sai số cho trước (Tính N) ---
-        // Lưu ý: Việc tính N tối ưu cho Newton-Cotes tổng quát rất phức tạp vì phụ thuộc đạo hàm bậc cao
-        // Ở đây ta sẽ dùng công thức xấp xỉ hoặc yêu cầu người dùng nhập N nếu quá phức tạp.
-        // Tuy nhiên để đồng bộ, ta sẽ thử ước lượng sơ bộ.
         public NewtonCotesIntegration(string functionStr, double a, double b, double epsilon, int order)
         {
             try { FunctionExpr = functionStr; }
@@ -56,11 +53,6 @@ namespace Interpolation.Methods
             Epsilon = epsilon;
             Order = order;
             IsFromData = false;
-
-            // Vì tính đạo hàm bậc cao (cấp n) tự động rất tốn kém và khó chính xác
-            // Ta sẽ sử dụng một N mặc định đủ lớn (ví dụ 10 * order) hoặc 
-            // dùng thuật toán lặp tăng dần N cho đến khi sai số Runge < Epsilon.
-            // Ở đây tôi chọn phương án: Lặp tìm N thỏa mãn Runge.
 
             CalculateOptimalN_ByRunge();
             Solve();
@@ -79,7 +71,6 @@ namespace Interpolation.Methods
             IsFromData = false;
 
             Solve();
-            // Newton-Cotes bậc cao tính đạo hàm lý thuyết rất khó, ta dùng Runge để đánh giá
             EstimateErrorRunge();
         }
 
@@ -94,9 +85,9 @@ namespace Interpolation.Methods
 
         private void SolveFromData()
         {
-            // Kiểm tra dữ liệu
-            if (XData.Length < Order + 1)
-                throw new ArgumentException($"Cần ít nhất {Order + 1} điểm dữ liệu cho Newton-Cotes bậc {Order}.");
+            // Kiểm tra dữ liệu cơ bản
+            if (XData.Length < 2)
+                throw new ArgumentException("Cần ít nhất 2 điểm dữ liệu.");
 
             int indexA = Array.IndexOf(XData, A);
             int indexB = Array.IndexOf(XData, B);
@@ -105,65 +96,80 @@ namespace Interpolation.Methods
                 throw new ArgumentException("Cận a, b không hợp lệ trong dữ liệu.");
 
             TotalSteps = indexB - indexA;
-
-            if (TotalSteps % Order != 0)
-            {
-                // Nếu không chia hết, thông báo cảnh báo hoặc lỗi
-                // Trong thực tế có thể kết hợp các phương pháp khác, nhưng ở đây ta báo lỗi strict.
-                throw new ArgumentException($"Số khoảng chia trong dữ liệu ({TotalSteps}) không chia hết cho bậc {Order}.\nKhông thể áp dụng công thức tổng hợp (Composite).");
-            }
-
             H = (B - A) / TotalSteps;
 
             calculationSteps.AppendLine($"Dữ liệu rời rạc: [{A}, {B}]");
             calculationSteps.AppendLine($"Tổng số khoảng chia (N): {TotalSteps}");
             calculationSteps.AppendLine($"Bước nhảy h: {H}");
-            calculationSteps.AppendLine($"Công thức Newton-Cotes bậc {Order} yêu cầu chia thành {TotalSteps / Order} đoạn lớn.");
 
-            // 1. Lấy hệ số Cotes
-            double[] weights = NewtonCotesHelper.GetWeights(Order);
-            calculationSteps.Append("Hệ số Cotes chuẩn hóa (trên đoạn [0,n]): [ ");
-            foreach (var w in weights) calculationSteps.Append($"{w:F4} ");
-            calculationSteps.AppendLine("]");
+            int numMainSegments = TotalSteps / Order; 
+            int remainder = TotalSteps % Order;      
 
-            // 2. Tính toán
-            double sum = 0;
+            int mainPartEndIndex = indexA + (numMainSegments * Order);
 
-            // Duyệt từng "đoạn lớn" (Mỗi đoạn lớn gồm 'Order' khoảng nhỏ)
-            int numSegments = TotalSteps / Order;
+            double sumMain = 0;
+            double sumRem = 0;
 
-            for (int seg = 0; seg < numSegments; seg++)
+            if (numMainSegments > 0)
             {
-                int startIndex = indexA + (seg * Order);
-                double segmentSum = 0;
+                calculationSteps.AppendLine($"--- PHẦN CHÍNH (Bậc {Order}) ---");
+                calculationSteps.AppendLine($"Sử dụng Newton-Cotes bậc {Order} từ x[{indexA}] đến x[{mainPartEndIndex}]");
 
-                for (int j = 0; j <= Order; j++)
+                double[] weights = NewtonCotesHelper.GetWeights(Order);
+
+                calculationSteps.Append($"Hệ số Cotes bậc {Order}: [ ");
+                foreach (var w in weights) calculationSteps.Append($"{w:F4} ");
+                calculationSteps.AppendLine("]");
+
+                for (int seg = 0; seg < numMainSegments; seg++)
                 {
-                    double yVal = YData[startIndex + j];
-                    segmentSum += weights[j] * yVal;
+                    int startIndex = indexA + (seg * Order);
+                    double segmentSum = 0;
+
+                    for (int j = 0; j <= Order; j++)
+                    {
+                        double yVal = YData[startIndex + j];
+                        segmentSum += weights[j] * yVal;
+                    }
+                    sumMain += segmentSum;
+
+                    if (seg < 3)
+                        calculationSteps.AppendLine($"  Đoạn {seg + 1} (x[{startIndex}]..x[{startIndex + Order}]): Tổng trọng số = {segmentSum:F6}");
                 }
-
-                sum += segmentSum;
-
-                // Hiển thị chi tiết cho vài đoạn đầu
-                if (seg < 3)
-                    calculationSteps.AppendLine($"  Đoạn {seg + 1} (x[{startIndex}]..x[{startIndex + Order}]): Tổng trọng số = {segmentSum:F6}");
+                if (numMainSegments > 3) calculationSteps.AppendLine("  ...");
+                calculationSteps.AppendLine($"Tổng trọng số phần chính: {sumMain:F8}");
             }
-            if (numSegments > 3) calculationSteps.AppendLine("  ...");
 
-            // Công thức chuẩn: I ≈ h * Sum(Weights * Y) / Divisor? 
-            // KHÔNG. Hàm GetWeights của ta đã trả về tích phân trên [0, n].
-            // Tích phân thực tế trên [a, b] = (H/1) * Sum(Weights_Normalized * Y) ???
-            // Hãy check lại Simpson (n=2): Weights = {1/3, 4/3, 1/3}.
-            // CT Simpson: h/3 * (y0 + 4y1 + y2). 
-            // -> h * (1/3*y0 + 4/3*y1 + 1/3*y2). -> ĐÚNG.
-            // Vậy ta chỉ cần nhân Sum với H.
+            if (remainder > 0)
+            {
+                calculationSteps.AppendLine();
+                calculationSteps.AppendLine($"--- PHẦN DƯ ({remainder} khoảng cuối) ---");
+                calculationSteps.AppendLine($"Số khoảng còn lại không chia hết cho {Order}.");
+                calculationSteps.AppendLine($"Giảm bậc xuống: Sử dụng Newton-Cotes bậc {remainder} từ x[{mainPartEndIndex}] đến x[{indexB}]");
 
-            Result = sum * H;
+                double[] remWeights = NewtonCotesHelper.GetWeights(remainder);
+
+                calculationSteps.Append($"Hệ số Cotes bậc {remainder}: [ ");
+                foreach (var w in remWeights) calculationSteps.Append($"{w:F4} ");
+                calculationSteps.AppendLine("]");
+
+                double segmentSum = 0;
+                for (int j = 0; j <= remainder; j++)
+                {
+                    double yVal = YData[mainPartEndIndex + j];
+                    segmentSum += remWeights[j] * yVal;
+                }
+                sumRem += segmentSum;
+                calculationSteps.AppendLine($"Tổng trọng số phần dư: {sumRem:F8}");
+            }
+
+            double totalSum = sumMain + sumRem;
+            Result = totalSum * H;
 
             calculationSteps.AppendLine();
-            calculationSteps.AppendLine($"Tổng trọng số: {sum:F8}");
-            calculationSteps.AppendLine($"I ≈ h × Tổng = {H} × {sum:F8} = {Result}");
+            calculationSteps.AppendLine("------------------------------------------------");
+            calculationSteps.AppendLine($"Tổng trọng số toàn bộ = {sumMain:F8} + {sumRem:F8} = {totalSum:F8}");
+            calculationSteps.AppendLine($"I ≈ h × Tổng = {H} × {totalSum:F8} = {Result}");
         }
 
         private void SolveFromFunction()
@@ -215,31 +221,19 @@ namespace Interpolation.Methods
 
         private void CalculateOptimalN_ByRunge()
         {
-            // Tìm N sao cho sai số Runge < Epsilon
-            // Bắt đầu với N = Order (1 đoạn)
             int currentN = Order;
-
-            // Loop tìm N (đơn giản hóa để tránh treo máy)
-            // Chiến thuật: Nhân đôi số đoạn lớn (currentN *= 2) sau mỗi lần lặp
 
             calculationSteps.AppendLine("Tự động tìm N tối ưu dựa trên sai số Runge...");
 
-            while (currentN < 10000) // Giới hạn an toàn
+            while (currentN < 10000) 
             {
-                // Tính tích phân với currentN
                 var calc = new NewtonCotesIntegration(FunctionExpr.ToString(), A, B, currentN, Order);
                 double valN = calc.Result;
 
-                // Tính tích phân với 2*currentN (để so sánh)
                 var calc2N = new NewtonCotesIntegration(FunctionExpr.ToString(), A, B, currentN * 2, Order);
                 double val2N = calc2N.Result;
 
-                // Runge Error
-                // Bậc chính xác của Newton-Cotes bậc n là:
-                // - n nếu n lẻ
-                // - n+1 nếu n chẵn (Ví dụ Simpson n=2 chính xác bậc 3)
-                int accuracyOrder = (Order % 2 == 0) ? Order + 1 : Order; // Hoặc dùng quy tắc chung
-                                                                          // Thực tế CT Runge mẫu số là 2^p - 1. Ta lấy p = Order + 1 cho an toàn.
+                int accuracyOrder = (Order % 2 == 0) ? Order + 1 : Order;
 
                 double error = Math.Abs(val2N - valN) / (Math.Pow(2, Order) - 1); // Ước lượng
 
@@ -253,38 +247,32 @@ namespace Interpolation.Methods
                 currentN *= 2;
             }
 
-            // Fallback nếu không hội tụ
             TotalSteps = currentN;
             calculationSteps.AppendLine($"-> Đạt giới hạn lặp, chọn N = {TotalSteps}");
         }
 
         private void EstimateErrorRunge()
         {
-            // 1. Xác định bậc chính xác p
-            // Nếu n chẵn (VD Simpson n=2), chính xác bậc n+2. Nếu n lẻ, chính xác bậc n+1
             int p = (Order % 2 == 0) ? Order + 2 : Order + 1;
 
-            // 2. Tìm tỷ lệ m (scale factor) phù hợp
             int m = -1;
 
-            // Thử m từ 2 trở lên. Giới hạn m sao cho n*m <= TotalSteps
             for (int scale = 2; scale * Order <= TotalSteps; scale++)
             {
                 if (TotalSteps % (Order * scale) == 0)
                 {
                     m = scale;
-                    break; // Tìm thấy m nhỏ nhất thỏa mãn
+                    break;
                 }
             }
 
             if (m == -1)
             {
                 EstimatedError = 0;
-                calculationSteps.AppendLine($"\n(!) Không tìm được lưới thô phù hợp để tính sai số (Dữ liệu không chia hết cho n*m).");
+                calculationSteps.AppendLine($"\n(!) Không tìm được lưới thô phù hợp để tính sai số.");
                 return;
             }
 
-            // --- SỬA LỖI TẠI ĐÂY: BIÊN DỊCH HÀM SỐ TRƯỚC VÒNG LẶP ---
             AngouriMath.Core.FastExpression compiledFunc = null;
             if (!IsFromData)
             {
@@ -297,12 +285,9 @@ namespace Interpolation.Methods
                     EstimatedError = 0; return;
                 }
             }
-            // --------------------------------------------------------
-
-            // 3. Tính I_tho
             double[] weights = NewtonCotesHelper.GetWeights(Order);
             double sumCoarse = 0;
-            double H_coarse = m * H; // Bước nhảy lưới thô tăng m lần
+            double H_coarse = m * H; 
             int numSegmentsCoarse = TotalSteps / (Order * m);
 
             for (int seg = 0; seg < numSegmentsCoarse; seg++)
@@ -311,7 +296,6 @@ namespace Interpolation.Methods
 
                 for (int j = 0; j <= Order; j++)
                 {
-                    // Các điểm cách nhau m đơn vị index
                     int idx = startBaseIdx + (j * m);
                     double yVal = 0;
 
@@ -321,10 +305,8 @@ namespace Interpolation.Methods
                     }
                     else
                     {
-                        // Nếu là hàm số, ta tính x dựa trên index và H ban đầu
                         double xVal = A + idx * H;
 
-                        // GỌI HÀM VỚI ĐỦ 2 THAM SỐ
                         yVal = EvaluateFunction(compiledFunc, xVal);
                     }
 
@@ -334,7 +316,6 @@ namespace Interpolation.Methods
 
             double I_coarse = sumCoarse * H_coarse;
 
-            // 4. Tính sai số Runge tổng quát
             double denominator = Math.Pow(m, p) - 1;
             EstimatedError = Math.Abs(Result - I_coarse) / denominator;
 

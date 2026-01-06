@@ -12,12 +12,22 @@ namespace Interpolation
         public ODE()
         {
             InitializeComponent();
-
+            cmbMethod.SelectedIndexChanged += CmbMethod_SelectedIndexChanged;
+            cmbAdamsOrder.SelectedIndexChanged += cmbAdamsOrder_SelectedIndexChanged;
             cmbMethod.SelectedIndex = 0;
             cmbOrder.SelectedIndex = 1;
             UpdateSystemUI();
             UpdateHighOrderUI();
         }
+        private void CmbMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selected = cmbMethod.SelectedItem != null ? cmbMethod.SelectedItem.ToString() : "";
+            bool isAdams = selected.Contains("ABs-AMs");
+
+            lblAdamsS.Visible = isAdams;
+            cmbAdamsOrder.Visible = isAdams;
+        }
+        private void cmbAdamsOrder_SelectedIndexChanged(object sender, EventArgs e) { }
         private void rdoSys1_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
         private void rdoSys2_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
         private void rdoSys3_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
@@ -117,6 +127,11 @@ namespace Interpolation
                 {
                     results = ODESolver.SolveRK4(derivativeFunc, y0, t0, tend, h); // RK4
                 }
+                else if (methodIndex == 6 || cmbMethod.Text.Contains("ABs-AMs")) // Adams
+                {
+                    int s = int.Parse(cmbAdamsOrder.SelectedItem.ToString());
+                    results = ODESolver.SolveAdams(derivativeFunc, y0, t0, tend, h, s, epsilon);
+                }
 
                 DisplayTable(results, dim);
 
@@ -199,13 +214,91 @@ namespace Interpolation
                 sb.AppendLine("   k4 = h * F(t[k] + h, u[k] + k3)");
                 sb.AppendLine("   u[k+1] = u[k] + (1/6) * (k1 + 2k2 + 2k3 + k4)");
             }
+            else if (method.Contains("ABs-AMs"))
+            {
+                // Lấy bậc s từ ComboBox
+                int s = int.Parse(cmbAdamsOrder.SelectedItem.ToString());
+
+                sb.AppendLine($"   Phương pháp đa bước Adams-Bashforth-Moulton (s = {s})");
+                sb.AppendLine();
+
+                // a) Khởi tạo
+                sb.AppendLine("   a) Khởi tạo:");
+                sb.AppendLine($"      Dùng RK4 tính {s - 1} điểm đầu tiên: u[0] ... u[{s - 1}]");
+                sb.AppendLine();
+
+                // b) Hệ số Beta (Dự báo)
+                double[] beta = ODESolver.GetAdamsBashforthCoeffs(s);
+                sb.AppendLine("   b) Hệ số Beta (Adams-Bashforth - Dự báo):");
+                sb.AppendLine("      ─────────────────────────────────────────");
+                for (int j = 0; j < beta.Length; j++)
+                {
+                    // In căn lề đẹp: Index 2 số, Giá trị 15 ký tự, 10 số lẻ
+                    sb.AppendLine($"      β[{j}] = {beta[j],15:F10}");
+                }
+                sb.AppendLine();
+
+                // c) Công thức dự báo
+                sb.AppendLine("   c) Công thức dự báo (Adams-Bashforth):");
+                sb.Append("      u_p = u[n] + h * (");
+                List<string> betaTerms = new List<string>();
+                for (int j = 0; j < beta.Length; j++)
+                {
+                    // Xử lý dấu + - cho đẹp
+                    string valStr = Math.Abs(beta[j]).ToString("F6");
+                    string sign = beta[j] < 0 ? "- " : (j == 0 ? "" : "+ ");
+
+                    // F[n] với j=0, F[n-1] với j=1...
+                    string indexStr = (j == 0) ? "n" : $"n-{j}";
+
+                    betaTerms.Add($"{sign}{valStr}*F[{indexStr}]");
+                }
+                sb.Append(string.Join(" ", betaTerms));
+                sb.AppendLine(")");
+                sb.AppendLine();
+
+                // d) Hệ số Gamma (Hiệu chỉnh)
+                double[] gamma = ODESolver.GetAdamsMoultonCoeffs(s);
+                sb.AppendLine("   d) Hệ số Gamma (Adams-Moulton - Hiệu chỉnh):");
+                sb.AppendLine("      ─────────────────────────────────────────");
+                for (int j = 0; j < gamma.Length; j++)
+                {
+                    sb.AppendLine($"      γ[{j}] = {gamma[j],15:F10}");
+                }
+                sb.AppendLine();
+
+                // e) Công thức hiệu chỉnh
+                sb.AppendLine("   e) Công thức hiệu chỉnh (Adams-Moulton):");
+                sb.Append("      u[n+1] = u[n] + h * (");
+                List<string> gammaTerms = new List<string>();
+
+                // Phần tử đầu tiên (j=0) là F tương lai: F(t[n+1], u_p)
+                string valG0 = Math.Abs(gamma[0]).ToString("F6");
+                gammaTerms.Add($"{valG0}*F_p");
+
+                // Các phần tử sau (j=1..s-1) là F quá khứ: F[n], F[n-1]...
+                for (int j = 1; j < gamma.Length; j++)
+                {
+                    string valStr = Math.Abs(gamma[j]).ToString("F6");
+                    string sign = gamma[j] < 0 ? "- " : "+ ";
+
+                    // j=1 -> F[n], j=2 -> F[n-1] ... => công thức n-(j-1)
+                    int offset = j - 1;
+                    string indexStr = (offset == 0) ? "n" : $"n-{offset}";
+
+                    gammaTerms.Add($"{sign}{valStr}*F[{indexStr}]");
+                }
+                sb.Append(string.Join(" ", gammaTerms));
+                sb.AppendLine(")");
+                sb.AppendLine("      (Với F_p = F(t[n+1], u_p))");
+                sb.AppendLine();
+            }
             sb.AppendLine();
             sb.AppendLine("5. Bảng giá trị (Xem Tab 'Bảng kết quả')");
             sb.AppendLine("6. Đồ thị nghiệm (Xem Tab 'Đồ thị nghiệm')");
 
             rtbLog.Text = sb.ToString();
         }
-
         private void DrawGraph(List<double[]> data, int dim)
         {
             chartResult.Series.Clear();

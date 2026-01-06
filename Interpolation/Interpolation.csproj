@@ -25,8 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -152,6 +152,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoundaryValueProblem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoundaryValueProblem.Designer.cs">
+      <DependentUpon>BoundaryValueProblem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BVP\BoundaryValueSolver.cs" />
+    <Compile Include="BVP\EigenvalueSolver.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +215,9 @@
     <Compile Include="Utilities\InputHelper.cs" />
     <Compile Include="Utilities\NewtonCotesHelper.cs" />
     <Compile Include="Utilities\UpdateManager.cs" />
+    <EmbeddedResource Include="BoundaryValueProblem.resx">
+      <DependentUpon>BoundaryValueProblem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>

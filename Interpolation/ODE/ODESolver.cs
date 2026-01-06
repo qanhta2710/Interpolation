@@ -1,6 +1,7 @@
 ﻿using AngouriMath;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Interpolation
 {
@@ -180,7 +181,7 @@ namespace Interpolation
 
                 // 2. Tính k2 = h * f(t + h, y + k1)
                 double[] y_temp = new double[n];
-                for (int i = 0; i < n; i++) y_temp[i] = y[i] + k1[i]; // Không cần nhân h vì k1 đã có h
+                for (int i = 0; i < n; i++) y_temp[i] = y[i] + k1[i]; 
 
                 double[] f2 = f(t + h, y_temp);
                 double[] k2 = new double[n];
@@ -189,7 +190,7 @@ namespace Interpolation
                 // 3. Cập nhật y: y + 0.5*(k1 + k2)
                 for (int i = 0; i < n; i++)
                 {
-                    y[i] = y[i] + 0.5 * (k1[i] + k2[i]); // Không nhân h ở ngoài nữa
+                    y[i] = y[i] + 0.5 * (k1[i] + k2[i]); 
                 }
 
                 t += h;
@@ -216,12 +217,10 @@ namespace Interpolation
 
             while (t < tend - 1e-9)
             {
-                // k1
                 double[] f1 = f(t, y);
                 double[] k1 = new double[n];
                 for (int i = 0; i < n; i++) k1[i] = h * f1[i];
 
-                // k2 (dùng k1/2 để update y)
                 double[] y_for_k2 = new double[n];
                 for (int i = 0; i < n; i++) y_for_k2[i] = y[i] + 0.5 * k1[i];
 
@@ -229,7 +228,6 @@ namespace Interpolation
                 double[] k2 = new double[n];
                 for (int i = 0; i < n; i++) k2[i] = h * f2[i];
 
-                // k3 (dùng -k1 + 2k2 để update y)
                 double[] y_for_k3 = new double[n];
                 for (int i = 0; i < n; i++) y_for_k3[i] = y[i] - k1[i] + 2 * k2[i];
 
@@ -237,7 +235,6 @@ namespace Interpolation
                 double[] k3 = new double[n];
                 for (int i = 0; i < n; i++) k3[i] = h * f3[i];
 
-                // Update y
                 for (int i = 0; i < n; i++)
                 {
                     y[i] = y[i] + (1.0 / 6.0) * (k1[i] + 4 * k2[i] + k3[i]);
@@ -268,12 +265,10 @@ namespace Interpolation
 
             while (t < tend - 1e-9)
             {
-                // k1
                 double[] f1 = f(t, y);
                 double[] k1 = new double[n];
                 for (int i = 0; i < n; i++) k1[i] = h * f1[i];
-
-                // k2 (y + k1/2)
+                
                 double[] y_for_k2 = new double[n];
                 for (int i = 0; i < n; i++) y_for_k2[i] = y[i] + 0.5 * k1[i];
 
@@ -281,7 +276,6 @@ namespace Interpolation
                 double[] k2 = new double[n];
                 for (int i = 0; i < n; i++) k2[i] = h * f2[i];
 
-                // k3 (y + k2/2)
                 double[] y_for_k3 = new double[n];
                 for (int i = 0; i < n; i++) y_for_k3[i] = y[i] + 0.5 * k2[i];
 
@@ -289,7 +283,6 @@ namespace Interpolation
                 double[] k3 = new double[n];
                 for (int i = 0; i < n; i++) k3[i] = h * f3[i];
 
-                // k4 (y + k3)
                 double[] y_for_k4 = new double[n];
                 for (int i = 0; i < n; i++) y_for_k4[i] = y[i] + k3[i];
 
@@ -297,7 +290,6 @@ namespace Interpolation
                 double[] k4 = new double[n];
                 for (int i = 0; i < n; i++) k4[i] = h * f4[i];
 
-                // Update y
                 for (int i = 0; i < n; i++)
                 {
                     y[i] = y[i] + (1.0 / 6.0) * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
@@ -307,6 +299,112 @@ namespace Interpolation
                 SaveState(result, t, y);
             }
             return result;
+        }
+        public static List<double[]> SolveAdams(DerivativeFunc f, double[] y0, double t0, double tend, double h, int s, double epsilon)
+        {
+            var result = new List<double[]>();
+            int n = y0.Length;
+
+            // B1: Khởi tạo s điểm đầu bằng RK4
+            double t_init_limit = t0 + (s - 1) * h;
+            var initPoints = SolveRK4(f, y0, t0, t_init_limit, h);
+            for (int i = 0; i < s && i < initPoints.Count; i++) result.Add(initPoints[i]);
+
+            // Chuẩn bị History F
+            List<double[]> f_history = new List<double[]>();
+            foreach (var pt in result)
+            {
+                double t_val = pt[0];
+                double[] y_val = new double[n];
+                Array.Copy(pt, 1, y_val, 0, n);
+                f_history.Add(f(t_val, y_val));
+            }
+
+            double[] beta = GetAdamsBashforthCoeffs(s);
+            double[] gamma = GetAdamsMoultonCoeffs(s);
+            double t = result.Last()[0];
+
+            // B2: Vòng lặp chính
+            while (t < tend - 1e-9)
+            {
+                double[] y_curr = new double[n];
+                Array.Copy(result.Last(), 1, y_curr, 0, n);
+
+                // Dự báo (AB)
+                double[] y_pred = new double[n];
+                for (int d = 0; d < n; d++)
+                {
+                    double sum = 0;
+                    for (int j = 0; j < s; j++)
+                    {
+                        int hIdx = f_history.Count - 1 - j;
+                        sum += beta[j] * f_history[hIdx][d];
+                    }
+                    y_pred[d] = y_curr[d] + h * sum;
+                }
+
+                double t_next = t + h;
+
+                // Hiệu chỉnh (AM)
+                double[] am_tail = new double[n];
+                for (int d = 0; d < n; d++)
+                {
+                    for (int j = 1; j < s; j++)
+                    {
+                        int hIdx = f_history.Count - j;
+                        am_tail[d] += gamma[j] * f_history[hIdx][d];
+                    }
+                }
+
+                double[] y_corr = (double[])y_pred.Clone();
+                for (int k = 0; k < 100; k++)
+                {
+                    double[] f_next = f(t_next, y_corr);
+                    double[] y_new = new double[n];
+                    double error = 0;
+                    for (int d = 0; d < n; d++)
+                    {
+                        y_new[d] = y_curr[d] + h * (gamma[0] * f_next[d] + am_tail[d]);
+                        error += Math.Abs(y_new[d] - y_corr[d]);
+                    }
+                    Array.Copy(y_new, y_corr, n);
+                    if (error < epsilon) break;
+                }
+
+                double[] nextRow = new double[n + 1];
+                nextRow[0] = t_next;
+                Array.Copy(y_corr, 0, nextRow, 1, n);
+                result.Add(nextRow);
+
+                f_history.Add(f(t_next, y_corr));
+                if (f_history.Count > s + 2) f_history.RemoveAt(0);
+
+                t = t_next;
+            }
+            return result;
+        }
+        public static double[] GetAdamsBashforthCoeffs(int s)
+        {
+            switch (s)
+            {
+                case 2: return new double[] { 1.5, -0.5 };
+                case 3: return new double[] { 23.0 / 12.0, -16.0 / 12.0, 5.0 / 12.0 };
+                case 4: return new double[] { 55.0 / 24.0, -59.0 / 24.0, 37.0 / 24.0, -9.0 / 24.0 };
+                case 5: return new double[] { 1901.0 / 720.0, -2774.0 / 720.0, 2616.0 / 720.0, -1274.0 / 720.0, 251.0 / 720.0 };
+                default: throw new ArgumentException("S=" + s);
+            }
+        }
+
+        public static double[] GetAdamsMoultonCoeffs(int s)
+        {
+            switch (s)
+            {
+                case 2: return new double[] { 5.0 / 12.0, 8.0 / 12.0, -1.0 / 12.0 };
+                case 3: return new double[] { 9.0 / 24.0, 19.0 / 24.0, -5.0 / 24.0, 1.0 / 24.0 };
+                case 4: return new double[] { 251.0 / 720.0, 646.0 / 720.0, -264.0 / 720.0, 106.0 / 720.0, -19.0 / 720.0 };
+                case 5: return new double[] { 475.0 / 1440.0, 1427.0 / 1440.0, -798.0 / 1440.0, 482.0 / 1440.0, -173.0 / 1440.0, 27.0 / 1440.0 };
+                default: throw new ArgumentException("S=" + s);
+            }
         }
 
         private static void SaveState(List<double[]> list, double t, double[] y)

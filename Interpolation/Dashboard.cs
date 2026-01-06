@@ -43,5 +43,13 @@ namespace Interpolation
             form3.ShowDialog();
             this.Show();
         }
+
+        private void btnBVP_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BoundaryValueProblem form4 = new BoundaryValueProblem();
+            form4.ShowDialog();
+            this.Show();
+        }
     }
 }
