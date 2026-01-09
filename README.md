@@ -14,9 +14,12 @@
 - Tính gần đúng đạo hàm tại 1 điểm bằng **Công thức p + 1 điểm**
 - Tính gần đúng tích phân tại 1 điểm bằng **Công thức hình thang**, **Công thức Simpson**, **Công thức Newton-Cotez**, **Công thức điểm giữa**
 - Đánh giá sai số tính gần đúng theo công thức lưới phủ (Runge) và sai số lý thuyết
-- Tìm nghiệm số của phương trình vi phân bằng **Phương pháp Euler hiện**, **Euler ẩn** và **Phương pháp hình thang**
-## Hướng dẫn sử dụng - ĐÃ CŨ
+- Tìm nghiệm số, vẽ đồ thị của phương trình vi phân Cauchy bằng **Phương pháp Euler hiện**, **Euler ẩn**, **Phương pháp hình thang**, **Runge-Kutta 2, 3 ,4**, **ABs-AMs (s = 2 - 5)** 
+- Giải bài toán biên, vẽ đồ thị 
+- Giải bài toán trị riêng (Biên Dirichlet thuần nhất), vẽ đồ thị hàm riêng
 
+## Hướng dẫn sử dụng - ĐÃ CŨ
+- **Video đã cũ, khuyến khích mọi người tự tìm hiểu cách dùng**
 [Video hướng dẫn](https://youtu.be/W5qSPlaAW-c)
 
 ## Hướng dẫn clone Source code
