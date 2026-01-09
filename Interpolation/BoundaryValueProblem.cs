@@ -69,7 +69,6 @@ namespace Interpolation
         {
             try
             {
-                // 1. Lấy dữ liệu (Tận dụng p, q từ Tab BVP)
                 var p = BoundaryValueSolver.CompileFunction(txtEigenP.Text);
                 var q = BoundaryValueSolver.CompileFunction(txtEigenQ.Text);
                 var r = BoundaryValueSolver.CompileFunction(txtEigenR.Text);
@@ -78,43 +77,36 @@ namespace Interpolation
                 double b = double.Parse(txtEigenB.Text);
                 double h = double.Parse(txtEigenH.Text);
 
-                var leftBC = new BoundaryValueSolver.BoundaryCondition
-                {
-                    Alpha = double.Parse(txtEigenAlpha1.Text),
-                    Beta = double.Parse(txtEigenBeta1.Text),
-                    Gamma = 0
-                };
+                EigenResult result = EigenvalueSolver.SolveSturmLiouville(p, q, r, a, b, h);
 
-                var rightBC = new BoundaryValueSolver.BoundaryCondition
-                {
-                    Alpha = double.Parse(txtEigenAlpha2.Text),
-                    Beta = double.Parse(txtEigenBeta2.Text),
-                    Gamma = 0
-                };
+                rtbEigenLog.Text = result.Log;
 
-                // 2. Gọi Solver
-                EigenResult result = EigenvalueSolver.SolveSturmLiouville(p, q, r, a, b, h, leftBC, rightBC);
-
-                // 3. Hiển thị
                 dgvEigen.Rows.Clear();
                 dgvEigen.Columns.Clear();
                 dgvEigen.Columns.Add("idx", "k");
-                dgvEigen.Columns.Add("val", "Lambda (Trị riêng)");
+                dgvEigen.Columns.Add("val", "Lambda (λ)");
 
                 var lambdas = result.Eigenvalues;
+
+                int minIdx = -1;
+                int maxIdx = -1;
+                double minVal = double.MaxValue;
+                double maxVal = double.MinValue;
+
                 for (int i = 0; i < lambdas.Count; i++)
                 {
-                    // Lọc bớt giá trị nhiễu quá lớn do thuật toán số
-                    if (Math.Abs(lambdas[i]) < 1e6)
-                    {
-                        dgvEigen.Rows.Add(i + 1, Math.Round(lambdas[i], 6));
-                    }
+                    dgvEigen.Rows.Add(i + 1, Math.Round(lambdas[i], 6));
+
+                    double absVal = Math.Abs(lambdas[i]);
+                    if (absVal < minVal) { minVal = absVal; minIdx = i; }
+                    if (absVal > maxVal) { maxVal = absVal; maxIdx = i; }
                 }
 
-                // 4. Hiển thị Log
-                rtbEigenLog.Text = result.Log;
+                if (minIdx != -1) dgvEigen.Rows[minIdx].DefaultCellStyle.BackColor = Color.LightGreen;
+                if (maxIdx != -1) dgvEigen.Rows[maxIdx].DefaultCellStyle.BackColor = Color.LightPink;
 
-                // Tự động chuyển sang tab Log để người dùng xem thông tin trước
+                DrawEigenChart(result, minIdx, maxIdx);
+
                 tabControlEigenOutput.SelectedTab = tabEigenLog;
             }
             catch (Exception ex)
@@ -122,7 +114,66 @@ namespace Interpolation
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+        private void DrawEigenChart(EigenResult result, int idxMin, int idxMax)
+        {
+            chartEigen.Series.Clear();
+            chartEigen.Titles.Clear();
+            chartEigen.Legends.Clear();
 
+            var title = chartEigen.Titles.Add("Đồ thị Hàm riêng");
+            title.Font = new Font("Consolas", 12, FontStyle.Bold);
+
+            var legend = chartEigen.Legends.Add("Legend");
+            legend.Docking = Docking.Right;
+            legend.Font = new Font("Consolas", 9);
+
+            var chartArea = chartEigen.ChartAreas[0];
+            chartArea.AxisX.Title = "x";
+            chartArea.AxisX.TitleFont = new Font("Consolas", 10, FontStyle.Bold);
+            chartArea.AxisX.MajorGrid.LineColor = Color.LightGray;
+            chartArea.AxisY.Title = "u(x)";
+            chartArea.AxisY.TitleFont = new Font("Consolas", 10, FontStyle.Bold);
+            chartArea.AxisY.MajorGrid.LineColor = Color.LightGray;
+
+            // Vẽ hàm riêng gần 0 nhất
+            if (idxMin != -1 && idxMin < result.Eigenfunctions.Count)
+            {
+                var seriesMin = new Series();
+                seriesMin.Name = $"λ[{idxMin + 1}] = {result.Eigenvalues[idxMin]:F4} (gần 0)";
+                seriesMin.ChartType = SeriesChartType.Spline;
+                seriesMin.BorderWidth = 3;
+                seriesMin.Color = Color.Green;
+
+                double[] yData = result.Eigenfunctions[idxMin];
+                for (int i = 0; i < result.X.Length; i++)
+                {
+                    seriesMin.Points.AddXY(result.X[i], yData[i]);
+                }
+
+                chartEigen.Series.Add(seriesMin);
+            }
+
+            // Vẽ hàm riêng xa 0 nhất
+            if (idxMax != -1 && idxMax != idxMin && idxMax < result.Eigenfunctions.Count)
+            {
+                var seriesMax = new Series();
+                seriesMax.Name = $"λ[{idxMax + 1}] = {result.Eigenvalues[idxMax]:F4} (xa 0)";
+                seriesMax.ChartType = SeriesChartType.Line;
+                seriesMax.BorderWidth = 2;
+                seriesMax.Color = Color.Red;
+
+                double[] yData = result.Eigenfunctions[idxMax];
+                for (int i = 0; i < result.X.Length; i++)
+                {
+                    seriesMax.Points.AddXY(result.X[i], yData[i]);
+                }
+
+                chartEigen.Series.Add(seriesMax);
+            }
+
+            // Tự động điều chỉnh trục Y
+            chartArea.RecalculateAxesScale();
+        }
         private void DisplayTable(List<double[]> data)
         {
             dgvResult.Rows.Clear();
@@ -132,7 +183,6 @@ namespace Interpolation
 
             dgvResult.SuspendLayout();
 
-            // Giới hạn hiển thị nếu quá nhiều dòng (tránh treo máy)
             int step = data.Count > 1000 ? data.Count / 1000 : 1;
 
             for (int i = 0; i < data.Count; i += step)
@@ -155,12 +205,16 @@ namespace Interpolation
         {
             chartResult.Series[0].Points.Clear();
             chartResult.Titles.Clear();
-            chartResult.Titles.Add("Đồ thị nghiệm u(x)");
+
+            var title = chartResult.Titles.Add("Đồ thị nghiệm u(x)");
+            title.Font = new Font("Consolas", 12, FontStyle.Bold);
 
             // Cấu hình trục
             var chartArea = chartResult.ChartAreas[0];
             chartArea.AxisX.Title = "x";
+            chartArea.AxisX.TitleFont = new Font("Consolas", 10, FontStyle.Bold);
             chartArea.AxisY.Title = "u(x)";
+            chartArea.AxisY.TitleFont = new Font("Consolas", 10, FontStyle.Bold);
             chartArea.AxisX.MajorGrid.LineColor = Color.LightGray;
             chartArea.AxisY.MajorGrid.LineColor = Color.LightGray;
 

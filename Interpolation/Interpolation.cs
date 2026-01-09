@@ -12,6 +12,11 @@ namespace Interpolation
         private double[] lastPolynomialCoeffs;
         private double[] xValues;
         private double[] yValues;
+
+        private double lastX0; // Mốc trung tâm
+        private double lastH; // Khoảng cách
+        private bool isLastMethodTransformed; // Đổi biến không?
+        private string lastTransformationType; // Loại nội suy đổi biến
         public Interpolation()
         {
             InitializeComponent();
@@ -181,14 +186,43 @@ namespace Interpolation
                 // Xử lý Input
                 double[] coeffsP = InputHelper.GetCoeffsP(dataGridViewCoeffsP);
                 int precision = Convert.ToInt32(txtBoxPrecisionEval.Text);
-                double c = Convert.ToDouble(txtBoxC.Text);
+                double inputValue = Convert.ToDouble(txtBoxC.Text);
                 int k = Convert.ToInt32(txtBoxk.Text);
-                int n = coeffsP.Length - 1;
 
-                // Tính và in kết quả
-                var result = new Horner(coeffsP, c, k, precision);
-                result.DisplayResults(richTextBoxResult, dataGridViewHornerEval, dataGridViewHornerDerivative);
-            }
+                double evaluationPoint;
+                string explanation;
+
+                if (isLastMethodTransformed)
+                {
+                    if (lastTransformationType == "Bessel")
+                    {
+                        evaluationPoint = ((inputValue - lastX0) / lastH) - 0.5;
+                        explanation = $"Đổi biến Bessel:\n" +
+                                    $"x = {inputValue}\n" +
+                                    $"t = ((x - x₀) / h) - 0.5\n" +
+                                    $"t = (({inputValue} - {lastX0}) / {lastH}) - 0.5\n" +
+                                    $"t = {evaluationPoint}";
+                    }
+                    else // Newton, Stirling, Gauss I, Gauss II
+                    {
+                        evaluationPoint = (inputValue - lastX0) / lastH;
+                        explanation = $"Đổi biến {lastTransformationType}:\n" +
+                                    $"x = {inputValue}\n" +
+                                    $"t = (x - x₀) / h\n" +
+                                    $"t = ({inputValue} - {lastX0}) / {lastH}\n" +
+                                    $"t = {evaluationPoint}";
+                    }
+
+                    MessageBox.Show(explanation, "Thông tin đổi biến", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    evaluationPoint = inputValue;
+                    MessageBox.Show($"Không thực hiện đổi biến\nTính tại x = {inputValue}", "Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                var result = new Horner(coeffsP, evaluationPoint, k, precision);
+                result.DisplayResults(richTextBoxResult, dataGridViewHornerEval, dataGridViewHornerDerivative);}
             catch (Exception)
             {
                 MessageBox.Show("Lỗi định dạng");
@@ -468,71 +502,70 @@ namespace Interpolation
             }
         }
         // Spline
-        //private void btnSolveSpline_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        dataXYSpline.Sort(dataXYSpline.Columns["colsXSpline"], System.ComponentModel.ListSortDirection.Ascending);
-        //        double[] x = GetXValues(dataXYSpline);
-        //        double[] y = GetYValues(dataXYSpline);
-        //        int precision = Convert.ToInt32(txtBoxPrecisionSpline.Text);
-        //        RemoveDuplicate(dataXYSpline);
+        private void btnSolveSpline_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataXYSpline.Sort(dataXYSpline.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
 
-        //        if (comboBoxSpline.SelectedIndex == 0)
-        //        {
-        //            SolveLinearSpline(x, y, precision, out double[] a, out double[] b, out double[] h);
-        //            DisplayLinearSplineResults(rtbResultSpline, x, y, a, b, h, precision);
-        //        }
-        //        else if (comboBoxSpline.SelectedIndex == 1)
-        //        {
-        //            // Fix
-        //        }
-        //        else if (comboBoxSpline.SelectedIndex == 2)
-        //        {
-        //            SolveCubicSpline(x, y, precision, out double[] a, out double[] b, out double[] c, out double[] d, out double[] h, out double[] alpha);
-        //            DisplayCubicSplineResults(rtbResultSpline, x, y, a, b, c, d, h, alpha, precision);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Lỗi: {ex.Message}");
-        //    }
-        //}
+                double[] x = InputHelper.GetXValues(dataXYSpline);
+                double[] y = InputHelper.GetYValues(dataXYSpline);
+
+                // Kiểm tra dữ liệu
+                if (x.Length < 2) { MessageBox.Show("Cần ít nhất 2 điểm dữ liệu."); return; }
+
+                int precision = Convert.ToInt32(txtBoxPrecisionSpline.Text);
+
+                // 2. Khởi tạo đối tượng Spline
+                Spline splineSolver = new Spline(x, y, precision);
+
+                // 3. Gọi phương thức giải tùy theo ComboBox
+                int type = comboBoxSpline.SelectedIndex;
+                double valStart = string.IsNullOrWhiteSpace(txtSplineStart.Text) ? 0 : Convert.ToDouble(txtSplineStart.Text);
+                double valEnd = string.IsNullOrWhiteSpace(txtSplineEnd.Text) ? 0 : Convert.ToDouble(txtSplineEnd.Text);
+
+                if (type == 0) // Linear
+                {
+                    splineSolver.SolveLinear();
+                }
+                else if (type == 1) // Quadratic
+                {
+                    double? s0 = string.IsNullOrWhiteSpace(txtSplineStart.Text) ? (double?)null : valStart;
+                    double? sn = string.IsNullOrWhiteSpace(txtSplineEnd.Text) ? (double?)null : valEnd;
+
+                    if (s0 == null && sn == null) s0 = 0;
+
+                    splineSolver.SolveQuadratic(s0, sn);
+                }
+                else if (type == 2) // Cubic General
+                {
+                    splineSolver.SolveCubic(false, valStart, valEnd);
+                }
+                else if (type == 3) // Clamped Cubic (S' biên)
+                {
+                    splineSolver.SolveCubic(true, valStart, valEnd);
+                }
+
+                // 4. Hiển thị kết quả
+                splineSolver.DisplayResults(rtbResultSpline);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+            }
+        }
         private void btnOpenExcelSpline_Click(object sender, EventArgs e)
         {
-            //ExcelPackage.License.SetNonCommercialPersonal("qanhta2710");
-            //try
-            //{
-            //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            //    {
-            //        openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
-            //        openFileDialog.Title = "Chọn file Excel chứa dữ liệu (x, y)";
-
-            //        if (openFileDialog.ShowDialog() == DialogResult.OK)
-            //        {
-            //            string filePath = openFileDialog.FileName;
-            //            ReadExcelData(filePath, out double[] xValues, out double[] yValues);
-            //            dataXYSpline.Rows.Clear();
-            //            for (int i = 0; i < xValues.Length; i++)
-            //            {
-            //                dataXYSpline.Rows.Add(xValues[i], yValues[i]);
-            //            }
-            //            MessageBox.Show(
-            //                $"Đã nhập thành công {xValues.Length} điểm dữ liệu từ Excel!",
-            //                "Thành công",
-            //                MessageBoxButtons.OK,
-            //                MessageBoxIcon.Information);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Lỗi khi đọc file Excel: {ex.Message}",
-            //          "Lỗi",
-            //          MessageBoxButtons.OK,
-            //          MessageBoxIcon.Error);
-            //}
+            try
+            {
+                InputHelper.OpenExcelAndLoadData(dataXYSpline);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi mở file: " + ex.Message);
+            }
         }
+
         // Tìm mốc nội suy cách đều
         private void btnFindPoints_Click(object sender, EventArgs e)
         {
@@ -686,36 +719,74 @@ namespace Interpolation
         private void btnLagrangeToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            isLastMethodTransformed = false;
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnNewtonToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            isLastMethodTransformed = false;
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnNewtonFiniteToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            double[] x = InputHelper.GetXValues(dataGridViewXYNewtonFinite);
+            if (comboBoxNewtonFinite.SelectedItem.ToString().Contains("tiến"))
+            {
+                lastX0 = x[0];
+            }
+            else if (comboBoxNewtonFinite.SelectedItem.ToString().Contains("lùi"))
+            {
+                lastX0 = x[x.Length - 1];
+            }
+            lastH = Math.Round(x[1] - x[0], 6);
+            isLastMethodTransformed = true;
+            lastTransformationType = "Newton Mốc cách đều";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnStirlingToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            double[] x = InputHelper.GetXValues(dataXYStirling);
+            int centerIndex = (x.Length - 1) / 2;
+            lastX0 = x[centerIndex];
+            lastH = Math.Round(x[1] - x[0], 6);
+            isLastMethodTransformed = true;
+            lastTransformationType = "Stirling";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnBesselToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            double[] x = InputHelper.GetXValues(dataXYBessel);
+            int centerIndex = (x.Length / 2) - 1; 
+            lastX0 = x[centerIndex];
+            lastH = Math.Round(x[1] - x[0], 6);
+            isLastMethodTransformed = true;
+            lastTransformationType = "Bessel";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnGaussIToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            double[] x = InputHelper.GetXValues(dataXYGaussI);
+            int centerIndex = (x.Length - 1) / 2;
+            lastX0 = x[centerIndex];
+            lastH = Math.Round(x[1] - x[0], 6);
+            isLastMethodTransformed = true;
+            lastTransformationType = "GaussI";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnGaussIIToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
+            double[] x = InputHelper.GetXValues(dataXYGaussII);
+            int centerIndex = (x.Length - 1) / 2;
+            lastX0 = x[centerIndex];
+            lastH = Math.Round(x[1] - x[0], 6);
+            isLastMethodTransformed = true;
+            lastTransformationType = "GaussII";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         #endregion
@@ -739,6 +810,42 @@ namespace Interpolation
             InputHelper.SetupDataGridViewColumnTypes(dataXYGaussII, "colsXGaussII", "colsYGaussII");
             InputHelper.SetupDataGridViewColumnTypes(dataGridViewXYIteration, "colsXIteration", "colsYIteration");
             InputHelper.SetupDataGridViewColumnTypes(dataXYLeastSquares, "colsXLeastSquares", "colsYLeastSquares");
+            InputHelper.SetupDataGridViewColumnTypes(dataXYSpline, "colsXSpline", "colsYSpline");
+        }
+        private void comboBoxSpline_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idx = comboBoxSpline.SelectedIndex;
+
+            // Mặc định hiện panel nhập liệu
+            panelSplineConditions.Visible = true;
+
+            switch (idx)
+            {
+                case 0: // Tuyến tính
+                    panelSplineConditions.Visible = false; // Không cần biên
+                    break;
+
+                case 1: // Bậc 2 (Cần S')
+                    labelSplineStart.Text = "S'(x0) =";
+                    labelSplineEnd.Text = "S'(xn) =";
+                    labelSplineNote.Text = "(Nhập 1 trong 2 giá trị đạo hàm cấp 1)";
+                    labelSplineNote.Visible = true;
+                    break;
+
+                case 2: // Bậc 3 Tổng quát (Cần S'') - CÂU B
+                    labelSplineStart.Text = "S''(x0) =";
+                    labelSplineEnd.Text = "S''(xn) =";
+                    labelSplineNote.Text = "(Nhập đạo hàm cấp 2. Để trống = 0 là Spline Tự nhiên)";
+                    labelSplineNote.Visible = true;
+                    break;
+
+                case 3: // Bậc 3 Clamped (Cần S') - CÂU C
+                    labelSplineStart.Text = "S'(x0) =";
+                    labelSplineEnd.Text = "S'(xn) =";
+                    labelSplineNote.Text = "(Nhập đạo hàm cấp 1 tại 2 đầu mút)";
+                    labelSplineNote.Visible = true;
+                    break;
+            }
         }
         #endregion
     }

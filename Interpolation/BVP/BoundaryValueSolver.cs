@@ -47,9 +47,10 @@ namespace Interpolation.Methods
             sb.AppendLine($"Phương trình: [p(x)u']' - q(x)u = -f(x)");
             sb.AppendLine($"Miền tính: [{a}, {b}], Bước lưới h = {h}");
 
+            // 1. Công thức N
             int N = (int)Math.Round((b - a) / h);
-
-            sb.AppendLine($"Số khoảng chia N = {N}");
+            sb.AppendLine($"Số khoảng chia: N = [(b-a)/h] = [({b}-{a})/{h}] = {N}");
+            sb.AppendLine($"Số điểm nút: N + 1 = {N + 1}");
             sb.AppendLine();
 
             double[] x = new double[N + 1];
@@ -61,22 +62,29 @@ namespace Interpolation.Methods
             double[] C_arr = new double[N + 1]; // Hệ số u_{i+1}
             double[] D_arr = new double[N + 1]; // -f_i
 
+            sb.AppendLine("1. CÔNG THỨC SAI PHÂN TẠI ĐIỂM i (1...N-1):");
+            sb.AppendLine("   p_{i-1/2}*u_{i-1} - (p_{i-1/2} + p_{i+1/2} + h^2*q_i)*u_i + p_{i+1/2}*u_{i+1} = -h^2*f_i");
+            sb.AppendLine("   Đặt:");
+            sb.AppendLine("     A_i = p(x_i - h/2)");
+            sb.AppendLine("     C_i = p(x_i + h/2)");
+            sb.AppendLine("     B_i = -(A_i + C_i + h^2 * q(x_i))");
+            sb.AppendLine("     F_i = -h^2 * f(x_i)");
+            sb.AppendLine("   => A_i*u_{i-1} + B_i*u_i + C_i*u_{i+1} = F_i");
+            sb.AppendLine();
+
             // Sai phân hoá PTVP
 
             for (int i = 1; i < N; i++)
             {
-                double x_half_plus = x[i] + h / 2.0;
-                double x_half_minus = x[i] - h / 2.0;
-
-                double p_plus = p(x_half_plus);   // p_{i+1/2}
-                double p_minus = p(x_half_minus); // p_{i-1/2}
+                double p_plus = p(x[i] + h / 2.0);  // p_{i+1/2}
+                double p_minus = p(x[i] - h / 2.0); // p_{i-1/2}
                 double q_val = q(x[i]);
                 double f_val = f(x[i]);
 
-                A_arr[i] = p_minus / (h * h);
-                B_arr[i] = -p_plus / (h * h) - p_minus / (h * h) - q_val;
-                C_arr[i] = p_plus / (h * h);
-                D_arr[i] = -f_val;
+                A_arr[i] = p_minus;
+                C_arr[i] = p_plus;
+                B_arr[i] = -(p_minus + p_plus + h * h * q_val);
+                D_arr[i] = -(h * h) * f_val;
             }
 
             // Biên trái
@@ -88,7 +96,7 @@ namespace Interpolation.Methods
                 B_arr[0] = 1.0;
                 C_arr[0] = 0;
                 D_arr[0] = left.Gamma / left.Beta;
-                sb.AppendLine("-> Loại 1 (Dirichlet): u0 = Gamma/Beta");
+                sb.AppendLine("=> Loại 1 (Dirichlet): u0 = Gamma/Beta");
             }
             else // Neumann / Robin 
             {
@@ -103,7 +111,11 @@ namespace Interpolation.Methods
 
                 D_arr[0] = -(h * h / 2.0) * f_0 + (h * left.Gamma / left.Alpha) * p_half;
 
-                sb.AppendLine("-> Loại 2/3 (Neumann/Robin)");
+                sb.AppendLine("=> Loại 2/3 (Neumann/Robin)");
+                sb.AppendLine("     Công thức:");
+                sb.AppendLine("     p_{1/2}u_1 - (p_{1/2} + h^2*q_0/2)*u_0 = -h^2*f_0/2 - h*u'(0)*p_{1/2}");
+                sb.AppendLine("     Thay u'(0) = (Gamma - Beta*u_0)/Alpha:");
+                sb.AppendLine("     => B_0*u_0 + C_0*u_1 = F_0");
             }
 
             sb.AppendLine($"   PT biên trái: {B_arr[0]:F4}*u0 + {C_arr[0]:F4}*u1 = {D_arr[0]:F4}");
@@ -118,7 +130,7 @@ namespace Interpolation.Methods
                 B_arr[N] = 1.0;
                 C_arr[N] = 0;
                 D_arr[N] = right.Gamma / right.Beta;
-                sb.AppendLine("-> Loại 1 (Dirichlet): uN = Gamma/Beta");
+                sb.AppendLine("=> Loại 1 (Dirichlet): uN = Gamma/Beta");
             }
             else // Neumann / Robin
             {
@@ -132,7 +144,14 @@ namespace Interpolation.Methods
                 C_arr[N] = 0;
 
                 D_arr[N] = -(h * h / 2.0) * f_N - (h * right.Gamma / right.Alpha) * p_half_left;
-                sb.AppendLine("-> Loại 2/3 (Neumann/Robin - Chính xác O(h^2))");
+                sb.AppendLine("=> Loại 2/3 (Neumann/Robin)");
+                sb.AppendLine("     Công thức:");
+                sb.AppendLine("     [ p_{N-1/2} + (h^2*q_N)/2 - σ₂ ]*u_N - p_{N-1/2}*u_{N-1} = (h^2*f_N)/2 - μ₂*h");
+                double sigma2 = -(h * right.Beta / right.Alpha) * p_half_left;
+                double mu2_h = (h * right.Gamma / right.Alpha) * p_half_left;
+                sb.AppendLine($"       σ₂ = {sigma2:F4}");
+                sb.AppendLine($"       μ₂*h = {mu2_h:F4}");
+                sb.AppendLine("     => A_N*u_{N-1} + B_N*u_N = F_N");
             }
 
             sb.AppendLine($"   PT biên phải: {A_arr[N]:F4}*u_{N - 1} + {B_arr[N]:F4}*u_{N} = {D_arr[N]:F4}");
@@ -140,16 +159,10 @@ namespace Interpolation.Methods
 
             // Giải hệ phương trình
             sb.AppendLine("--- HỆ PHƯƠNG TRÌNH ĐẠI SỐ (MA TRẬN 3 ĐƯỜNG CHÉO) ---");
-            sb.AppendLine("Dạng: A_i*u_{i-1} + B_i*u_i + C_i*u_{i+1} = D_i");
-            sb.AppendLine(string.Format("{0,5} | {1,12} {2,12} {3,12} | {4,12}", "Idx", "A (u_i-1)", "B (u_i)", "C (u_i+1)", "D (VP)"));
-            sb.AppendLine(new string('-', 70));
-
-            for (int i = 0; i <= N; i++)
-            {
-                sb.AppendLine(string.Format("{0,5} | {1,12:F4} {2,12:F4} {3,12:F4} | {4,12:F4}",
-                    i, A_arr[i], B_arr[i], C_arr[i], D_arr[i]));
-            }
-            sb.AppendLine();
+            sb.AppendLine("Dạng: A_i*u_{i-1} + B_i*u_i + C_i*u_{i+1} = F_i");
+            PrintTableStyle(sb, A_arr, B_arr, C_arr, D_arr, N);
+            sb.AppendLine("\n   Ma trận M:");
+            PrintMatrixStyle(sb, A_arr, B_arr, C_arr, N);
 
             double[] u = ThomasAlgorithm(A_arr, B_arr, C_arr, D_arr, N + 1);
 
@@ -202,6 +215,45 @@ namespace Interpolation.Methods
             }
 
             return x;
+        }
+        private static void PrintTableStyle(StringBuilder sb, double[] A, double[] B, double[] C, double[] D, int N)
+        {
+            sb.AppendLine(string.Format(" {0,4} | {1,12} {2,12} {3,12} | {4,12}", "i", "A_i", "B_i", "C_i", "F_i"));
+            sb.AppendLine(new string('-', 70));
+
+            int showCount = 4;
+            // Đầu
+            for (int i = 0; i < showCount; i++)
+            {
+                sb.AppendLine(string.Format(" {0,4} | {1,12:F4} {2,12:F4} {3,12:F4} | {4,12:F4}",
+                    i, A[i], B[i], C[i], D[i]));
+            }
+            // Giữa
+            sb.AppendLine("  ... |      ...          ...          ...     |      ...");
+            // Cuối
+            for (int i = N - showCount + 1; i <= N; i++)
+            {
+                sb.AppendLine(string.Format(" {0,4} | {1,12:F4} {2,12:F4} {3,12:F4} | {4,12:F4}",
+                    i, A[i], B[i], C[i], D[i]));
+            }
+        }
+
+        private static void PrintMatrixStyle(StringBuilder sb, double[] A, double[] B, double[] C, int N)
+        {
+
+            // Dòng 0: B0 C0 0 ...
+            sb.AppendLine($" | {B[0],8:F4}  {C[0],8:F4}   {0,8:F4}    ...     |");
+            // Dòng 1: A1 B1 C1 ...
+            sb.AppendLine($" | {A[1],8:F4}  {B[1],8:F4}  {C[1],8:F4}    ...     |");
+            // Dòng 2: 0 A2 B2 C2...
+            sb.AppendLine($" | {0,8:F4}  {A[2],8:F4}  {B[2],8:F4}    ...     |");
+
+            sb.AppendLine(" |   ...       ...       ...        ...     |");
+
+            // Dòng N-1
+            sb.AppendLine($" |   ...    {A[N - 1],8:F4}  {B[N - 1],8:F4}  {C[N - 1],8:F4}  |");
+            // Dòng N
+            sb.AppendLine($" |   ...      {0,8:F4}   {A[N],8:F4}  {B[N],8:F4} |");
         }
     }
 }

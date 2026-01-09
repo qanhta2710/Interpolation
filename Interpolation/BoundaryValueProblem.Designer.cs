@@ -17,6 +17,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControlBVP = new System.Windows.Forms.TabControl();
             this.tabBVP_Standard = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -60,24 +63,11 @@
             this.tabEigen = new System.Windows.Forms.TabPage();
             this.splitContainerEigen = new System.Windows.Forms.SplitContainer();
             this.btnSolveEigen = new System.Windows.Forms.Button();
-            this.grpEigenBC = new System.Windows.Forms.GroupBox();
-            this.labelEigenBCLeft = new System.Windows.Forms.Label();
-            this.labelEigenAlpha1 = new System.Windows.Forms.Label();
-            this.txtEigenAlpha1 = new System.Windows.Forms.TextBox();
-            this.labelEigenBeta1 = new System.Windows.Forms.Label();
-            this.txtEigenBeta1 = new System.Windows.Forms.TextBox();
-            this.labelEigenBCRight = new System.Windows.Forms.Label();
-            this.labelEigenAlpha2 = new System.Windows.Forms.Label();
-            this.txtEigenAlpha2 = new System.Windows.Forms.TextBox();
-            this.labelEigenBeta2 = new System.Windows.Forms.Label();
-            this.txtEigenBeta2 = new System.Windows.Forms.TextBox();
             this.grpEigenGrid = new System.Windows.Forms.GroupBox();
             this.labelEigenA = new System.Windows.Forms.Label();
             this.txtEigenA = new System.Windows.Forms.TextBox();
             this.labelEigenB = new System.Windows.Forms.Label();
             this.txtEigenB = new System.Windows.Forms.TextBox();
-            this.labelEigenH = new System.Windows.Forms.Label();
-            this.txtEigenH = new System.Windows.Forms.TextBox();
             this.grpEigenFunctions = new System.Windows.Forms.GroupBox();
             this.labelEigenP = new System.Windows.Forms.Label();
             this.txtEigenP = new System.Windows.Forms.TextBox();
@@ -85,12 +75,15 @@
             this.txtEigenQ = new System.Windows.Forms.TextBox();
             this.labelEigenR = new System.Windows.Forms.Label();
             this.txtEigenR = new System.Windows.Forms.TextBox();
+            this.txtEigenH = new System.Windows.Forms.TextBox();
+            this.labelEigenH = new System.Windows.Forms.Label();
             this.tabControlEigenOutput = new System.Windows.Forms.TabControl();
             this.tabEigenTable = new System.Windows.Forms.TabPage();
             this.dgvEigen = new System.Windows.Forms.DataGridView();
             this.tabEigenLog = new System.Windows.Forms.TabPage();
             this.rtbEigenLog = new System.Windows.Forms.RichTextBox();
-            this.tabHeat = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chartEigen = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControlBVP.SuspendLayout();
             this.tabBVP_Standard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -112,20 +105,20 @@
             this.splitContainerEigen.Panel1.SuspendLayout();
             this.splitContainerEigen.Panel2.SuspendLayout();
             this.splitContainerEigen.SuspendLayout();
-            this.grpEigenBC.SuspendLayout();
             this.grpEigenGrid.SuspendLayout();
             this.grpEigenFunctions.SuspendLayout();
             this.tabControlEigenOutput.SuspendLayout();
             this.tabEigenTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEigen)).BeginInit();
             this.tabEigenLog.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartEigen)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlBVP
             // 
             this.tabControlBVP.Controls.Add(this.tabBVP_Standard);
             this.tabControlBVP.Controls.Add(this.tabEigen);
-            this.tabControlBVP.Controls.Add(this.tabHeat);
             this.tabControlBVP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlBVP.Location = new System.Drawing.Point(0, 0);
             this.tabControlBVP.Name = "tabControlBVP";
@@ -162,7 +155,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlOutput);
             this.splitContainer1.Size = new System.Drawing.Size(1168, 718);
-            this.splitContainer1.SplitterDistance = 400;
+            this.splitContainer1.SplitterDistance = 353;
             this.splitContainer1.TabIndex = 0;
             // 
             // btnSolve
@@ -174,7 +167,7 @@
             this.btnSolve.ForeColor = System.Drawing.Color.White;
             this.btnSolve.Location = new System.Drawing.Point(0, 668);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(400, 50);
+            this.btnSolve.Size = new System.Drawing.Size(353, 50);
             this.btnSolve.TabIndex = 4;
             this.btnSolve.Text = "GIẢI BÀI TOÁN";
             this.btnSolve.UseVisualStyleBackColor = false;
@@ -191,7 +184,7 @@
             this.grpRightBC.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpRightBC.Location = new System.Drawing.Point(0, 390);
             this.grpRightBC.Name = "grpRightBC";
-            this.grpRightBC.Size = new System.Drawing.Size(400, 110);
+            this.grpRightBC.Size = new System.Drawing.Size(353, 110);
             this.grpRightBC.TabIndex = 3;
             this.grpRightBC.TabStop = false;
             this.grpRightBC.Text = "Biên Phải (tại b): Alpha*u\' + Beta*u = Gamma";
@@ -226,7 +219,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(130, 60);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(15, 16);
+            this.label11.Size = new System.Drawing.Size(14, 16);
             this.label11.TabIndex = 2;
             this.label11.Text = "+";
             // 
@@ -258,7 +251,7 @@
             this.grpLeftBC.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpLeftBC.Location = new System.Drawing.Point(0, 280);
             this.grpLeftBC.Name = "grpLeftBC";
-            this.grpLeftBC.Size = new System.Drawing.Size(400, 110);
+            this.grpLeftBC.Size = new System.Drawing.Size(353, 110);
             this.grpLeftBC.TabIndex = 2;
             this.grpLeftBC.TabStop = false;
             this.grpLeftBC.Text = "Biên Trái (tại a): Alpha*u\' + Beta*u = Gamma";
@@ -325,7 +318,7 @@
             this.grpGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpGrid.Location = new System.Drawing.Point(0, 180);
             this.grpGrid.Name = "grpGrid";
-            this.grpGrid.Size = new System.Drawing.Size(400, 100);
+            this.grpGrid.Size = new System.Drawing.Size(353, 100);
             this.grpGrid.TabIndex = 1;
             this.grpGrid.TabStop = false;
             this.grpGrid.Text = "Cấu hình lưới";
@@ -392,7 +385,7 @@
             this.grpFunctions.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpFunctions.Location = new System.Drawing.Point(0, 0);
             this.grpFunctions.Name = "grpFunctions";
-            this.grpFunctions.Size = new System.Drawing.Size(400, 180);
+            this.grpFunctions.Size = new System.Drawing.Size(353, 180);
             this.grpFunctions.TabIndex = 0;
             this.grpFunctions.TabStop = false;
             this.grpFunctions.Text = "Phương trình: [p(x)u\']\' - q(x)u = -f(x)";
@@ -457,7 +450,7 @@
             this.tabControlOutput.Location = new System.Drawing.Point(0, 0);
             this.tabControlOutput.Name = "tabControlOutput";
             this.tabControlOutput.SelectedIndex = 0;
-            this.tabControlOutput.Size = new System.Drawing.Size(764, 718);
+            this.tabControlOutput.Size = new System.Drawing.Size(811, 718);
             this.tabControlOutput.TabIndex = 0;
             // 
             // tabTable
@@ -466,7 +459,7 @@
             this.tabTable.Location = new System.Drawing.Point(4, 25);
             this.tabTable.Name = "tabTable";
             this.tabTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTable.Size = new System.Drawing.Size(756, 689);
+            this.tabTable.Size = new System.Drawing.Size(803, 689);
             this.tabTable.TabIndex = 0;
             this.tabTable.Text = "Bảng giá trị";
             this.tabTable.UseVisualStyleBackColor = true;
@@ -482,7 +475,7 @@
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.RowHeadersWidth = 51;
             this.dgvResult.RowTemplate.Height = 24;
-            this.dgvResult.Size = new System.Drawing.Size(750, 683);
+            this.dgvResult.Size = new System.Drawing.Size(797, 683);
             this.dgvResult.TabIndex = 0;
             // 
             // tabGraph
@@ -511,18 +504,17 @@
             // 
             chartArea1.Name = "ChartArea1";
             this.chartResult.ChartAreas.Add(chartArea1);
-            this.chartResult.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chartResult.Height = 650;
+            this.chartResult.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.chartResult.Legends.Add(legend1);
-            this.chartResult.Location = new System.Drawing.Point(3, 36);
+            this.chartResult.Location = new System.Drawing.Point(3, 3);
             this.chartResult.Name = "chartResult";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "u(x)";
             this.chartResult.Series.Add(series1);
-            this.chartResult.Size = new System.Drawing.Size(750, 650);
+            this.chartResult.Size = new System.Drawing.Size(750, 683);
             this.chartResult.TabIndex = 0;
             this.chartResult.Text = "chart1";
             // 
@@ -567,15 +559,16 @@
             // splitContainerEigen.Panel1
             // 
             this.splitContainerEigen.Panel1.Controls.Add(this.btnSolveEigen);
-            this.splitContainerEigen.Panel1.Controls.Add(this.grpEigenBC);
             this.splitContainerEigen.Panel1.Controls.Add(this.grpEigenGrid);
             this.splitContainerEigen.Panel1.Controls.Add(this.grpEigenFunctions);
+            this.splitContainerEigen.Panel1.Controls.Add(this.txtEigenH);
+            this.splitContainerEigen.Panel1.Controls.Add(this.labelEigenH);
             // 
             // splitContainerEigen.Panel2
             // 
             this.splitContainerEigen.Panel2.Controls.Add(this.tabControlEigenOutput);
             this.splitContainerEigen.Size = new System.Drawing.Size(1174, 724);
-            this.splitContainerEigen.SplitterDistance = 400; // Chia tỉ lệ giống tab trước
+            this.splitContainerEigen.SplitterDistance = 400;
             this.splitContainerEigen.TabIndex = 0;
             // 
             // btnSolveEigen
@@ -593,120 +586,12 @@
             this.btnSolveEigen.UseVisualStyleBackColor = false;
             this.btnSolveEigen.Click += new System.EventHandler(this.btnSolveEigen_Click);
             // 
-            // grpEigenBC
-            // 
-            this.grpEigenBC.Controls.Add(this.labelEigenBCLeft);
-            this.grpEigenBC.Controls.Add(this.labelEigenAlpha1);
-            this.grpEigenBC.Controls.Add(this.txtEigenAlpha1);
-            this.grpEigenBC.Controls.Add(this.labelEigenBeta1);
-            this.grpEigenBC.Controls.Add(this.txtEigenBeta1);
-            this.grpEigenBC.Controls.Add(this.labelEigenBCRight);
-            this.grpEigenBC.Controls.Add(this.labelEigenAlpha2);
-            this.grpEigenBC.Controls.Add(this.txtEigenAlpha2);
-            this.grpEigenBC.Controls.Add(this.labelEigenBeta2);
-            this.grpEigenBC.Controls.Add(this.txtEigenBeta2);
-            this.grpEigenBC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpEigenBC.Location = new System.Drawing.Point(0, 240);
-            this.grpEigenBC.Name = "grpEigenBC";
-            this.grpEigenBC.Size = new System.Drawing.Size(400, 160);
-            this.grpEigenBC.TabIndex = 2;
-            this.grpEigenBC.TabStop = false;
-            this.grpEigenBC.Text = "Điều kiện biên thuần nhất";
-            // 
-            // labelEigenBCLeft
-            // 
-            this.labelEigenBCLeft.AutoSize = true;
-            this.labelEigenBCLeft.Location = new System.Drawing.Point(15, 25);
-            this.labelEigenBCLeft.Name = "labelEigenBCLeft";
-            this.labelEigenBCLeft.Size = new System.Drawing.Size(165, 16);
-            this.labelEigenBCLeft.TabIndex = 0;
-            this.labelEigenBCLeft.Text = "Biên trái: α₁u\'(a) + β₁u(a) = 0";
-            // 
-            // labelEigenAlpha1
-            // 
-            this.labelEigenAlpha1.AutoSize = true;
-            this.labelEigenAlpha1.Location = new System.Drawing.Point(30, 55);
-            this.labelEigenAlpha1.Name = "labelEigenAlpha1";
-            this.labelEigenAlpha1.Size = new System.Drawing.Size(21, 16);
-            this.labelEigenAlpha1.TabIndex = 1;
-            this.labelEigenAlpha1.Text = "α₁:";
-            // 
-            // txtEigenAlpha1
-            // 
-            this.txtEigenAlpha1.Location = new System.Drawing.Point(65, 52);
-            this.txtEigenAlpha1.Name = "txtEigenAlpha1";
-            this.txtEigenAlpha1.Size = new System.Drawing.Size(60, 22);
-            this.txtEigenAlpha1.TabIndex = 2;
-            this.txtEigenAlpha1.Text = "0";
-            // 
-            // labelEigenBeta1
-            // 
-            this.labelEigenBeta1.AutoSize = true;
-            this.labelEigenBeta1.Location = new System.Drawing.Point(150, 55);
-            this.labelEigenBeta1.Name = "labelEigenBeta1";
-            this.labelEigenBeta1.Size = new System.Drawing.Size(21, 16);
-            this.labelEigenBeta1.TabIndex = 3;
-            this.labelEigenBeta1.Text = "β₁:";
-            // 
-            // txtEigenBeta1
-            // 
-            this.txtEigenBeta1.Location = new System.Drawing.Point(185, 52);
-            this.txtEigenBeta1.Name = "txtEigenBeta1";
-            this.txtEigenBeta1.Size = new System.Drawing.Size(60, 22);
-            this.txtEigenBeta1.TabIndex = 4;
-            this.txtEigenBeta1.Text = "1";
-            // 
-            // labelEigenBCRight
-            // 
-            this.labelEigenBCRight.AutoSize = true;
-            this.labelEigenBCRight.Location = new System.Drawing.Point(15, 85);
-            this.labelEigenBCRight.Name = "labelEigenBCRight";
-            this.labelEigenBCRight.Size = new System.Drawing.Size(173, 16);
-            this.labelEigenBCRight.TabIndex = 5;
-            this.labelEigenBCRight.Text = "Biên phải: α₂u\'(b) + β₂u(b) = 0";
-            // 
-            // labelEigenAlpha2
-            // 
-            this.labelEigenAlpha2.AutoSize = true;
-            this.labelEigenAlpha2.Location = new System.Drawing.Point(30, 115);
-            this.labelEigenAlpha2.Name = "labelEigenAlpha2";
-            this.labelEigenAlpha2.Size = new System.Drawing.Size(21, 16);
-            this.labelEigenAlpha2.TabIndex = 6;
-            this.labelEigenAlpha2.Text = "α₂:";
-            // 
-            // txtEigenAlpha2
-            // 
-            this.txtEigenAlpha2.Location = new System.Drawing.Point(65, 112);
-            this.txtEigenAlpha2.Name = "txtEigenAlpha2";
-            this.txtEigenAlpha2.Size = new System.Drawing.Size(60, 22);
-            this.txtEigenAlpha2.TabIndex = 7;
-            this.txtEigenAlpha2.Text = "0";
-            // 
-            // labelEigenBeta2
-            // 
-            this.labelEigenBeta2.AutoSize = true;
-            this.labelEigenBeta2.Location = new System.Drawing.Point(150, 115);
-            this.labelEigenBeta2.Name = "labelEigenBeta2";
-            this.labelEigenBeta2.Size = new System.Drawing.Size(21, 16);
-            this.labelEigenBeta2.TabIndex = 8;
-            this.labelEigenBeta2.Text = "β₂:";
-            // 
-            // txtEigenBeta2
-            // 
-            this.txtEigenBeta2.Location = new System.Drawing.Point(185, 112);
-            this.txtEigenBeta2.Name = "txtEigenBeta2";
-            this.txtEigenBeta2.Size = new System.Drawing.Size(60, 22);
-            this.txtEigenBeta2.TabIndex = 9;
-            this.txtEigenBeta2.Text = "1";
-            // 
             // grpEigenGrid
             // 
             this.grpEigenGrid.Controls.Add(this.labelEigenA);
             this.grpEigenGrid.Controls.Add(this.txtEigenA);
             this.grpEigenGrid.Controls.Add(this.labelEigenB);
             this.grpEigenGrid.Controls.Add(this.txtEigenB);
-            this.grpEigenGrid.Controls.Add(this.labelEigenH);
-            this.grpEigenGrid.Controls.Add(this.txtEigenH);
             this.grpEigenGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpEigenGrid.Location = new System.Drawing.Point(0, 160);
             this.grpEigenGrid.Name = "grpEigenGrid";
@@ -747,24 +632,7 @@
             this.txtEigenB.Name = "txtEigenB";
             this.txtEigenB.Size = new System.Drawing.Size(80, 22);
             this.txtEigenB.TabIndex = 3;
-            this.txtEigenB.Text = "1";
-            // 
-            // labelEigenH
-            // 
-            this.labelEigenH.AutoSize = true;
-            this.labelEigenH.Location = new System.Drawing.Point(15, 55);
-            this.labelEigenH.Name = "labelEigenH";
-            this.labelEigenH.Size = new System.Drawing.Size(51, 16);
-            this.labelEigenH.TabIndex = 4;
-            this.labelEigenH.Text = "Bước h:";
-            // 
-            // txtEigenH
-            // 
-            this.txtEigenH.Location = new System.Drawing.Point(80, 52);
-            this.txtEigenH.Name = "txtEigenH";
-            this.txtEigenH.Size = new System.Drawing.Size(80, 22);
-            this.txtEigenH.TabIndex = 5;
-            this.txtEigenH.Text = "0.1";
+            this.txtEigenB.Text = "3";
             // 
             // grpEigenFunctions
             // 
@@ -797,7 +665,7 @@
             this.txtEigenP.Name = "txtEigenP";
             this.txtEigenP.Size = new System.Drawing.Size(280, 22);
             this.txtEigenP.TabIndex = 1;
-            this.txtEigenP.Text = "1";
+            this.txtEigenP.Text = "1x^2 + 1";
             // 
             // labelEigenQ
             // 
@@ -814,7 +682,7 @@
             this.txtEigenQ.Name = "txtEigenQ";
             this.txtEigenQ.Size = new System.Drawing.Size(280, 22);
             this.txtEigenQ.TabIndex = 3;
-            this.txtEigenQ.Text = "0";
+            this.txtEigenQ.Text = "4*x^4 - 4*x^2 + 5";
             // 
             // labelEigenR
             // 
@@ -831,12 +699,30 @@
             this.txtEigenR.Name = "txtEigenR";
             this.txtEigenR.Size = new System.Drawing.Size(280, 22);
             this.txtEigenR.TabIndex = 5;
-            this.txtEigenR.Text = "1";
+            this.txtEigenR.Text = "x^2 + x + 1";
+            // 
+            // txtEigenH
+            // 
+            this.txtEigenH.Location = new System.Drawing.Point(80, 246);
+            this.txtEigenH.Name = "txtEigenH";
+            this.txtEigenH.Size = new System.Drawing.Size(80, 22);
+            this.txtEigenH.TabIndex = 5;
+            this.txtEigenH.Text = "0.1";
+            // 
+            // labelEigenH
+            // 
+            this.labelEigenH.AutoSize = true;
+            this.labelEigenH.Location = new System.Drawing.Point(15, 249);
+            this.labelEigenH.Name = "labelEigenH";
+            this.labelEigenH.Size = new System.Drawing.Size(51, 16);
+            this.labelEigenH.TabIndex = 4;
+            this.labelEigenH.Text = "Bước h:";
             // 
             // tabControlEigenOutput
             // 
             this.tabControlEigenOutput.Controls.Add(this.tabEigenTable);
             this.tabControlEigenOutput.Controls.Add(this.tabEigenLog);
+            this.tabControlEigenOutput.Controls.Add(this.tabPage1);
             this.tabControlEigenOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlEigenOutput.Location = new System.Drawing.Point(0, 0);
             this.tabControlEigenOutput.Name = "tabControlEigenOutput";
@@ -891,14 +777,34 @@
             this.rtbEigenLog.TabIndex = 0;
             this.rtbEigenLog.Text = "";
             // 
-            // tabHeat
+            // tabPage1
             // 
-            this.tabHeat.Location = new System.Drawing.Point(4, 25);
-            this.tabHeat.Name = "tabHeat";
-            this.tabHeat.Size = new System.Drawing.Size(1174, 724);
-            this.tabHeat.TabIndex = 2;
-            this.tabHeat.Text = "Phương trình truyền nhiệt";
-            this.tabHeat.UseVisualStyleBackColor = true;
+            this.tabPage1.Controls.Add(this.chartEigen);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(762, 695);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Đồ thị";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chartEigen
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chartEigen.ChartAreas.Add(chartArea2);
+            this.chartEigen.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend2.Name = "Legend1";
+            this.chartEigen.Legends.Add(legend2);
+            this.chartEigen.Location = new System.Drawing.Point(3, 3);
+            this.chartEigen.Name = "chartEigen";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "u(x)";
+            this.chartEigen.Series.Add(series2);
+            this.chartEigen.Size = new System.Drawing.Size(756, 689);
+            this.chartEigen.TabIndex = 1;
+            this.chartEigen.Text = "chart1";
             // 
             // BoundaryValueProblem
             // 
@@ -932,11 +838,10 @@
             this.tabLog.ResumeLayout(false);
             this.tabEigen.ResumeLayout(false);
             this.splitContainerEigen.Panel1.ResumeLayout(false);
+            this.splitContainerEigen.Panel1.PerformLayout();
             this.splitContainerEigen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEigen)).EndInit();
             this.splitContainerEigen.ResumeLayout(false);
-            this.grpEigenBC.ResumeLayout(false);
-            this.grpEigenBC.PerformLayout();
             this.grpEigenGrid.ResumeLayout(false);
             this.grpEigenGrid.PerformLayout();
             this.grpEigenFunctions.ResumeLayout(false);
@@ -945,6 +850,8 @@
             this.tabEigenTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEigen)).EndInit();
             this.tabEigenLog.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartEigen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -954,7 +861,6 @@
         private System.Windows.Forms.TabControl tabControlBVP;
         private System.Windows.Forms.TabPage tabBVP_Standard;
         private System.Windows.Forms.TabPage tabEigen;
-        private System.Windows.Forms.TabPage tabHeat;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox grpFunctions;
         private System.Windows.Forms.TextBox txtF;
@@ -998,7 +904,6 @@
         private System.Windows.Forms.SplitContainer splitContainerEigen;
         private System.Windows.Forms.GroupBox grpEigenFunctions;
         private System.Windows.Forms.GroupBox grpEigenGrid;
-        private System.Windows.Forms.GroupBox grpEigenBC;
         private System.Windows.Forms.TabControl tabControlEigenOutput;
         private System.Windows.Forms.TabPage tabEigenTable;
         private System.Windows.Forms.DataGridView dgvEigen;
@@ -1019,17 +924,8 @@
         private System.Windows.Forms.Label labelEigenH;
         private System.Windows.Forms.TextBox txtEigenH;
 
-        private System.Windows.Forms.Label labelEigenBCLeft;
-        private System.Windows.Forms.Label labelEigenAlpha1;
-        private System.Windows.Forms.TextBox txtEigenAlpha1;
-        private System.Windows.Forms.Label labelEigenBeta1;
-        private System.Windows.Forms.TextBox txtEigenBeta1;
-        private System.Windows.Forms.Label labelEigenBCRight;
-        private System.Windows.Forms.Label labelEigenAlpha2;
-        private System.Windows.Forms.TextBox txtEigenAlpha2;
-        private System.Windows.Forms.Label labelEigenBeta2;
-        private System.Windows.Forms.TextBox txtEigenBeta2;
-
         private System.Windows.Forms.Button btnSolveEigen;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartEigen;
     }
 }
