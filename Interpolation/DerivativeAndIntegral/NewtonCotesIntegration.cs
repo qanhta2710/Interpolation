@@ -28,13 +28,12 @@ namespace Interpolation.Methods
         private StringBuilder calculationSteps;
 
         // --- CONSTRUCTOR 1: Dữ liệu rời rạc ---
-        public NewtonCotesIntegration(double[] x, double[] y, double a, double b, double epsilon, int order)
+        public NewtonCotesIntegration(double[] x, double[] y, double a, double b, int order)
         {
             XData = x;
             YData = y;
             A = a;
             B = b;
-            Epsilon = epsilon;
             Order = order;
             IsFromData = true;
 

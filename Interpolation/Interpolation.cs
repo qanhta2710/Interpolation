@@ -17,6 +17,7 @@ namespace Interpolation
         private double lastH; // Khoảng cách
         private bool isLastMethodTransformed; // Đổi biến không?
         private string lastTransformationType; // Loại nội suy đổi biến
+
         public Interpolation()
         {
             InitializeComponent();
@@ -30,6 +31,20 @@ namespace Interpolation
             SetupDataGridViewColumnTypes();
         }
         #region Event Handlers
+        private void dataGridViewCoeffsP_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewCoeffsP_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewCoeffsP_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+
+        }
         // Tìm mốc nội suy Chebyshev
         private void btnSolveChebyshev_Click(object sender, EventArgs e)
         {
@@ -720,12 +735,16 @@ namespace Interpolation
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
             isLastMethodTransformed = false;
+            lblMethod.Visible = true;
+            lblMethod.Text = "Phương pháp đổi biến: Mặc định (Không đổi biến)";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnNewtonToEval_Click(object sender, EventArgs e)
         {
             TransferCoeffsToEval(dataGridViewCoeffsP, lastPolynomialCoeffs);
             isLastMethodTransformed = false;
+            lblMethod.Visible = true;
+            lblMethod.Text = "Phương pháp đổi biến: Mặc định (Không đổi biến)";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnNewtonFiniteToEval_Click(object sender, EventArgs e)
@@ -743,6 +762,9 @@ namespace Interpolation
             lastH = Math.Round(x[1] - x[0], 6);
             isLastMethodTransformed = true;
             lastTransformationType = "Newton Mốc cách đều";
+            lblMethod.Visible = true;
+            lblMethod.Text = $"Phương pháp đổi biến: {lastTransformationType}\n" +
+                             $"x₀ = {lastX0}, h = {lastH}";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnStirlingToEval_Click(object sender, EventArgs e)
@@ -754,6 +776,9 @@ namespace Interpolation
             lastH = Math.Round(x[1] - x[0], 6);
             isLastMethodTransformed = true;
             lastTransformationType = "Stirling";
+            lblMethod.Visible = true;
+            lblMethod.Text = $"Phương pháp đổi biến: {lastTransformationType}\n" +
+                             $"x₀ = {lastX0}, h = {lastH}";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnBesselToEval_Click(object sender, EventArgs e)
@@ -765,6 +790,9 @@ namespace Interpolation
             lastH = Math.Round(x[1] - x[0], 6);
             isLastMethodTransformed = true;
             lastTransformationType = "Bessel";
+            lblMethod.Visible = true;
+            lblMethod.Text = $"Phương pháp đổi biến: {lastTransformationType}\n" +
+                             $"x₀ = {lastX0}, h = {lastH}";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnGaussIToEval_Click(object sender, EventArgs e)
@@ -776,6 +804,9 @@ namespace Interpolation
             lastH = Math.Round(x[1] - x[0], 6);
             isLastMethodTransformed = true;
             lastTransformationType = "GaussI";
+            lblMethod.Visible = true;
+            lblMethod.Text = $"Phương pháp đổi biến: {lastTransformationType}\n" +
+                             $"x₀ = {lastX0}, h = {lastH}";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
         }
         private void btnGaussIIToEval_Click(object sender, EventArgs e)
@@ -787,7 +818,37 @@ namespace Interpolation
             lastH = Math.Round(x[1] - x[0], 6);
             isLastMethodTransformed = true;
             lastTransformationType = "GaussII";
+            lblMethod.Visible = true;
+            lblMethod.Text = $"Phương pháp đổi biến: {lastTransformationType}\n" +
+                             $"x₀ = {lastX0}, h = {lastH}";
             MessageBox.Show("Đã chuyển hệ số qua tính giá trị");
+        }
+        private void btnResetDefault_Click(object sender, EventArgs e)
+        {
+            if (!isLastMethodTransformed)
+            {
+                MessageBox.Show("Hiện tại không có thông tin đổi biến để reset.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            var result = MessageBox.Show(
+                $"Bạn có chắc muốn reset thông tin đổi biến?\n\n" +
+                $"Thông tin hiện tại:\n" +
+                $"- Phương pháp: {lastTransformationType}\n" +
+                $"- x₀ = {lastX0}\n" +
+                $"- h = {lastH}",
+                "Xác nhận reset",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                isLastMethodTransformed = false;
+                lastTransformationType = null;
+                lastX0 = 0;
+                lastH = 0;
+                lblMethod.Text = "Phương pháp đổi biến: Mặc định (Không đổi biến)";
+                MessageBox.Show("Reset về mặc định thành công");
+            }
         }
         #endregion
 
@@ -848,5 +909,18 @@ namespace Interpolation
             }
         }
         #endregion
+
+        private void comboBoxLeastSquares_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxLeastSquares.Text.Contains("ax^b"))
+            {
+                txtBoxLeastSquares.Enabled = false;
+                txtBoxLeastSquares.Clear();
+            }
+            else
+            {
+                txtBoxLeastSquares.Enabled = true;
+            }
+        }
     }
 }

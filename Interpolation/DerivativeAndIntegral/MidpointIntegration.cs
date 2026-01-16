@@ -26,14 +26,12 @@ namespace Interpolation.Methods
         private StringBuilder calculationSteps;
 
         // Constructor 1: Dữ liệu rời rạc
-        // Lưu ý: Với điểm giữa từ dữ liệu, ta coi các điểm y là giá trị tại trung điểm các khoảng
-        public MidpointIntegration(double[] x, double[] y, double a, double b, double epsilon)
+        public MidpointIntegration(double[] x, double[] y, double a, double b)
         {
             XData = x;
             YData = y;
             A = a;
             B = b;
-            Epsilon = epsilon;
             IsFromData = true;
             Solve();
             EstimateErrorRunge();

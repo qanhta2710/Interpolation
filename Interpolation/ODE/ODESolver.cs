@@ -1,4 +1,5 @@
 ﻿using AngouriMath;
+using OfficeOpenXml.ConditionalFormatting.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ namespace Interpolation
 {
     public class ODESolver
     {
+        public enum RK2ParamType { Alpha2, R1, R2, Beta11 }
         public delegate double[] DerivativeFunc(double t, double[] y);
 
         public static DerivativeFunc CompileSystem(string[] strFuncs)
@@ -380,6 +382,142 @@ namespace Interpolation
                 if (f_history.Count > s + 2) f_history.RemoveAt(0);
 
                 t = t_next;
+            }
+            return result;
+        }
+
+        // RK2 Custom
+        public static List<double[]> SolveCustomRK2(DerivativeFunc f, double[] y0, double t0, double tend, double h,
+                                                    RK2ParamType paramType, double paramValue)
+        {
+            double r1 = 0, r2 = 0, alpha2 = 0, beta11 = 0;
+
+            switch (paramType)
+            {
+                case RK2ParamType.Alpha2:
+                    if (paramValue == 0) throw new ArgumentException("Alpha2 phải khác 0");
+                    alpha2 = paramValue;
+                    r2 = 1.0 / (2.0 * alpha2);
+                    r1 = 1.0 - r2;
+                    beta11 = alpha2;
+                    break;
+
+                case RK2ParamType.R2: 
+                    if (paramValue == 0) throw new ArgumentException("r2 phải khác 0");
+                    r2 = paramValue;
+                    r1 = 1.0 - r2;
+                    alpha2 = 1.0 / (2.0 * r2);
+                    beta11 = alpha2;
+                    break;
+
+                case RK2ParamType.R1: 
+                    r1 = paramValue;
+                    r2 = 1.0 - r1;
+                    if (r2 == 0) throw new ArgumentException("r1=1 dẫn đến r2=0, không tính được Alpha.");
+                    alpha2 = 1.0 / (2.0 * r2);
+                    beta11 = alpha2;
+                    break;
+                case RK2ParamType.Beta11:
+                    if (paramValue == 0) throw new ArgumentException("Beta11 phải khác 0");
+                    beta11 = paramValue;
+                    alpha2 = beta11;
+                    r2 = 1.0 / (2.0 * alpha2);
+                    r1 = 1.0 - r2;
+                    break;
+            }
+
+            // --- Thực hiện giải ---
+            var result = new List<double[]>();
+            SaveState(result, t0, y0);
+
+            double t = t0;
+            double[] y = (double[])y0.Clone();
+            int n = y.Length;
+
+            while (t < tend - 1e-9)
+            {
+                // k1 = h * f(t, y)
+                double[] f1 = f(t, y);
+                double[] k1 = new double[n];
+                for (int i = 0; i < n; i++) k1[i] = h * f1[i];
+
+                // k2 = h * f(t + alpha2*h, y + beta11*k1)
+                double[] y_temp = new double[n];
+                for (int i = 0; i < n; i++) y_temp[i] = y[i] + beta11 * k1[i];
+
+                double[] f2 = f(t + alpha2 * h, y_temp);
+                double[] k2 = new double[n];
+                for (int i = 0; i < n; i++) k2[i] = h * f2[i];
+
+                // y_new = y + r1*k1 + r2*k2
+                for (int i = 0; i < n; i++)
+                {
+                    y[i] = y[i] + (r1 * k1[i] + r2 * k2[i]);
+                }
+
+                t += h;
+                SaveState(result, t, y);
+            }
+
+            return result;
+        }
+        // RK3 Custom
+        public static List<double[]> SolveCustomRK3(DerivativeFunc f, double[] y0, double t0, double tend, double h,
+                                            double alpha2, double alpha3)
+        {
+            if (Math.Abs(alpha2 - alpha3) < 1e-9) throw new ArgumentException("Alpha2 và Alpha3 phải khác nhau.");
+            if (alpha2 == 0 || alpha3 == 0) throw new ArgumentException("Alpha phải khác 0.");
+
+            double r2 = (3 * alpha3 - 2) / (6 * alpha2 * (alpha3 - alpha2));
+
+            double r3 = (2 - 3 * alpha2) / (6 * alpha3 * (alpha3 - alpha2));
+
+            double r1 = 1 - r2 - r3;
+
+            double beta11 = alpha2; 
+
+            if (r3 == 0) throw new ArgumentException("Bộ tham số này khiến r3=0, không tính được beta22.");
+            double beta22 = 1.0 / (6 * r3 * alpha2);
+
+            double beta21 = alpha3 - beta22;
+
+            var result = new List<double[]>();
+            SaveState(result, t0, y0);
+            double t = t0;
+            double[] y = (double[])y0.Clone();
+            int n = y.Length;
+
+            while (t < tend - 1e-9)
+            {
+                // k1 = h * f(t, y)
+                double[] f1 = f(t, y);
+                double[] k1 = new double[n];
+                for (int i = 0; i < n; i++) k1[i] = h * f1[i];
+
+                // k2 = h * f(t + alpha2*h, y + beta11*k1)
+                double[] y_k2 = new double[n];
+                for (int i = 0; i < n; i++) y_k2[i] = y[i] + beta11 * k1[i];
+
+                double[] f2 = f(t + alpha2 * h, y_k2);
+                double[] k2 = new double[n];
+                for (int i = 0; i < n; i++) k2[i] = h * f2[i];
+
+                // k3 = h * f(t + alpha3*h, y + beta21*k1 + beta22*k2)
+                double[] y_k3 = new double[n];
+                for (int i = 0; i < n; i++) y_k3[i] = y[i] + beta21 * k1[i] + beta22 * k2[i];
+
+                double[] f3 = f(t + alpha3 * h, y_k3);
+                double[] k3 = new double[n];
+                for (int i = 0; i < n; i++) k3[i] = h * f3[i];
+
+                // Update y
+                for (int i = 0; i < n; i++)
+                {
+                    y[i] = y[i] + (r1 * k1[i] + r2 * k2[i] + r3 * k3[i]);
+                }
+
+                t += h;
+                SaveState(result, t, y);
             }
             return result;
         }

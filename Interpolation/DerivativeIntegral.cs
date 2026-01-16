@@ -276,7 +276,6 @@ namespace Interpolation
 
                     double[] x = InputHelper.GetXValues(dgvIntegralData);
                     double[] y = InputHelper.GetYValues(dgvIntegralData);
-                    double epsilon = Convert.ToDouble(txtDataEpsilon.Text);
 
                     // Xử lý Newton-Cotes cho dữ liệu rời rạc
                     if (cmbMethod.SelectedItem != null && cmbMethod.SelectedItem.ToString() == "Newton-Cotes")
@@ -295,7 +294,7 @@ namespace Interpolation
                             return;
                         }
 
-                        var nc = new NewtonCotesIntegration(x, y, a, b, epsilon, order);
+                        var nc = new NewtonCotesIntegration(x, y, a, b, order);
                         nc.DisplayResults(rtbIntegralResult);
                         return;
                     }
@@ -304,17 +303,17 @@ namespace Interpolation
 
                     if (methodIndex == 1) // Simpson
                     {
-                        var simpson = new SimpsonIntegration(x, y, a, b, epsilon);
+                        var simpson = new SimpsonIntegration(x, y, a, b);
                         simpson.DisplayResults(rtbIntegralResult);
                     }
                     else if (methodIndex == 2) // Điểm giữa
                     {
-                        var midpoint = new MidpointIntegration(x, y, a, b, epsilon);
+                        var midpoint = new MidpointIntegration(x, y, a, b);
                         midpoint.DisplayResults(rtbIntegralResult);
                     }
                     else // Hình thang (mặc định hoặc index 0)
                     {
-                        var trapezoidal = new TrapezoidalIntegration(x, y, a, b, epsilon);
+                        var trapezoidal = new TrapezoidalIntegration(x, y, a, b);
                         trapezoidal.DisplayResults(rtbIntegralResult);
                     }
                 }
@@ -468,8 +467,27 @@ namespace Interpolation
         }
         private void rdoFunction_CheckedChanged(object sender, EventArgs e)
         {
+            bool isFunctionMode = rdoFunction.Checked;
+
             panelFunction.Visible = rdoFunction.Checked;
             panelData.Visible = !rdoFunction.Checked;
+            if (isFunctionMode)
+            {
+                rdoFixedN.Enabled = true;
+                rdoCalculateN.Enabled = true;
+                txtN.Enabled = rdoFixedN.Checked;
+                txtEpsilon.Enabled = rdoCalculateN.Checked;
+            }
+            else
+            {
+                rdoFixedN.Enabled = false;
+                rdoCalculateN.Enabled = false;
+                txtN.Enabled = false;
+                txtEpsilon.Enabled = false;
+
+                txtN.BackColor = System.Drawing.SystemColors.Control;
+                txtEpsilon.BackColor = System.Drawing.SystemColors.Control;
+            }
         }
 
         private void rdoFixedN_CheckedChanged(object sender, EventArgs e)

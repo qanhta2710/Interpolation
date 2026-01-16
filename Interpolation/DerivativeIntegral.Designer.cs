@@ -65,8 +65,6 @@
             this.lblNewtonOrder = new System.Windows.Forms.Label();
             this.txtNewtonOrder = new System.Windows.Forms.TextBox();
             this.panelData = new System.Windows.Forms.Panel();
-            this.txtDataEpsilon = new System.Windows.Forms.TextBox();
-            this.lblDataEpsilon = new System.Windows.Forms.Label();
             this.txtDataUpperBound = new System.Windows.Forms.TextBox();
             this.lblDataUpperBound = new System.Windows.Forms.Label();
             this.txtDataLowerBound = new System.Windows.Forms.TextBox();
@@ -90,6 +88,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.rtbResult2D = new System.Windows.Forms.RichTextBox();
             this.panelDoubleInput = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBoxErrorGeneral = new System.Windows.Forms.TextBox();
             this.btnCalcDouble = new System.Windows.Forms.Button();
             this.lblMethod2D = new System.Windows.Forms.Label();
             this.cmbMethod2D = new System.Windows.Forms.ComboBox();
@@ -106,8 +106,6 @@
             this.txtFunction2D = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtBoxErrorGeneral = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataXYDerivative)).BeginInit();
@@ -528,8 +526,6 @@
             // panelData
             // 
             this.panelData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelData.Controls.Add(this.txtDataEpsilon);
-            this.panelData.Controls.Add(this.lblDataEpsilon);
             this.panelData.Controls.Add(this.txtDataUpperBound);
             this.panelData.Controls.Add(this.lblDataUpperBound);
             this.panelData.Controls.Add(this.txtDataLowerBound);
@@ -542,23 +538,6 @@
             this.panelData.Size = new System.Drawing.Size(1150, 280);
             this.panelData.TabIndex = 2;
             this.panelData.Visible = false;
-            // 
-            // txtDataEpsilon
-            // 
-            this.txtDataEpsilon.Location = new System.Drawing.Point(480, 237);
-            this.txtDataEpsilon.Name = "txtDataEpsilon";
-            this.txtDataEpsilon.Size = new System.Drawing.Size(100, 22);
-            this.txtDataEpsilon.TabIndex = 8;
-            this.txtDataEpsilon.Text = "0.001";
-            // 
-            // lblDataEpsilon
-            // 
-            this.lblDataEpsilon.AutoSize = true;
-            this.lblDataEpsilon.Location = new System.Drawing.Point(420, 240);
-            this.lblDataEpsilon.Name = "lblDataEpsilon";
-            this.lblDataEpsilon.Size = new System.Drawing.Size(58, 16);
-            this.lblDataEpsilon.TabIndex = 7;
-            this.lblDataEpsilon.Text = "Sai số ε:";
             // 
             // txtDataUpperBound
             // 
@@ -786,6 +765,23 @@
             this.panelDoubleInput.Size = new System.Drawing.Size(1210, 220);
             this.panelDoubleInput.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(403, 172);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 16);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Sai số cho phép";
+            // 
+            // txtBoxErrorGeneral
+            // 
+            this.txtBoxErrorGeneral.Location = new System.Drawing.Point(523, 169);
+            this.txtBoxErrorGeneral.Name = "txtBoxErrorGeneral";
+            this.txtBoxErrorGeneral.Size = new System.Drawing.Size(100, 22);
+            this.txtBoxErrorGeneral.TabIndex = 8;
+            this.txtBoxErrorGeneral.Text = "0.00001";
+            // 
             // btnCalcDouble
             // 
             this.btnCalcDouble.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -934,23 +930,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Hàm f(x, y):";
             // 
-            // txtBoxErrorGeneral
-            // 
-            this.txtBoxErrorGeneral.Location = new System.Drawing.Point(523, 169);
-            this.txtBoxErrorGeneral.Name = "txtBoxErrorGeneral";
-            this.txtBoxErrorGeneral.Size = new System.Drawing.Size(100, 22);
-            this.txtBoxErrorGeneral.TabIndex = 8;
-            this.txtBoxErrorGeneral.Text = "0.00001";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(403, 172);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 16);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Sai số cho phép";
-            // 
             // DerivativeIntegral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1030,8 +1009,6 @@
         private System.Windows.Forms.TextBox txtFunction;
         private System.Windows.Forms.Label lblFunction;
         private System.Windows.Forms.Panel panelData;
-        private System.Windows.Forms.TextBox txtDataEpsilon;
-        private System.Windows.Forms.Label lblDataEpsilon;
         private System.Windows.Forms.TextBox txtDataUpperBound;
         private System.Windows.Forms.Label lblDataUpperBound;
         private System.Windows.Forms.TextBox txtDataLowerBound;

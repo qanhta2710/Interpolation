@@ -15,6 +15,10 @@ namespace Interpolation.Methods
         public double MSE { get; protected set; }
         public double[,] ThetaMatrix { get; protected set; }
         public double[,] MMatrix { get; protected set; }
+        public double YShift { get; protected set; } = 0;
+        public bool IsShiftedDataNegative { get; protected set; } = false;
+        public double XShift { get; protected set; } = 0;
+        public bool IsXShifted { get; protected set; } = false;
 
         protected LeastSquaresBase(double[] x, double[] y)
         {
@@ -24,18 +28,53 @@ namespace Interpolation.Methods
             XData = x;
             YData = y;
         }
+        protected void CalculateYShift()
+        {
+            double minY = YData.Min();
+            double maxY = YData.Max();
 
+            bool hasPositive = YData.Any(y => y > 0);
+            bool hasNegative = YData.Any(y => y < 0);
+
+            bool needsShift = (hasPositive && hasNegative) || YData.Any(y => y == 0);
+
+            if (!needsShift)
+            {
+                YShift = 0;
+                IsShiftedDataNegative = (maxY < 0);
+                return;
+            }
+
+            double shiftUpAmount = Math.Abs(minY) + 1.0;
+            double shiftDownAmount = -(Math.Abs(maxY) + 1.0);
+
+            if (Math.Abs(shiftDownAmount) < Math.Abs(shiftUpAmount))
+            {
+                YShift = shiftDownAmount;
+                IsShiftedDataNegative = true;
+            }
+            else
+            {
+                YShift = shiftUpAmount;
+                IsShiftedDataNegative = false;
+            }
+        }
+        protected void CalculateXShift()
+        {
+            double minX = XData.Min();
+            if (minX <= 0)
+            {
+                XShift = Math.Abs(minX) + 1.0;
+                IsXShifted = true;
+            }
+            else
+            {
+                XShift = 0;
+                IsXShifted = false;
+            }
+        }
         public abstract void Solve();
         public abstract void DisplayResults(RichTextBox rtb);
-
-        protected void ValidateDataSigns()
-        {
-            bool allPositive = Array.TrueForAll(YData, v => v > 0);
-            bool allNegative = Array.TrueForAll(YData, v => v < 0);
-
-            if (!allPositive && !allNegative)
-                throw new ArgumentException("Dữ liệu y chứa cả giá trị dương và âm, người dùng cần tự xử lý dữ liệu để chỉ chứa giá trị dương hoặc âm");
-        }
 
         protected double EvaluatePhi(string phiExpression, double xValue)
         {
@@ -190,7 +229,7 @@ namespace Interpolation.Methods
 
             sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  MSE = {MSE:F8}");
+            sb.AppendLine($"  MSE = sqrt( Σ( ln|y| - ln|y_pred| )² = {MSE:F8}");
             sb.AppendLine();
 
             rtb.AppendText(sb.ToString());
@@ -204,30 +243,34 @@ namespace Interpolation.Methods
         public double[] RVector { get; private set; }
 
         public PowerLawLeastSquares(double[] x, double[] y)
-            : base(x, y)
-        {
-            ValidateDataSigns();
-        }
+            : base(x, y) { }
 
         public override void Solve()
         {
+            CalculateYShift();
+            CalculateXShift();
+
             int n = XData.Length;
 
-            bool allNegative = Array.TrueForAll(YData, v => v < 0);
+            double[] X_Log = new double[n];
+            double[] Y_Log = new double[n];
 
-            double[] X = XData.Select(xi => Math.Log(xi)).ToArray();
-            double[] Y = YData.Select(yi => Math.Log(Math.Abs(yi))).ToArray();
+            for (int i = 0; i < n; i++)
+            {
+                X_Log[i] = Math.Log(XData[i] + XShift);
+
+                Y_Log[i] = Math.Log(Math.Abs(YData[i] + YShift));
+            }
 
             ThetaMatrix = new double[n, 2];
             for (int i = 0; i < n; i++)
             {
                 ThetaMatrix[i, 0] = 1.0;
-                ThetaMatrix[i, 1] = X[i];
+                ThetaMatrix[i, 1] = X_Log[i];
             }
 
             var Theta = Matrix<double>.Build.DenseOfArray(ThetaMatrix);
-            var Yvec = Vector<double>.Build.Dense(Y);
-
+            var Yvec = Vector<double>.Build.Dense(Y_Log);
             var M = Theta.TransposeThisAndMultiply(Theta);
             var r = Theta.TransposeThisAndMultiply(Yvec);
 
@@ -236,14 +279,13 @@ namespace Interpolation.Methods
 
             var coeffs = M.Solve(r);
 
-            A = Math.Exp(coeffs[0]);
+            double rawA = Math.Exp(coeffs[0]);
+            A = IsShiftedDataNegative ? -rawA : rawA;
             P = coeffs[1];
 
-            if (allNegative)
-                A = -A;
+            var yPredLog = Theta * coeffs;
 
-            var yPred = Theta * coeffs;
-            MSE = Math.Sqrt((Yvec - yPred).PointwisePower(2).Sum() / n);
+            MSE = Math.Sqrt((Yvec - yPredLog).PointwisePower(2).Sum() / n);
         }
 
         public override void DisplayResults(RichTextBox rtb)
@@ -252,19 +294,40 @@ namespace Interpolation.Methods
             var sb = new StringBuilder();
 
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
-            sb.AppendLine("KẾT QUẢ PHƯƠNG PHÁP BÌNH PHƯƠNG TỐI THIỂU - DẠNG LUỸ THỪA");
+            sb.AppendLine("KẾT QUẢ BÌNH PHƯƠNG TỐI THIỂU - DẠNG LUỸ THỪA");
             sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
 
-            sb.AppendLine("MÔ HÌNH:");
-            sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine("  y = a × x^p");
-            sb.AppendLine("  Biến đổi logarit: ln(y) = ln(a) + p × ln(x)");
-            sb.AppendLine("  Đặt: Y = ln(y), X = ln(x), A₀ = ln(a), A₁ = p");
-            sb.AppendLine("  => Y = A₀ + A₁ × X\n");
+            if (YShift != 0 || XShift != 0)
+            {
+                sb.AppendLine("⚠️ XỬ LÝ DỮ LIỆU:");
+                if (XShift != 0)
+                    sb.AppendLine($"   [Trục X] Dữ liệu chứa giá trị <= 0. Tịnh tiến trục hoành: Sx = {XShift:F6}");
 
-            sb.AppendLine("MA TRẬN Θ SAU KHI BIẾN ĐỔI:");
+                if (YShift != 0)
+                {
+                    sb.Append($"   [Trục Y] Tịnh tiến trục tung: Sy = {YShift:F6} ");
+                    sb.AppendLine(IsShiftedDataNegative ? "(Dịch về ÂM)" : "(Dịch về DƯƠNG)");
+                }
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("MÔ HÌNH TOÁN HỌC:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine("   i |      1       |    ln(xi)    |");
+
+            string xTerm = XShift != 0 ? $"(x + {XShift:F4})" : "x";
+            string yTerm = YShift != 0 ? $"(y + {YShift:F4})" : "y";
+
+            sb.AppendLine($"  Dạng gốc: {yTerm} = a × {xTerm}^p");
+            sb.AppendLine($"  Tuyến tính hóa: ln|{yTerm}| = ln|a| + p × ln({xTerm})");
+            sb.AppendLine($"  Đặt: Y = ln|{yTerm}|, X = ln({xTerm})");
+            sb.AppendLine($"  => Y = A₀ + A₁ × X");
+            sb.AppendLine();
+
+            sb.AppendLine("MA TRẬN Θ (THETA):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            // Header động
+            string lnXHeader = XShift != 0 ? $"ln(xi + {XShift:F2})" : "ln(xi)";
+            sb.AppendLine($"   i |      1       | {lnXHeader,-12} |");
             sb.AppendLine(new string('─', 40));
 
             for (int i = 0; i < ThetaMatrix.GetLength(0); i++)
@@ -278,32 +341,35 @@ namespace Interpolation.Methods
             }
             sb.AppendLine();
 
-            sb.AppendLine("DỮ LIỆU GỐC VÀ SAU BIẾN ĐỔI:");
+            sb.AppendLine("DỮ LIỆU CHUYỂN ĐỔI:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine("   i |      x       |      y       |    ln(x)     |    ln(|y|)   |");
-            sb.AppendLine(new string('─', 70));
+            string hX = XShift != 0 ? "x+Sx" : "x";
+            string hY = YShift != 0 ? "y+Sy" : "y";
+            sb.AppendLine($"   i |      x       |      y       |   {hX,-10} |   {hY,-10} |  ln({hX})   |  ln|{hY}|  |");
+            sb.AppendLine(new string('─', 95));
 
             for (int i = 0; i < XData.Length; i++)
             {
-                sb.AppendLine($"  {i + 1,2} | {XData[i],12:F6} | {YData[i],12:F6} | {Math.Log(XData[i]),12:F6} | {Math.Log(Math.Abs(YData[i])),12:F6} |");
+                double valX = XData[i] + XShift;
+                double valY = YData[i] + YShift;
+                double lnX = Math.Log(valX);
+                double lnY = Math.Log(Math.Abs(valY));
+
+                sb.Append($"  {i + 1,2} | {XData[i],12:F6} | {YData[i],12:F6} |");
+                sb.Append($" {valX,12:F6} | {valY,12:F6} |");
+                sb.AppendLine($" {lnX,10:F6} | {lnY,10:F6} |");
             }
             sb.AppendLine();
 
-            sb.AppendLine("MA TRẬN M = Θ^T × Θ:");
-            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("HỆ PHƯƠNG TRÌNH (M × A = r):");
+            sb.AppendLine("Ma trận M = Θ^T × Θ:");
             for (int i = 0; i < MMatrix.GetLength(0); i++)
             {
                 sb.Append("  [");
-                for (int j = 0; j < MMatrix.GetLength(1); j++)
-                {
-                    sb.Append($" {MMatrix[i, j],12:F6}");
-                }
+                for (int j = 0; j < MMatrix.GetLength(1); j++) sb.Append($" {MMatrix[i, j],12:F6}");
                 sb.AppendLine(" ]");
             }
-            sb.AppendLine();
-
-            sb.AppendLine("VECTOR r = Θ^T × Y:");
-            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("Vector r = Θ^T × Y:");
             sb.Append("  r = [");
             for (int i = 0; i < RVector.Length; i++)
             {
@@ -312,28 +378,48 @@ namespace Interpolation.Methods
             }
             sb.AppendLine(" ]^T\n");
 
-            sb.AppendLine("HỆ SỐ TÌM ĐƯỢC:");
+            sb.AppendLine("KẾT QUẢ HỆ SỐ:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  A₀ = ln(|a|) = {Math.Log(Math.Abs(A)):F8}");
+            sb.AppendLine($"  A₀ = ln(|a|) = {Math.Log(Math.Abs(A)):F8} => |a| = {Math.Abs(A):F8}");
             sb.AppendLine($"  A₁ = p       = {P:F8}");
             sb.AppendLine();
-
-            sb.AppendLine("THAM SỐ CUỐI CÙNG:");
-            sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  a = {A:F8}");
-            sb.AppendLine($"  p = {P:F8}");
+            sb.AppendLine($"  => Hệ số a = {A:F8}");
+            if (IsShiftedDataNegative) sb.AppendLine("  (Dấu âm do y được dịch về phía âm)");
             sb.AppendLine();
 
-            sb.AppendLine("PHƯƠNG TRÌNH XẤP XỈ:");
+            sb.AppendLine("PHƯƠNG TRÌNH CUỐI CÙNG:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  y ≈ {A:F8} × x^({P:F8})");
+
+            sb.Append($"  y ≈ {A:F8} × (");
+            if (XShift != 0) sb.Append($"x + {XShift:F6}");
+            else sb.Append("x");
+            sb.Append($")^({P:F8})");
+
+            if (YShift > 0) sb.Append($" - {Math.Abs(YShift):F6}");
+            else if (YShift < 0) sb.Append($" + {Math.Abs(YShift):F6}");
+
+            sb.AppendLine();
             sb.AppendLine();
 
-            sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG:");
+            sb.AppendLine("BẢNG SO SÁNH GIÁ TRỊ:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  MSE = {MSE:F8}");
-            sb.AppendLine("  (Tính trên không gian logarit: ln(y))");
+            sb.AppendLine("   i |      x       |    y_thực    |   y_dự_đoán  |");
+            sb.AppendLine(new string('─', 58));
+
+            for (int i = 0; i < XData.Length; i++)
+            {
+                double x_term = XData[i] + XShift;
+                double y_pred = (A * Math.Pow(x_term, P)) - YShift;
+
+                sb.AppendLine($"  {i + 1,2} | {XData[i],12:F6} | {YData[i],12:F6} | {y_pred,12:F6} |");
+            }
             sb.AppendLine();
+
+            // --- Phần 7: Sai số ---
+            sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG (MSE):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  MSE = sqrt( Σ( ln|y+S| - ln|y_pred+S| )² = {MSE:F10}");
+            sb.AppendLine("  (Tính trên không gian Logarit)");
 
             rtb.AppendText(sb.ToString());
         }
@@ -353,19 +439,21 @@ namespace Interpolation.Methods
                 throw new ArgumentException("Phải cung cấp ít nhất 1 hàm cơ sở");
 
             PhiExpressions = phiExpressions;
-            ValidateDataSigns();
         }
-
         public override void Solve()
         {
+            CalculateYShift();
+
             int n = XData.Length;
             int m = PhiExpressions.Length;
 
-            bool allNegative = Array.TrueForAll(YData, v => v < 0);
+            double[] Y_Log = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                Y_Log[i] = Math.Log(Math.Abs(YData[i] + YShift));
+            }
 
-            double[] Y = YData.Select(yi => Math.Log(Math.Abs(yi))).ToArray();
-
-            // Xây dựng ma trận Theta sử dụng AngouriMath
+            // Ma trận Theta
             ThetaMatrix = new double[n, m + 1];
             for (int i = 0; i < n; i++)
             {
@@ -376,8 +464,9 @@ namespace Interpolation.Methods
                 }
             }
 
+            // Giải hệ phương trình
             var Theta = Matrix<double>.Build.DenseOfArray(ThetaMatrix);
-            var Yvec = Vector<double>.Build.Dense(Y);
+            var Yvec = Vector<double>.Build.Dense(Y_Log);
 
             var M = Theta.TransposeThisAndMultiply(Theta);
             var r = Theta.TransposeThisAndMultiply(Yvec);
@@ -387,41 +476,53 @@ namespace Interpolation.Methods
 
             var C = M.Solve(r).ToArray();
 
-            A = Math.Exp(C[0]);
-            if (allNegative) A = -A;
+            double rawA = Math.Exp(C[0]);
+            A = IsShiftedDataNegative ? -rawA : rawA;
 
             BCoefficients = C.Skip(1).ToArray();
 
             var yPred = Theta * Vector<double>.Build.Dense(C);
             MSE = Math.Sqrt((Yvec - yPred).PointwisePower(2).Sum() / n);
         }
-
         public override void DisplayResults(RichTextBox rtb)
         {
             rtb.Clear();
             var sb = new StringBuilder();
 
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
-            sb.AppendLine("KẾT QUẢ PHƯƠNG PHÁP BÌNH PHƯƠNG TỐI THIỂU - DẠNG MŨ");
+            sb.AppendLine("KẾT QUẢ BÌNH PHƯƠNG TỐI THIỂU - DẠNG MŨ TỔNG QUÁT");
             sb.AppendLine("═══════════════════════════════════════════════════════════════\n");
 
-            sb.AppendLine("MÔ HÌNH:");
+            // --- Phần 1: Thông tin mô hình và dịch chuyển ---
+            if (YShift != 0)
+            {
+                sb.AppendLine("⚠️ XỬ LÝ DỮ LIỆU:");
+                sb.AppendLine($"   Dữ liệu gốc có dấu hỗn hợp hoặc chứa số 0.");
+                sb.AppendLine($"   Đã thực hiện tịnh tiến trục tung một lượng S = {YShift:F6}");
+                if (IsShiftedDataNegative)
+                    sb.AppendLine("   (Dịch về phía ÂM)");
+                else
+                    sb.AppendLine("   (Dịch về phía DƯƠNG)");
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("MÔ HÌNH TOÁN HỌC:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.Append("  y = a × e^(");
+            sb.Append("Mô hình: (y + S) = a × e^(");
             var expTerms = new List<string>();
             for (int j = 0; j < PhiExpressions.Length; j++)
             {
-                expTerms.Add($"b{j + 1}×{PhiExpressions[j]}");
+                expTerms.Add($"b{j + 1}×φ{j + 1}(x)");
             }
             sb.Append(string.Join(" + ", expTerms));
             sb.AppendLine(")");
 
-            sb.Append("  Biến đổi logarit: ln(|y|) = ln(a) + ");
+            sb.Append("  Tuyến tính hóa: ln|y + S| = ln|a| + ");
             sb.AppendLine(string.Join(" + ", expTerms));
-            sb.AppendLine("  Đặt: Y = ln(|y|), C₀ = ln(|a|), Cᵢ = bᵢ");
             sb.AppendLine();
 
-            sb.AppendLine("MA TRẬN Θ SAU KHI BIẾN ĐỔI:");
+            // --- Phần 2: Ma trận Theta ---
+            sb.AppendLine("MA TRẬN Θ (THETA):");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
             sb.Append("   i |      1       |");
             for (int j = 0; j < PhiExpressions.Length; j++)
@@ -442,29 +543,24 @@ namespace Interpolation.Methods
             }
             sb.AppendLine();
 
-            sb.AppendLine("DỮ LIỆU GỐC VÀ SAU BIẾN ĐỔI:");
+            // --- Phần 3: Dữ liệu chuyển đổi ---
+            sb.AppendLine("DỮ LIỆU CHUYỂN ĐỔI (LOGARIT):");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.Append("   i |      x       |      y       |");
-            for (int j = 0; j < PhiExpressions.Length; j++)
-            {
-                sb.Append($"   φ{j + 1}(x)     |");
-            }
-            sb.AppendLine("   ln(|y|)    |");
-            sb.AppendLine(new string('─', 40 + PhiExpressions.Length * 14 + 14));
+            sb.AppendLine("   i |      x       |      y       |   y + S      |  ln|y + S|   |");
+            sb.AppendLine(new string('─', 75));
 
             for (int i = 0; i < XData.Length; i++)
             {
-                sb.Append($"  {i + 1,2} | {XData[i],12:F6} | {YData[i],12:F6} |");
-                for (int j = 0; j < PhiExpressions.Length; j++)
-                {
-                    sb.Append($" {ThetaMatrix[i, j + 1],12:F6} |");
-                }
-                sb.AppendLine($" {Math.Log(Math.Abs(YData[i])),12:F6} |");
+                double shiftedY = YData[i] + YShift;
+                double logY = Math.Log(Math.Abs(shiftedY));
+                sb.AppendLine($"  {i + 1,2} | {XData[i],12:F6} | {YData[i],12:F6} | {shiftedY,12:F6} | {logY,12:F6} |");
             }
             sb.AppendLine();
 
-            sb.AppendLine("MA TRẬN M = Θ^T × Θ:");
+            // --- Phần 4: Ma trận M và Vector r ---
+            sb.AppendLine("HỆ PHƯƠNG TRÌNH (M × C = r):");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("Ma trận M = Θ^T × Θ:");
             for (int i = 0; i < MMatrix.GetLength(0); i++)
             {
                 sb.Append("  [");
@@ -476,8 +572,7 @@ namespace Interpolation.Methods
             }
             sb.AppendLine();
 
-            sb.AppendLine("VECTOR r = Θ^T × Y:");
-            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine("Vector r = Θ^T × ln|y+S|:");
             sb.Append("  r = [");
             for (int i = 0; i < RVector.Length; i++)
             {
@@ -486,41 +581,71 @@ namespace Interpolation.Methods
             }
             sb.AppendLine(" ]^T\n");
 
-            sb.AppendLine("HỆ SỐ TÌM ĐƯỢC:");
+            // --- Phần 5: Kết quả hệ số ---
+            sb.AppendLine("KẾT QUẢ HỆ SỐ:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  C₀ = ln(|a|) = {Math.Log(Math.Abs(A)):F8}");
+            sb.AppendLine($"  C₀ = {Math.Log(Math.Abs(A)):F8}  => |a| = {Math.Abs(A):F8}");
             for (int j = 0; j < BCoefficients.Length; j++)
             {
-                sb.AppendLine($"  C{j + 1} = b{j + 1}     = {BCoefficients[j]:F8}");
+                sb.AppendLine($"  C{j + 1} = b{j + 1} = {BCoefficients[j]:F8}");
             }
             sb.AppendLine();
 
-            sb.AppendLine("THAM SỐ CUỐI CÙNG:");
-            sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  a  = {A:F8}");
-            for (int j = 0; j < BCoefficients.Length; j++)
-            {
-                sb.AppendLine($"  b{j + 1} = {BCoefficients[j]:F8}");
-            }
+            sb.AppendLine($"  => Hệ số a = {A:F8}");
+            if (IsShiftedDataNegative) sb.AppendLine("  (Dấu âm do dữ liệu được dịch về phía âm)");
             sb.AppendLine();
 
-            sb.AppendLine("PHƯƠNG TRÌNH XẤP XỈ:");
+            // --- Phần 6: Phương trình cuối cùng ---
+            sb.AppendLine("PHƯƠNG TRÌNH XẤP XỈ CUỐI CÙNG:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.Append($"  y ≈ {A:F8} × e^(");
+            sb.Append($"  y ≈ {A:F6} × e^(");
+
             var finalTerms = new List<string>();
             for (int j = 0; j < PhiExpressions.Length; j++)
             {
                 string sign = BCoefficients[j] >= 0 ? "+" : "";
-                finalTerms.Add($"{sign}{BCoefficients[j]:F8}×({PhiExpressions[j]})");
+                if (j == 0 && BCoefficients[j] >= 0) sign = "";
+                finalTerms.Add($"{sign}{BCoefficients[j]:F6}·({PhiExpressions[j]})");
             }
             sb.Append(string.Join(" ", finalTerms));
-            sb.AppendLine(")");
+            sb.Append(")");
+
+            if (YShift > 0)
+            {
+                sb.Append($" - {Math.Abs(YShift):F6}");
+            }
+            else if (YShift < 0)
+            {
+                sb.Append($" + {Math.Abs(YShift):F6}"); 
+            }
+
+            sb.AppendLine();
             sb.AppendLine();
 
-            sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG:");
+            sb.AppendLine("BẢNG SO SÁNH GIÁ TRỊ THỰC TẾ VÀ DỰ ĐOÁN:");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine($"  MSE = {MSE:F8}");
-            sb.AppendLine("  (Tính trên không gian logarit: ln(y))");
+            sb.AppendLine("   i |      x       |    y_thực    |   y_dự_đoán  |");
+            sb.AppendLine(new string('─', 58));
+
+            for (int i = 0; i < XData.Length; i++)
+            {
+                double exponent = 0;
+                for (int j = 0; j < PhiExpressions.Length; j++)
+                {
+                    exponent += BCoefficients[j] * EvaluatePhi(PhiExpressions[j], XData[i]);
+                }
+
+                double y_pred = (A * Math.Exp(exponent)) - YShift;
+
+                sb.AppendLine($"  {i + 1,2} | {XData[i],12:F6} | {YData[i],12:F6} | {y_pred,12:F6} |");
+            }
+            sb.AppendLine();
+
+            // --- Phần 7: Sai số ---
+            sb.AppendLine("SAI SỐ TRUNG BÌNH PHƯƠNG (MSE):");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
+            sb.AppendLine($"  MSE = sqrt( Σ( ln|y+S| - ln|y_pred+S| )² / n ) = {MSE:F10}");
+            sb.AppendLine("  Lưu ý: Sai số tính trên không gian Logarit");
             sb.AppendLine();
 
             rtb.AppendText(sb.ToString());

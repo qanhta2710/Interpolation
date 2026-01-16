@@ -26,13 +26,12 @@ namespace Interpolation.Methods
         private StringBuilder calculationSteps;
 
         // Dữ liệu rời rạc
-        public SimpsonIntegration(double[] x, double[] y, double a, double b, double epsilon)
+        public SimpsonIntegration(double[] x, double[] y, double a, double b)
         {
             XData = x;
             YData = y;
             A = a;
             B = b;
-            Epsilon = epsilon;
             IsFromData = true;
             Solve();
             EstimateErrorGeneral();

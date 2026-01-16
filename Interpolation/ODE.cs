@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MathNet.Numerics.Distributions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -16,6 +18,8 @@ namespace Interpolation
             cmbAdamsOrder.SelectedIndexChanged += cmbAdamsOrder_SelectedIndexChanged;
             cmbMethod.SelectedIndex = 0;
             cmbOrder.SelectedIndex = 1;
+            grpCustomRK.Visible = false;
+            grpCustomRK3.Visible = false;
             UpdateSystemUI();
             UpdateHighOrderUI();
         }
@@ -26,6 +30,13 @@ namespace Interpolation
 
             lblAdamsS.Visible = isAdams;
             cmbAdamsOrder.Visible = isAdams;
+
+            // Xử lý RK Tùy chỉnh
+            bool isCustomRK = selected.Contains("Runge-Kutta 2 (Custom)");
+            grpCustomRK.Visible = isCustomRK;
+
+            bool isCustomRK3 = selected.Contains("Runge-Kutta 3 (Custom)");
+            grpCustomRK3.Visible = isCustomRK3;
         }
         private void cmbAdamsOrder_SelectedIndexChanged(object sender, EventArgs e) { }
         private void rdoSys1_CheckedChanged(object sender, EventArgs e) { UpdateSystemUI(); }
@@ -132,6 +143,26 @@ namespace Interpolation
                     int s = int.Parse(cmbAdamsOrder.SelectedItem.ToString());
                     results = ODESolver.SolveAdams(derivativeFunc, y0, t0, tend, h, s, epsilon);
                 }
+                else if (cmbMethod.Text.Contains("Runge-Kutta 2 (Custom)"))
+                {
+                    string typeStr = cmbRKParamType.SelectedItem.ToString();
+                    ODESolver.RK2ParamType pType;
+
+                    if (typeStr == "Alpha2") pType = ODESolver.RK2ParamType.Alpha2;
+                    else if (typeStr == "Beta11") pType = ODESolver.RK2ParamType.Beta11;
+                    else if (typeStr == "R1") pType = ODESolver.RK2ParamType.R1;
+                    else pType = ODESolver.RK2ParamType.R2;
+
+                    double val = ParseFraction(txtRKParamValue.Text);
+                    results = ODESolver.SolveCustomRK2(derivativeFunc, y0, t0, tend, h, pType, val);
+                }
+                else if (cmbMethod.Text.Contains("Runge-Kutta 3 (Custom)"))
+                {
+                    double alpha2 = ParseFraction(txtAlpha2_RK3.Text);
+                    double alpha3 = ParseFraction(txtAlpha3_RK3.Text);
+
+                    results = ODESolver.SolveCustomRK3(derivativeFunc, y0, t0, tend, h, alpha2, alpha3);
+                }
 
                 DisplayTable(results, dim);
 
@@ -192,6 +223,110 @@ namespace Interpolation
             {
                 sb.AppendLine("   u* = u[k] + h * F(t[k], u[k])");
                 sb.AppendLine("   CT Lặp: u[k+1] = u[k] + (h/2) * [F(t[k], u[k]) + F(t[k+1], u*)]");
+            }
+            else if (method.Contains("Runge-Kutta 2 (Custom)"))
+            {
+                double val = ParseFraction(txtRKParamValue.Text);
+                string paramType = cmbRKParamType.Text;
+
+                double r1 = 0, r2 = 0, alpha2 = 0, beta11 = 0;
+
+                if (paramType == "Alpha2")
+                {
+                    alpha2 = val;
+                    beta11 = alpha2;
+                    r2 = 1.0 / (2.0 * alpha2);
+                    r1 = 1.0 - r2;
+                }
+                else if (paramType == "Beta11")
+                {
+                    beta11 = val;
+                    alpha2 = beta11;
+                    r2 = 1.0 / (2.0 * alpha2);
+                    r1 = 1.0 - r2;
+                }
+                else if (paramType == "R2")
+                {
+                    r2 = val;
+                    r1 = 1.0 - r2;
+                    alpha2 = 1.0 / (2.0 * r2);
+                    beta11 = alpha2;
+                }
+                else if (paramType == "R1")
+                {
+                    r1 = val;
+                    r2 = 1.0 - r1;
+                    if (r2 != 0)
+                    {
+                        alpha2 = 1.0 / (2.0 * r2);
+                        beta11 = alpha2;
+                    }
+                }
+
+                sb.AppendLine($"   Phương pháp RK2 Tùy chỉnh (Input: {paramType} = {val:F4})");
+                sb.AppendLine();
+
+                sb.AppendLine("   a) Hệ phương trình ràng buộc các hệ số:");
+                sb.AppendLine("      (1) r1 + r2 = 1");
+                sb.AppendLine("      (2) r2 * alpha2 = 1/2");
+                sb.AppendLine("      (3) r2 * beta11 = 1/2");
+                sb.AppendLine();
+
+                sb.AppendLine("   b) Các hệ số tính được:");
+                sb.AppendLine($"      r1      = {r1:F6}");
+                sb.AppendLine($"      r2      = {r2:F6}");
+                sb.AppendLine($"      alpha2  = {alpha2:F6}");
+                sb.AppendLine($"      beta11  = {beta11:F6}");
+                sb.AppendLine();
+
+                sb.AppendLine("   c) Công thức thực hiện:");
+                sb.AppendLine("      k1 = h * F(t[k], u[k])");
+                sb.AppendLine($"      k2 = h * F(t[k] + {alpha2:F4}h, u[k] + {beta11:F4}k1)");
+                sb.AppendLine($"      u[k+1] = u[k] + {r1:F4}k1 + {r2:F4}k2");
+            }
+            else if (method.Contains("Runge-Kutta 3 (Custom)"))
+            {
+                double alpha2 = ParseFraction(txtAlpha2_RK3.Text);
+                double alpha3 = ParseFraction(txtAlpha3_RK3.Text);
+
+                sb.AppendLine($"   Phương pháp RK3 Tùy chỉnh (Input: α2={alpha2:F4}, α3={alpha3:F4})");
+                sb.AppendLine();
+
+                sb.AppendLine("   a) Hệ phương trình ràng buộc các hệ số:");
+                sb.AppendLine("      (1) r1 + r2 + r3 = 1");
+                sb.AppendLine("      (2) r2*α2 + r3*α3 = 1/2");
+                sb.AppendLine("      (3) r2*β11 + r3*(β21 + β22) = 1/2");
+                sb.AppendLine("      (4) 1/2*r2*α2² + 1/2*r3*α3² = 1/6");
+                sb.AppendLine("      (5) r2*α2*β11 + r3*α3*(β21 + β22) = 1/3");
+                sb.AppendLine("      (6) r2*β11² + r3*(β21 + β22)² = 1/3");
+                sb.AppendLine("      (7) r3*β22*α2 = 1/6");
+                sb.AppendLine("      (8) r3*β11*β22 = 1/6");
+                sb.AppendLine();
+
+                sb.AppendLine("   b) Rút gọn và giải hệ:");
+                sb.AppendLine("      Áp dụng điều kiện: β11 = α2 và (β21 + β22) = α3");
+                sb.AppendLine("      Ta thu được hệ phương trình để tìm r2, r3:");
+                sb.AppendLine($"      (I)   {alpha2:F4}*r2 + {alpha3:F4}*r3 = 0.5");
+                sb.AppendLine($"      (II)  {alpha2 * alpha2:F4}*r2 + {alpha3 * alpha3:F4}*r3 = 0.3333");
+                sb.AppendLine();
+
+                double r2 = (3 * alpha3 - 2) / (6 * alpha2 * (alpha3 - alpha2));
+                double r3 = (2 - 3 * alpha2) / (6 * alpha3 * (alpha3 - alpha2));
+                double r1 = 1 - r2 - r3;
+                double beta11 = alpha2;
+                double beta22 = 1.0 / (6 * r3 * alpha2);
+                double beta21 = alpha3 - beta22;
+
+                sb.AppendLine($"   Phương pháp RK3 Tùy chỉnh (Alpha2={alpha2}, Alpha3={alpha3})");
+                sb.AppendLine("   a) Hệ số tính được:");
+                sb.AppendLine($"      r1={r1:F4}, r2={r2:F4}, r3={r3:F4}");
+                sb.AppendLine($"      beta11={beta11:F4}, beta21={beta21:F4}, beta22={beta22:F4}");
+                sb.AppendLine();
+                sb.AppendLine("   b) Công thức:");
+                sb.AppendLine("      k1 = h * f(t, y)");
+                sb.AppendLine($"      k2 = h * f(t + {alpha2:F4}h, y + {beta11:F4}k1)");
+                sb.AppendLine($"      k3 = h * f(t + {alpha3:F4}h, y + {beta21:F4}k1 + {beta22:F4}k2)");
+                sb.AppendLine($"      y_new = y + {r1:F4}k1 + {r2:F4}k2 + {r3:F4}k3");
             }
             else if (method.Contains("Runge-Kutta 2"))
             {
@@ -404,6 +539,16 @@ namespace Interpolation
             }
             return temp;
         }
-
+        private double ParseFraction(string input)
+        {
+            try
+            {
+                return Convert.ToDouble(new System.Data.DataTable().Compute(input, null));
+            }
+            catch
+            {
+                return double.Parse(input); 
+            }
+        }
     }
 }

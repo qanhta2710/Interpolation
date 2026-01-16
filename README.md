@@ -6,9 +6,9 @@
 
 ## Tính năng:
 - Tìm đa thức nội suy bằng Nội suy mốc bất kì _(Lagrange, Newton)_, Nội suy mốc cách đều _(Newton)_, Nội suy trung tâm _(Stirling, Bessel, Gauss I, Gauss II)_, Nội suy ngược _(Phương pháp lặp)_, Hàm ghép trơn _(Spline)_
-- Tìm hàm thực nghiệm bằng phương pháp bình phương tối thiểu _(Dạng tuyến tính và Dạng phi tuyến có thể đưa về tuyến tính)_
+- Tìm hàm thực nghiệm bằng phương pháp bình phương tối thiểu _(Dạng tuyến tính và Dạng phi tuyến có thể đưa về tuyến tính)_, tự động tịnh tiến trục tung để toàn bộ dữ liệu cùng dấu
 - Tìm các mốc nội suy cách đều phù hợp cho bài toán **Nội suy trung tâm** từ tập dữ liệu, Tìm các mốc nội suy phù hợp cho bài toán **Nội suy ngược** từ tập dữ liệu
-- Tính giá trị đa thức tại 1 điểm _(Sử dụng lược đồ Hoocne)_, Tính đạo hàm các cấp của đa thức tại 1 điểm
+- Tính giá trị đa thức tại 1 điểm _(Sử dụng lược đồ Hoocne)_, Tính đạo hàm các cấp của đa thức tại 1 điểm, Tự động đổi biến khi sử dụng phương pháp nội suy cần đổi biến _(Newton mốc cách đều, Bessel, Stirling, ...)_
 - Khi phát hiện điểm nội suy trùng nhau, tự động giữ lại điểm đầu tiên và loại bỏ tất cả các điểm còn lại
 - Tự động nhập dữ liệu từ File Excel
 - Tính gần đúng đạo hàm tại 1 điểm bằng **Công thức p + 1 điểm**

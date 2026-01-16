@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnSolve = new System.Windows.Forms.Button();
             this.tabInput = new System.Windows.Forms.TabControl();
@@ -69,9 +69,17 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cmbOrder = new System.Windows.Forms.ComboBox();
             this.grpCommon = new System.Windows.Forms.GroupBox();
+            this.grpCustomRK3 = new System.Windows.Forms.GroupBox();
+            this.txtAlpha2_RK3 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.lblEpsilon = new System.Windows.Forms.Label();
             this.txtEpsilon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.grpCustomRK = new System.Windows.Forms.GroupBox();
+            this.txtRKParamValue = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.cmbRKParamType = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.cmbMethod = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtH = new System.Windows.Forms.TextBox();
@@ -88,6 +96,8 @@
             this.chartResult = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabLog = new System.Windows.Forms.TabPage();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
+            this.txtAlpha3_RK3 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -102,6 +112,8 @@
             this.grpHighEq.SuspendLayout();
             this.panelHighConfig.SuspendLayout();
             this.grpCommon.SuspendLayout();
+            this.grpCustomRK3.SuspendLayout();
+            this.grpCustomRK.SuspendLayout();
             this.tabOutput.SuspendLayout();
             this.tabTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
@@ -128,7 +140,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tabOutput);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(10);
             this.splitContainer1.Size = new System.Drawing.Size(1182, 653);
-            this.splitContainer1.SplitterDistance = 459;
+            this.splitContainer1.SplitterDistance = 458;
             this.splitContainer1.TabIndex = 0;
             // 
             // btnSolve
@@ -140,7 +152,7 @@
             this.btnSolve.ForeColor = System.Drawing.Color.White;
             this.btnSolve.Location = new System.Drawing.Point(10, 593);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(439, 50);
+            this.btnSolve.Size = new System.Drawing.Size(438, 50);
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "GIẢI PHƯƠNG TRÌNH";
             this.btnSolve.UseVisualStyleBackColor = false;
@@ -154,7 +166,7 @@
             this.tabInput.Location = new System.Drawing.Point(10, 185);
             this.tabInput.Name = "tabInput";
             this.tabInput.SelectedIndex = 0;
-            this.tabInput.Size = new System.Drawing.Size(439, 400);
+            this.tabInput.Size = new System.Drawing.Size(438, 400);
             this.tabInput.TabIndex = 1;
             // 
             // tabSystem
@@ -165,7 +177,7 @@
             this.tabSystem.Location = new System.Drawing.Point(4, 25);
             this.tabSystem.Name = "tabSystem";
             this.tabSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSystem.Size = new System.Drawing.Size(431, 371);
+            this.tabSystem.Size = new System.Drawing.Size(430, 371);
             this.tabSystem.TabIndex = 0;
             this.tabSystem.Text = "Hệ phương trình";
             this.tabSystem.UseVisualStyleBackColor = true;
@@ -181,7 +193,7 @@
             this.grpSysInit.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpSysInit.Location = new System.Drawing.Point(3, 213);
             this.grpSysInit.Name = "grpSysInit";
-            this.grpSysInit.Size = new System.Drawing.Size(425, 150);
+            this.grpSysInit.Size = new System.Drawing.Size(424, 150);
             this.grpSysInit.TabIndex = 2;
             this.grpSysInit.TabStop = false;
             this.grpSysInit.Text = "Giá trị ban đầu (tại t0)";
@@ -245,7 +257,7 @@
             this.grpSysEq.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpSysEq.Location = new System.Drawing.Point(3, 43);
             this.grpSysEq.Name = "grpSysEq";
-            this.grpSysEq.Size = new System.Drawing.Size(425, 170);
+            this.grpSysEq.Size = new System.Drawing.Size(424, 170);
             this.grpSysEq.TabIndex = 1;
             this.grpSysEq.TabStop = false;
             this.grpSysEq.Text = "Vế phải phương trình";
@@ -306,7 +318,7 @@
             this.panelSysConfig.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSysConfig.Location = new System.Drawing.Point(3, 3);
             this.panelSysConfig.Name = "panelSysConfig";
-            this.panelSysConfig.Size = new System.Drawing.Size(425, 40);
+            this.panelSysConfig.Size = new System.Drawing.Size(424, 40);
             this.panelSysConfig.TabIndex = 0;
             // 
             // rdoSys1
@@ -352,7 +364,7 @@
             this.tabHighOrder.Location = new System.Drawing.Point(4, 25);
             this.tabHighOrder.Name = "tabHighOrder";
             this.tabHighOrder.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHighOrder.Size = new System.Drawing.Size(422, 371);
+            this.tabHighOrder.Size = new System.Drawing.Size(430, 371);
             this.tabHighOrder.TabIndex = 1;
             this.tabHighOrder.Text = "PT bậc cao";
             this.tabHighOrder.UseVisualStyleBackColor = true;
@@ -368,7 +380,7 @@
             this.grpHighInit.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpHighInit.Location = new System.Drawing.Point(3, 143);
             this.grpHighInit.Name = "grpHighInit";
-            this.grpHighInit.Size = new System.Drawing.Size(416, 150);
+            this.grpHighInit.Size = new System.Drawing.Size(424, 150);
             this.grpHighInit.TabIndex = 2;
             this.grpHighInit.TabStop = false;
             this.grpHighInit.Text = "Giá trị ban đầu";
@@ -429,7 +441,7 @@
             this.grpHighEq.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpHighEq.Location = new System.Drawing.Point(3, 43);
             this.grpHighEq.Name = "grpHighEq";
-            this.grpHighEq.Size = new System.Drawing.Size(416, 100);
+            this.grpHighEq.Size = new System.Drawing.Size(424, 100);
             this.grpHighEq.TabIndex = 1;
             this.grpHighEq.TabStop = false;
             this.grpHighEq.Text = "Phương trình vi phân";
@@ -468,7 +480,7 @@
             this.panelHighConfig.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHighConfig.Location = new System.Drawing.Point(3, 3);
             this.panelHighConfig.Name = "panelHighConfig";
-            this.panelHighConfig.Size = new System.Drawing.Size(416, 40);
+            this.panelHighConfig.Size = new System.Drawing.Size(424, 40);
             this.panelHighConfig.TabIndex = 0;
             // 
             // label14
@@ -496,9 +508,11 @@
             // 
             // grpCommon
             // 
+            this.grpCommon.Controls.Add(this.grpCustomRK3);
             this.grpCommon.Controls.Add(this.lblEpsilon);
             this.grpCommon.Controls.Add(this.txtEpsilon);
             this.grpCommon.Controls.Add(this.label4);
+            this.grpCommon.Controls.Add(this.grpCustomRK);
             this.grpCommon.Controls.Add(this.cmbMethod);
             this.grpCommon.Controls.Add(this.label3);
             this.grpCommon.Controls.Add(this.txtH);
@@ -511,15 +525,47 @@
             this.grpCommon.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpCommon.Location = new System.Drawing.Point(10, 10);
             this.grpCommon.Name = "grpCommon";
-            this.grpCommon.Size = new System.Drawing.Size(439, 175);
+            this.grpCommon.Size = new System.Drawing.Size(438, 175);
             this.grpCommon.TabIndex = 0;
             this.grpCommon.TabStop = false;
             this.grpCommon.Text = "Cấu hình chung";
             // 
+            // grpCustomRK3
+            // 
+            this.grpCustomRK3.Controls.Add(this.label18);
+            this.grpCustomRK3.Controls.Add(this.txtAlpha3_RK3);
+            this.grpCustomRK3.Controls.Add(this.txtAlpha2_RK3);
+            this.grpCustomRK3.Controls.Add(this.label17);
+            this.grpCustomRK3.Location = new System.Drawing.Point(14, 115);
+            this.grpCustomRK3.Name = "grpCustomRK3";
+            this.grpCustomRK3.Size = new System.Drawing.Size(400, 50);
+            this.grpCustomRK3.TabIndex = 13;
+            this.grpCustomRK3.TabStop = false;
+            this.grpCustomRK3.Text = "Tham số RK3 Tùy chỉnh";
+            this.grpCustomRK3.Visible = false;
+            // 
+            // txtAlpha2_RK3
+            // 
+            this.txtAlpha2_RK3.Location = new System.Drawing.Point(57, 22);
+            this.txtAlpha2_RK3.Name = "txtAlpha2_RK3";
+            this.txtAlpha2_RK3.Size = new System.Drawing.Size(80, 22);
+            this.txtAlpha2_RK3.TabIndex = 1;
+            this.txtAlpha2_RK3.Text = "1/3";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(22, 22);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(29, 20);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "α₂:";
+            // 
             // lblEpsilon
             // 
             this.lblEpsilon.AutoSize = true;
-            this.lblEpsilon.Location = new System.Drawing.Point(240, 95);
+            this.lblEpsilon.Location = new System.Drawing.Point(239, 53);
             this.lblEpsilon.Name = "lblEpsilon";
             this.lblEpsilon.Size = new System.Drawing.Size(55, 16);
             this.lblEpsilon.TabIndex = 8;
@@ -527,7 +573,7 @@
             // 
             // txtEpsilon
             // 
-            this.txtEpsilon.Location = new System.Drawing.Point(300, 92);
+            this.txtEpsilon.Location = new System.Drawing.Point(299, 50);
             this.txtEpsilon.Name = "txtEpsilon";
             this.txtEpsilon.Size = new System.Drawing.Size(80, 22);
             this.txtEpsilon.TabIndex = 9;
@@ -536,11 +582,65 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 130);
+            this.label4.Location = new System.Drawing.Point(19, 88);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 16);
             this.label4.TabIndex = 7;
             this.label4.Text = "Phương pháp:";
+            // 
+            // grpCustomRK
+            // 
+            this.grpCustomRK.Controls.Add(this.txtRKParamValue);
+            this.grpCustomRK.Controls.Add(this.label16);
+            this.grpCustomRK.Controls.Add(this.cmbRKParamType);
+            this.grpCustomRK.Controls.Add(this.label15);
+            this.grpCustomRK.Location = new System.Drawing.Point(14, 115);
+            this.grpCustomRK.Name = "grpCustomRK";
+            this.grpCustomRK.Size = new System.Drawing.Size(400, 50);
+            this.grpCustomRK.TabIndex = 12;
+            this.grpCustomRK.TabStop = false;
+            this.grpCustomRK.Text = "Tham số RK2 Tùy chỉnh";
+            this.grpCustomRK.Visible = false;
+            // 
+            // txtRKParamValue
+            // 
+            this.txtRKParamValue.Location = new System.Drawing.Point(230, 19);
+            this.txtRKParamValue.Name = "txtRKParamValue";
+            this.txtRKParamValue.Size = new System.Drawing.Size(80, 22);
+            this.txtRKParamValue.TabIndex = 1;
+            this.txtRKParamValue.Text = "2/3";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(180, 22);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 16);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Giá trị:";
+            // 
+            // cmbRKParamType
+            // 
+            this.cmbRKParamType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRKParamType.FormattingEnabled = true;
+            this.cmbRKParamType.Items.AddRange(new object[] {
+            "Alpha2",
+            "R1",
+            "R2",
+            "Beta11"});
+            this.cmbRKParamType.Location = new System.Drawing.Point(85, 19);
+            this.cmbRKParamType.Name = "cmbRKParamType";
+            this.cmbRKParamType.Size = new System.Drawing.Size(80, 24);
+            this.cmbRKParamType.TabIndex = 0;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(10, 22);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(66, 16);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Chọn loại:";
             // 
             // cmbMethod
             // 
@@ -553,8 +653,10 @@
             "Runge-Kutta 2 (Heun)",
             "Runge-Kutta 3",
             "Runge-Kutta 4",
-            "ABs-AMs"});
-            this.cmbMethod.Location = new System.Drawing.Point(130, 127);
+            "ABs-AMs",
+            "Runge-Kutta 2 (Custom)",
+            "Runge-Kutta 3 (Custom)"});
+            this.cmbMethod.Location = new System.Drawing.Point(129, 85);
             this.cmbMethod.Name = "cmbMethod";
             this.cmbMethod.Size = new System.Drawing.Size(200, 24);
             this.cmbMethod.TabIndex = 6;
@@ -562,7 +664,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 95);
+            this.label3.Location = new System.Drawing.Point(19, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 16);
             this.label3.TabIndex = 5;
@@ -570,7 +672,7 @@
             // 
             // txtH
             // 
-            this.txtH.Location = new System.Drawing.Point(130, 92);
+            this.txtH.Location = new System.Drawing.Point(129, 50);
             this.txtH.Name = "txtH";
             this.txtH.Size = new System.Drawing.Size(100, 22);
             this.txtH.TabIndex = 4;
@@ -579,7 +681,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(252, 60);
+            this.label2.Location = new System.Drawing.Point(251, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(19, 16);
             this.label2.TabIndex = 3;
@@ -587,7 +689,7 @@
             // 
             // txtTend
             // 
-            this.txtTend.Location = new System.Drawing.Point(280, 57);
+            this.txtTend.Location = new System.Drawing.Point(279, 15);
             this.txtTend.Name = "txtTend";
             this.txtTend.Size = new System.Drawing.Size(100, 22);
             this.txtTend.TabIndex = 2;
@@ -596,7 +698,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 60);
+            this.label1.Location = new System.Drawing.Point(19, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 16);
             this.label1.TabIndex = 1;
@@ -604,7 +706,7 @@
             // 
             // txtT0
             // 
-            this.txtT0.Location = new System.Drawing.Point(130, 57);
+            this.txtT0.Location = new System.Drawing.Point(129, 15);
             this.txtT0.Name = "txtT0";
             this.txtT0.Size = new System.Drawing.Size(50, 22);
             this.txtT0.TabIndex = 0;
@@ -613,7 +715,7 @@
             // lblAdamsS
             // 
             this.lblAdamsS.AutoSize = true;
-            this.lblAdamsS.Location = new System.Drawing.Point(336, 130);
+            this.lblAdamsS.Location = new System.Drawing.Point(335, 88);
             this.lblAdamsS.Name = "lblAdamsS";
             this.lblAdamsS.Size = new System.Drawing.Size(44, 16);
             this.lblAdamsS.TabIndex = 10;
@@ -629,7 +731,7 @@
             "3",
             "4",
             "5"});
-            this.cmbAdamsOrder.Location = new System.Drawing.Point(385, 127);
+            this.cmbAdamsOrder.Location = new System.Drawing.Point(384, 85);
             this.cmbAdamsOrder.Name = "cmbAdamsOrder";
             this.cmbAdamsOrder.Size = new System.Drawing.Size(40, 24);
             this.cmbAdamsOrder.TabIndex = 11;
@@ -644,7 +746,7 @@
             this.tabOutput.Location = new System.Drawing.Point(10, 10);
             this.tabOutput.Name = "tabOutput";
             this.tabOutput.SelectedIndex = 0;
-            this.tabOutput.Size = new System.Drawing.Size(699, 633);
+            this.tabOutput.Size = new System.Drawing.Size(700, 633);
             this.tabOutput.TabIndex = 0;
             // 
             // tabTable
@@ -653,7 +755,7 @@
             this.tabTable.Location = new System.Drawing.Point(4, 25);
             this.tabTable.Name = "tabTable";
             this.tabTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTable.Size = new System.Drawing.Size(691, 604);
+            this.tabTable.Size = new System.Drawing.Size(692, 604);
             this.tabTable.TabIndex = 0;
             this.tabTable.Text = "Bảng kết quả";
             this.tabTable.UseVisualStyleBackColor = true;
@@ -664,21 +766,21 @@
             this.dgvResult.AllowUserToDeleteRows = false;
             this.dgvResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.ReadOnly = true;
             this.dgvResult.RowHeadersWidth = 51;
             this.dgvResult.RowTemplate.Height = 24;
-            this.dgvResult.Size = new System.Drawing.Size(685, 598);
+            this.dgvResult.Size = new System.Drawing.Size(686, 598);
             this.dgvResult.TabIndex = 0;
             // 
             // tabGraph
@@ -687,21 +789,21 @@
             this.tabGraph.Location = new System.Drawing.Point(4, 25);
             this.tabGraph.Name = "tabGraph";
             this.tabGraph.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGraph.Size = new System.Drawing.Size(700, 604);
+            this.tabGraph.Size = new System.Drawing.Size(692, 604);
             this.tabGraph.TabIndex = 2;
             this.tabGraph.Text = "Đồ thị nghiệm";
             this.tabGraph.UseVisualStyleBackColor = true;
             // 
             // chartResult
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartResult.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chartResult.ChartAreas.Add(chartArea1);
             this.chartResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartResult.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chartResult.Legends.Add(legend1);
             this.chartResult.Location = new System.Drawing.Point(3, 3);
             this.chartResult.Name = "chartResult";
-            this.chartResult.Size = new System.Drawing.Size(694, 598);
+            this.chartResult.Size = new System.Drawing.Size(686, 598);
             this.chartResult.TabIndex = 0;
             this.chartResult.Text = "chart1";
             // 
@@ -711,7 +813,7 @@
             this.tabLog.Location = new System.Drawing.Point(4, 25);
             this.tabLog.Name = "tabLog";
             this.tabLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLog.Size = new System.Drawing.Size(700, 604);
+            this.tabLog.Size = new System.Drawing.Size(692, 604);
             this.tabLog.TabIndex = 1;
             this.tabLog.Text = "Log / Chi tiết";
             this.tabLog.UseVisualStyleBackColor = true;
@@ -722,9 +824,27 @@
             this.rtbLog.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbLog.Location = new System.Drawing.Point(3, 3);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(694, 598);
+            this.rtbLog.Size = new System.Drawing.Size(686, 598);
             this.rtbLog.TabIndex = 0;
             this.rtbLog.Text = "";
+            // 
+            // txtAlpha3_RK3
+            // 
+            this.txtAlpha3_RK3.Location = new System.Drawing.Point(285, 22);
+            this.txtAlpha3_RK3.Name = "txtAlpha3_RK3";
+            this.txtAlpha3_RK3.Size = new System.Drawing.Size(80, 22);
+            this.txtAlpha3_RK3.TabIndex = 4;
+            this.txtAlpha3_RK3.Text = "2/3";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(250, 24);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 20);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "α₃:";
             // 
             // ODE
             // 
@@ -756,6 +876,10 @@
             this.panelHighConfig.PerformLayout();
             this.grpCommon.ResumeLayout(false);
             this.grpCommon.PerformLayout();
+            this.grpCustomRK3.ResumeLayout(false);
+            this.grpCustomRK3.PerformLayout();
+            this.grpCustomRK.ResumeLayout(false);
+            this.grpCustomRK.PerformLayout();
             this.tabOutput.ResumeLayout(false);
             this.tabTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
@@ -825,5 +949,15 @@
         private System.Windows.Forms.RadioButton rdoSys1;
         private System.Windows.Forms.Label lblAdamsS;
         private System.Windows.Forms.ComboBox cmbAdamsOrder;
+        private System.Windows.Forms.GroupBox grpCustomRK;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cmbRKParamType;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtRKParamValue;
+        private System.Windows.Forms.GroupBox grpCustomRK3;
+        private System.Windows.Forms.TextBox txtAlpha2_RK3;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtAlpha3_RK3;
     }
 }
