@@ -15,6 +15,7 @@
 - Tính gần đúng tích phân tại 1 điểm bằng **Công thức hình thang**, **Công thức Simpson**, **Công thức Newton-Cotez**, **Công thức điểm giữa**
 - Đánh giá sai số tính gần đúng theo công thức lưới phủ (Runge) và sai số lý thuyết
 - Tìm nghiệm số, vẽ đồ thị của phương trình vi phân Cauchy bằng **Phương pháp Euler hiện**, **Euler ẩn**, **Phương pháp hình thang**, **Runge-Kutta 2, 3 ,4**, **ABs-AMs (s = 2 - 5)** 
+- Hỗ trợ tính hệ số tuỳ chỉnh của phương pháp RKs 
 - Giải bài toán biên, vẽ đồ thị 
 - Giải bài toán trị riêng (Biên Dirichlet thuần nhất), vẽ đồ thị hàm riêng
 
