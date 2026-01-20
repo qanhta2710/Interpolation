@@ -232,6 +232,8 @@
             this.dataGridViewHornerEval = new System.Windows.Forms.DataGridView();
             this.dataGridViewHornerDerivative = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnResetDefault = new System.Windows.Forms.Button();
+            this.lblMethod = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -243,8 +245,6 @@
             this.txtBoxPrecisionEval = new System.Windows.Forms.TextBox();
             this.dataGridViewCoeffsP = new System.Windows.Forms.DataGridView();
             this.coeffsP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblMethod = new System.Windows.Forms.Label();
-            this.btnResetDefault = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -1059,7 +1059,7 @@
             this.tableLayoutPanel18.ColumnCount = 3;
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.14418F));
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.85582F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 268F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 269F));
             this.tableLayoutPanel18.Controls.Add(this.btnOpenExcelNewtonFinite, 1, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnNewtonFiniteToEval, 2, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnSolveNewtonFinite, 0, 0);
@@ -1076,7 +1076,7 @@
             this.btnOpenExcelNewtonFinite.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnOpenExcelNewtonFinite.AutoSize = true;
             this.btnOpenExcelNewtonFinite.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(299, 4);
+            this.btnOpenExcelNewtonFinite.Location = new System.Drawing.Point(298, 4);
             this.btnOpenExcelNewtonFinite.Name = "btnOpenExcelNewtonFinite";
             this.btnOpenExcelNewtonFinite.Size = new System.Drawing.Size(178, 35);
             this.btnOpenExcelNewtonFinite.TabIndex = 6;
@@ -2257,7 +2257,7 @@
             this.tableLayoutPanel26.ColumnCount = 3;
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.83247F));
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.16753F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 853F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 854F));
             this.tableLayoutPanel26.Controls.Add(this.dataXYLeastSquares, 0, 0);
             this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 1, 0);
             this.tableLayoutPanel26.Controls.Add(this.rtbResultLeastSquares, 2, 0);
@@ -2309,7 +2309,7 @@
             this.tableLayoutPanel27.RowCount = 2;
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.85768F));
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.14232F));
-            this.tableLayoutPanel27.Size = new System.Drawing.Size(153, 534);
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(152, 534);
             this.tableLayoutPanel27.TabIndex = 8;
             // 
             // txtBoxLeastSquares
@@ -2318,7 +2318,7 @@
             this.txtBoxLeastSquares.Location = new System.Drawing.Point(3, 77);
             this.txtBoxLeastSquares.Multiline = true;
             this.txtBoxLeastSquares.Name = "txtBoxLeastSquares";
-            this.txtBoxLeastSquares.Size = new System.Drawing.Size(147, 454);
+            this.txtBoxLeastSquares.Size = new System.Drawing.Size(146, 454);
             this.txtBoxLeastSquares.TabIndex = 8;
             // 
             // label21
@@ -2336,10 +2336,10 @@
             // 
             this.rtbResultLeastSquares.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbResultLeastSquares.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbResultLeastSquares.Location = new System.Drawing.Point(281, 3);
+            this.rtbResultLeastSquares.Location = new System.Drawing.Point(280, 3);
             this.rtbResultLeastSquares.Name = "rtbResultLeastSquares";
             this.rtbResultLeastSquares.ReadOnly = true;
-            this.rtbResultLeastSquares.Size = new System.Drawing.Size(848, 534);
+            this.rtbResultLeastSquares.Size = new System.Drawing.Size(849, 534);
             this.rtbResultLeastSquares.TabIndex = 9;
             this.rtbResultLeastSquares.Text = "";
             // 
@@ -2769,6 +2769,29 @@
             this.panel2.Size = new System.Drawing.Size(966, 120);
             this.panel2.TabIndex = 1;
             // 
+            // btnResetDefault
+            // 
+            this.btnResetDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnResetDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetDefault.Location = new System.Drawing.Point(816, 85);
+            this.btnResetDefault.Name = "btnResetDefault";
+            this.btnResetDefault.Size = new System.Drawing.Size(144, 30);
+            this.btnResetDefault.TabIndex = 10;
+            this.btnResetDefault.Text = "Reset mặc định";
+            this.btnResetDefault.UseVisualStyleBackColor = true;
+            this.btnResetDefault.Click += new System.EventHandler(this.btnResetDefault_Click);
+            // 
+            // lblMethod
+            // 
+            this.lblMethod.AutoSize = true;
+            this.lblMethod.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMethod.Location = new System.Drawing.Point(671, 71);
+            this.lblMethod.Name = "lblMethod";
+            this.lblMethod.Size = new System.Drawing.Size(87, 23);
+            this.lblMethod.TabIndex = 9;
+            this.lblMethod.Text = "label25";
+            this.lblMethod.Visible = false;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -2875,29 +2898,6 @@
             this.coeffsP.HeaderText = "Hệ số";
             this.coeffsP.MinimumWidth = 6;
             this.coeffsP.Name = "coeffsP";
-            // 
-            // lblMethod
-            // 
-            this.lblMethod.AutoSize = true;
-            this.lblMethod.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMethod.Location = new System.Drawing.Point(671, 71);
-            this.lblMethod.Name = "lblMethod";
-            this.lblMethod.Size = new System.Drawing.Size(87, 23);
-            this.lblMethod.TabIndex = 9;
-            this.lblMethod.Text = "label25";
-            this.lblMethod.Visible = false;
-            // 
-            // btnResetDefault
-            // 
-            this.btnResetDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnResetDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetDefault.Location = new System.Drawing.Point(816, 85);
-            this.btnResetDefault.Name = "btnResetDefault";
-            this.btnResetDefault.Size = new System.Drawing.Size(144, 30);
-            this.btnResetDefault.TabIndex = 10;
-            this.btnResetDefault.Text = "Reset mặc định";
-            this.btnResetDefault.UseVisualStyleBackColor = true;
-            this.btnResetDefault.Click += new System.EventHandler(this.btnResetDefault_Click);
             // 
             // Interpolation
             // 

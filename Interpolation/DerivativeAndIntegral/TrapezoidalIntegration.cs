@@ -193,6 +193,7 @@ namespace Interpolation.Methods
             double sum = 0;
             double middleSum = 0;
 
+            // Tính tất cả giá trị
             for (int i = 0; i <= N; i++)
             {
                 double xi = A + i * H;
@@ -207,14 +208,44 @@ namespace Interpolation.Methods
                     middleSum += fxi;
             }
 
-            calculationSteps.AppendLine($"f(a) = f({A}) = {YData[0]:F8}");
-            calculationSteps.AppendLine($"f(b) = f({B}) = {YData[N]:F8}");
+            // Hiển thị bảng với 3 giá trị đầu và 3 giá trị cuối
+            calculationSteps.AppendLine("┌─────────┬──────────────────┬──────────────────┐");
+            calculationSteps.AppendLine("│    i    │       x_i        │      f(x_i)      │");
+            calculationSteps.AppendLine("├─────────┼──────────────────┼──────────────────┤");
+
+            int displayCount = Math.Min(3, N + 1);
+
+            // Hiển thị 3 giá trị đầu
+            for (int i = 0; i < displayCount; i++)
+            {
+                calculationSteps.AppendLine($"│ {i,7} │ {XData[i],16:F6} │ {YData[i],16:F8} │");
+            }
+
+            // Nếu có nhiều hơn 6 giá trị, hiển thị dấu "..."
+            if (N + 1 > 6)
+            {
+                calculationSteps.AppendLine("│   ...   │       ...        │       ...        │");
+            }
+
+            // Hiển thị 3 giá trị cuối (nếu có nhiều hơn 3 giá trị)
+            if (N + 1 > 3)
+            {
+                int startLast = Math.Max(displayCount, N + 1 - 3);
+                for (int i = startLast; i <= N; i++)
+                {
+                    calculationSteps.AppendLine($"│ {i,7} │ {XData[i],16:F6} │ {YData[i],16:F8} │");
+                }
+            }
+
+            calculationSteps.AppendLine("└─────────┴──────────────────┴──────────────────┘");
             calculationSteps.AppendLine();
 
             sum += 2 * middleSum;
 
             Result = (H / 2.0) * sum;
 
+            calculationSteps.AppendLine($"f(a) = f({A}) = {YData[0]:F8}");
+            calculationSteps.AppendLine($"f(b) = f({B}) = {YData[N]:F8}");
             calculationSteps.AppendLine();
             calculationSteps.AppendLine($"I ≈ ({H}/2) × [{YData[0]:F8} + 2×{middleSum:F8} + {YData[N]:F8}]");
             calculationSteps.AppendLine($"  = ({H}/2) × {sum:F8}");

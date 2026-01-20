@@ -116,14 +116,46 @@ namespace Interpolation.Methods
             var compiledFunc = FunctionExpr.Compile("x");
             double sum = 0;
 
-            calculationSteps.AppendLine("\nTính giá trị tại các trung điểm:");
+            // Lưu trữ tất cả các giá trị để hiển thị bảng
+            double[] xMidValues = new double[N];
+            double[] yMidValues = new double[N];
+
             for (int i = 0; i < N; i++)
             {
                 double xMid = A + (i + 0.5) * H;
                 double yMid = EvaluateFunction(compiledFunc, xMid);
+                xMidValues[i] = xMid;
+                yMidValues[i] = yMid;
                 sum += yMid;
-                calculationSteps.AppendLine($"  x_mid_{i} = {xMid:F6} => f(x_mid) = {yMid:F8}");
             }
+
+            // Hiển thị bảng với 3 giá trị đầu và 3 giá trị cuối
+            calculationSteps.AppendLine("\n┌─────────┬──────────────────┬──────────────────┐");
+            calculationSteps.AppendLine("│    i    │      x_mid       │     f(x_mid)     │");
+            calculationSteps.AppendLine("├─────────┼──────────────────┼──────────────────┤");
+
+            int displayCount = Math.Min(3, N);
+
+            for (int i = 0; i < displayCount; i++)
+            {
+                calculationSteps.AppendLine($"│ {i,7} │ {xMidValues[i],16:F6} │ {yMidValues[i],16:F8} │");
+            }
+
+            if (N > 6)
+            {
+                calculationSteps.AppendLine("│   ...   │       ...        │       ...        │");
+            }
+
+            if (N > 3)
+            {
+                int startLast = Math.Max(displayCount, N - 3);
+                for (int i = startLast; i < N; i++)
+                {
+                    calculationSteps.AppendLine($"│ {i,7} │ {xMidValues[i],16:F6} │ {yMidValues[i],16:F8} │");
+                }
+            }
+
+            calculationSteps.AppendLine("└─────────┴──────────────────┴──────────────────┘");
 
             Result = sum * H;
             calculationSteps.AppendLine($"\nCông thức: I ≈ h * Σ f(x_mid)");

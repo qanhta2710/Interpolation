@@ -225,6 +225,7 @@ namespace Interpolation.Methods
             double oddSum = 0;
             double evenSum = 0;
 
+            // Tính tất cả giá trị
             for (int i = 0; i <= N; i++)
             {
                 double xi = A + i * H;
@@ -247,29 +248,46 @@ namespace Interpolation.Methods
                 }
             }
 
+            // Hiển thị bảng với 3 giá trị đầu và 3 giá trị cuối
+            calculationSteps.AppendLine("┌─────────┬──────────────────┬──────────────────┐");
+            calculationSteps.AppendLine("│    i    │       x_i        │      f(x_i)      │");
+            calculationSteps.AppendLine("├─────────┼──────────────────┼──────────────────┤");
+
+            int displayCount = Math.Min(3, N + 1);
+
+            // Hiển thị 3 giá trị đầu
+            for (int i = 0; i < displayCount; i++)
+            {
+                calculationSteps.AppendLine($"│ {i,7} │ {XData[i],16:F6} │ {YData[i],16:F8} │");
+            }
+
+            // Nếu có nhiều hơn 6 giá trị, hiển thị dấu "..."
+            if (N + 1 > 6)
+            {
+                calculationSteps.AppendLine("│   ...   │       ...        │       ...        │");
+            }
+
+            // Hiển thị 3 giá trị cuối (nếu có nhiều hơn 3 giá trị)
+            if (N + 1 > 3)
+            {
+                int startLast = Math.Max(displayCount, N + 1 - 3);
+                for (int i = startLast; i <= N; i++)
+                {
+                    calculationSteps.AppendLine($"│ {i,7} │ {XData[i],16:F6} │ {YData[i],16:F8} │");
+                }
+            }
+
+            calculationSteps.AppendLine("└─────────┴──────────────────┴──────────────────┘");
+            calculationSteps.AppendLine();
+
             calculationSteps.AppendLine($"f(a) = f({A}) = {YData[0]:F8}");
             calculationSteps.AppendLine($"f(b) = f({B}) = {YData[N]:F8}");
-            calculationSteps.AppendLine();
-
-            calculationSteps.AppendLine("Các điểm có chỉ số lẻ:");
-            for (int i = 1; i < N; i += 2)
-            {
-                calculationSteps.AppendLine($"  f(x{i}) = f({XData[i]:F6}) = {YData[i]:F8}");
-            }
-            calculationSteps.AppendLine($"  Tổng: {oddSum:F8}");
-            calculationSteps.AppendLine();
-
-            calculationSteps.AppendLine("Các điểm có chỉ số chẵn:");
-            for (int i = 2; i < N; i += 2)
-            {
-                calculationSteps.AppendLine($"  f(x{i}) = f({XData[i]:F6}) = {YData[i]:F8}");
-            }
-            calculationSteps.AppendLine($"  Tổng: {evenSum:F8}");
+            calculationSteps.AppendLine($"Tổng các điểm chỉ số lẻ (hệ số 4): {oddSum:F8}");
+            calculationSteps.AppendLine($"Tổng các điểm chỉ số chẵn (hệ số 2): {evenSum:F8}");
             calculationSteps.AppendLine();
 
             Result = (H / 3.0) * (sum + 4 * oddSum + 2 * evenSum);
 
-            calculationSteps.AppendLine();
             calculationSteps.AppendLine($"I ≈ ({H}/3) × [{YData[0]:F8} + 4×{oddSum:F8} + 2×{evenSum:F8} + {YData[N]:F8}]");
             calculationSteps.AppendLine($"  = ({H}/3) × {sum + 4 * oddSum + 2 * evenSum:F8}");
             calculationSteps.AppendLine($"  = {Result}");

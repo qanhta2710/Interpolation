@@ -488,18 +488,25 @@ namespace Interpolation
 
             for (int i = 0; i < data.Count; i += step)
             {
-                if (i >= 3 && i < data.Count - 3)
-                {
-                    continue;
-                }
-                else
-                {
-                    object[] row = new object[dim + 1];
-                    row[0] = Math.Round(data[i][0], 4);
-                    for (int j = 0; j < dim; j++) row[j + 1] = Math.Round(data[i][j + 1], 6);
-                    dgvResult.Rows.Add(row);
-                }
+                object[] row = new object[dim + 1];
+                row[0] = Math.Round(data[i][0], 4);
+                for (int j = 0; j < dim; j++) row[j + 1] = Math.Round(data[i][j + 1], 6);
+                dgvResult.Rows.Add(row);
             }
+
+            int totalRows = dgvResult.Rows.Count;
+            Color highlightColor = Color.LightYellow; 
+
+            for (int i = 0; i < Math.Min(3, totalRows); i++)
+            {
+                dgvResult.Rows[i].DefaultCellStyle.BackColor = highlightColor;
+            }
+
+            for (int i = Math.Max(0, totalRows - 3); i < totalRows; i++)
+            {
+                dgvResult.Rows[i].DefaultCellStyle.BackColor = highlightColor;
+            }
+
             dgvResult.ResumeLayout();
         }
 
